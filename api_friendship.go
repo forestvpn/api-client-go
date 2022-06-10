@@ -213,16 +213,16 @@ func (a *FriendshipApiService) AcceptFriendshipInvitationExecute(r ApiAcceptFrie
 type ApiCreateFriendshipInvitationRequest struct {
 	ctx context.Context
 	ApiService FriendshipApi
-	perPage *float32
-	page *float32
+	perPage *int32
+	page *int32
 }
 
-func (r ApiCreateFriendshipInvitationRequest) PerPage(perPage float32) ApiCreateFriendshipInvitationRequest {
+func (r ApiCreateFriendshipInvitationRequest) PerPage(perPage int32) ApiCreateFriendshipInvitationRequest {
 	r.perPage = &perPage
 	return r
 }
 
-func (r ApiCreateFriendshipInvitationRequest) Page(page float32) ApiCreateFriendshipInvitationRequest {
+func (r ApiCreateFriendshipInvitationRequest) Page(page int32) ApiCreateFriendshipInvitationRequest {
 	r.page = &page
 	return r
 }
@@ -648,16 +648,16 @@ func (a *FriendshipApiService) GetFriendshipInvitationExecute(r ApiGetFriendship
 type ApiListFriendsRequest struct {
 	ctx context.Context
 	ApiService FriendshipApi
-	perPage *float32
-	page *float32
+	perPage *int32
+	page *int32
 }
 
-func (r ApiListFriendsRequest) PerPage(perPage float32) ApiListFriendsRequest {
+func (r ApiListFriendsRequest) PerPage(perPage int32) ApiListFriendsRequest {
 	r.perPage = &perPage
 	return r
 }
 
-func (r ApiListFriendsRequest) Page(page float32) ApiListFriendsRequest {
+func (r ApiListFriendsRequest) Page(page int32) ApiListFriendsRequest {
 	r.page = &page
 	return r
 }

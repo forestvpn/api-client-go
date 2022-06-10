@@ -1303,8 +1303,8 @@ type ApiListDeviceDetailStatsRequest struct {
 	deviceID string
 	dateTimeAfter *string
 	dateTimeBefore *string
-	perPage *float32
-	page *float32
+	perPage *int32
+	page *int32
 }
 
 func (r ApiListDeviceDetailStatsRequest) DateTimeAfter(dateTimeAfter string) ApiListDeviceDetailStatsRequest {
@@ -1317,12 +1317,12 @@ func (r ApiListDeviceDetailStatsRequest) DateTimeBefore(dateTimeBefore string) A
 	return r
 }
 
-func (r ApiListDeviceDetailStatsRequest) PerPage(perPage float32) ApiListDeviceDetailStatsRequest {
+func (r ApiListDeviceDetailStatsRequest) PerPage(perPage int32) ApiListDeviceDetailStatsRequest {
 	r.perPage = &perPage
 	return r
 }
 
-func (r ApiListDeviceDetailStatsRequest) Page(page float32) ApiListDeviceDetailStatsRequest {
+func (r ApiListDeviceDetailStatsRequest) Page(page int32) ApiListDeviceDetailStatsRequest {
 	r.page = &page
 	return r
 }
@@ -1445,16 +1445,16 @@ type ApiListDevicePortForwardingsRequest struct {
 	ctx context.Context
 	ApiService DeviceApi
 	deviceID string
-	perPage *float32
-	page *float32
+	perPage *int32
+	page *int32
 }
 
-func (r ApiListDevicePortForwardingsRequest) PerPage(perPage float32) ApiListDevicePortForwardingsRequest {
+func (r ApiListDevicePortForwardingsRequest) PerPage(perPage int32) ApiListDevicePortForwardingsRequest {
 	r.perPage = &perPage
 	return r
 }
 
-func (r ApiListDevicePortForwardingsRequest) Page(page float32) ApiListDevicePortForwardingsRequest {
+func (r ApiListDevicePortForwardingsRequest) Page(page int32) ApiListDevicePortForwardingsRequest {
 	r.page = &page
 	return r
 }
@@ -1576,8 +1576,8 @@ type ApiListDeviceStatsRequest struct {
 	deviceID string
 	dateAfter *string
 	dateBefore *string
-	perPage *float32
-	page *float32
+	perPage *int32
+	page *int32
 }
 
 func (r ApiListDeviceStatsRequest) DateAfter(dateAfter string) ApiListDeviceStatsRequest {
@@ -1590,12 +1590,12 @@ func (r ApiListDeviceStatsRequest) DateBefore(dateBefore string) ApiListDeviceSt
 	return r
 }
 
-func (r ApiListDeviceStatsRequest) PerPage(perPage float32) ApiListDeviceStatsRequest {
+func (r ApiListDeviceStatsRequest) PerPage(perPage int32) ApiListDeviceStatsRequest {
 	r.perPage = &perPage
 	return r
 }
 
-func (r ApiListDeviceStatsRequest) Page(page float32) ApiListDeviceStatsRequest {
+func (r ApiListDeviceStatsRequest) Page(page int32) ApiListDeviceStatsRequest {
 	r.page = &page
 	return r
 }
@@ -1830,16 +1830,16 @@ type ApiListDeviceWireGuardsRequest struct {
 	ctx context.Context
 	ApiService DeviceApi
 	deviceID string
-	perPage *float32
-	page *float32
+	perPage *int32
+	page *int32
 }
 
-func (r ApiListDeviceWireGuardsRequest) PerPage(perPage float32) ApiListDeviceWireGuardsRequest {
+func (r ApiListDeviceWireGuardsRequest) PerPage(perPage int32) ApiListDeviceWireGuardsRequest {
 	r.perPage = &perPage
 	return r
 }
 
-func (r ApiListDeviceWireGuardsRequest) Page(page float32) ApiListDeviceWireGuardsRequest {
+func (r ApiListDeviceWireGuardsRequest) Page(page int32) ApiListDeviceWireGuardsRequest {
 	r.page = &page
 	return r
 }
@@ -1956,8 +1956,8 @@ type ApiListDevicesRequest struct {
 	ctx context.Context
 	ApiService DeviceApi
 	externalKey *string
-	perPage *float32
-	page *float32
+	perPage *int32
+	page *int32
 }
 
 func (r ApiListDevicesRequest) ExternalKey(externalKey string) ApiListDevicesRequest {
@@ -1965,12 +1965,12 @@ func (r ApiListDevicesRequest) ExternalKey(externalKey string) ApiListDevicesReq
 	return r
 }
 
-func (r ApiListDevicesRequest) PerPage(perPage float32) ApiListDevicesRequest {
+func (r ApiListDevicesRequest) PerPage(perPage int32) ApiListDevicesRequest {
 	r.perPage = &perPage
 	return r
 }
 
-func (r ApiListDevicesRequest) Page(page float32) ApiListDevicesRequest {
+func (r ApiListDevicesRequest) Page(page int32) ApiListDevicesRequest {
 	r.page = &page
 	return r
 }

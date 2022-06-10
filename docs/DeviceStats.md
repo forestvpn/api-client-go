@@ -5,11 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** |  | [optional] 
-**Connections** | Pointer to **float32** |  | [optional] 
-**ReceivedBytes** | Pointer to **float32** |  | [optional] 
-**TransmittedBytes** | Pointer to **float32** |  | [optional] 
-**BlockedAds** | Pointer to **float32** |  | [optional] 
-**BlockedMalwares** | Pointer to **float32** |  | [optional] 
+**Connections** | Pointer to **int32** |  | [optional] 
+**ReceivedBytes** | Pointer to **int32** |  | [optional] 
+**TransmittedBytes** | Pointer to **int32** |  | [optional] 
+**BlockedAds** | Pointer to **int32** |  | [optional] 
+**BlockedMalwares** | Pointer to **int32** |  | [optional] 
 **Date** | Pointer to **time.Time** |  | [optional] 
 
 ## Methods
@@ -58,20 +58,20 @@ HasId returns a boolean if a field has been set.
 
 ### GetConnections
 
-`func (o *DeviceStats) GetConnections() float32`
+`func (o *DeviceStats) GetConnections() int32`
 
 GetConnections returns the Connections field if non-nil, zero value otherwise.
 
 ### GetConnectionsOk
 
-`func (o *DeviceStats) GetConnectionsOk() (*float32, bool)`
+`func (o *DeviceStats) GetConnectionsOk() (*int32, bool)`
 
 GetConnectionsOk returns a tuple with the Connections field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetConnections
 
-`func (o *DeviceStats) SetConnections(v float32)`
+`func (o *DeviceStats) SetConnections(v int32)`
 
 SetConnections sets Connections field to given value.
 
@@ -83,20 +83,20 @@ HasConnections returns a boolean if a field has been set.
 
 ### GetReceivedBytes
 
-`func (o *DeviceStats) GetReceivedBytes() float32`
+`func (o *DeviceStats) GetReceivedBytes() int32`
 
 GetReceivedBytes returns the ReceivedBytes field if non-nil, zero value otherwise.
 
 ### GetReceivedBytesOk
 
-`func (o *DeviceStats) GetReceivedBytesOk() (*float32, bool)`
+`func (o *DeviceStats) GetReceivedBytesOk() (*int32, bool)`
 
 GetReceivedBytesOk returns a tuple with the ReceivedBytes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetReceivedBytes
 
-`func (o *DeviceStats) SetReceivedBytes(v float32)`
+`func (o *DeviceStats) SetReceivedBytes(v int32)`
 
 SetReceivedBytes sets ReceivedBytes field to given value.
 
@@ -108,20 +108,20 @@ HasReceivedBytes returns a boolean if a field has been set.
 
 ### GetTransmittedBytes
 
-`func (o *DeviceStats) GetTransmittedBytes() float32`
+`func (o *DeviceStats) GetTransmittedBytes() int32`
 
 GetTransmittedBytes returns the TransmittedBytes field if non-nil, zero value otherwise.
 
 ### GetTransmittedBytesOk
 
-`func (o *DeviceStats) GetTransmittedBytesOk() (*float32, bool)`
+`func (o *DeviceStats) GetTransmittedBytesOk() (*int32, bool)`
 
 GetTransmittedBytesOk returns a tuple with the TransmittedBytes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTransmittedBytes
 
-`func (o *DeviceStats) SetTransmittedBytes(v float32)`
+`func (o *DeviceStats) SetTransmittedBytes(v int32)`
 
 SetTransmittedBytes sets TransmittedBytes field to given value.
 
@@ -133,20 +133,20 @@ HasTransmittedBytes returns a boolean if a field has been set.
 
 ### GetBlockedAds
 
-`func (o *DeviceStats) GetBlockedAds() float32`
+`func (o *DeviceStats) GetBlockedAds() int32`
 
 GetBlockedAds returns the BlockedAds field if non-nil, zero value otherwise.
 
 ### GetBlockedAdsOk
 
-`func (o *DeviceStats) GetBlockedAdsOk() (*float32, bool)`
+`func (o *DeviceStats) GetBlockedAdsOk() (*int32, bool)`
 
 GetBlockedAdsOk returns a tuple with the BlockedAds field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBlockedAds
 
-`func (o *DeviceStats) SetBlockedAds(v float32)`
+`func (o *DeviceStats) SetBlockedAds(v int32)`
 
 SetBlockedAds sets BlockedAds field to given value.
 
@@ -158,20 +158,20 @@ HasBlockedAds returns a boolean if a field has been set.
 
 ### GetBlockedMalwares
 
-`func (o *DeviceStats) GetBlockedMalwares() float32`
+`func (o *DeviceStats) GetBlockedMalwares() int32`
 
 GetBlockedMalwares returns the BlockedMalwares field if non-nil, zero value otherwise.
 
 ### GetBlockedMalwaresOk
 
-`func (o *DeviceStats) GetBlockedMalwaresOk() (*float32, bool)`
+`func (o *DeviceStats) GetBlockedMalwaresOk() (*int32, bool)`
 
 GetBlockedMalwaresOk returns a tuple with the BlockedMalwares field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBlockedMalwares
 
-`func (o *DeviceStats) SetBlockedMalwares(v float32)`
+`func (o *DeviceStats) SetBlockedMalwares(v int32)`
 
 SetBlockedMalwares sets BlockedMalwares field to given value.
 

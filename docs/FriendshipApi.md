@@ -99,8 +99,8 @@ import (
 )
 
 func main() {
-    perPage := float32(8.14) // float32 |  (optional)
-    page := float32(8.14) // float32 |  (optional)
+    perPage := int32(56) // int32 |  (optional)
+    page := int32(56) // int32 |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -125,8 +125,8 @@ Other parameters are passed through a pointer to a apiCreateFriendshipInvitation
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **perPage** | **float32** |  | 
- **page** | **float32** |  | 
+ **perPage** | **int32** |  | 
+ **page** | **int32** |  | 
 
 ### Return type
 
@@ -367,8 +367,8 @@ import (
 )
 
 func main() {
-    perPage := float32(8.14) // float32 |  (optional)
-    page := float32(8.14) // float32 |  (optional)
+    perPage := int32(56) // int32 |  (optional)
+    page := int32(56) // int32 |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -393,8 +393,8 @@ Other parameters are passed through a pointer to a apiListFriendsRequest struct 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **perPage** | **float32** |  | 
- **page** | **float32** |  | 
+ **perPage** | **int32** |  | 
+ **page** | **int32** |  | 
 
 ### Return type
 

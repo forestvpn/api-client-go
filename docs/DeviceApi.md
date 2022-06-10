@@ -679,8 +679,8 @@ func main() {
     deviceID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
     dateTimeAfter := "dateTimeAfter_example" // string |  (optional)
     dateTimeBefore := "dateTimeBefore_example" // string |  (optional)
-    perPage := float32(8.14) // float32 |  (optional)
-    page := float32(8.14) // float32 |  (optional)
+    perPage := int32(56) // int32 |  (optional)
+    page := int32(56) // int32 |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -712,8 +712,8 @@ Name | Type | Description  | Notes
 
  **dateTimeAfter** | **string** |  | 
  **dateTimeBefore** | **string** |  | 
- **perPage** | **float32** |  | 
- **page** | **float32** |  | 
+ **perPage** | **int32** |  | 
+ **page** | **int32** |  | 
 
 ### Return type
 
@@ -755,8 +755,8 @@ import (
 
 func main() {
     deviceID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-    perPage := float32(8.14) // float32 |  (optional)
-    page := float32(8.14) // float32 |  (optional)
+    perPage := int32(56) // int32 |  (optional)
+    page := int32(56) // int32 |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -786,8 +786,8 @@ Other parameters are passed through a pointer to a apiListDevicePortForwardingsR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **perPage** | **float32** |  | 
- **page** | **float32** |  | 
+ **perPage** | **int32** |  | 
+ **page** | **int32** |  | 
 
 ### Return type
 
@@ -830,8 +830,8 @@ func main() {
     deviceID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
     dateAfter := time.Now() // string |  (optional)
     dateBefore := time.Now() // string |  (optional)
-    perPage := float32(8.14) // float32 |  (optional)
-    page := float32(8.14) // float32 |  (optional)
+    perPage := int32(56) // int32 |  (optional)
+    page := int32(56) // int32 |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -863,8 +863,8 @@ Name | Type | Description  | Notes
 
  **dateAfter** | **string** |  | 
  **dateBefore** | **string** |  | 
- **perPage** | **float32** |  | 
- **page** | **float32** |  | 
+ **perPage** | **int32** |  | 
+ **page** | **int32** |  | 
 
 ### Return type
 
@@ -975,8 +975,8 @@ import (
 
 func main() {
     deviceID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-    perPage := float32(8.14) // float32 |  (optional)
-    page := float32(8.14) // float32 |  (optional)
+    perPage := int32(56) // int32 |  (optional)
+    page := int32(56) // int32 |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1006,8 +1006,8 @@ Other parameters are passed through a pointer to a apiListDeviceWireGuardsReques
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **perPage** | **float32** |  | 
- **page** | **float32** |  | 
+ **perPage** | **int32** |  | 
+ **page** | **int32** |  | 
 
 ### Return type
 
@@ -1049,8 +1049,8 @@ import (
 
 func main() {
     externalKey := "externalKey_example" // string |  (optional)
-    perPage := float32(8.14) // float32 |  (optional)
-    page := float32(8.14) // float32 |  (optional)
+    perPage := int32(56) // int32 |  (optional)
+    page := int32(56) // int32 |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1076,8 +1076,8 @@ Other parameters are passed through a pointer to a apiListDevicesRequest struct 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **externalKey** | **string** |  | 
- **perPage** | **float32** |  | 
- **page** | **float32** |  | 
+ **perPage** | **int32** |  | 
+ **page** | **int32** |  | 
 
 ### Return type
 

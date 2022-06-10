@@ -19,11 +19,11 @@ import (
 // DeviceStats struct for DeviceStats
 type DeviceStats struct {
 	Id *string `json:"id,omitempty"`
-	Connections *float32 `json:"connections,omitempty"`
-	ReceivedBytes *float32 `json:"received_bytes,omitempty"`
-	TransmittedBytes *float32 `json:"transmitted_bytes,omitempty"`
-	BlockedAds *float32 `json:"blocked_ads,omitempty"`
-	BlockedMalwares *float32 `json:"blocked_malwares,omitempty"`
+	Connections *int32 `json:"connections,omitempty"`
+	ReceivedBytes *int32 `json:"received_bytes,omitempty"`
+	TransmittedBytes *int32 `json:"transmitted_bytes,omitempty"`
+	BlockedAds *int32 `json:"blocked_ads,omitempty"`
+	BlockedMalwares *int32 `json:"blocked_malwares,omitempty"`
 	Date *time.Time `json:"date,omitempty"`
 }
 
@@ -77,9 +77,9 @@ func (o *DeviceStats) SetId(v string) {
 }
 
 // GetConnections returns the Connections field value if set, zero value otherwise.
-func (o *DeviceStats) GetConnections() float32 {
+func (o *DeviceStats) GetConnections() int32 {
 	if o == nil || o.Connections == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.Connections
@@ -87,7 +87,7 @@ func (o *DeviceStats) GetConnections() float32 {
 
 // GetConnectionsOk returns a tuple with the Connections field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DeviceStats) GetConnectionsOk() (*float32, bool) {
+func (o *DeviceStats) GetConnectionsOk() (*int32, bool) {
 	if o == nil || o.Connections == nil {
 		return nil, false
 	}
@@ -103,15 +103,15 @@ func (o *DeviceStats) HasConnections() bool {
 	return false
 }
 
-// SetConnections gets a reference to the given float32 and assigns it to the Connections field.
-func (o *DeviceStats) SetConnections(v float32) {
+// SetConnections gets a reference to the given int32 and assigns it to the Connections field.
+func (o *DeviceStats) SetConnections(v int32) {
 	o.Connections = &v
 }
 
 // GetReceivedBytes returns the ReceivedBytes field value if set, zero value otherwise.
-func (o *DeviceStats) GetReceivedBytes() float32 {
+func (o *DeviceStats) GetReceivedBytes() int32 {
 	if o == nil || o.ReceivedBytes == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.ReceivedBytes
@@ -119,7 +119,7 @@ func (o *DeviceStats) GetReceivedBytes() float32 {
 
 // GetReceivedBytesOk returns a tuple with the ReceivedBytes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DeviceStats) GetReceivedBytesOk() (*float32, bool) {
+func (o *DeviceStats) GetReceivedBytesOk() (*int32, bool) {
 	if o == nil || o.ReceivedBytes == nil {
 		return nil, false
 	}
@@ -135,15 +135,15 @@ func (o *DeviceStats) HasReceivedBytes() bool {
 	return false
 }
 
-// SetReceivedBytes gets a reference to the given float32 and assigns it to the ReceivedBytes field.
-func (o *DeviceStats) SetReceivedBytes(v float32) {
+// SetReceivedBytes gets a reference to the given int32 and assigns it to the ReceivedBytes field.
+func (o *DeviceStats) SetReceivedBytes(v int32) {
 	o.ReceivedBytes = &v
 }
 
 // GetTransmittedBytes returns the TransmittedBytes field value if set, zero value otherwise.
-func (o *DeviceStats) GetTransmittedBytes() float32 {
+func (o *DeviceStats) GetTransmittedBytes() int32 {
 	if o == nil || o.TransmittedBytes == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.TransmittedBytes
@@ -151,7 +151,7 @@ func (o *DeviceStats) GetTransmittedBytes() float32 {
 
 // GetTransmittedBytesOk returns a tuple with the TransmittedBytes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DeviceStats) GetTransmittedBytesOk() (*float32, bool) {
+func (o *DeviceStats) GetTransmittedBytesOk() (*int32, bool) {
 	if o == nil || o.TransmittedBytes == nil {
 		return nil, false
 	}
@@ -167,15 +167,15 @@ func (o *DeviceStats) HasTransmittedBytes() bool {
 	return false
 }
 
-// SetTransmittedBytes gets a reference to the given float32 and assigns it to the TransmittedBytes field.
-func (o *DeviceStats) SetTransmittedBytes(v float32) {
+// SetTransmittedBytes gets a reference to the given int32 and assigns it to the TransmittedBytes field.
+func (o *DeviceStats) SetTransmittedBytes(v int32) {
 	o.TransmittedBytes = &v
 }
 
 // GetBlockedAds returns the BlockedAds field value if set, zero value otherwise.
-func (o *DeviceStats) GetBlockedAds() float32 {
+func (o *DeviceStats) GetBlockedAds() int32 {
 	if o == nil || o.BlockedAds == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.BlockedAds
@@ -183,7 +183,7 @@ func (o *DeviceStats) GetBlockedAds() float32 {
 
 // GetBlockedAdsOk returns a tuple with the BlockedAds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DeviceStats) GetBlockedAdsOk() (*float32, bool) {
+func (o *DeviceStats) GetBlockedAdsOk() (*int32, bool) {
 	if o == nil || o.BlockedAds == nil {
 		return nil, false
 	}
@@ -199,15 +199,15 @@ func (o *DeviceStats) HasBlockedAds() bool {
 	return false
 }
 
-// SetBlockedAds gets a reference to the given float32 and assigns it to the BlockedAds field.
-func (o *DeviceStats) SetBlockedAds(v float32) {
+// SetBlockedAds gets a reference to the given int32 and assigns it to the BlockedAds field.
+func (o *DeviceStats) SetBlockedAds(v int32) {
 	o.BlockedAds = &v
 }
 
 // GetBlockedMalwares returns the BlockedMalwares field value if set, zero value otherwise.
-func (o *DeviceStats) GetBlockedMalwares() float32 {
+func (o *DeviceStats) GetBlockedMalwares() int32 {
 	if o == nil || o.BlockedMalwares == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.BlockedMalwares
@@ -215,7 +215,7 @@ func (o *DeviceStats) GetBlockedMalwares() float32 {
 
 // GetBlockedMalwaresOk returns a tuple with the BlockedMalwares field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DeviceStats) GetBlockedMalwaresOk() (*float32, bool) {
+func (o *DeviceStats) GetBlockedMalwaresOk() (*int32, bool) {
 	if o == nil || o.BlockedMalwares == nil {
 		return nil, false
 	}
@@ -231,8 +231,8 @@ func (o *DeviceStats) HasBlockedMalwares() bool {
 	return false
 }
 
-// SetBlockedMalwares gets a reference to the given float32 and assigns it to the BlockedMalwares field.
-func (o *DeviceStats) SetBlockedMalwares(v float32) {
+// SetBlockedMalwares gets a reference to the given int32 and assigns it to the BlockedMalwares field.
+func (o *DeviceStats) SetBlockedMalwares(v int32) {
 	o.BlockedMalwares = &v
 }
 
