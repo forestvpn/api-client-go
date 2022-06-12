@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** |  | 
 **Name** | **string** |  | 
-**Latitude** | **int32** |  | 
-**Longitude** | **int32** |  | 
+**Latitude** | **float64** |  | 
+**Longitude** | **float64** |  | 
 **Country** | [**Country**](Country.md) |  | 
 **AlternativeNames** | Pointer to **[]string** |  | [optional] 
 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewLocation
 
-`func NewLocation(id string, name string, latitude int32, longitude int32, country Country, ) *Location`
+`func NewLocation(id string, name string, latitude float64, longitude float64, country Country, ) *Location`
 
 NewLocation instantiates a new Location object
 This constructor will assign default values to properties that have it defined,
@@ -72,40 +72,40 @@ SetName sets Name field to given value.
 
 ### GetLatitude
 
-`func (o *Location) GetLatitude() int32`
+`func (o *Location) GetLatitude() float64`
 
 GetLatitude returns the Latitude field if non-nil, zero value otherwise.
 
 ### GetLatitudeOk
 
-`func (o *Location) GetLatitudeOk() (*int32, bool)`
+`func (o *Location) GetLatitudeOk() (*float64, bool)`
 
 GetLatitudeOk returns a tuple with the Latitude field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLatitude
 
-`func (o *Location) SetLatitude(v int32)`
+`func (o *Location) SetLatitude(v float64)`
 
 SetLatitude sets Latitude field to given value.
 
 
 ### GetLongitude
 
-`func (o *Location) GetLongitude() int32`
+`func (o *Location) GetLongitude() float64`
 
 GetLongitude returns the Longitude field if non-nil, zero value otherwise.
 
 ### GetLongitudeOk
 
-`func (o *Location) GetLongitudeOk() (*int32, bool)`
+`func (o *Location) GetLongitudeOk() (*float64, bool)`
 
 GetLongitudeOk returns a tuple with the Longitude field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLongitude
 
-`func (o *Location) SetLongitude(v int32)`
+`func (o *Location) SetLongitude(v float64)`
 
 SetLongitude sets Longitude field to given value.
 

@@ -2096,13 +2096,13 @@ components:
           - alternative_names
           - alternative_names
           currency_code: currency_code
-        latitude: 0
+        latitude: 0.8008281904610115
         name: name
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         alternative_names:
         - alternative_names
         - alternative_names
-        longitude: 6
+        longitude: 6.027456183070403
       properties:
         id:
           format: uuid
@@ -2110,9 +2110,11 @@ components:
         name:
           type: string
         latitude:
-          type: integer
+          format: double
+          type: number
         longitude:
-          type: integer
+          format: double
+          type: number
         country:
           $ref: '#/components/schemas/Country'
         alternative_names:
@@ -2320,13 +2322,13 @@ components:
             - alternative_names
             - alternative_names
             currency_code: currency_code
-          latitude: 0
+          latitude: 0.8008281904610115
           name: name
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           alternative_names:
           - alternative_names
           - alternative_names
-          longitude: 6
+          longitude: 6.027456183070403
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         wireguard:
           peers:

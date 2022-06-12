@@ -19,8 +19,8 @@ import (
 type Location struct {
 	Id string `json:"id"`
 	Name string `json:"name"`
-	Latitude int32 `json:"latitude"`
-	Longitude int32 `json:"longitude"`
+	Latitude float64 `json:"latitude"`
+	Longitude float64 `json:"longitude"`
 	Country Country `json:"country"`
 	AlternativeNames []string `json:"alternative_names,omitempty"`
 }
@@ -29,7 +29,7 @@ type Location struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLocation(id string, name string, latitude int32, longitude int32, country Country) *Location {
+func NewLocation(id string, name string, latitude float64, longitude float64, country Country) *Location {
 	this := Location{}
 	this.Id = id
 	this.Name = name
@@ -96,9 +96,9 @@ func (o *Location) SetName(v string) {
 }
 
 // GetLatitude returns the Latitude field value
-func (o *Location) GetLatitude() int32 {
+func (o *Location) GetLatitude() float64 {
 	if o == nil {
-		var ret int32
+		var ret float64
 		return ret
 	}
 
@@ -107,7 +107,7 @@ func (o *Location) GetLatitude() int32 {
 
 // GetLatitudeOk returns a tuple with the Latitude field value
 // and a boolean to check if the value has been set.
-func (o *Location) GetLatitudeOk() (*int32, bool) {
+func (o *Location) GetLatitudeOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -115,14 +115,14 @@ func (o *Location) GetLatitudeOk() (*int32, bool) {
 }
 
 // SetLatitude sets field value
-func (o *Location) SetLatitude(v int32) {
+func (o *Location) SetLatitude(v float64) {
 	o.Latitude = v
 }
 
 // GetLongitude returns the Longitude field value
-func (o *Location) GetLongitude() int32 {
+func (o *Location) GetLongitude() float64 {
 	if o == nil {
-		var ret int32
+		var ret float64
 		return ret
 	}
 
@@ -131,7 +131,7 @@ func (o *Location) GetLongitude() int32 {
 
 // GetLongitudeOk returns a tuple with the Longitude field value
 // and a boolean to check if the value has been set.
-func (o *Location) GetLongitudeOk() (*int32, bool) {
+func (o *Location) GetLongitudeOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -139,7 +139,7 @@ func (o *Location) GetLongitudeOk() (*int32, bool) {
 }
 
 // SetLongitude sets field value
-func (o *Location) SetLongitude(v int32) {
+func (o *Location) SetLongitude(v float64) {
 	o.Longitude = v
 }
 
