@@ -18,19 +18,17 @@ import (
 // Price struct for Price
 type Price struct {
 	Currency string `json:"currency"`
-	Amount float64 `json:"amount"`
-	Tax float64 `json:"tax"`
+	Price float64 `json:"price"`
 }
 
 // NewPrice instantiates a new Price object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPrice(currency string, amount float64, tax float64) *Price {
+func NewPrice(currency string, price float64) *Price {
 	this := Price{}
 	this.Currency = currency
-	this.Amount = amount
-	this.Tax = tax
+	this.Price = price
 	return &this
 }
 
@@ -66,52 +64,28 @@ func (o *Price) SetCurrency(v string) {
 	o.Currency = v
 }
 
-// GetAmount returns the Amount field value
-func (o *Price) GetAmount() float64 {
+// GetPrice returns the Price field value
+func (o *Price) GetPrice() float64 {
 	if o == nil {
 		var ret float64
 		return ret
 	}
 
-	return o.Amount
+	return o.Price
 }
 
-// GetAmountOk returns a tuple with the Amount field value
+// GetPriceOk returns a tuple with the Price field value
 // and a boolean to check if the value has been set.
-func (o *Price) GetAmountOk() (*float64, bool) {
+func (o *Price) GetPriceOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Amount, true
+	return &o.Price, true
 }
 
-// SetAmount sets field value
-func (o *Price) SetAmount(v float64) {
-	o.Amount = v
-}
-
-// GetTax returns the Tax field value
-func (o *Price) GetTax() float64 {
-	if o == nil {
-		var ret float64
-		return ret
-	}
-
-	return o.Tax
-}
-
-// GetTaxOk returns a tuple with the Tax field value
-// and a boolean to check if the value has been set.
-func (o *Price) GetTaxOk() (*float64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Tax, true
-}
-
-// SetTax sets field value
-func (o *Price) SetTax(v float64) {
-	o.Tax = v
+// SetPrice sets field value
+func (o *Price) SetPrice(v float64) {
+	o.Price = v
 }
 
 func (o Price) MarshalJSON() ([]byte, error) {
@@ -120,10 +94,7 @@ func (o Price) MarshalJSON() ([]byte, error) {
 		toSerialize["currency"] = o.Currency
 	}
 	if true {
-		toSerialize["amount"] = o.Amount
-	}
-	if true {
-		toSerialize["tax"] = o.Tax
+		toSerialize["price"] = o.Price
 	}
 	return json.Marshal(toSerialize)
 }

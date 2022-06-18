@@ -2845,22 +2845,17 @@ components:
       type: object
     Price:
       example:
-        amount: amount
+        price: price
         currency: currency
-        tax: tax
       properties:
         currency:
           type: string
-        amount:
-          format: decimal
-          type: string
-        tax:
+        price:
           format: decimal
           type: string
       required:
-      - amount
       - currency
-      - tax
+      - price
       type: object
     Recurring:
       example:
@@ -2876,9 +2871,8 @@ components:
     Product:
       example:
         price:
-          amount: amount
+          price: price
           currency: currency
-          tax: tax
         recurring:
           period: P1M
         name: name
@@ -2979,9 +2973,8 @@ components:
       example:
         product:
           price:
-            amount: amount
+            price: price
             currency: currency
-            tax: tax
           recurring:
             period: P1M
           name: name
@@ -3013,9 +3006,8 @@ components:
         products:
         - product:
             price:
-              amount: amount
+              price: price
               currency: currency
-              tax: tax
             recurring:
               period: P1M
             name: name
@@ -3031,9 +3023,8 @@ components:
           quantity: 0
         - product:
             price:
-              amount: amount
+              price: price
               currency: currency
-              tax: tax
             recurring:
               period: P1M
             name: name
