@@ -2845,14 +2845,14 @@ components:
       type: object
     Price:
       example:
-        price: price
+        price: 0.8008281904610115
         currency: currency
       properties:
         currency:
           type: string
         price:
-          format: decimal
-          type: string
+          format: double
+          type: number
       required:
       - currency
       - price
@@ -2871,7 +2871,7 @@ components:
     Product:
       example:
         price:
-          price: price
+          price: 0.8008281904610115
           currency: currency
         recurring:
           period: P1M
@@ -2973,7 +2973,7 @@ components:
       example:
         product:
           price:
-            price: price
+            price: 0.8008281904610115
             currency: currency
           recurring:
             period: P1M
@@ -2987,7 +2987,7 @@ components:
             products:
             - null
             - null
-        quantity: 0
+        quantity: 1
       properties:
         product:
           $ref: '#/components/schemas/Product'
@@ -3000,13 +3000,13 @@ components:
     CheckoutSession:
       example:
         payment_status: paid
-        amount_total: amount_total
+        amount_total: 6.027456183070403
         created_at: 2000-01-23T04:56:07.000+00:00
         locale: locale
         products:
         - product:
             price:
-              price: price
+              price: 0.8008281904610115
               currency: currency
             recurring:
               period: P1M
@@ -3020,10 +3020,10 @@ components:
               products:
               - null
               - null
-          quantity: 0
+          quantity: 1
         - product:
             price:
-              price: price
+              price: 0.8008281904610115
               currency: currency
             recurring:
               period: P1M
@@ -3037,7 +3037,7 @@ components:
               products:
               - null
               - null
-          quantity: 0
+          quantity: 1
         expires_at: 2000-01-23T04:56:07.000+00:00
         currency: currency
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -3045,7 +3045,7 @@ components:
         cancel_url: cancel_url
         user: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         redirect_url: redirect_url
-        amount_subtotal: amount_subtotal
+        amount_subtotal: 0.8008281904610115
         email: email
         success_url: success_url
         status: open
@@ -3062,11 +3062,11 @@ components:
         currency:
           type: string
         amount_subtotal:
-          format: decimal
-          type: string
+          format: double
+          type: number
         amount_total:
-          format: decimal
-          type: string
+          format: double
+          type: number
         locale:
           type: string
         email:
@@ -3124,14 +3124,14 @@ components:
       type: object
     CouponCheckoutSession:
       example:
-        discount: discount
+        discount: 0.8008281904610115
         key: key
       properties:
         key:
           type: string
         discount:
-          format: decimal
-          type: string
+          format: double
+          type: number
       required:
       - discount
       - key
