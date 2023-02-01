@@ -1,5 +1,4 @@
 .travis.yml
-README.md
 api/openapi.yaml
 api_ads.go
 api_analytics.go

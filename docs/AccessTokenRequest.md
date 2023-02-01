@@ -5,16 +5,17 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** |  | [readonly] 
-**UserAgent** | **string** |  | [readonly] 
-**Token** | Pointer to **string** |  | [optional] [readonly] 
-**Username** | **string** |  | [readonly] 
+**UserAgent** | Pointer to **string** |  | [optional] [readonly] 
+**AccessToken** | Pointer to **string** |  | [optional] [readonly] 
 **Status** | **string** |  | 
+**CreatedAt** | **time.Time** |  | 
+**ExpiresAt** | **time.Time** |  | 
 
 ## Methods
 
 ### NewAccessTokenRequest
 
-`func NewAccessTokenRequest(id string, userAgent string, username string, status string, ) *AccessTokenRequest`
+`func NewAccessTokenRequest(id string, status string, createdAt time.Time, expiresAt time.Time, ) *AccessTokenRequest`
 
 NewAccessTokenRequest instantiates a new AccessTokenRequest object
 This constructor will assign default values to properties that have it defined,
@@ -68,51 +69,36 @@ and a boolean to check if the value has been set.
 
 SetUserAgent sets UserAgent field to given value.
 
+### HasUserAgent
 
-### GetToken
+`func (o *AccessTokenRequest) HasUserAgent() bool`
 
-`func (o *AccessTokenRequest) GetToken() string`
+HasUserAgent returns a boolean if a field has been set.
 
-GetToken returns the Token field if non-nil, zero value otherwise.
+### GetAccessToken
 
-### GetTokenOk
+`func (o *AccessTokenRequest) GetAccessToken() string`
 
-`func (o *AccessTokenRequest) GetTokenOk() (*string, bool)`
+GetAccessToken returns the AccessToken field if non-nil, zero value otherwise.
 
-GetTokenOk returns a tuple with the Token field if it's non-nil, zero value otherwise
+### GetAccessTokenOk
+
+`func (o *AccessTokenRequest) GetAccessTokenOk() (*string, bool)`
+
+GetAccessTokenOk returns a tuple with the AccessToken field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetToken
+### SetAccessToken
 
-`func (o *AccessTokenRequest) SetToken(v string)`
+`func (o *AccessTokenRequest) SetAccessToken(v string)`
 
-SetToken sets Token field to given value.
+SetAccessToken sets AccessToken field to given value.
 
-### HasToken
+### HasAccessToken
 
-`func (o *AccessTokenRequest) HasToken() bool`
+`func (o *AccessTokenRequest) HasAccessToken() bool`
 
-HasToken returns a boolean if a field has been set.
-
-### GetUsername
-
-`func (o *AccessTokenRequest) GetUsername() string`
-
-GetUsername returns the Username field if non-nil, zero value otherwise.
-
-### GetUsernameOk
-
-`func (o *AccessTokenRequest) GetUsernameOk() (*string, bool)`
-
-GetUsernameOk returns a tuple with the Username field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUsername
-
-`func (o *AccessTokenRequest) SetUsername(v string)`
-
-SetUsername sets Username field to given value.
-
+HasAccessToken returns a boolean if a field has been set.
 
 ### GetStatus
 
@@ -132,6 +118,46 @@ and a boolean to check if the value has been set.
 `func (o *AccessTokenRequest) SetStatus(v string)`
 
 SetStatus sets Status field to given value.
+
+
+### GetCreatedAt
+
+`func (o *AccessTokenRequest) GetCreatedAt() time.Time`
+
+GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
+
+### GetCreatedAtOk
+
+`func (o *AccessTokenRequest) GetCreatedAtOk() (*time.Time, bool)`
+
+GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedAt
+
+`func (o *AccessTokenRequest) SetCreatedAt(v time.Time)`
+
+SetCreatedAt sets CreatedAt field to given value.
+
+
+### GetExpiresAt
+
+`func (o *AccessTokenRequest) GetExpiresAt() time.Time`
+
+GetExpiresAt returns the ExpiresAt field if non-nil, zero value otherwise.
+
+### GetExpiresAtOk
+
+`func (o *AccessTokenRequest) GetExpiresAtOk() (*time.Time, bool)`
+
+GetExpiresAtOk returns a tuple with the ExpiresAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpiresAt
+
+`func (o *AccessTokenRequest) SetExpiresAt(v time.Time)`
+
+SetExpiresAt sets ExpiresAt field to given value.
 
 
 

@@ -13,27 +13,29 @@ package forestvpn_api
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // AccessTokenRequest struct for AccessTokenRequest
 type AccessTokenRequest struct {
 	Id string `json:"id"`
-	UserAgent string `json:"user_agent"`
-	Token *string `json:"token,omitempty"`
-	Username string `json:"username"`
+	UserAgent *string `json:"user_agent,omitempty"`
+	AccessToken *string `json:"access_token,omitempty"`
 	Status string `json:"status"`
+	CreatedAt time.Time `json:"created_at"`
+	ExpiresAt time.Time `json:"expires_at"`
 }
 
 // NewAccessTokenRequest instantiates a new AccessTokenRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccessTokenRequest(id string, userAgent string, username string, status string) *AccessTokenRequest {
+func NewAccessTokenRequest(id string, status string, createdAt time.Time, expiresAt time.Time) *AccessTokenRequest {
 	this := AccessTokenRequest{}
 	this.Id = id
-	this.UserAgent = userAgent
-	this.Username = username
 	this.Status = status
+	this.CreatedAt = createdAt
+	this.ExpiresAt = expiresAt
 	return &this
 }
 
@@ -69,84 +71,68 @@ func (o *AccessTokenRequest) SetId(v string) {
 	o.Id = v
 }
 
-// GetUserAgent returns the UserAgent field value
+// GetUserAgent returns the UserAgent field value if set, zero value otherwise.
 func (o *AccessTokenRequest) GetUserAgent() string {
-	if o == nil {
+	if o == nil || isNil(o.UserAgent) {
 		var ret string
 		return ret
 	}
-
-	return o.UserAgent
+	return *o.UserAgent
 }
 
-// GetUserAgentOk returns a tuple with the UserAgent field value
+// GetUserAgentOk returns a tuple with the UserAgent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AccessTokenRequest) GetUserAgentOk() (*string, bool) {
-	if o == nil {
+	if o == nil || isNil(o.UserAgent) {
     return nil, false
 	}
-	return &o.UserAgent, true
+	return o.UserAgent, true
 }
 
-// SetUserAgent sets field value
-func (o *AccessTokenRequest) SetUserAgent(v string) {
-	o.UserAgent = v
-}
-
-// GetToken returns the Token field value if set, zero value otherwise.
-func (o *AccessTokenRequest) GetToken() string {
-	if o == nil || isNil(o.Token) {
-		var ret string
-		return ret
-	}
-	return *o.Token
-}
-
-// GetTokenOk returns a tuple with the Token field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AccessTokenRequest) GetTokenOk() (*string, bool) {
-	if o == nil || isNil(o.Token) {
-    return nil, false
-	}
-	return o.Token, true
-}
-
-// HasToken returns a boolean if a field has been set.
-func (o *AccessTokenRequest) HasToken() bool {
-	if o != nil && !isNil(o.Token) {
+// HasUserAgent returns a boolean if a field has been set.
+func (o *AccessTokenRequest) HasUserAgent() bool {
+	if o != nil && !isNil(o.UserAgent) {
 		return true
 	}
 
 	return false
 }
 
-// SetToken gets a reference to the given string and assigns it to the Token field.
-func (o *AccessTokenRequest) SetToken(v string) {
-	o.Token = &v
+// SetUserAgent gets a reference to the given string and assigns it to the UserAgent field.
+func (o *AccessTokenRequest) SetUserAgent(v string) {
+	o.UserAgent = &v
 }
 
-// GetUsername returns the Username field value
-func (o *AccessTokenRequest) GetUsername() string {
-	if o == nil {
+// GetAccessToken returns the AccessToken field value if set, zero value otherwise.
+func (o *AccessTokenRequest) GetAccessToken() string {
+	if o == nil || isNil(o.AccessToken) {
 		var ret string
 		return ret
 	}
-
-	return o.Username
+	return *o.AccessToken
 }
 
-// GetUsernameOk returns a tuple with the Username field value
+// GetAccessTokenOk returns a tuple with the AccessToken field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccessTokenRequest) GetUsernameOk() (*string, bool) {
-	if o == nil {
+func (o *AccessTokenRequest) GetAccessTokenOk() (*string, bool) {
+	if o == nil || isNil(o.AccessToken) {
     return nil, false
 	}
-	return &o.Username, true
+	return o.AccessToken, true
 }
 
-// SetUsername sets field value
-func (o *AccessTokenRequest) SetUsername(v string) {
-	o.Username = v
+// HasAccessToken returns a boolean if a field has been set.
+func (o *AccessTokenRequest) HasAccessToken() bool {
+	if o != nil && !isNil(o.AccessToken) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessToken gets a reference to the given string and assigns it to the AccessToken field.
+func (o *AccessTokenRequest) SetAccessToken(v string) {
+	o.AccessToken = &v
 }
 
 // GetStatus returns the Status field value
@@ -173,22 +159,73 @@ func (o *AccessTokenRequest) SetStatus(v string) {
 	o.Status = v
 }
 
+// GetCreatedAt returns the CreatedAt field value
+func (o *AccessTokenRequest) GetCreatedAt() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
+// and a boolean to check if the value has been set.
+func (o *AccessTokenRequest) GetCreatedAtOk() (*time.Time, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return &o.CreatedAt, true
+}
+
+// SetCreatedAt sets field value
+func (o *AccessTokenRequest) SetCreatedAt(v time.Time) {
+	o.CreatedAt = v
+}
+
+// GetExpiresAt returns the ExpiresAt field value
+func (o *AccessTokenRequest) GetExpiresAt() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.ExpiresAt
+}
+
+// GetExpiresAtOk returns a tuple with the ExpiresAt field value
+// and a boolean to check if the value has been set.
+func (o *AccessTokenRequest) GetExpiresAtOk() (*time.Time, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return &o.ExpiresAt, true
+}
+
+// SetExpiresAt sets field value
+func (o *AccessTokenRequest) SetExpiresAt(v time.Time) {
+	o.ExpiresAt = v
+}
+
 func (o AccessTokenRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["id"] = o.Id
 	}
-	if true {
+	if !isNil(o.UserAgent) {
 		toSerialize["user_agent"] = o.UserAgent
 	}
-	if !isNil(o.Token) {
-		toSerialize["token"] = o.Token
-	}
-	if true {
-		toSerialize["username"] = o.Username
+	if !isNil(o.AccessToken) {
+		toSerialize["access_token"] = o.AccessToken
 	}
 	if true {
 		toSerialize["status"] = o.Status
+	}
+	if true {
+		toSerialize["created_at"] = o.CreatedAt
+	}
+	if true {
+		toSerialize["expires_at"] = o.ExpiresAt
 	}
 	return json.Marshal(toSerialize)
 }
