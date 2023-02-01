@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -54,7 +54,7 @@ func (o *NetworkService) GetProto() string {
 // and a boolean to check if the value has been set.
 func (o *NetworkService) GetProtoOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Proto, true
 }
@@ -78,7 +78,7 @@ func (o *NetworkService) GetConnectionUri() string {
 // and a boolean to check if the value has been set.
 func (o *NetworkService) GetConnectionUriOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ConnectionUri, true
 }

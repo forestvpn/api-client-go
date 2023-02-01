@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -18,6 +18,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 )
 
 
@@ -382,7 +383,8 @@ func (a *DeviceApiService) CreateDeviceExecute(r ApiCreateDeviceRequest) (*Devic
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -501,7 +503,8 @@ func (a *DeviceApiService) CreateDevicePortForwardingExecute(r ApiCreateDevicePo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -610,7 +613,8 @@ func (a *DeviceApiService) DeleteDeviceExecute(r ApiDeleteDeviceRequest) (*http.
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarHTTPResponse, newErr
 	}
 
@@ -714,7 +718,8 @@ func (a *DeviceApiService) DeleteDevicePortForwardingExecute(r ApiDeleteDevicePo
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarHTTPResponse, newErr
 	}
 
@@ -816,7 +821,8 @@ func (a *DeviceApiService) GetDeviceExecute(r ApiGetDeviceRequest) (*Device, *ht
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -928,7 +934,8 @@ func (a *DeviceApiService) GetDeviceStatsExecute(r ApiGetDeviceStatsRequest) (*D
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1040,7 +1047,8 @@ func (a *DeviceApiService) GetDeviceWireGuardExecute(r ApiGetDeviceWireGuardRequ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1152,7 +1160,8 @@ func (a *DeviceApiService) ListDeviceBindingsExecute(r ApiListDeviceBindingsRequ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1281,7 +1290,8 @@ func (a *DeviceApiService) ListDeviceConnectionModesExecute(r ApiListDeviceConne
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1425,7 +1435,8 @@ func (a *DeviceApiService) ListDeviceDetailStatsExecute(r ApiListDeviceDetailSta
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1554,7 +1565,8 @@ func (a *DeviceApiService) ListDevicePortForwardingsExecute(r ApiListDevicePortF
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1698,7 +1710,8 @@ func (a *DeviceApiService) ListDeviceStatsExecute(r ApiListDeviceStatsRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1810,7 +1823,8 @@ func (a *DeviceApiService) ListDeviceWireGuardPeersExecute(r ApiListDeviceWireGu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1936,7 +1950,8 @@ func (a *DeviceApiService) ListDeviceWireGuardsExecute(r ApiListDeviceWireGuards
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1955,13 +1970,49 @@ func (a *DeviceApiService) ListDeviceWireGuardsExecute(r ApiListDeviceWireGuards
 type ApiListDevicesRequest struct {
 	ctx context.Context
 	ApiService DeviceApi
+	q *string
 	externalKey *string
+	recentlyActive *bool
+	lastActiveAtAfter *time.Time
+	lastActiveAtBefore *time.Time
+	sort *string
 	perPage *int32
 	page *int32
 }
 
+// Filter by search query
+func (r ApiListDevicesRequest) Q(q string) ApiListDevicesRequest {
+	r.q = &q
+	return r
+}
+
+// Filter by external_key
 func (r ApiListDevicesRequest) ExternalKey(externalKey string) ApiListDevicesRequest {
 	r.externalKey = &externalKey
+	return r
+}
+
+// Filter by recently active
+func (r ApiListDevicesRequest) RecentlyActive(recentlyActive bool) ApiListDevicesRequest {
+	r.recentlyActive = &recentlyActive
+	return r
+}
+
+// Filter by last active at date-time after provided value
+func (r ApiListDevicesRequest) LastActiveAtAfter(lastActiveAtAfter time.Time) ApiListDevicesRequest {
+	r.lastActiveAtAfter = &lastActiveAtAfter
+	return r
+}
+
+// Filter by last active at date-time before provided value
+func (r ApiListDevicesRequest) LastActiveAtBefore(lastActiveAtBefore time.Time) ApiListDevicesRequest {
+	r.lastActiveAtBefore = &lastActiveAtBefore
+	return r
+}
+
+// Sort by provided field
+func (r ApiListDevicesRequest) Sort(sort string) ApiListDevicesRequest {
+	r.sort = &sort
 	return r
 }
 
@@ -2016,8 +2067,23 @@ func (a *DeviceApiService) ListDevicesExecute(r ApiListDevicesRequest) ([]Device
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.q != nil {
+		localVarQueryParams.Add("q", parameterToString(*r.q, ""))
+	}
 	if r.externalKey != nil {
 		localVarQueryParams.Add("external_key", parameterToString(*r.externalKey, ""))
+	}
+	if r.recentlyActive != nil {
+		localVarQueryParams.Add("recently_active", parameterToString(*r.recentlyActive, ""))
+	}
+	if r.lastActiveAtAfter != nil {
+		localVarQueryParams.Add("last_active_at_after", parameterToString(*r.lastActiveAtAfter, ""))
+	}
+	if r.lastActiveAtBefore != nil {
+		localVarQueryParams.Add("last_active_at_before", parameterToString(*r.lastActiveAtBefore, ""))
+	}
+	if r.sort != nil {
+		localVarQueryParams.Add("sort", parameterToString(*r.sort, ""))
 	}
 	if r.perPage != nil {
 		localVarQueryParams.Add("per_page", parameterToString(*r.perPage, ""))
@@ -2070,7 +2136,8 @@ func (a *DeviceApiService) ListDevicesExecute(r ApiListDevicesRequest) ([]Device
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2192,7 +2259,8 @@ func (a *DeviceApiService) UpdateDeviceExecute(r ApiUpdateDeviceRequest) (*Devic
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2318,7 +2386,8 @@ func (a *DeviceApiService) UpdateDevicePortForwardingExecute(r ApiUpdateDevicePo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

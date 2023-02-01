@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -55,7 +55,7 @@ func (o *AppStoreReceiptVerificationRequest) GetReceipt() string {
 // and a boolean to check if the value has been set.
 func (o *AppStoreReceiptVerificationRequest) GetReceiptOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Receipt, true
 }
@@ -67,7 +67,7 @@ func (o *AppStoreReceiptVerificationRequest) SetReceipt(v string) {
 
 // GetPrice returns the Price field value if set, zero value otherwise.
 func (o *AppStoreReceiptVerificationRequest) GetPrice() int64 {
-	if o == nil || o.Price == nil {
+	if o == nil || isNil(o.Price) {
 		var ret int64
 		return ret
 	}
@@ -77,15 +77,15 @@ func (o *AppStoreReceiptVerificationRequest) GetPrice() int64 {
 // GetPriceOk returns a tuple with the Price field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppStoreReceiptVerificationRequest) GetPriceOk() (*int64, bool) {
-	if o == nil || o.Price == nil {
-		return nil, false
+	if o == nil || isNil(o.Price) {
+    return nil, false
 	}
 	return o.Price, true
 }
 
 // HasPrice returns a boolean if a field has been set.
 func (o *AppStoreReceiptVerificationRequest) HasPrice() bool {
-	if o != nil && o.Price != nil {
+	if o != nil && !isNil(o.Price) {
 		return true
 	}
 
@@ -99,7 +99,7 @@ func (o *AppStoreReceiptVerificationRequest) SetPrice(v int64) {
 
 // GetCurrency returns the Currency field value if set, zero value otherwise.
 func (o *AppStoreReceiptVerificationRequest) GetCurrency() string {
-	if o == nil || o.Currency == nil {
+	if o == nil || isNil(o.Currency) {
 		var ret string
 		return ret
 	}
@@ -109,15 +109,15 @@ func (o *AppStoreReceiptVerificationRequest) GetCurrency() string {
 // GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppStoreReceiptVerificationRequest) GetCurrencyOk() (*string, bool) {
-	if o == nil || o.Currency == nil {
-		return nil, false
+	if o == nil || isNil(o.Currency) {
+    return nil, false
 	}
 	return o.Currency, true
 }
 
 // HasCurrency returns a boolean if a field has been set.
 func (o *AppStoreReceiptVerificationRequest) HasCurrency() bool {
-	if o != nil && o.Currency != nil {
+	if o != nil && !isNil(o.Currency) {
 		return true
 	}
 
@@ -134,10 +134,10 @@ func (o AppStoreReceiptVerificationRequest) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["receipt"] = o.Receipt
 	}
-	if o.Price != nil {
+	if !isNil(o.Price) {
 		toSerialize["price"] = o.Price
 	}
-	if o.Currency != nil {
+	if !isNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
 	return json.Marshal(toSerialize)

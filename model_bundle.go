@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -57,7 +57,7 @@ func (o *Bundle) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *Bundle) GetIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Id, true
 }
@@ -81,7 +81,7 @@ func (o *Bundle) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *Bundle) GetNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Name, true
 }
@@ -93,7 +93,7 @@ func (o *Bundle) SetName(v string) {
 
 // GetTrialPeriod returns the TrialPeriod field value if set, zero value otherwise.
 func (o *Bundle) GetTrialPeriod() string {
-	if o == nil || o.TrialPeriod == nil {
+	if o == nil || isNil(o.TrialPeriod) {
 		var ret string
 		return ret
 	}
@@ -103,15 +103,15 @@ func (o *Bundle) GetTrialPeriod() string {
 // GetTrialPeriodOk returns a tuple with the TrialPeriod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Bundle) GetTrialPeriodOk() (*string, bool) {
-	if o == nil || o.TrialPeriod == nil {
-		return nil, false
+	if o == nil || isNil(o.TrialPeriod) {
+    return nil, false
 	}
 	return o.TrialPeriod, true
 }
 
 // HasTrialPeriod returns a boolean if a field has been set.
 func (o *Bundle) HasTrialPeriod() bool {
-	if o != nil && o.TrialPeriod != nil {
+	if o != nil && !isNil(o.TrialPeriod) {
 		return true
 	}
 
@@ -125,7 +125,7 @@ func (o *Bundle) SetTrialPeriod(v string) {
 
 // GetProducts returns the Products field value if set, zero value otherwise.
 func (o *Bundle) GetProducts() []Product {
-	if o == nil || o.Products == nil {
+	if o == nil || isNil(o.Products) {
 		var ret []Product
 		return ret
 	}
@@ -135,15 +135,15 @@ func (o *Bundle) GetProducts() []Product {
 // GetProductsOk returns a tuple with the Products field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Bundle) GetProductsOk() ([]Product, bool) {
-	if o == nil || o.Products == nil {
-		return nil, false
+	if o == nil || isNil(o.Products) {
+    return nil, false
 	}
 	return o.Products, true
 }
 
 // HasProducts returns a boolean if a field has been set.
 func (o *Bundle) HasProducts() bool {
-	if o != nil && o.Products != nil {
+	if o != nil && !isNil(o.Products) {
 		return true
 	}
 
@@ -163,10 +163,10 @@ func (o Bundle) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["name"] = o.Name
 	}
-	if o.TrialPeriod != nil {
+	if !isNil(o.TrialPeriod) {
 		toSerialize["trial_period"] = o.TrialPeriod
 	}
-	if o.Products != nil {
+	if !isNil(o.Products) {
 		toSerialize["products"] = o.Products
 	}
 	return json.Marshal(toSerialize)

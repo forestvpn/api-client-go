@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **Latitude** | **float64** |  | 
 **Longitude** | **float64** |  | 
 **Country** | [**Country**](Country.md) |  | 
+**Distance** | Pointer to **float64** | it&#39;s distance in kilometers between an user (longitude and latitude from request object) and a location object | [optional] 
+**LatencyRate** | Pointer to **float64** | it&#39;s a rate from 0 to 1 which shows a connection quality. where 1 is good and 0 is bad | [optional] 
 **AlternativeNames** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
@@ -129,6 +131,56 @@ and a boolean to check if the value has been set.
 
 SetCountry sets Country field to given value.
 
+
+### GetDistance
+
+`func (o *Location) GetDistance() float64`
+
+GetDistance returns the Distance field if non-nil, zero value otherwise.
+
+### GetDistanceOk
+
+`func (o *Location) GetDistanceOk() (*float64, bool)`
+
+GetDistanceOk returns a tuple with the Distance field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDistance
+
+`func (o *Location) SetDistance(v float64)`
+
+SetDistance sets Distance field to given value.
+
+### HasDistance
+
+`func (o *Location) HasDistance() bool`
+
+HasDistance returns a boolean if a field has been set.
+
+### GetLatencyRate
+
+`func (o *Location) GetLatencyRate() float64`
+
+GetLatencyRate returns the LatencyRate field if non-nil, zero value otherwise.
+
+### GetLatencyRateOk
+
+`func (o *Location) GetLatencyRateOk() (*float64, bool)`
+
+GetLatencyRateOk returns a tuple with the LatencyRate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLatencyRate
+
+`func (o *Location) SetLatencyRate(v float64)`
+
+SetLatencyRate sets LatencyRate field to given value.
+
+### HasLatencyRate
+
+`func (o *Location) HasLatencyRate() bool`
+
+HasLatencyRate returns a boolean if a field has been set.
 
 ### GetAlternativeNames
 

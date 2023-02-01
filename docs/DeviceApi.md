@@ -1029,7 +1029,7 @@ Name | Type | Description  | Notes
 
 ## ListDevices
 
-> []Device ListDevices(ctx).ExternalKey(externalKey).PerPage(perPage).Page(page).Execute()
+> []Device ListDevices(ctx).Q(q).ExternalKey(externalKey).RecentlyActive(recentlyActive).LastActiveAtAfter(lastActiveAtAfter).LastActiveAtBefore(lastActiveAtBefore).Sort(sort).PerPage(perPage).Page(page).Execute()
 
 Device List
 
@@ -1044,17 +1044,23 @@ import (
     "context"
     "fmt"
     "os"
+    "time"
     openapiclient "./openapi"
 )
 
 func main() {
-    externalKey := "externalKey_example" // string |  (optional)
+    q := "q_example" // string | Filter by search query (optional)
+    externalKey := "externalKey_example" // string | Filter by external_key (optional)
+    recentlyActive := true // bool | Filter by recently active (optional)
+    lastActiveAtAfter := time.Now() // time.Time | Filter by last active at date-time after provided value (optional)
+    lastActiveAtBefore := time.Now() // time.Time | Filter by last active at date-time before provided value (optional)
+    sort := "sort_example" // string | Sort by provided field (optional)
     perPage := int32(56) // int32 |  (optional)
     page := int32(56) // int32 |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DeviceApi.ListDevices(context.Background()).ExternalKey(externalKey).PerPage(perPage).Page(page).Execute()
+    resp, r, err := apiClient.DeviceApi.ListDevices(context.Background()).Q(q).ExternalKey(externalKey).RecentlyActive(recentlyActive).LastActiveAtAfter(lastActiveAtAfter).LastActiveAtBefore(lastActiveAtBefore).Sort(sort).PerPage(perPage).Page(page).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DeviceApi.ListDevices``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1075,7 +1081,12 @@ Other parameters are passed through a pointer to a apiListDevicesRequest struct 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **externalKey** | **string** |  | 
+ **q** | **string** | Filter by search query | 
+ **externalKey** | **string** | Filter by external_key | 
+ **recentlyActive** | **bool** | Filter by recently active | 
+ **lastActiveAtAfter** | **time.Time** | Filter by last active at date-time after provided value | 
+ **lastActiveAtBefore** | **time.Time** | Filter by last active at date-time before provided value | 
+ **sort** | **string** | Sort by provided field | 
  **perPage** | **int32** |  | 
  **page** | **int32** |  | 
 

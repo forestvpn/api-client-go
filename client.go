@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -52,6 +52,10 @@ type APIClient struct {
 
 	AdsApi AdsApi
 
+	AnalyticsApi AnalyticsApi
+
+	AppApi AppApi
+
 	AppleApi AppleApi
 
 	AuthApi AuthApi
@@ -70,7 +74,9 @@ type APIClient struct {
 
 	GoogleApi GoogleApi
 
-	NewsApi NewsApi
+	NotificationsApi NotificationsApi
+
+	SupportApi SupportApi
 
 	WireguardApi WireguardApi
 }
@@ -92,6 +98,8 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.AdsApi = (*AdsApiService)(&c.common)
+	c.AnalyticsApi = (*AnalyticsApiService)(&c.common)
+	c.AppApi = (*AppApiService)(&c.common)
 	c.AppleApi = (*AppleApiService)(&c.common)
 	c.AuthApi = (*AuthApiService)(&c.common)
 	c.BillingApi = (*BillingApiService)(&c.common)
@@ -101,7 +109,8 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.FriendshipApi = (*FriendshipApiService)(&c.common)
 	c.GeoApi = (*GeoApiService)(&c.common)
 	c.GoogleApi = (*GoogleApiService)(&c.common)
-	c.NewsApi = (*NewsApiService)(&c.common)
+	c.NotificationsApi = (*NotificationsApiService)(&c.common)
+	c.SupportApi = (*SupportApiService)(&c.common)
 	c.WireguardApi = (*WireguardApiService)(&c.common)
 
 	return c
@@ -138,7 +147,7 @@ func selectHeaderAccept(accepts []string) string {
 // contains is a case insensitive match, finding needle in a haystack
 func contains(haystack []string, needle string) bool {
 	for _, a := range haystack {
-		if strings.ToLower(a) == strings.ToLower(needle) {
+		if strings.EqualFold(a, needle) {
 			return true
 		}
 	}
@@ -154,7 +163,7 @@ func typeCheckParameter(obj interface{}, expected string, name string) error {
 
 	// Check the type is as expected.
 	if reflect.TypeOf(obj).String() != expected {
-		return fmt.Errorf("Expected %s to be of type %s but received %s.", name, expected, reflect.TypeOf(obj).String())
+		return fmt.Errorf("expected %s to be of type %s but received %s", name, expected, reflect.TypeOf(obj).String())
 	}
 	return nil
 }
@@ -436,11 +445,14 @@ func (c *APIClient) decode(v interface{}, b []byte, contentType string) (err err
 
 // Add a file to the multipart request
 func addFile(w *multipart.Writer, fieldName, path string) error {
-	file, err := os.Open(path)
+	file, err := os.Open(filepath.Clean(path))
 	if err != nil {
 		return err
 	}
-	defer file.Close()
+	err = file.Close()
+	if err != nil {
+		return err
+	}
 
 	part, err := w.CreateFormFile(fieldName, filepath.Base(path))
 	if err != nil {
@@ -490,7 +502,7 @@ func setBody(body interface{}, contentType string) (bodyBuf *bytes.Buffer, err e
 	}
 
 	if bodyBuf.Len() == 0 {
-		err = fmt.Errorf("Invalid body type %s\n", contentType)
+		err = fmt.Errorf("invalid body type %s\n", contentType)
 		return nil, err
 	}
 	return bodyBuf, nil
@@ -591,4 +603,24 @@ func (e GenericOpenAPIError) Body() []byte {
 // Model returns the unpacked model of the error
 func (e GenericOpenAPIError) Model() interface{} {
 	return e.model
+}
+
+// format error message using title and detail when model implements rfc7807
+func formatErrorMessage(status string, v interface{}) string {
+
+    str := ""
+    metaValue := reflect.ValueOf(v).Elem()
+
+    field := metaValue.FieldByName("Title")
+    if field != (reflect.Value{}) {
+        str = fmt.Sprintf("%s", field.Interface())
+    }
+
+    field = metaValue.FieldByName("Detail")
+    if field != (reflect.Value{}) {
+        str = fmt.Sprintf("%s (%s)", str, field.Interface())
+    }
+
+    // status title (detail)
+    return fmt.Sprintf("%s %s", status, str)
 }

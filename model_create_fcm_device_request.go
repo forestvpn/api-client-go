@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -55,7 +55,7 @@ func (o *CreateFCMDeviceRequest) GetRegistrationId() string {
 // and a boolean to check if the value has been set.
 func (o *CreateFCMDeviceRequest) GetRegistrationIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.RegistrationId, true
 }
@@ -67,7 +67,7 @@ func (o *CreateFCMDeviceRequest) SetRegistrationId(v string) {
 
 // GetDeviceId returns the DeviceId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateFCMDeviceRequest) GetDeviceId() string {
-	if o == nil || o.DeviceId.Get() == nil {
+	if o == nil || isNil(o.DeviceId.Get()) {
 		var ret string
 		return ret
 	}
@@ -79,7 +79,7 @@ func (o *CreateFCMDeviceRequest) GetDeviceId() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateFCMDeviceRequest) GetDeviceIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.DeviceId.Get(), o.DeviceId.IsSet()
 }
@@ -121,7 +121,7 @@ func (o *CreateFCMDeviceRequest) GetActive() bool {
 // and a boolean to check if the value has been set.
 func (o *CreateFCMDeviceRequest) GetActiveOk() (*bool, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Active, true
 }

@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -17,15 +17,16 @@ import (
 
 // Error struct for Error
 type Error struct {
-	Code int32 `json:"code"`
+	Code string `json:"code"`
 	Message string `json:"message"`
+	Detail map[string]interface{} `json:"detail,omitempty"`
 }
 
 // NewError instantiates a new Error object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewError(code int32, message string) *Error {
+func NewError(code string, message string) *Error {
 	this := Error{}
 	this.Code = code
 	this.Message = message
@@ -41,9 +42,9 @@ func NewErrorWithDefaults() *Error {
 }
 
 // GetCode returns the Code field value
-func (o *Error) GetCode() int32 {
+func (o *Error) GetCode() string {
 	if o == nil {
-		var ret int32
+		var ret string
 		return ret
 	}
 
@@ -52,15 +53,15 @@ func (o *Error) GetCode() int32 {
 
 // GetCodeOk returns a tuple with the Code field value
 // and a boolean to check if the value has been set.
-func (o *Error) GetCodeOk() (*int32, bool) {
+func (o *Error) GetCodeOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Code, true
 }
 
 // SetCode sets field value
-func (o *Error) SetCode(v int32) {
+func (o *Error) SetCode(v string) {
 	o.Code = v
 }
 
@@ -78,7 +79,7 @@ func (o *Error) GetMessage() string {
 // and a boolean to check if the value has been set.
 func (o *Error) GetMessageOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Message, true
 }
@@ -88,6 +89,38 @@ func (o *Error) SetMessage(v string) {
 	o.Message = v
 }
 
+// GetDetail returns the Detail field value if set, zero value otherwise.
+func (o *Error) GetDetail() map[string]interface{} {
+	if o == nil || isNil(o.Detail) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Detail
+}
+
+// GetDetailOk returns a tuple with the Detail field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Error) GetDetailOk() (map[string]interface{}, bool) {
+	if o == nil || isNil(o.Detail) {
+    return map[string]interface{}{}, false
+	}
+	return o.Detail, true
+}
+
+// HasDetail returns a boolean if a field has been set.
+func (o *Error) HasDetail() bool {
+	if o != nil && !isNil(o.Detail) {
+		return true
+	}
+
+	return false
+}
+
+// SetDetail gets a reference to the given map[string]interface{} and assigns it to the Detail field.
+func (o *Error) SetDetail(v map[string]interface{}) {
+	o.Detail = v
+}
+
 func (o Error) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -95,6 +128,9 @@ func (o Error) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["message"] = o.Message
+	}
+	if !isNil(o.Detail) {
+		toSerialize["detail"] = o.Detail
 	}
 	return json.Marshal(toSerialize)
 }

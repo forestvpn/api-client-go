@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -60,7 +60,7 @@ func (o *CreateAdUnitRequestLogRequest) GetUnit() string {
 // and a boolean to check if the value has been set.
 func (o *CreateAdUnitRequestLogRequest) GetUnitOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Unit, true
 }
@@ -84,7 +84,7 @@ func (o *CreateAdUnitRequestLogRequest) GetRequestDate() time.Time {
 // and a boolean to check if the value has been set.
 func (o *CreateAdUnitRequestLogRequest) GetRequestDateOk() (*time.Time, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.RequestDate, true
 }
@@ -96,7 +96,7 @@ func (o *CreateAdUnitRequestLogRequest) SetRequestDate(v time.Time) {
 
 // GetErrorCode returns the ErrorCode field value if set, zero value otherwise.
 func (o *CreateAdUnitRequestLogRequest) GetErrorCode() int32 {
-	if o == nil || o.ErrorCode == nil {
+	if o == nil || isNil(o.ErrorCode) {
 		var ret int32
 		return ret
 	}
@@ -106,15 +106,15 @@ func (o *CreateAdUnitRequestLogRequest) GetErrorCode() int32 {
 // GetErrorCodeOk returns a tuple with the ErrorCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateAdUnitRequestLogRequest) GetErrorCodeOk() (*int32, bool) {
-	if o == nil || o.ErrorCode == nil {
-		return nil, false
+	if o == nil || isNil(o.ErrorCode) {
+    return nil, false
 	}
 	return o.ErrorCode, true
 }
 
 // HasErrorCode returns a boolean if a field has been set.
 func (o *CreateAdUnitRequestLogRequest) HasErrorCode() bool {
-	if o != nil && o.ErrorCode != nil {
+	if o != nil && !isNil(o.ErrorCode) {
 		return true
 	}
 
@@ -128,7 +128,7 @@ func (o *CreateAdUnitRequestLogRequest) SetErrorCode(v int32) {
 
 // GetErrorMessage returns the ErrorMessage field value if set, zero value otherwise.
 func (o *CreateAdUnitRequestLogRequest) GetErrorMessage() string {
-	if o == nil || o.ErrorMessage == nil {
+	if o == nil || isNil(o.ErrorMessage) {
 		var ret string
 		return ret
 	}
@@ -138,15 +138,15 @@ func (o *CreateAdUnitRequestLogRequest) GetErrorMessage() string {
 // GetErrorMessageOk returns a tuple with the ErrorMessage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateAdUnitRequestLogRequest) GetErrorMessageOk() (*string, bool) {
-	if o == nil || o.ErrorMessage == nil {
-		return nil, false
+	if o == nil || isNil(o.ErrorMessage) {
+    return nil, false
 	}
 	return o.ErrorMessage, true
 }
 
 // HasErrorMessage returns a boolean if a field has been set.
 func (o *CreateAdUnitRequestLogRequest) HasErrorMessage() bool {
-	if o != nil && o.ErrorMessage != nil {
+	if o != nil && !isNil(o.ErrorMessage) {
 		return true
 	}
 
@@ -172,7 +172,7 @@ func (o *CreateAdUnitRequestLogRequest) GetDuration() string {
 // and a boolean to check if the value has been set.
 func (o *CreateAdUnitRequestLogRequest) GetDurationOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Duration, true
 }
@@ -190,10 +190,10 @@ func (o CreateAdUnitRequestLogRequest) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["request_date"] = o.RequestDate
 	}
-	if o.ErrorCode != nil {
+	if !isNil(o.ErrorCode) {
 		toSerialize["error_code"] = o.ErrorCode
 	}
-	if o.ErrorMessage != nil {
+	if !isNil(o.ErrorMessage) {
 		toSerialize["error_message"] = o.ErrorMessage
 	}
 	if true {

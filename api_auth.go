@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -17,10 +17,49 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 
 type AuthApi interface {
+
+	/*
+	AuthorizeAccessTokenRequest Authorize access token request
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param requestID
+	@return ApiAuthorizeAccessTokenRequestRequest
+	*/
+	AuthorizeAccessTokenRequest(ctx context.Context, requestID string) ApiAuthorizeAccessTokenRequestRequest
+
+	// AuthorizeAccessTokenRequestExecute executes the request
+	//  @return AccessTokenRequest
+	AuthorizeAccessTokenRequestExecute(r ApiAuthorizeAccessTokenRequestRequest) (*AccessTokenRequest, *http.Response, error)
+
+	/*
+	CreateAccessTokenRequest Create access token request
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAccessTokenRequestRequest
+	*/
+	CreateAccessTokenRequest(ctx context.Context) ApiCreateAccessTokenRequestRequest
+
+	// CreateAccessTokenRequestExecute executes the request
+	//  @return AccessTokenRequest
+	CreateAccessTokenRequestExecute(r ApiCreateAccessTokenRequestRequest) (*AccessTokenRequest, *http.Response, error)
+
+	/*
+	GetAccessTokenRequest Get access token request details
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param requestID
+	@return ApiGetAccessTokenRequestRequest
+	*/
+	GetAccessTokenRequest(ctx context.Context, requestID string) ApiGetAccessTokenRequestRequest
+
+	// GetAccessTokenRequestExecute executes the request
+	//  @return AccessTokenRequest
+	GetAccessTokenRequestExecute(r ApiGetAccessTokenRequestRequest) (*AccessTokenRequest, *http.Response, error)
 
 	/*
 	LoginToken Login with JWT token
@@ -57,6 +96,19 @@ type AuthApi interface {
 	// ObtainTokenExecute executes the request
 	//  @return TokenObtain
 	ObtainTokenExecute(r ApiObtainTokenRequest) (*TokenObtain, *http.Response, error)
+
+	/*
+	RevokeAccessTokenRequest Revoke access token request
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param requestID
+	@return ApiRevokeAccessTokenRequestRequest
+	*/
+	RevokeAccessTokenRequest(ctx context.Context, requestID string) ApiRevokeAccessTokenRequestRequest
+
+	// RevokeAccessTokenRequestExecute executes the request
+	//  @return AccessTokenRequest
+	RevokeAccessTokenRequestExecute(r ApiRevokeAccessTokenRequestRequest) (*AccessTokenRequest, *http.Response, error)
 
 	/*
 	UpdateUserProfile Update profile
@@ -97,6 +149,329 @@ type AuthApi interface {
 
 // AuthApiService AuthApi service
 type AuthApiService service
+
+type ApiAuthorizeAccessTokenRequestRequest struct {
+	ctx context.Context
+	ApiService AuthApi
+	requestID string
+}
+
+func (r ApiAuthorizeAccessTokenRequestRequest) Execute() (*AccessTokenRequest, *http.Response, error) {
+	return r.ApiService.AuthorizeAccessTokenRequestExecute(r)
+}
+
+/*
+AuthorizeAccessTokenRequest Authorize access token request
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param requestID
+ @return ApiAuthorizeAccessTokenRequestRequest
+*/
+func (a *AuthApiService) AuthorizeAccessTokenRequest(ctx context.Context, requestID string) ApiAuthorizeAccessTokenRequestRequest {
+	return ApiAuthorizeAccessTokenRequestRequest{
+		ApiService: a,
+		ctx: ctx,
+		requestID: requestID,
+	}
+}
+
+// Execute executes the request
+//  @return AccessTokenRequest
+func (a *AuthApiService) AuthorizeAccessTokenRequestExecute(r ApiAuthorizeAccessTokenRequestRequest) (*AccessTokenRequest, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AccessTokenRequest
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuthApiService.AuthorizeAccessTokenRequest")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/auth/access-token-requests/{requestID}/authorize/"
+	localVarPath = strings.Replace(localVarPath, "{"+"requestID"+"}", url.PathEscape(parameterToString(r.requestID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateAccessTokenRequestRequest struct {
+	ctx context.Context
+	ApiService AuthApi
+}
+
+func (r ApiCreateAccessTokenRequestRequest) Execute() (*AccessTokenRequest, *http.Response, error) {
+	return r.ApiService.CreateAccessTokenRequestExecute(r)
+}
+
+/*
+CreateAccessTokenRequest Create access token request
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateAccessTokenRequestRequest
+*/
+func (a *AuthApiService) CreateAccessTokenRequest(ctx context.Context) ApiCreateAccessTokenRequestRequest {
+	return ApiCreateAccessTokenRequestRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return AccessTokenRequest
+func (a *AuthApiService) CreateAccessTokenRequestExecute(r ApiCreateAccessTokenRequestRequest) (*AccessTokenRequest, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AccessTokenRequest
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuthApiService.CreateAccessTokenRequest")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/auth/access-token-requests/"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetAccessTokenRequestRequest struct {
+	ctx context.Context
+	ApiService AuthApi
+	requestID string
+}
+
+func (r ApiGetAccessTokenRequestRequest) Execute() (*AccessTokenRequest, *http.Response, error) {
+	return r.ApiService.GetAccessTokenRequestExecute(r)
+}
+
+/*
+GetAccessTokenRequest Get access token request details
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param requestID
+ @return ApiGetAccessTokenRequestRequest
+*/
+func (a *AuthApiService) GetAccessTokenRequest(ctx context.Context, requestID string) ApiGetAccessTokenRequestRequest {
+	return ApiGetAccessTokenRequestRequest{
+		ApiService: a,
+		ctx: ctx,
+		requestID: requestID,
+	}
+}
+
+// Execute executes the request
+//  @return AccessTokenRequest
+func (a *AuthApiService) GetAccessTokenRequestExecute(r ApiGetAccessTokenRequestRequest) (*AccessTokenRequest, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AccessTokenRequest
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuthApiService.GetAccessTokenRequest")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/auth/access-token-requests/{requestID}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"requestID"+"}", url.PathEscape(parameterToString(r.requestID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
 
 type ApiLoginTokenRequest struct {
 	ctx context.Context
@@ -194,7 +569,8 @@ func (a *AuthApiService) LoginTokenExecute(r ApiLoginTokenRequest) (*TokenLogin,
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -298,7 +674,8 @@ func (a *AuthApiService) MigrateLegacyAuthExecute(r ApiMigrateLegacyAuthRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -402,7 +779,117 @@ func (a *AuthApiService) ObtainTokenExecute(r ApiObtainTokenRequest) (*TokenObta
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiRevokeAccessTokenRequestRequest struct {
+	ctx context.Context
+	ApiService AuthApi
+	requestID string
+}
+
+func (r ApiRevokeAccessTokenRequestRequest) Execute() (*AccessTokenRequest, *http.Response, error) {
+	return r.ApiService.RevokeAccessTokenRequestExecute(r)
+}
+
+/*
+RevokeAccessTokenRequest Revoke access token request
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param requestID
+ @return ApiRevokeAccessTokenRequestRequest
+*/
+func (a *AuthApiService) RevokeAccessTokenRequest(ctx context.Context, requestID string) ApiRevokeAccessTokenRequestRequest {
+	return ApiRevokeAccessTokenRequestRequest{
+		ApiService: a,
+		ctx: ctx,
+		requestID: requestID,
+	}
+}
+
+// Execute executes the request
+//  @return AccessTokenRequest
+func (a *AuthApiService) RevokeAccessTokenRequestExecute(r ApiRevokeAccessTokenRequestRequest) (*AccessTokenRequest, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AccessTokenRequest
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuthApiService.RevokeAccessTokenRequest")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/auth/access-token-requests/{requestID}/revoke/"
+	localVarPath = strings.Replace(localVarPath, "{"+"requestID"+"}", url.PathEscape(parameterToString(r.requestID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -514,7 +1001,8 @@ func (a *AuthApiService) UpdateUserProfileExecute(r ApiUpdateUserProfileRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -618,7 +1106,8 @@ func (a *AuthApiService) UserProfileExecute(r ApiUserProfileRequest) (*User, *ht
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -722,7 +1211,8 @@ func (a *AuthApiService) WhoAmIExecute(r ApiWhoAmIRequest) (*User, *http.Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

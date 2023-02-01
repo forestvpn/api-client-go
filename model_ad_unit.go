@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -60,7 +60,7 @@ func (o *AdUnit) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *AdUnit) GetIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Id, true
 }
@@ -84,7 +84,7 @@ func (o *AdUnit) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *AdUnit) GetNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Name, true
 }
@@ -96,7 +96,7 @@ func (o *AdUnit) SetName(v string) {
 
 // GetExternalKey returns the ExternalKey field value if set, zero value otherwise.
 func (o *AdUnit) GetExternalKey() string {
-	if o == nil || o.ExternalKey == nil {
+	if o == nil || isNil(o.ExternalKey) {
 		var ret string
 		return ret
 	}
@@ -106,15 +106,15 @@ func (o *AdUnit) GetExternalKey() string {
 // GetExternalKeyOk returns a tuple with the ExternalKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdUnit) GetExternalKeyOk() (*string, bool) {
-	if o == nil || o.ExternalKey == nil {
-		return nil, false
+	if o == nil || isNil(o.ExternalKey) {
+    return nil, false
 	}
 	return o.ExternalKey, true
 }
 
 // HasExternalKey returns a boolean if a field has been set.
 func (o *AdUnit) HasExternalKey() bool {
-	if o != nil && o.ExternalKey != nil {
+	if o != nil && !isNil(o.ExternalKey) {
 		return true
 	}
 
@@ -140,7 +140,7 @@ func (o *AdUnit) GetFormat() string {
 // and a boolean to check if the value has been set.
 func (o *AdUnit) GetFormatOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Format, true
 }
@@ -152,7 +152,7 @@ func (o *AdUnit) SetFormat(v string) {
 
 // GetReward returns the Reward field value if set, zero value otherwise.
 func (o *AdUnit) GetReward() AdReward {
-	if o == nil || o.Reward == nil {
+	if o == nil || isNil(o.Reward) {
 		var ret AdReward
 		return ret
 	}
@@ -162,15 +162,15 @@ func (o *AdUnit) GetReward() AdReward {
 // GetRewardOk returns a tuple with the Reward field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdUnit) GetRewardOk() (*AdReward, bool) {
-	if o == nil || o.Reward == nil {
-		return nil, false
+	if o == nil || isNil(o.Reward) {
+    return nil, false
 	}
 	return o.Reward, true
 }
 
 // HasReward returns a boolean if a field has been set.
 func (o *AdUnit) HasReward() bool {
-	if o != nil && o.Reward != nil {
+	if o != nil && !isNil(o.Reward) {
 		return true
 	}
 
@@ -196,7 +196,7 @@ func (o *AdUnit) GetProvider() AdProvider {
 // and a boolean to check if the value has been set.
 func (o *AdUnit) GetProviderOk() (*AdProvider, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Provider, true
 }
@@ -214,13 +214,13 @@ func (o AdUnit) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["name"] = o.Name
 	}
-	if o.ExternalKey != nil {
+	if !isNil(o.ExternalKey) {
 		toSerialize["external_key"] = o.ExternalKey
 	}
 	if true {
 		toSerialize["format"] = o.Format
 	}
-	if o.Reward != nil {
+	if !isNil(o.Reward) {
 		toSerialize["reward"] = o.Reward
 	}
 	if true {

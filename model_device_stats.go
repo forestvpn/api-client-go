@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -46,7 +46,7 @@ func NewDeviceStatsWithDefaults() *DeviceStats {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *DeviceStats) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || isNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -56,15 +56,15 @@ func (o *DeviceStats) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DeviceStats) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
-		return nil, false
+	if o == nil || isNil(o.Id) {
+    return nil, false
 	}
 	return o.Id, true
 }
 
 // HasId returns a boolean if a field has been set.
 func (o *DeviceStats) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !isNil(o.Id) {
 		return true
 	}
 
@@ -78,7 +78,7 @@ func (o *DeviceStats) SetId(v string) {
 
 // GetConnections returns the Connections field value if set, zero value otherwise.
 func (o *DeviceStats) GetConnections() int32 {
-	if o == nil || o.Connections == nil {
+	if o == nil || isNil(o.Connections) {
 		var ret int32
 		return ret
 	}
@@ -88,15 +88,15 @@ func (o *DeviceStats) GetConnections() int32 {
 // GetConnectionsOk returns a tuple with the Connections field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DeviceStats) GetConnectionsOk() (*int32, bool) {
-	if o == nil || o.Connections == nil {
-		return nil, false
+	if o == nil || isNil(o.Connections) {
+    return nil, false
 	}
 	return o.Connections, true
 }
 
 // HasConnections returns a boolean if a field has been set.
 func (o *DeviceStats) HasConnections() bool {
-	if o != nil && o.Connections != nil {
+	if o != nil && !isNil(o.Connections) {
 		return true
 	}
 
@@ -110,7 +110,7 @@ func (o *DeviceStats) SetConnections(v int32) {
 
 // GetReceivedBytes returns the ReceivedBytes field value if set, zero value otherwise.
 func (o *DeviceStats) GetReceivedBytes() int32 {
-	if o == nil || o.ReceivedBytes == nil {
+	if o == nil || isNil(o.ReceivedBytes) {
 		var ret int32
 		return ret
 	}
@@ -120,15 +120,15 @@ func (o *DeviceStats) GetReceivedBytes() int32 {
 // GetReceivedBytesOk returns a tuple with the ReceivedBytes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DeviceStats) GetReceivedBytesOk() (*int32, bool) {
-	if o == nil || o.ReceivedBytes == nil {
-		return nil, false
+	if o == nil || isNil(o.ReceivedBytes) {
+    return nil, false
 	}
 	return o.ReceivedBytes, true
 }
 
 // HasReceivedBytes returns a boolean if a field has been set.
 func (o *DeviceStats) HasReceivedBytes() bool {
-	if o != nil && o.ReceivedBytes != nil {
+	if o != nil && !isNil(o.ReceivedBytes) {
 		return true
 	}
 
@@ -142,7 +142,7 @@ func (o *DeviceStats) SetReceivedBytes(v int32) {
 
 // GetTransmittedBytes returns the TransmittedBytes field value if set, zero value otherwise.
 func (o *DeviceStats) GetTransmittedBytes() int32 {
-	if o == nil || o.TransmittedBytes == nil {
+	if o == nil || isNil(o.TransmittedBytes) {
 		var ret int32
 		return ret
 	}
@@ -152,15 +152,15 @@ func (o *DeviceStats) GetTransmittedBytes() int32 {
 // GetTransmittedBytesOk returns a tuple with the TransmittedBytes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DeviceStats) GetTransmittedBytesOk() (*int32, bool) {
-	if o == nil || o.TransmittedBytes == nil {
-		return nil, false
+	if o == nil || isNil(o.TransmittedBytes) {
+    return nil, false
 	}
 	return o.TransmittedBytes, true
 }
 
 // HasTransmittedBytes returns a boolean if a field has been set.
 func (o *DeviceStats) HasTransmittedBytes() bool {
-	if o != nil && o.TransmittedBytes != nil {
+	if o != nil && !isNil(o.TransmittedBytes) {
 		return true
 	}
 
@@ -174,7 +174,7 @@ func (o *DeviceStats) SetTransmittedBytes(v int32) {
 
 // GetBlockedAds returns the BlockedAds field value if set, zero value otherwise.
 func (o *DeviceStats) GetBlockedAds() int32 {
-	if o == nil || o.BlockedAds == nil {
+	if o == nil || isNil(o.BlockedAds) {
 		var ret int32
 		return ret
 	}
@@ -184,15 +184,15 @@ func (o *DeviceStats) GetBlockedAds() int32 {
 // GetBlockedAdsOk returns a tuple with the BlockedAds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DeviceStats) GetBlockedAdsOk() (*int32, bool) {
-	if o == nil || o.BlockedAds == nil {
-		return nil, false
+	if o == nil || isNil(o.BlockedAds) {
+    return nil, false
 	}
 	return o.BlockedAds, true
 }
 
 // HasBlockedAds returns a boolean if a field has been set.
 func (o *DeviceStats) HasBlockedAds() bool {
-	if o != nil && o.BlockedAds != nil {
+	if o != nil && !isNil(o.BlockedAds) {
 		return true
 	}
 
@@ -206,7 +206,7 @@ func (o *DeviceStats) SetBlockedAds(v int32) {
 
 // GetBlockedMalwares returns the BlockedMalwares field value if set, zero value otherwise.
 func (o *DeviceStats) GetBlockedMalwares() int32 {
-	if o == nil || o.BlockedMalwares == nil {
+	if o == nil || isNil(o.BlockedMalwares) {
 		var ret int32
 		return ret
 	}
@@ -216,15 +216,15 @@ func (o *DeviceStats) GetBlockedMalwares() int32 {
 // GetBlockedMalwaresOk returns a tuple with the BlockedMalwares field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DeviceStats) GetBlockedMalwaresOk() (*int32, bool) {
-	if o == nil || o.BlockedMalwares == nil {
-		return nil, false
+	if o == nil || isNil(o.BlockedMalwares) {
+    return nil, false
 	}
 	return o.BlockedMalwares, true
 }
 
 // HasBlockedMalwares returns a boolean if a field has been set.
 func (o *DeviceStats) HasBlockedMalwares() bool {
-	if o != nil && o.BlockedMalwares != nil {
+	if o != nil && !isNil(o.BlockedMalwares) {
 		return true
 	}
 
@@ -238,7 +238,7 @@ func (o *DeviceStats) SetBlockedMalwares(v int32) {
 
 // GetDate returns the Date field value if set, zero value otherwise.
 func (o *DeviceStats) GetDate() time.Time {
-	if o == nil || o.Date == nil {
+	if o == nil || isNil(o.Date) {
 		var ret time.Time
 		return ret
 	}
@@ -248,15 +248,15 @@ func (o *DeviceStats) GetDate() time.Time {
 // GetDateOk returns a tuple with the Date field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DeviceStats) GetDateOk() (*time.Time, bool) {
-	if o == nil || o.Date == nil {
-		return nil, false
+	if o == nil || isNil(o.Date) {
+    return nil, false
 	}
 	return o.Date, true
 }
 
 // HasDate returns a boolean if a field has been set.
 func (o *DeviceStats) HasDate() bool {
-	if o != nil && o.Date != nil {
+	if o != nil && !isNil(o.Date) {
 		return true
 	}
 
@@ -270,25 +270,25 @@ func (o *DeviceStats) SetDate(v time.Time) {
 
 func (o DeviceStats) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
+	if !isNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.Connections != nil {
+	if !isNil(o.Connections) {
 		toSerialize["connections"] = o.Connections
 	}
-	if o.ReceivedBytes != nil {
+	if !isNil(o.ReceivedBytes) {
 		toSerialize["received_bytes"] = o.ReceivedBytes
 	}
-	if o.TransmittedBytes != nil {
+	if !isNil(o.TransmittedBytes) {
 		toSerialize["transmitted_bytes"] = o.TransmittedBytes
 	}
-	if o.BlockedAds != nil {
+	if !isNil(o.BlockedAds) {
 		toSerialize["blocked_ads"] = o.BlockedAds
 	}
-	if o.BlockedMalwares != nil {
+	if !isNil(o.BlockedMalwares) {
 		toSerialize["blocked_malwares"] = o.BlockedMalwares
 	}
-	if o.Date != nil {
+	if !isNil(o.Date) {
 		toSerialize["date"] = o.Date
 	}
 	return json.Marshal(toSerialize)

@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -56,7 +56,7 @@ func (o *CloudPaymentsSecure3d) GetPaReq() string {
 // and a boolean to check if the value has been set.
 func (o *CloudPaymentsSecure3d) GetPaReqOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.PaReq, true
 }
@@ -80,7 +80,7 @@ func (o *CloudPaymentsSecure3d) GetAcsUrl() string {
 // and a boolean to check if the value has been set.
 func (o *CloudPaymentsSecure3d) GetAcsUrlOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.AcsUrl, true
 }
@@ -104,7 +104,7 @@ func (o *CloudPaymentsSecure3d) GetTermUrl() string {
 // and a boolean to check if the value has been set.
 func (o *CloudPaymentsSecure3d) GetTermUrlOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.TermUrl, true
 }

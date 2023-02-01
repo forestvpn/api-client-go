@@ -5,18 +5,26 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **int32** |  | 
-**CreatedAt** | **time.Time** |  | 
+**Slug** | **int32** |  | 
 **Title** | **string** |  | 
-**Summary** | **string** |  | 
-**FeaturedImage** | [**FeaturedImage**](FeaturedImage.md) |  | 
-**IsUnread** | **bool** |  | 
-**IsFeatured** | **bool** |  | 
+**Description** | **string** |  | 
+**Unread** | **bool** |  | 
+**Type** | **string** |  | 
+**Level** | Pointer to **string** |  | [optional] 
+**Recipient** | Pointer to **string** |  | [optional] 
+**ActorContentType** | Pointer to **int32** |  | [optional] 
+**ActorObjectId** | Pointer to **string** |  | [optional] 
+**Verb** | Pointer to **string** |  | [optional] 
+**CreatedAt** | Pointer to **time.Time** |  | [optional] 
+**Public** | Pointer to **bool** |  | [optional] 
+**Deleted** | Pointer to **bool** |  | [optional] 
+**Data** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewNotification
 
-`func NewNotification(id int32, createdAt time.Time, title string, summary string, featuredImage FeaturedImage, isUnread bool, isFeatured bool, ) *Notification`
+`func NewNotification(id int32, slug int32, title string, description string, unread bool, type_ string, ) *Notification`
 
 NewNotification instantiates a new Notification object
 This constructor will assign default values to properties that have it defined,
@@ -51,24 +59,24 @@ and a boolean to check if the value has been set.
 SetId sets Id field to given value.
 
 
-### GetCreatedAt
+### GetSlug
 
-`func (o *Notification) GetCreatedAt() time.Time`
+`func (o *Notification) GetSlug() int32`
 
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
+GetSlug returns the Slug field if non-nil, zero value otherwise.
 
-### GetCreatedAtOk
+### GetSlugOk
 
-`func (o *Notification) GetCreatedAtOk() (*time.Time, bool)`
+`func (o *Notification) GetSlugOk() (*int32, bool)`
 
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
+GetSlugOk returns a tuple with the Slug field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCreatedAt
+### SetSlug
 
-`func (o *Notification) SetCreatedAt(v time.Time)`
+`func (o *Notification) SetSlug(v int32)`
 
-SetCreatedAt sets CreatedAt field to given value.
+SetSlug sets Slug field to given value.
 
 
 ### GetTitle
@@ -91,85 +99,290 @@ and a boolean to check if the value has been set.
 SetTitle sets Title field to given value.
 
 
-### GetSummary
+### GetDescription
 
-`func (o *Notification) GetSummary() string`
+`func (o *Notification) GetDescription() string`
 
-GetSummary returns the Summary field if non-nil, zero value otherwise.
+GetDescription returns the Description field if non-nil, zero value otherwise.
 
-### GetSummaryOk
+### GetDescriptionOk
 
-`func (o *Notification) GetSummaryOk() (*string, bool)`
+`func (o *Notification) GetDescriptionOk() (*string, bool)`
 
-GetSummaryOk returns a tuple with the Summary field if it's non-nil, zero value otherwise
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSummary
+### SetDescription
 
-`func (o *Notification) SetSummary(v string)`
+`func (o *Notification) SetDescription(v string)`
 
-SetSummary sets Summary field to given value.
+SetDescription sets Description field to given value.
 
 
-### GetFeaturedImage
+### GetUnread
 
-`func (o *Notification) GetFeaturedImage() FeaturedImage`
+`func (o *Notification) GetUnread() bool`
 
-GetFeaturedImage returns the FeaturedImage field if non-nil, zero value otherwise.
+GetUnread returns the Unread field if non-nil, zero value otherwise.
 
-### GetFeaturedImageOk
+### GetUnreadOk
 
-`func (o *Notification) GetFeaturedImageOk() (*FeaturedImage, bool)`
+`func (o *Notification) GetUnreadOk() (*bool, bool)`
 
-GetFeaturedImageOk returns a tuple with the FeaturedImage field if it's non-nil, zero value otherwise
+GetUnreadOk returns a tuple with the Unread field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetFeaturedImage
+### SetUnread
 
-`func (o *Notification) SetFeaturedImage(v FeaturedImage)`
+`func (o *Notification) SetUnread(v bool)`
 
-SetFeaturedImage sets FeaturedImage field to given value.
+SetUnread sets Unread field to given value.
 
 
-### GetIsUnread
+### GetType
 
-`func (o *Notification) GetIsUnread() bool`
+`func (o *Notification) GetType() string`
 
-GetIsUnread returns the IsUnread field if non-nil, zero value otherwise.
+GetType returns the Type field if non-nil, zero value otherwise.
 
-### GetIsUnreadOk
+### GetTypeOk
 
-`func (o *Notification) GetIsUnreadOk() (*bool, bool)`
+`func (o *Notification) GetTypeOk() (*string, bool)`
 
-GetIsUnreadOk returns a tuple with the IsUnread field if it's non-nil, zero value otherwise
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIsUnread
+### SetType
 
-`func (o *Notification) SetIsUnread(v bool)`
+`func (o *Notification) SetType(v string)`
 
-SetIsUnread sets IsUnread field to given value.
+SetType sets Type field to given value.
 
 
-### GetIsFeatured
+### GetLevel
 
-`func (o *Notification) GetIsFeatured() bool`
+`func (o *Notification) GetLevel() string`
 
-GetIsFeatured returns the IsFeatured field if non-nil, zero value otherwise.
+GetLevel returns the Level field if non-nil, zero value otherwise.
 
-### GetIsFeaturedOk
+### GetLevelOk
 
-`func (o *Notification) GetIsFeaturedOk() (*bool, bool)`
+`func (o *Notification) GetLevelOk() (*string, bool)`
 
-GetIsFeaturedOk returns a tuple with the IsFeatured field if it's non-nil, zero value otherwise
+GetLevelOk returns a tuple with the Level field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIsFeatured
+### SetLevel
 
-`func (o *Notification) SetIsFeatured(v bool)`
+`func (o *Notification) SetLevel(v string)`
 
-SetIsFeatured sets IsFeatured field to given value.
+SetLevel sets Level field to given value.
 
+### HasLevel
+
+`func (o *Notification) HasLevel() bool`
+
+HasLevel returns a boolean if a field has been set.
+
+### GetRecipient
+
+`func (o *Notification) GetRecipient() string`
+
+GetRecipient returns the Recipient field if non-nil, zero value otherwise.
+
+### GetRecipientOk
+
+`func (o *Notification) GetRecipientOk() (*string, bool)`
+
+GetRecipientOk returns a tuple with the Recipient field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecipient
+
+`func (o *Notification) SetRecipient(v string)`
+
+SetRecipient sets Recipient field to given value.
+
+### HasRecipient
+
+`func (o *Notification) HasRecipient() bool`
+
+HasRecipient returns a boolean if a field has been set.
+
+### GetActorContentType
+
+`func (o *Notification) GetActorContentType() int32`
+
+GetActorContentType returns the ActorContentType field if non-nil, zero value otherwise.
+
+### GetActorContentTypeOk
+
+`func (o *Notification) GetActorContentTypeOk() (*int32, bool)`
+
+GetActorContentTypeOk returns a tuple with the ActorContentType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActorContentType
+
+`func (o *Notification) SetActorContentType(v int32)`
+
+SetActorContentType sets ActorContentType field to given value.
+
+### HasActorContentType
+
+`func (o *Notification) HasActorContentType() bool`
+
+HasActorContentType returns a boolean if a field has been set.
+
+### GetActorObjectId
+
+`func (o *Notification) GetActorObjectId() string`
+
+GetActorObjectId returns the ActorObjectId field if non-nil, zero value otherwise.
+
+### GetActorObjectIdOk
+
+`func (o *Notification) GetActorObjectIdOk() (*string, bool)`
+
+GetActorObjectIdOk returns a tuple with the ActorObjectId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActorObjectId
+
+`func (o *Notification) SetActorObjectId(v string)`
+
+SetActorObjectId sets ActorObjectId field to given value.
+
+### HasActorObjectId
+
+`func (o *Notification) HasActorObjectId() bool`
+
+HasActorObjectId returns a boolean if a field has been set.
+
+### GetVerb
+
+`func (o *Notification) GetVerb() string`
+
+GetVerb returns the Verb field if non-nil, zero value otherwise.
+
+### GetVerbOk
+
+`func (o *Notification) GetVerbOk() (*string, bool)`
+
+GetVerbOk returns a tuple with the Verb field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVerb
+
+`func (o *Notification) SetVerb(v string)`
+
+SetVerb sets Verb field to given value.
+
+### HasVerb
+
+`func (o *Notification) HasVerb() bool`
+
+HasVerb returns a boolean if a field has been set.
+
+### GetCreatedAt
+
+`func (o *Notification) GetCreatedAt() time.Time`
+
+GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
+
+### GetCreatedAtOk
+
+`func (o *Notification) GetCreatedAtOk() (*time.Time, bool)`
+
+GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedAt
+
+`func (o *Notification) SetCreatedAt(v time.Time)`
+
+SetCreatedAt sets CreatedAt field to given value.
+
+### HasCreatedAt
+
+`func (o *Notification) HasCreatedAt() bool`
+
+HasCreatedAt returns a boolean if a field has been set.
+
+### GetPublic
+
+`func (o *Notification) GetPublic() bool`
+
+GetPublic returns the Public field if non-nil, zero value otherwise.
+
+### GetPublicOk
+
+`func (o *Notification) GetPublicOk() (*bool, bool)`
+
+GetPublicOk returns a tuple with the Public field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPublic
+
+`func (o *Notification) SetPublic(v bool)`
+
+SetPublic sets Public field to given value.
+
+### HasPublic
+
+`func (o *Notification) HasPublic() bool`
+
+HasPublic returns a boolean if a field has been set.
+
+### GetDeleted
+
+`func (o *Notification) GetDeleted() bool`
+
+GetDeleted returns the Deleted field if non-nil, zero value otherwise.
+
+### GetDeletedOk
+
+`func (o *Notification) GetDeletedOk() (*bool, bool)`
+
+GetDeletedOk returns a tuple with the Deleted field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeleted
+
+`func (o *Notification) SetDeleted(v bool)`
+
+SetDeleted sets Deleted field to given value.
+
+### HasDeleted
+
+`func (o *Notification) HasDeleted() bool`
+
+HasDeleted returns a boolean if a field has been set.
+
+### GetData
+
+`func (o *Notification) GetData() string`
+
+GetData returns the Data field if non-nil, zero value otherwise.
+
+### GetDataOk
+
+`func (o *Notification) GetDataOk() (*string, bool)`
+
+GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetData
+
+`func (o *Notification) SetData(v string)`
+
+SetData sets Data field to given value.
+
+### HasData
+
+`func (o *Notification) HasData() bool`
+
+HasData returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

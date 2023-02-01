@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -41,7 +41,7 @@ func NewConstraintWithDefaults() *Constraint {
 
 // GetNamespace returns the Namespace field value if set, zero value otherwise.
 func (o *Constraint) GetNamespace() string {
-	if o == nil || o.Namespace == nil {
+	if o == nil || isNil(o.Namespace) {
 		var ret string
 		return ret
 	}
@@ -51,15 +51,15 @@ func (o *Constraint) GetNamespace() string {
 // GetNamespaceOk returns a tuple with the Namespace field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Constraint) GetNamespaceOk() (*string, bool) {
-	if o == nil || o.Namespace == nil {
-		return nil, false
+	if o == nil || isNil(o.Namespace) {
+    return nil, false
 	}
 	return o.Namespace, true
 }
 
 // HasNamespace returns a boolean if a field has been set.
 func (o *Constraint) HasNamespace() bool {
-	if o != nil && o.Namespace != nil {
+	if o != nil && !isNil(o.Namespace) {
 		return true
 	}
 
@@ -73,7 +73,7 @@ func (o *Constraint) SetNamespace(v string) {
 
 // GetRelation returns the Relation field value if set, zero value otherwise.
 func (o *Constraint) GetRelation() string {
-	if o == nil || o.Relation == nil {
+	if o == nil || isNil(o.Relation) {
 		var ret string
 		return ret
 	}
@@ -83,15 +83,15 @@ func (o *Constraint) GetRelation() string {
 // GetRelationOk returns a tuple with the Relation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Constraint) GetRelationOk() (*string, bool) {
-	if o == nil || o.Relation == nil {
-		return nil, false
+	if o == nil || isNil(o.Relation) {
+    return nil, false
 	}
 	return o.Relation, true
 }
 
 // HasRelation returns a boolean if a field has been set.
 func (o *Constraint) HasRelation() bool {
-	if o != nil && o.Relation != nil {
+	if o != nil && !isNil(o.Relation) {
 		return true
 	}
 
@@ -105,7 +105,7 @@ func (o *Constraint) SetRelation(v string) {
 
 // GetSubject returns the Subject field value if set, zero value otherwise.
 func (o *Constraint) GetSubject() []string {
-	if o == nil || o.Subject == nil {
+	if o == nil || isNil(o.Subject) {
 		var ret []string
 		return ret
 	}
@@ -115,15 +115,15 @@ func (o *Constraint) GetSubject() []string {
 // GetSubjectOk returns a tuple with the Subject field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Constraint) GetSubjectOk() ([]string, bool) {
-	if o == nil || o.Subject == nil {
-		return nil, false
+	if o == nil || isNil(o.Subject) {
+    return nil, false
 	}
 	return o.Subject, true
 }
 
 // HasSubject returns a boolean if a field has been set.
 func (o *Constraint) HasSubject() bool {
-	if o != nil && o.Subject != nil {
+	if o != nil && !isNil(o.Subject) {
 		return true
 	}
 
@@ -137,13 +137,13 @@ func (o *Constraint) SetSubject(v []string) {
 
 func (o Constraint) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Namespace != nil {
+	if !isNil(o.Namespace) {
 		toSerialize["namespace"] = o.Namespace
 	}
-	if o.Relation != nil {
+	if !isNil(o.Relation) {
 		toSerialize["relation"] = o.Relation
 	}
-	if o.Subject != nil {
+	if !isNil(o.Subject) {
 		toSerialize["subject"] = o.Subject
 	}
 	return json.Marshal(toSerialize)

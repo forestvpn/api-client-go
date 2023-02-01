@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -17,7 +17,7 @@ import (
 
 // CreateOrUpdateDeviceRequestInfo struct for CreateOrUpdateDeviceRequestInfo
 type CreateOrUpdateDeviceRequestInfo struct {
-	Type string `json:"type"`
+	Type DeviceType `json:"type"`
 	Info map[string]string `json:"info"`
 }
 
@@ -25,7 +25,7 @@ type CreateOrUpdateDeviceRequestInfo struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateOrUpdateDeviceRequestInfo(type_ string, info map[string]string) *CreateOrUpdateDeviceRequestInfo {
+func NewCreateOrUpdateDeviceRequestInfo(type_ DeviceType, info map[string]string) *CreateOrUpdateDeviceRequestInfo {
 	this := CreateOrUpdateDeviceRequestInfo{}
 	this.Type = type_
 	this.Info = info
@@ -41,9 +41,9 @@ func NewCreateOrUpdateDeviceRequestInfoWithDefaults() *CreateOrUpdateDeviceReque
 }
 
 // GetType returns the Type field value
-func (o *CreateOrUpdateDeviceRequestInfo) GetType() string {
+func (o *CreateOrUpdateDeviceRequestInfo) GetType() DeviceType {
 	if o == nil {
-		var ret string
+		var ret DeviceType
 		return ret
 	}
 
@@ -52,15 +52,15 @@ func (o *CreateOrUpdateDeviceRequestInfo) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *CreateOrUpdateDeviceRequestInfo) GetTypeOk() (*string, bool) {
+func (o *CreateOrUpdateDeviceRequestInfo) GetTypeOk() (*DeviceType, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Type, true
 }
 
 // SetType sets field value
-func (o *CreateOrUpdateDeviceRequestInfo) SetType(v string) {
+func (o *CreateOrUpdateDeviceRequestInfo) SetType(v DeviceType) {
 	o.Type = v
 }
 
@@ -78,7 +78,7 @@ func (o *CreateOrUpdateDeviceRequestInfo) GetInfo() map[string]string {
 // and a boolean to check if the value has been set.
 func (o *CreateOrUpdateDeviceRequestInfo) GetInfoOk() (*map[string]string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Info, true
 }

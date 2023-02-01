@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -40,7 +40,7 @@ func NewCloudPaymentsAuthWithDefaults() *CloudPaymentsAuth {
 
 // GetTransactionId returns the TransactionId field value if set, zero value otherwise.
 func (o *CloudPaymentsAuth) GetTransactionId() int32 {
-	if o == nil || o.TransactionId == nil {
+	if o == nil || isNil(o.TransactionId) {
 		var ret int32
 		return ret
 	}
@@ -50,15 +50,15 @@ func (o *CloudPaymentsAuth) GetTransactionId() int32 {
 // GetTransactionIdOk returns a tuple with the TransactionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudPaymentsAuth) GetTransactionIdOk() (*int32, bool) {
-	if o == nil || o.TransactionId == nil {
-		return nil, false
+	if o == nil || isNil(o.TransactionId) {
+    return nil, false
 	}
 	return o.TransactionId, true
 }
 
 // HasTransactionId returns a boolean if a field has been set.
 func (o *CloudPaymentsAuth) HasTransactionId() bool {
-	if o != nil && o.TransactionId != nil {
+	if o != nil && !isNil(o.TransactionId) {
 		return true
 	}
 
@@ -72,7 +72,7 @@ func (o *CloudPaymentsAuth) SetTransactionId(v int32) {
 
 // GetSecure3d returns the Secure3d field value if set, zero value otherwise.
 func (o *CloudPaymentsAuth) GetSecure3d() CloudPaymentsSecure3d {
-	if o == nil || o.Secure3d == nil {
+	if o == nil || isNil(o.Secure3d) {
 		var ret CloudPaymentsSecure3d
 		return ret
 	}
@@ -82,15 +82,15 @@ func (o *CloudPaymentsAuth) GetSecure3d() CloudPaymentsSecure3d {
 // GetSecure3dOk returns a tuple with the Secure3d field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudPaymentsAuth) GetSecure3dOk() (*CloudPaymentsSecure3d, bool) {
-	if o == nil || o.Secure3d == nil {
-		return nil, false
+	if o == nil || isNil(o.Secure3d) {
+    return nil, false
 	}
 	return o.Secure3d, true
 }
 
 // HasSecure3d returns a boolean if a field has been set.
 func (o *CloudPaymentsAuth) HasSecure3d() bool {
-	if o != nil && o.Secure3d != nil {
+	if o != nil && !isNil(o.Secure3d) {
 		return true
 	}
 
@@ -104,10 +104,10 @@ func (o *CloudPaymentsAuth) SetSecure3d(v CloudPaymentsSecure3d) {
 
 func (o CloudPaymentsAuth) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.TransactionId != nil {
+	if !isNil(o.TransactionId) {
 		toSerialize["transaction_id"] = o.TransactionId
 	}
-	if o.Secure3d != nil {
+	if !isNil(o.Secure3d) {
 		toSerialize["secure3d"] = o.Secure3d
 	}
 	return json.Marshal(toSerialize)

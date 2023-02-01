@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -22,6 +22,10 @@ type Location struct {
 	Latitude float64 `json:"latitude"`
 	Longitude float64 `json:"longitude"`
 	Country Country `json:"country"`
+	// it's distance in kilometers between an user (longitude and latitude from request object) and a location object
+	Distance *float64 `json:"distance,omitempty"`
+	// it's a rate from 0 to 1 which shows a connection quality. where 1 is good and 0 is bad
+	LatencyRate *float64 `json:"latency_rate,omitempty"`
 	AlternativeNames []string `json:"alternative_names,omitempty"`
 }
 
@@ -61,7 +65,7 @@ func (o *Location) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *Location) GetIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Id, true
 }
@@ -85,7 +89,7 @@ func (o *Location) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *Location) GetNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Name, true
 }
@@ -109,7 +113,7 @@ func (o *Location) GetLatitude() float64 {
 // and a boolean to check if the value has been set.
 func (o *Location) GetLatitudeOk() (*float64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Latitude, true
 }
@@ -133,7 +137,7 @@ func (o *Location) GetLongitude() float64 {
 // and a boolean to check if the value has been set.
 func (o *Location) GetLongitudeOk() (*float64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Longitude, true
 }
@@ -157,7 +161,7 @@ func (o *Location) GetCountry() Country {
 // and a boolean to check if the value has been set.
 func (o *Location) GetCountryOk() (*Country, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Country, true
 }
@@ -167,9 +171,73 @@ func (o *Location) SetCountry(v Country) {
 	o.Country = v
 }
 
+// GetDistance returns the Distance field value if set, zero value otherwise.
+func (o *Location) GetDistance() float64 {
+	if o == nil || isNil(o.Distance) {
+		var ret float64
+		return ret
+	}
+	return *o.Distance
+}
+
+// GetDistanceOk returns a tuple with the Distance field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Location) GetDistanceOk() (*float64, bool) {
+	if o == nil || isNil(o.Distance) {
+    return nil, false
+	}
+	return o.Distance, true
+}
+
+// HasDistance returns a boolean if a field has been set.
+func (o *Location) HasDistance() bool {
+	if o != nil && !isNil(o.Distance) {
+		return true
+	}
+
+	return false
+}
+
+// SetDistance gets a reference to the given float64 and assigns it to the Distance field.
+func (o *Location) SetDistance(v float64) {
+	o.Distance = &v
+}
+
+// GetLatencyRate returns the LatencyRate field value if set, zero value otherwise.
+func (o *Location) GetLatencyRate() float64 {
+	if o == nil || isNil(o.LatencyRate) {
+		var ret float64
+		return ret
+	}
+	return *o.LatencyRate
+}
+
+// GetLatencyRateOk returns a tuple with the LatencyRate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Location) GetLatencyRateOk() (*float64, bool) {
+	if o == nil || isNil(o.LatencyRate) {
+    return nil, false
+	}
+	return o.LatencyRate, true
+}
+
+// HasLatencyRate returns a boolean if a field has been set.
+func (o *Location) HasLatencyRate() bool {
+	if o != nil && !isNil(o.LatencyRate) {
+		return true
+	}
+
+	return false
+}
+
+// SetLatencyRate gets a reference to the given float64 and assigns it to the LatencyRate field.
+func (o *Location) SetLatencyRate(v float64) {
+	o.LatencyRate = &v
+}
+
 // GetAlternativeNames returns the AlternativeNames field value if set, zero value otherwise.
 func (o *Location) GetAlternativeNames() []string {
-	if o == nil || o.AlternativeNames == nil {
+	if o == nil || isNil(o.AlternativeNames) {
 		var ret []string
 		return ret
 	}
@@ -179,15 +247,15 @@ func (o *Location) GetAlternativeNames() []string {
 // GetAlternativeNamesOk returns a tuple with the AlternativeNames field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Location) GetAlternativeNamesOk() ([]string, bool) {
-	if o == nil || o.AlternativeNames == nil {
-		return nil, false
+	if o == nil || isNil(o.AlternativeNames) {
+    return nil, false
 	}
 	return o.AlternativeNames, true
 }
 
 // HasAlternativeNames returns a boolean if a field has been set.
 func (o *Location) HasAlternativeNames() bool {
-	if o != nil && o.AlternativeNames != nil {
+	if o != nil && !isNil(o.AlternativeNames) {
 		return true
 	}
 
@@ -216,7 +284,13 @@ func (o Location) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["country"] = o.Country
 	}
-	if o.AlternativeNames != nil {
+	if !isNil(o.Distance) {
+		toSerialize["distance"] = o.Distance
+	}
+	if !isNil(o.LatencyRate) {
+		toSerialize["latency_rate"] = o.LatencyRate
+	}
+	if !isNil(o.AlternativeNames) {
 		toSerialize["alternative_names"] = o.AlternativeNames
 	}
 	return json.Marshal(toSerialize)

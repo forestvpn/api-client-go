@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -55,7 +55,7 @@ func (o *WireGuardPeer) GetPubKey() string {
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeer) GetPubKeyOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.PubKey, true
 }
@@ -67,7 +67,7 @@ func (o *WireGuardPeer) SetPubKey(v string) {
 
 // GetPsKey returns the PsKey field value if set, zero value otherwise.
 func (o *WireGuardPeer) GetPsKey() string {
-	if o == nil || o.PsKey == nil {
+	if o == nil || isNil(o.PsKey) {
 		var ret string
 		return ret
 	}
@@ -77,15 +77,15 @@ func (o *WireGuardPeer) GetPsKey() string {
 // GetPsKeyOk returns a tuple with the PsKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeer) GetPsKeyOk() (*string, bool) {
-	if o == nil || o.PsKey == nil {
-		return nil, false
+	if o == nil || isNil(o.PsKey) {
+    return nil, false
 	}
 	return o.PsKey, true
 }
 
 // HasPsKey returns a boolean if a field has been set.
 func (o *WireGuardPeer) HasPsKey() bool {
-	if o != nil && o.PsKey != nil {
+	if o != nil && !isNil(o.PsKey) {
 		return true
 	}
 
@@ -99,7 +99,7 @@ func (o *WireGuardPeer) SetPsKey(v string) {
 
 // GetEndpoint returns the Endpoint field value if set, zero value otherwise.
 func (o *WireGuardPeer) GetEndpoint() string {
-	if o == nil || o.Endpoint == nil {
+	if o == nil || isNil(o.Endpoint) {
 		var ret string
 		return ret
 	}
@@ -109,15 +109,15 @@ func (o *WireGuardPeer) GetEndpoint() string {
 // GetEndpointOk returns a tuple with the Endpoint field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeer) GetEndpointOk() (*string, bool) {
-	if o == nil || o.Endpoint == nil {
-		return nil, false
+	if o == nil || isNil(o.Endpoint) {
+    return nil, false
 	}
 	return o.Endpoint, true
 }
 
 // HasEndpoint returns a boolean if a field has been set.
 func (o *WireGuardPeer) HasEndpoint() bool {
-	if o != nil && o.Endpoint != nil {
+	if o != nil && !isNil(o.Endpoint) {
 		return true
 	}
 
@@ -131,7 +131,7 @@ func (o *WireGuardPeer) SetEndpoint(v string) {
 
 // GetAllowedIps returns the AllowedIps field value if set, zero value otherwise.
 func (o *WireGuardPeer) GetAllowedIps() []string {
-	if o == nil || o.AllowedIps == nil {
+	if o == nil || isNil(o.AllowedIps) {
 		var ret []string
 		return ret
 	}
@@ -141,15 +141,15 @@ func (o *WireGuardPeer) GetAllowedIps() []string {
 // GetAllowedIpsOk returns a tuple with the AllowedIps field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeer) GetAllowedIpsOk() ([]string, bool) {
-	if o == nil || o.AllowedIps == nil {
-		return nil, false
+	if o == nil || isNil(o.AllowedIps) {
+    return nil, false
 	}
 	return o.AllowedIps, true
 }
 
 // HasAllowedIps returns a boolean if a field has been set.
 func (o *WireGuardPeer) HasAllowedIps() bool {
-	if o != nil && o.AllowedIps != nil {
+	if o != nil && !isNil(o.AllowedIps) {
 		return true
 	}
 
@@ -166,13 +166,13 @@ func (o WireGuardPeer) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["pub_key"] = o.PubKey
 	}
-	if o.PsKey != nil {
+	if !isNil(o.PsKey) {
 		toSerialize["ps_key"] = o.PsKey
 	}
-	if o.Endpoint != nil {
+	if !isNil(o.Endpoint) {
 		toSerialize["endpoint"] = o.Endpoint
 	}
-	if o.AllowedIps != nil {
+	if !isNil(o.AllowedIps) {
 		toSerialize["allowed_ips"] = o.AllowedIps
 	}
 	return json.Marshal(toSerialize)

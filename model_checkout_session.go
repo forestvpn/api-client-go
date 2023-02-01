@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -79,7 +79,7 @@ func (o *CheckoutSession) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Id, true
 }
@@ -103,7 +103,7 @@ func (o *CheckoutSession) GetCancelUrl() string {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetCancelUrlOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.CancelUrl, true
 }
@@ -127,7 +127,7 @@ func (o *CheckoutSession) GetSuccessUrl() string {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetSuccessUrlOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.SuccessUrl, true
 }
@@ -139,7 +139,7 @@ func (o *CheckoutSession) SetSuccessUrl(v string) {
 
 // GetRedirectUrl returns the RedirectUrl field value if set, zero value otherwise.
 func (o *CheckoutSession) GetRedirectUrl() string {
-	if o == nil || o.RedirectUrl == nil {
+	if o == nil || isNil(o.RedirectUrl) {
 		var ret string
 		return ret
 	}
@@ -149,15 +149,15 @@ func (o *CheckoutSession) GetRedirectUrl() string {
 // GetRedirectUrlOk returns a tuple with the RedirectUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetRedirectUrlOk() (*string, bool) {
-	if o == nil || o.RedirectUrl == nil {
-		return nil, false
+	if o == nil || isNil(o.RedirectUrl) {
+    return nil, false
 	}
 	return o.RedirectUrl, true
 }
 
 // HasRedirectUrl returns a boolean if a field has been set.
 func (o *CheckoutSession) HasRedirectUrl() bool {
-	if o != nil && o.RedirectUrl != nil {
+	if o != nil && !isNil(o.RedirectUrl) {
 		return true
 	}
 
@@ -183,7 +183,7 @@ func (o *CheckoutSession) GetCurrency() string {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetCurrencyOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Currency, true
 }
@@ -207,7 +207,7 @@ func (o *CheckoutSession) GetAmountSubtotal() float64 {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetAmountSubtotalOk() (*float64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.AmountSubtotal, true
 }
@@ -231,7 +231,7 @@ func (o *CheckoutSession) GetAmountTotal() float64 {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetAmountTotalOk() (*float64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.AmountTotal, true
 }
@@ -243,7 +243,7 @@ func (o *CheckoutSession) SetAmountTotal(v float64) {
 
 // GetLocale returns the Locale field value if set, zero value otherwise.
 func (o *CheckoutSession) GetLocale() string {
-	if o == nil || o.Locale == nil {
+	if o == nil || isNil(o.Locale) {
 		var ret string
 		return ret
 	}
@@ -253,15 +253,15 @@ func (o *CheckoutSession) GetLocale() string {
 // GetLocaleOk returns a tuple with the Locale field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetLocaleOk() (*string, bool) {
-	if o == nil || o.Locale == nil {
-		return nil, false
+	if o == nil || isNil(o.Locale) {
+    return nil, false
 	}
 	return o.Locale, true
 }
 
 // HasLocale returns a boolean if a field has been set.
 func (o *CheckoutSession) HasLocale() bool {
-	if o != nil && o.Locale != nil {
+	if o != nil && !isNil(o.Locale) {
 		return true
 	}
 
@@ -275,7 +275,7 @@ func (o *CheckoutSession) SetLocale(v string) {
 
 // GetEmail returns the Email field value if set, zero value otherwise.
 func (o *CheckoutSession) GetEmail() string {
-	if o == nil || o.Email == nil {
+	if o == nil || isNil(o.Email) {
 		var ret string
 		return ret
 	}
@@ -285,15 +285,15 @@ func (o *CheckoutSession) GetEmail() string {
 // GetEmailOk returns a tuple with the Email field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetEmailOk() (*string, bool) {
-	if o == nil || o.Email == nil {
-		return nil, false
+	if o == nil || isNil(o.Email) {
+    return nil, false
 	}
 	return o.Email, true
 }
 
 // HasEmail returns a boolean if a field has been set.
 func (o *CheckoutSession) HasEmail() bool {
-	if o != nil && o.Email != nil {
+	if o != nil && !isNil(o.Email) {
 		return true
 	}
 
@@ -319,7 +319,7 @@ func (o *CheckoutSession) GetProducts() []CheckoutSessionProduct {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetProductsOk() ([]CheckoutSessionProduct, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Products, true
 }
@@ -343,7 +343,7 @@ func (o *CheckoutSession) GetPaymentStatus() string {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetPaymentStatusOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.PaymentStatus, true
 }
@@ -367,7 +367,7 @@ func (o *CheckoutSession) GetStatus() string {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetStatusOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Status, true
 }
@@ -379,7 +379,7 @@ func (o *CheckoutSession) SetStatus(v string) {
 
 // GetTrialPeriod returns the TrialPeriod field value if set, zero value otherwise.
 func (o *CheckoutSession) GetTrialPeriod() string {
-	if o == nil || o.TrialPeriod == nil {
+	if o == nil || isNil(o.TrialPeriod) {
 		var ret string
 		return ret
 	}
@@ -389,15 +389,15 @@ func (o *CheckoutSession) GetTrialPeriod() string {
 // GetTrialPeriodOk returns a tuple with the TrialPeriod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetTrialPeriodOk() (*string, bool) {
-	if o == nil || o.TrialPeriod == nil {
-		return nil, false
+	if o == nil || isNil(o.TrialPeriod) {
+    return nil, false
 	}
 	return o.TrialPeriod, true
 }
 
 // HasTrialPeriod returns a boolean if a field has been set.
 func (o *CheckoutSession) HasTrialPeriod() bool {
-	if o != nil && o.TrialPeriod != nil {
+	if o != nil && !isNil(o.TrialPeriod) {
 		return true
 	}
 
@@ -411,7 +411,7 @@ func (o *CheckoutSession) SetTrialPeriod(v string) {
 
 // GetUser returns the User field value if set, zero value otherwise.
 func (o *CheckoutSession) GetUser() string {
-	if o == nil || o.User == nil {
+	if o == nil || isNil(o.User) {
 		var ret string
 		return ret
 	}
@@ -421,15 +421,15 @@ func (o *CheckoutSession) GetUser() string {
 // GetUserOk returns a tuple with the User field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetUserOk() (*string, bool) {
-	if o == nil || o.User == nil {
-		return nil, false
+	if o == nil || isNil(o.User) {
+    return nil, false
 	}
 	return o.User, true
 }
 
 // HasUser returns a boolean if a field has been set.
 func (o *CheckoutSession) HasUser() bool {
-	if o != nil && o.User != nil {
+	if o != nil && !isNil(o.User) {
 		return true
 	}
 
@@ -455,7 +455,7 @@ func (o *CheckoutSession) GetCreatedAt() time.Time {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.CreatedAt, true
 }
@@ -479,7 +479,7 @@ func (o *CheckoutSession) GetExpiresAt() time.Time {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetExpiresAtOk() (*time.Time, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ExpiresAt, true
 }
@@ -500,7 +500,7 @@ func (o CheckoutSession) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["success_url"] = o.SuccessUrl
 	}
-	if o.RedirectUrl != nil {
+	if !isNil(o.RedirectUrl) {
 		toSerialize["redirect_url"] = o.RedirectUrl
 	}
 	if true {
@@ -512,10 +512,10 @@ func (o CheckoutSession) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["amount_total"] = o.AmountTotal
 	}
-	if o.Locale != nil {
+	if !isNil(o.Locale) {
 		toSerialize["locale"] = o.Locale
 	}
-	if o.Email != nil {
+	if !isNil(o.Email) {
 		toSerialize["email"] = o.Email
 	}
 	if true {
@@ -527,10 +527,10 @@ func (o CheckoutSession) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["status"] = o.Status
 	}
-	if o.TrialPeriod != nil {
+	if !isNil(o.TrialPeriod) {
 		toSerialize["trial_period"] = o.TrialPeriod
 	}
-	if o.User != nil {
+	if !isNil(o.User) {
 		toSerialize["user"] = o.User
 	}
 	if true {

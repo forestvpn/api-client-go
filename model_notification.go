@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -19,27 +19,34 @@ import (
 // Notification struct for Notification
 type Notification struct {
 	Id int32 `json:"id"`
-	CreatedAt time.Time `json:"created_at"`
+	Slug int32 `json:"slug"`
 	Title string `json:"title"`
-	Summary string `json:"summary"`
-	FeaturedImage FeaturedImage `json:"featured_image"`
-	IsUnread bool `json:"is_unread"`
-	IsFeatured bool `json:"is_featured"`
+	Description string `json:"description"`
+	Unread bool `json:"unread"`
+	Type string `json:"type"`
+	Level *string `json:"level,omitempty"`
+	Recipient *string `json:"recipient,omitempty"`
+	ActorContentType *int32 `json:"actor_content_type,omitempty"`
+	ActorObjectId *string `json:"actor_object_id,omitempty"`
+	Verb *string `json:"verb,omitempty"`
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	Public *bool `json:"public,omitempty"`
+	Deleted *bool `json:"deleted,omitempty"`
+	Data *string `json:"data,omitempty"`
 }
 
 // NewNotification instantiates a new Notification object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNotification(id int32, createdAt time.Time, title string, summary string, featuredImage FeaturedImage, isUnread bool, isFeatured bool) *Notification {
+func NewNotification(id int32, slug int32, title string, description string, unread bool, type_ string) *Notification {
 	this := Notification{}
 	this.Id = id
-	this.CreatedAt = createdAt
+	this.Slug = slug
 	this.Title = title
-	this.Summary = summary
-	this.FeaturedImage = featuredImage
-	this.IsUnread = isUnread
-	this.IsFeatured = isFeatured
+	this.Description = description
+	this.Unread = unread
+	this.Type = type_
 	return &this
 }
 
@@ -65,7 +72,7 @@ func (o *Notification) GetId() int32 {
 // and a boolean to check if the value has been set.
 func (o *Notification) GetIdOk() (*int32, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Id, true
 }
@@ -75,28 +82,28 @@ func (o *Notification) SetId(v int32) {
 	o.Id = v
 }
 
-// GetCreatedAt returns the CreatedAt field value
-func (o *Notification) GetCreatedAt() time.Time {
+// GetSlug returns the Slug field value
+func (o *Notification) GetSlug() int32 {
 	if o == nil {
-		var ret time.Time
+		var ret int32
 		return ret
 	}
 
-	return o.CreatedAt
+	return o.Slug
 }
 
-// GetCreatedAtOk returns a tuple with the CreatedAt field value
+// GetSlugOk returns a tuple with the Slug field value
 // and a boolean to check if the value has been set.
-func (o *Notification) GetCreatedAtOk() (*time.Time, bool) {
+func (o *Notification) GetSlugOk() (*int32, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
-	return &o.CreatedAt, true
+	return &o.Slug, true
 }
 
-// SetCreatedAt sets field value
-func (o *Notification) SetCreatedAt(v time.Time) {
-	o.CreatedAt = v
+// SetSlug sets field value
+func (o *Notification) SetSlug(v int32) {
+	o.Slug = v
 }
 
 // GetTitle returns the Title field value
@@ -113,7 +120,7 @@ func (o *Notification) GetTitle() string {
 // and a boolean to check if the value has been set.
 func (o *Notification) GetTitleOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Title, true
 }
@@ -123,100 +130,364 @@ func (o *Notification) SetTitle(v string) {
 	o.Title = v
 }
 
-// GetSummary returns the Summary field value
-func (o *Notification) GetSummary() string {
+// GetDescription returns the Description field value
+func (o *Notification) GetDescription() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Summary
+	return o.Description
 }
 
-// GetSummaryOk returns a tuple with the Summary field value
+// GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
-func (o *Notification) GetSummaryOk() (*string, bool) {
+func (o *Notification) GetDescriptionOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
-	return &o.Summary, true
+	return &o.Description, true
 }
 
-// SetSummary sets field value
-func (o *Notification) SetSummary(v string) {
-	o.Summary = v
+// SetDescription sets field value
+func (o *Notification) SetDescription(v string) {
+	o.Description = v
 }
 
-// GetFeaturedImage returns the FeaturedImage field value
-func (o *Notification) GetFeaturedImage() FeaturedImage {
-	if o == nil {
-		var ret FeaturedImage
-		return ret
-	}
-
-	return o.FeaturedImage
-}
-
-// GetFeaturedImageOk returns a tuple with the FeaturedImage field value
-// and a boolean to check if the value has been set.
-func (o *Notification) GetFeaturedImageOk() (*FeaturedImage, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FeaturedImage, true
-}
-
-// SetFeaturedImage sets field value
-func (o *Notification) SetFeaturedImage(v FeaturedImage) {
-	o.FeaturedImage = v
-}
-
-// GetIsUnread returns the IsUnread field value
-func (o *Notification) GetIsUnread() bool {
+// GetUnread returns the Unread field value
+func (o *Notification) GetUnread() bool {
 	if o == nil {
 		var ret bool
 		return ret
 	}
 
-	return o.IsUnread
+	return o.Unread
 }
 
-// GetIsUnreadOk returns a tuple with the IsUnread field value
+// GetUnreadOk returns a tuple with the Unread field value
 // and a boolean to check if the value has been set.
-func (o *Notification) GetIsUnreadOk() (*bool, bool) {
+func (o *Notification) GetUnreadOk() (*bool, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
-	return &o.IsUnread, true
+	return &o.Unread, true
 }
 
-// SetIsUnread sets field value
-func (o *Notification) SetIsUnread(v bool) {
-	o.IsUnread = v
+// SetUnread sets field value
+func (o *Notification) SetUnread(v bool) {
+	o.Unread = v
 }
 
-// GetIsFeatured returns the IsFeatured field value
-func (o *Notification) GetIsFeatured() bool {
+// GetType returns the Type field value
+func (o *Notification) GetType() string {
 	if o == nil {
-		var ret bool
+		var ret string
 		return ret
 	}
 
-	return o.IsFeatured
+	return o.Type
 }
 
-// GetIsFeaturedOk returns a tuple with the IsFeatured field value
+// GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *Notification) GetIsFeaturedOk() (*bool, bool) {
+func (o *Notification) GetTypeOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
-	return &o.IsFeatured, true
+	return &o.Type, true
 }
 
-// SetIsFeatured sets field value
-func (o *Notification) SetIsFeatured(v bool) {
-	o.IsFeatured = v
+// SetType sets field value
+func (o *Notification) SetType(v string) {
+	o.Type = v
+}
+
+// GetLevel returns the Level field value if set, zero value otherwise.
+func (o *Notification) GetLevel() string {
+	if o == nil || isNil(o.Level) {
+		var ret string
+		return ret
+	}
+	return *o.Level
+}
+
+// GetLevelOk returns a tuple with the Level field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Notification) GetLevelOk() (*string, bool) {
+	if o == nil || isNil(o.Level) {
+    return nil, false
+	}
+	return o.Level, true
+}
+
+// HasLevel returns a boolean if a field has been set.
+func (o *Notification) HasLevel() bool {
+	if o != nil && !isNil(o.Level) {
+		return true
+	}
+
+	return false
+}
+
+// SetLevel gets a reference to the given string and assigns it to the Level field.
+func (o *Notification) SetLevel(v string) {
+	o.Level = &v
+}
+
+// GetRecipient returns the Recipient field value if set, zero value otherwise.
+func (o *Notification) GetRecipient() string {
+	if o == nil || isNil(o.Recipient) {
+		var ret string
+		return ret
+	}
+	return *o.Recipient
+}
+
+// GetRecipientOk returns a tuple with the Recipient field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Notification) GetRecipientOk() (*string, bool) {
+	if o == nil || isNil(o.Recipient) {
+    return nil, false
+	}
+	return o.Recipient, true
+}
+
+// HasRecipient returns a boolean if a field has been set.
+func (o *Notification) HasRecipient() bool {
+	if o != nil && !isNil(o.Recipient) {
+		return true
+	}
+
+	return false
+}
+
+// SetRecipient gets a reference to the given string and assigns it to the Recipient field.
+func (o *Notification) SetRecipient(v string) {
+	o.Recipient = &v
+}
+
+// GetActorContentType returns the ActorContentType field value if set, zero value otherwise.
+func (o *Notification) GetActorContentType() int32 {
+	if o == nil || isNil(o.ActorContentType) {
+		var ret int32
+		return ret
+	}
+	return *o.ActorContentType
+}
+
+// GetActorContentTypeOk returns a tuple with the ActorContentType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Notification) GetActorContentTypeOk() (*int32, bool) {
+	if o == nil || isNil(o.ActorContentType) {
+    return nil, false
+	}
+	return o.ActorContentType, true
+}
+
+// HasActorContentType returns a boolean if a field has been set.
+func (o *Notification) HasActorContentType() bool {
+	if o != nil && !isNil(o.ActorContentType) {
+		return true
+	}
+
+	return false
+}
+
+// SetActorContentType gets a reference to the given int32 and assigns it to the ActorContentType field.
+func (o *Notification) SetActorContentType(v int32) {
+	o.ActorContentType = &v
+}
+
+// GetActorObjectId returns the ActorObjectId field value if set, zero value otherwise.
+func (o *Notification) GetActorObjectId() string {
+	if o == nil || isNil(o.ActorObjectId) {
+		var ret string
+		return ret
+	}
+	return *o.ActorObjectId
+}
+
+// GetActorObjectIdOk returns a tuple with the ActorObjectId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Notification) GetActorObjectIdOk() (*string, bool) {
+	if o == nil || isNil(o.ActorObjectId) {
+    return nil, false
+	}
+	return o.ActorObjectId, true
+}
+
+// HasActorObjectId returns a boolean if a field has been set.
+func (o *Notification) HasActorObjectId() bool {
+	if o != nil && !isNil(o.ActorObjectId) {
+		return true
+	}
+
+	return false
+}
+
+// SetActorObjectId gets a reference to the given string and assigns it to the ActorObjectId field.
+func (o *Notification) SetActorObjectId(v string) {
+	o.ActorObjectId = &v
+}
+
+// GetVerb returns the Verb field value if set, zero value otherwise.
+func (o *Notification) GetVerb() string {
+	if o == nil || isNil(o.Verb) {
+		var ret string
+		return ret
+	}
+	return *o.Verb
+}
+
+// GetVerbOk returns a tuple with the Verb field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Notification) GetVerbOk() (*string, bool) {
+	if o == nil || isNil(o.Verb) {
+    return nil, false
+	}
+	return o.Verb, true
+}
+
+// HasVerb returns a boolean if a field has been set.
+func (o *Notification) HasVerb() bool {
+	if o != nil && !isNil(o.Verb) {
+		return true
+	}
+
+	return false
+}
+
+// SetVerb gets a reference to the given string and assigns it to the Verb field.
+func (o *Notification) SetVerb(v string) {
+	o.Verb = &v
+}
+
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+func (o *Notification) GetCreatedAt() time.Time {
+	if o == nil || isNil(o.CreatedAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Notification) GetCreatedAtOk() (*time.Time, bool) {
+	if o == nil || isNil(o.CreatedAt) {
+    return nil, false
+	}
+	return o.CreatedAt, true
+}
+
+// HasCreatedAt returns a boolean if a field has been set.
+func (o *Notification) HasCreatedAt() bool {
+	if o != nil && !isNil(o.CreatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+func (o *Notification) SetCreatedAt(v time.Time) {
+	o.CreatedAt = &v
+}
+
+// GetPublic returns the Public field value if set, zero value otherwise.
+func (o *Notification) GetPublic() bool {
+	if o == nil || isNil(o.Public) {
+		var ret bool
+		return ret
+	}
+	return *o.Public
+}
+
+// GetPublicOk returns a tuple with the Public field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Notification) GetPublicOk() (*bool, bool) {
+	if o == nil || isNil(o.Public) {
+    return nil, false
+	}
+	return o.Public, true
+}
+
+// HasPublic returns a boolean if a field has been set.
+func (o *Notification) HasPublic() bool {
+	if o != nil && !isNil(o.Public) {
+		return true
+	}
+
+	return false
+}
+
+// SetPublic gets a reference to the given bool and assigns it to the Public field.
+func (o *Notification) SetPublic(v bool) {
+	o.Public = &v
+}
+
+// GetDeleted returns the Deleted field value if set, zero value otherwise.
+func (o *Notification) GetDeleted() bool {
+	if o == nil || isNil(o.Deleted) {
+		var ret bool
+		return ret
+	}
+	return *o.Deleted
+}
+
+// GetDeletedOk returns a tuple with the Deleted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Notification) GetDeletedOk() (*bool, bool) {
+	if o == nil || isNil(o.Deleted) {
+    return nil, false
+	}
+	return o.Deleted, true
+}
+
+// HasDeleted returns a boolean if a field has been set.
+func (o *Notification) HasDeleted() bool {
+	if o != nil && !isNil(o.Deleted) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeleted gets a reference to the given bool and assigns it to the Deleted field.
+func (o *Notification) SetDeleted(v bool) {
+	o.Deleted = &v
+}
+
+// GetData returns the Data field value if set, zero value otherwise.
+func (o *Notification) GetData() string {
+	if o == nil || isNil(o.Data) {
+		var ret string
+		return ret
+	}
+	return *o.Data
+}
+
+// GetDataOk returns a tuple with the Data field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Notification) GetDataOk() (*string, bool) {
+	if o == nil || isNil(o.Data) {
+    return nil, false
+	}
+	return o.Data, true
+}
+
+// HasData returns a boolean if a field has been set.
+func (o *Notification) HasData() bool {
+	if o != nil && !isNil(o.Data) {
+		return true
+	}
+
+	return false
+}
+
+// SetData gets a reference to the given string and assigns it to the Data field.
+func (o *Notification) SetData(v string) {
+	o.Data = &v
 }
 
 func (o Notification) MarshalJSON() ([]byte, error) {
@@ -225,22 +496,46 @@ func (o Notification) MarshalJSON() ([]byte, error) {
 		toSerialize["id"] = o.Id
 	}
 	if true {
-		toSerialize["created_at"] = o.CreatedAt
+		toSerialize["slug"] = o.Slug
 	}
 	if true {
 		toSerialize["title"] = o.Title
 	}
 	if true {
-		toSerialize["summary"] = o.Summary
+		toSerialize["description"] = o.Description
 	}
 	if true {
-		toSerialize["featured_image"] = o.FeaturedImage
+		toSerialize["unread"] = o.Unread
 	}
 	if true {
-		toSerialize["is_unread"] = o.IsUnread
+		toSerialize["type"] = o.Type
 	}
-	if true {
-		toSerialize["is_featured"] = o.IsFeatured
+	if !isNil(o.Level) {
+		toSerialize["level"] = o.Level
+	}
+	if !isNil(o.Recipient) {
+		toSerialize["recipient"] = o.Recipient
+	}
+	if !isNil(o.ActorContentType) {
+		toSerialize["actor_content_type"] = o.ActorContentType
+	}
+	if !isNil(o.ActorObjectId) {
+		toSerialize["actor_object_id"] = o.ActorObjectId
+	}
+	if !isNil(o.Verb) {
+		toSerialize["verb"] = o.Verb
+	}
+	if !isNil(o.CreatedAt) {
+		toSerialize["created_at"] = o.CreatedAt
+	}
+	if !isNil(o.Public) {
+		toSerialize["public"] = o.Public
+	}
+	if !isNil(o.Deleted) {
+		toSerialize["deleted"] = o.Deleted
+	}
+	if !isNil(o.Data) {
+		toSerialize["data"] = o.Data
 	}
 	return json.Marshal(toSerialize)
 }

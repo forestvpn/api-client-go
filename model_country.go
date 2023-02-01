@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -58,7 +58,7 @@ func (o *Country) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *Country) GetIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Id, true
 }
@@ -82,7 +82,7 @@ func (o *Country) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *Country) GetNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Name, true
 }
@@ -106,7 +106,7 @@ func (o *Country) GetEmoji() string {
 // and a boolean to check if the value has been set.
 func (o *Country) GetEmojiOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Emoji, true
 }
@@ -118,7 +118,7 @@ func (o *Country) SetEmoji(v string) {
 
 // GetCurrencyCode returns the CurrencyCode field value if set, zero value otherwise.
 func (o *Country) GetCurrencyCode() string {
-	if o == nil || o.CurrencyCode == nil {
+	if o == nil || isNil(o.CurrencyCode) {
 		var ret string
 		return ret
 	}
@@ -128,15 +128,15 @@ func (o *Country) GetCurrencyCode() string {
 // GetCurrencyCodeOk returns a tuple with the CurrencyCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Country) GetCurrencyCodeOk() (*string, bool) {
-	if o == nil || o.CurrencyCode == nil {
-		return nil, false
+	if o == nil || isNil(o.CurrencyCode) {
+    return nil, false
 	}
 	return o.CurrencyCode, true
 }
 
 // HasCurrencyCode returns a boolean if a field has been set.
 func (o *Country) HasCurrencyCode() bool {
-	if o != nil && o.CurrencyCode != nil {
+	if o != nil && !isNil(o.CurrencyCode) {
 		return true
 	}
 
@@ -150,7 +150,7 @@ func (o *Country) SetCurrencyCode(v string) {
 
 // GetAlternativeNames returns the AlternativeNames field value if set, zero value otherwise.
 func (o *Country) GetAlternativeNames() []string {
-	if o == nil || o.AlternativeNames == nil {
+	if o == nil || isNil(o.AlternativeNames) {
 		var ret []string
 		return ret
 	}
@@ -160,15 +160,15 @@ func (o *Country) GetAlternativeNames() []string {
 // GetAlternativeNamesOk returns a tuple with the AlternativeNames field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Country) GetAlternativeNamesOk() ([]string, bool) {
-	if o == nil || o.AlternativeNames == nil {
-		return nil, false
+	if o == nil || isNil(o.AlternativeNames) {
+    return nil, false
 	}
 	return o.AlternativeNames, true
 }
 
 // HasAlternativeNames returns a boolean if a field has been set.
 func (o *Country) HasAlternativeNames() bool {
-	if o != nil && o.AlternativeNames != nil {
+	if o != nil && !isNil(o.AlternativeNames) {
 		return true
 	}
 
@@ -191,10 +191,10 @@ func (o Country) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["emoji"] = o.Emoji
 	}
-	if o.CurrencyCode != nil {
+	if !isNil(o.CurrencyCode) {
 		toSerialize["currency_code"] = o.CurrencyCode
 	}
-	if o.AlternativeNames != nil {
+	if !isNil(o.AlternativeNames) {
 		toSerialize["alternative_names"] = o.AlternativeNames
 	}
 	return json.Marshal(toSerialize)

@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -58,7 +58,7 @@ func (o *FCMDevice) GetRegistrationId() string {
 // and a boolean to check if the value has been set.
 func (o *FCMDevice) GetRegistrationIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.RegistrationId, true
 }
@@ -70,7 +70,7 @@ func (o *FCMDevice) SetRegistrationId(v string) {
 
 // GetDeviceId returns the DeviceId field value if set, zero value otherwise.
 func (o *FCMDevice) GetDeviceId() string {
-	if o == nil || o.DeviceId == nil {
+	if o == nil || isNil(o.DeviceId) {
 		var ret string
 		return ret
 	}
@@ -80,15 +80,15 @@ func (o *FCMDevice) GetDeviceId() string {
 // GetDeviceIdOk returns a tuple with the DeviceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FCMDevice) GetDeviceIdOk() (*string, bool) {
-	if o == nil || o.DeviceId == nil {
-		return nil, false
+	if o == nil || isNil(o.DeviceId) {
+    return nil, false
 	}
 	return o.DeviceId, true
 }
 
 // HasDeviceId returns a boolean if a field has been set.
 func (o *FCMDevice) HasDeviceId() bool {
-	if o != nil && o.DeviceId != nil {
+	if o != nil && !isNil(o.DeviceId) {
 		return true
 	}
 
@@ -114,7 +114,7 @@ func (o *FCMDevice) GetActive() bool {
 // and a boolean to check if the value has been set.
 func (o *FCMDevice) GetActiveOk() (*bool, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Active, true
 }
@@ -138,7 +138,7 @@ func (o *FCMDevice) GetCreatedAt() time.Time {
 // and a boolean to check if the value has been set.
 func (o *FCMDevice) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.CreatedAt, true
 }
@@ -153,7 +153,7 @@ func (o FCMDevice) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["registration_id"] = o.RegistrationId
 	}
-	if o.DeviceId != nil {
+	if !isNil(o.DeviceId) {
 		toSerialize["device_id"] = o.DeviceId
 	}
 	if true {

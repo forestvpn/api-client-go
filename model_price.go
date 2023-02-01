@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -17,16 +17,19 @@ import (
 
 // Price struct for Price
 type Price struct {
+	Id string `json:"id"`
 	Currency string `json:"currency"`
 	Price float64 `json:"price"`
+	Product *Product `json:"product,omitempty"`
 }
 
 // NewPrice instantiates a new Price object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPrice(currency string, price float64) *Price {
+func NewPrice(id string, currency string, price float64) *Price {
 	this := Price{}
+	this.Id = id
 	this.Currency = currency
 	this.Price = price
 	return &this
@@ -38,6 +41,30 @@ func NewPrice(currency string, price float64) *Price {
 func NewPriceWithDefaults() *Price {
 	this := Price{}
 	return &this
+}
+
+// GetId returns the Id field value
+func (o *Price) GetId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value
+// and a boolean to check if the value has been set.
+func (o *Price) GetIdOk() (*string, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *Price) SetId(v string) {
+	o.Id = v
 }
 
 // GetCurrency returns the Currency field value
@@ -54,7 +81,7 @@ func (o *Price) GetCurrency() string {
 // and a boolean to check if the value has been set.
 func (o *Price) GetCurrencyOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Currency, true
 }
@@ -78,7 +105,7 @@ func (o *Price) GetPrice() float64 {
 // and a boolean to check if the value has been set.
 func (o *Price) GetPriceOk() (*float64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Price, true
 }
@@ -88,13 +115,51 @@ func (o *Price) SetPrice(v float64) {
 	o.Price = v
 }
 
+// GetProduct returns the Product field value if set, zero value otherwise.
+func (o *Price) GetProduct() Product {
+	if o == nil || isNil(o.Product) {
+		var ret Product
+		return ret
+	}
+	return *o.Product
+}
+
+// GetProductOk returns a tuple with the Product field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Price) GetProductOk() (*Product, bool) {
+	if o == nil || isNil(o.Product) {
+    return nil, false
+	}
+	return o.Product, true
+}
+
+// HasProduct returns a boolean if a field has been set.
+func (o *Price) HasProduct() bool {
+	if o != nil && !isNil(o.Product) {
+		return true
+	}
+
+	return false
+}
+
+// SetProduct gets a reference to the given Product and assigns it to the Product field.
+func (o *Price) SetProduct(v Product) {
+	o.Product = &v
+}
+
 func (o Price) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["id"] = o.Id
+	}
 	if true {
 		toSerialize["currency"] = o.Currency
 	}
 	if true {
 		toSerialize["price"] = o.Price
+	}
+	if !isNil(o.Product) {
+		toSerialize["product"] = o.Product
 	}
 	return json.Marshal(toSerialize)
 }

@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -41,7 +41,7 @@ func NewWireGuardPeerInfoWithDefaults() *WireGuardPeerInfo {
 
 // GetPubKey returns the PubKey field value if set, zero value otherwise.
 func (o *WireGuardPeerInfo) GetPubKey() string {
-	if o == nil || o.PubKey == nil {
+	if o == nil || isNil(o.PubKey) {
 		var ret string
 		return ret
 	}
@@ -51,15 +51,15 @@ func (o *WireGuardPeerInfo) GetPubKey() string {
 // GetPubKeyOk returns a tuple with the PubKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeerInfo) GetPubKeyOk() (*string, bool) {
-	if o == nil || o.PubKey == nil {
-		return nil, false
+	if o == nil || isNil(o.PubKey) {
+    return nil, false
 	}
 	return o.PubKey, true
 }
 
 // HasPubKey returns a boolean if a field has been set.
 func (o *WireGuardPeerInfo) HasPubKey() bool {
-	if o != nil && o.PubKey != nil {
+	if o != nil && !isNil(o.PubKey) {
 		return true
 	}
 
@@ -73,7 +73,7 @@ func (o *WireGuardPeerInfo) SetPubKey(v string) {
 
 // GetUser returns the User field value if set, zero value otherwise.
 func (o *WireGuardPeerInfo) GetUser() WireGuardPeerUser {
-	if o == nil || o.User == nil {
+	if o == nil || isNil(o.User) {
 		var ret WireGuardPeerUser
 		return ret
 	}
@@ -83,15 +83,15 @@ func (o *WireGuardPeerInfo) GetUser() WireGuardPeerUser {
 // GetUserOk returns a tuple with the User field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeerInfo) GetUserOk() (*WireGuardPeerUser, bool) {
-	if o == nil || o.User == nil {
-		return nil, false
+	if o == nil || isNil(o.User) {
+    return nil, false
 	}
 	return o.User, true
 }
 
 // HasUser returns a boolean if a field has been set.
 func (o *WireGuardPeerInfo) HasUser() bool {
-	if o != nil && o.User != nil {
+	if o != nil && !isNil(o.User) {
 		return true
 	}
 
@@ -105,7 +105,7 @@ func (o *WireGuardPeerInfo) SetUser(v WireGuardPeerUser) {
 
 // GetDevice returns the Device field value if set, zero value otherwise.
 func (o *WireGuardPeerInfo) GetDevice() WireGuardPeerDevice {
-	if o == nil || o.Device == nil {
+	if o == nil || isNil(o.Device) {
 		var ret WireGuardPeerDevice
 		return ret
 	}
@@ -115,15 +115,15 @@ func (o *WireGuardPeerInfo) GetDevice() WireGuardPeerDevice {
 // GetDeviceOk returns a tuple with the Device field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeerInfo) GetDeviceOk() (*WireGuardPeerDevice, bool) {
-	if o == nil || o.Device == nil {
-		return nil, false
+	if o == nil || isNil(o.Device) {
+    return nil, false
 	}
 	return o.Device, true
 }
 
 // HasDevice returns a boolean if a field has been set.
 func (o *WireGuardPeerInfo) HasDevice() bool {
-	if o != nil && o.Device != nil {
+	if o != nil && !isNil(o.Device) {
 		return true
 	}
 
@@ -137,13 +137,13 @@ func (o *WireGuardPeerInfo) SetDevice(v WireGuardPeerDevice) {
 
 func (o WireGuardPeerInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.PubKey != nil {
+	if !isNil(o.PubKey) {
 		toSerialize["pub_key"] = o.PubKey
 	}
-	if o.User != nil {
+	if !isNil(o.User) {
 		toSerialize["user"] = o.User
 	}
-	if o.Device != nil {
+	if !isNil(o.Device) {
 		toSerialize["device"] = o.Device
 	}
 	return json.Marshal(toSerialize)

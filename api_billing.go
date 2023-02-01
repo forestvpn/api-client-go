@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -24,6 +24,66 @@ import (
 type BillingApi interface {
 
 	/*
+	CancelSubscription Cancel subscription
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subscriptionID
+	@return ApiCancelSubscriptionRequest
+	*/
+	CancelSubscription(ctx context.Context, subscriptionID string) ApiCancelSubscriptionRequest
+
+	// CancelSubscriptionExecute executes the request
+	CancelSubscriptionExecute(r ApiCancelSubscriptionRequest) (*http.Response, error)
+
+	/*
+	CreatePaymentMethodStripeSetupIntent Create stripe's setup intent for add new payment method.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreatePaymentMethodStripeSetupIntentRequest
+	*/
+	CreatePaymentMethodStripeSetupIntent(ctx context.Context) ApiCreatePaymentMethodStripeSetupIntentRequest
+
+	// CreatePaymentMethodStripeSetupIntentExecute executes the request
+	//  @return StripeSetupIntent
+	CreatePaymentMethodStripeSetupIntentExecute(r ApiCreatePaymentMethodStripeSetupIntentRequest) (*StripeSetupIntent, *http.Response, error)
+
+	/*
+	CreateSubscription Create subscription
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSubscriptionRequest
+	*/
+	CreateSubscription(ctx context.Context) ApiCreateSubscriptionRequest
+
+	// CreateSubscriptionExecute executes the request
+	//  @return Subscription
+	CreateSubscriptionExecute(r ApiCreateSubscriptionRequest) (*Subscription, *http.Response, error)
+
+	/*
+	DeletePaymentMethod Delete payment method
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param paymentMethodID
+	@return ApiDeletePaymentMethodRequest
+	*/
+	DeletePaymentMethod(ctx context.Context, paymentMethodID string) ApiDeletePaymentMethodRequest
+
+	// DeletePaymentMethodExecute executes the request
+	DeletePaymentMethodExecute(r ApiDeletePaymentMethodRequest) (*http.Response, error)
+
+	/*
+	GetBillingAccount Billing account info
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetBillingAccountRequest
+	*/
+	GetBillingAccount(ctx context.Context) ApiGetBillingAccountRequest
+
+	// GetBillingAccountExecute executes the request
+	//  @return BillingAccount
+	GetBillingAccountExecute(r ApiGetBillingAccountRequest) (*BillingAccount, *http.Response, error)
+
+	/*
 	GetBillingBundle Bundle info
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -37,17 +97,17 @@ type BillingApi interface {
 	GetBillingBundleExecute(r ApiGetBillingBundleRequest) (*Bundle, *http.Response, error)
 
 	/*
-	GetBillingPaymentMethod Payment method info
+	GetBillingPaymentOption Payment option info
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param paymentMethodID
-	@return ApiGetBillingPaymentMethodRequest
+	@param paymentOptionID
+	@return ApiGetBillingPaymentOptionRequest
 	*/
-	GetBillingPaymentMethod(ctx context.Context, paymentMethodID string) ApiGetBillingPaymentMethodRequest
+	GetBillingPaymentOption(ctx context.Context, paymentOptionID string) ApiGetBillingPaymentOptionRequest
 
-	// GetBillingPaymentMethodExecute executes the request
-	//  @return PaymentMethod
-	GetBillingPaymentMethodExecute(r ApiGetBillingPaymentMethodRequest) (*PaymentMethod, *http.Response, error)
+	// GetBillingPaymentOptionExecute executes the request
+	//  @return PaymentOption
+	GetBillingPaymentOptionExecute(r ApiGetBillingPaymentOptionRequest) (*PaymentOption, *http.Response, error)
 
 	/*
 	GetBillingProduct Product info
@@ -61,6 +121,45 @@ type BillingApi interface {
 	// GetBillingProductExecute executes the request
 	//  @return Product
 	GetBillingProductExecute(r ApiGetBillingProductRequest) (*Product, *http.Response, error)
+
+	/*
+	GetPaymentMethod Payment method info
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param paymentMethodID
+	@return ApiGetPaymentMethodRequest
+	*/
+	GetPaymentMethod(ctx context.Context, paymentMethodID string) ApiGetPaymentMethodRequest
+
+	// GetPaymentMethodExecute executes the request
+	//  @return PaymentMethod
+	GetPaymentMethodExecute(r ApiGetPaymentMethodRequest) (*PaymentMethod, *http.Response, error)
+
+	/*
+	GetSubscription Subscription info
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subscriptionID
+	@return ApiGetSubscriptionRequest
+	*/
+	GetSubscription(ctx context.Context, subscriptionID string) ApiGetSubscriptionRequest
+
+	// GetSubscriptionExecute executes the request
+	//  @return Subscription
+	GetSubscriptionExecute(r ApiGetSubscriptionRequest) (*Subscription, *http.Response, error)
+
+	/*
+	GetSubscriptionItem Subscription item info
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subscriptionItemID
+	@return ApiGetSubscriptionItemRequest
+	*/
+	GetSubscriptionItem(ctx context.Context, subscriptionItemID string) ApiGetSubscriptionItemRequest
+
+	// GetSubscriptionItemExecute executes the request
+	//  @return SubscriptionItem
+	GetSubscriptionItemExecute(r ApiGetSubscriptionItemRequest) (*SubscriptionItem, *http.Response, error)
 
 	/*
 	ListBillingBundles Billing bundles list
@@ -87,16 +186,16 @@ type BillingApi interface {
 	ListBillingFeaturesExecute(r ApiListBillingFeaturesRequest) ([]BillingFeature, *http.Response, error)
 
 	/*
-	ListBillingPaymentMethods Billing payment methods list
+	ListBillingPaymentOptions Billing payment option list
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListBillingPaymentMethodsRequest
+	@return ApiListBillingPaymentOptionsRequest
 	*/
-	ListBillingPaymentMethods(ctx context.Context) ApiListBillingPaymentMethodsRequest
+	ListBillingPaymentOptions(ctx context.Context) ApiListBillingPaymentOptionsRequest
 
-	// ListBillingPaymentMethodsExecute executes the request
-	//  @return []PaymentMethod
-	ListBillingPaymentMethodsExecute(r ApiListBillingPaymentMethodsRequest) ([]PaymentMethod, *http.Response, error)
+	// ListBillingPaymentOptionsExecute executes the request
+	//  @return []PaymentOption
+	ListBillingPaymentOptionsExecute(r ApiListBillingPaymentOptionsRequest) ([]PaymentOption, *http.Response, error)
 
 	/*
 	ListBillingProducts Billing products list
@@ -109,10 +208,611 @@ type BillingApi interface {
 	// ListBillingProductsExecute executes the request
 	//  @return []Product
 	ListBillingProductsExecute(r ApiListBillingProductsRequest) ([]Product, *http.Response, error)
+
+	/*
+	ListPaymentMethods Payment method list
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListPaymentMethodsRequest
+	*/
+	ListPaymentMethods(ctx context.Context) ApiListPaymentMethodsRequest
+
+	// ListPaymentMethodsExecute executes the request
+	//  @return []PaymentMethod
+	ListPaymentMethodsExecute(r ApiListPaymentMethodsRequest) ([]PaymentMethod, *http.Response, error)
+
+	/*
+	ListSubscriptionItems Subscription items list
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListSubscriptionItemsRequest
+	*/
+	ListSubscriptionItems(ctx context.Context) ApiListSubscriptionItemsRequest
+
+	// ListSubscriptionItemsExecute executes the request
+	//  @return []SubscriptionItem
+	ListSubscriptionItemsExecute(r ApiListSubscriptionItemsRequest) ([]SubscriptionItem, *http.Response, error)
+
+	/*
+	ListSubscriptions Billing subscriptions list
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListSubscriptionsRequest
+	*/
+	ListSubscriptions(ctx context.Context) ApiListSubscriptionsRequest
+
+	// ListSubscriptionsExecute executes the request
+	//  @return []Subscription
+	ListSubscriptionsExecute(r ApiListSubscriptionsRequest) ([]Subscription, *http.Response, error)
+
+	/*
+	ReactivateSubscription Reactivate subscription
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subscriptionID
+	@return ApiReactivateSubscriptionRequest
+	*/
+	ReactivateSubscription(ctx context.Context, subscriptionID string) ApiReactivateSubscriptionRequest
+
+	// ReactivateSubscriptionExecute executes the request
+	//  @return Subscription
+	ReactivateSubscriptionExecute(r ApiReactivateSubscriptionRequest) (*Subscription, *http.Response, error)
+
+	/*
+	UpdateBillingAccount Update billing account
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiUpdateBillingAccountRequest
+	*/
+	UpdateBillingAccount(ctx context.Context) ApiUpdateBillingAccountRequest
+
+	// UpdateBillingAccountExecute executes the request
+	//  @return BillingAccount
+	UpdateBillingAccountExecute(r ApiUpdateBillingAccountRequest) (*BillingAccount, *http.Response, error)
+
+	/*
+	UpdateSubscriptionItem Update subscription item
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subscriptionItemID
+	@return ApiUpdateSubscriptionItemRequest
+	*/
+	UpdateSubscriptionItem(ctx context.Context, subscriptionItemID string) ApiUpdateSubscriptionItemRequest
+
+	// UpdateSubscriptionItemExecute executes the request
+	//  @return SubscriptionItem
+	UpdateSubscriptionItemExecute(r ApiUpdateSubscriptionItemRequest) (*SubscriptionItem, *http.Response, error)
 }
 
 // BillingApiService BillingApi service
 type BillingApiService service
+
+type ApiCancelSubscriptionRequest struct {
+	ctx context.Context
+	ApiService BillingApi
+	subscriptionID string
+}
+
+func (r ApiCancelSubscriptionRequest) Execute() (*http.Response, error) {
+	return r.ApiService.CancelSubscriptionExecute(r)
+}
+
+/*
+CancelSubscription Cancel subscription
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param subscriptionID
+ @return ApiCancelSubscriptionRequest
+*/
+func (a *BillingApiService) CancelSubscription(ctx context.Context, subscriptionID string) ApiCancelSubscriptionRequest {
+	return ApiCancelSubscriptionRequest{
+		ApiService: a,
+		ctx: ctx,
+		subscriptionID: subscriptionID,
+	}
+}
+
+// Execute executes the request
+func (a *BillingApiService) CancelSubscriptionExecute(r ApiCancelSubscriptionRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BillingApiService.CancelSubscription")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/billing/subscriptions/{subscriptionID}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"subscriptionID"+"}", url.PathEscape(parameterToString(r.subscriptionID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiCreatePaymentMethodStripeSetupIntentRequest struct {
+	ctx context.Context
+	ApiService BillingApi
+	createStripeSetupIntentRequest *CreateStripeSetupIntentRequest
+}
+
+func (r ApiCreatePaymentMethodStripeSetupIntentRequest) CreateStripeSetupIntentRequest(createStripeSetupIntentRequest CreateStripeSetupIntentRequest) ApiCreatePaymentMethodStripeSetupIntentRequest {
+	r.createStripeSetupIntentRequest = &createStripeSetupIntentRequest
+	return r
+}
+
+func (r ApiCreatePaymentMethodStripeSetupIntentRequest) Execute() (*StripeSetupIntent, *http.Response, error) {
+	return r.ApiService.CreatePaymentMethodStripeSetupIntentExecute(r)
+}
+
+/*
+CreatePaymentMethodStripeSetupIntent Create stripe's setup intent for add new payment method.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreatePaymentMethodStripeSetupIntentRequest
+*/
+func (a *BillingApiService) CreatePaymentMethodStripeSetupIntent(ctx context.Context) ApiCreatePaymentMethodStripeSetupIntentRequest {
+	return ApiCreatePaymentMethodStripeSetupIntentRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return StripeSetupIntent
+func (a *BillingApiService) CreatePaymentMethodStripeSetupIntentExecute(r ApiCreatePaymentMethodStripeSetupIntentRequest) (*StripeSetupIntent, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *StripeSetupIntent
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BillingApiService.CreatePaymentMethodStripeSetupIntent")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/billing/payment-methods/stripe/setup-intents/"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/x-www-form-urlencoded"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createStripeSetupIntentRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateSubscriptionRequest struct {
+	ctx context.Context
+	ApiService BillingApi
+	subscription *Subscription
+}
+
+func (r ApiCreateSubscriptionRequest) Subscription(subscription Subscription) ApiCreateSubscriptionRequest {
+	r.subscription = &subscription
+	return r
+}
+
+func (r ApiCreateSubscriptionRequest) Execute() (*Subscription, *http.Response, error) {
+	return r.ApiService.CreateSubscriptionExecute(r)
+}
+
+/*
+CreateSubscription Create subscription
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateSubscriptionRequest
+*/
+func (a *BillingApiService) CreateSubscription(ctx context.Context) ApiCreateSubscriptionRequest {
+	return ApiCreateSubscriptionRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return Subscription
+func (a *BillingApiService) CreateSubscriptionExecute(r ApiCreateSubscriptionRequest) (*Subscription, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Subscription
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BillingApiService.CreateSubscription")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/billing/subscriptions/"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/x-www-form-urlencoded"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.subscription
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiDeletePaymentMethodRequest struct {
+	ctx context.Context
+	ApiService BillingApi
+	paymentMethodID string
+}
+
+func (r ApiDeletePaymentMethodRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeletePaymentMethodExecute(r)
+}
+
+/*
+DeletePaymentMethod Delete payment method
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param paymentMethodID
+ @return ApiDeletePaymentMethodRequest
+*/
+func (a *BillingApiService) DeletePaymentMethod(ctx context.Context, paymentMethodID string) ApiDeletePaymentMethodRequest {
+	return ApiDeletePaymentMethodRequest{
+		ApiService: a,
+		ctx: ctx,
+		paymentMethodID: paymentMethodID,
+	}
+}
+
+// Execute executes the request
+func (a *BillingApiService) DeletePaymentMethodExecute(r ApiDeletePaymentMethodRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BillingApiService.DeletePaymentMethod")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/billing/payment-methods/{paymentMethodID}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"paymentMethodID"+"}", url.PathEscape(parameterToString(r.paymentMethodID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiGetBillingAccountRequest struct {
+	ctx context.Context
+	ApiService BillingApi
+}
+
+func (r ApiGetBillingAccountRequest) Execute() (*BillingAccount, *http.Response, error) {
+	return r.ApiService.GetBillingAccountExecute(r)
+}
+
+/*
+GetBillingAccount Billing account info
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetBillingAccountRequest
+*/
+func (a *BillingApiService) GetBillingAccount(ctx context.Context) ApiGetBillingAccountRequest {
+	return ApiGetBillingAccountRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return BillingAccount
+func (a *BillingApiService) GetBillingAccountExecute(r ApiGetBillingAccountRequest) (*BillingAccount, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *BillingAccount
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BillingApiService.GetBillingAccount")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/billing/account/"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
 
 type ApiGetBillingBundleRequest struct {
 	ctx context.Context
@@ -206,7 +906,8 @@ func (a *BillingApiService) GetBillingBundleExecute(r ApiGetBillingBundleRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -222,48 +923,48 @@ func (a *BillingApiService) GetBillingBundleExecute(r ApiGetBillingBundleRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetBillingPaymentMethodRequest struct {
+type ApiGetBillingPaymentOptionRequest struct {
 	ctx context.Context
 	ApiService BillingApi
-	paymentMethodID string
+	paymentOptionID string
 }
 
-func (r ApiGetBillingPaymentMethodRequest) Execute() (*PaymentMethod, *http.Response, error) {
-	return r.ApiService.GetBillingPaymentMethodExecute(r)
+func (r ApiGetBillingPaymentOptionRequest) Execute() (*PaymentOption, *http.Response, error) {
+	return r.ApiService.GetBillingPaymentOptionExecute(r)
 }
 
 /*
-GetBillingPaymentMethod Payment method info
+GetBillingPaymentOption Payment option info
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param paymentMethodID
- @return ApiGetBillingPaymentMethodRequest
+ @param paymentOptionID
+ @return ApiGetBillingPaymentOptionRequest
 */
-func (a *BillingApiService) GetBillingPaymentMethod(ctx context.Context, paymentMethodID string) ApiGetBillingPaymentMethodRequest {
-	return ApiGetBillingPaymentMethodRequest{
+func (a *BillingApiService) GetBillingPaymentOption(ctx context.Context, paymentOptionID string) ApiGetBillingPaymentOptionRequest {
+	return ApiGetBillingPaymentOptionRequest{
 		ApiService: a,
 		ctx: ctx,
-		paymentMethodID: paymentMethodID,
+		paymentOptionID: paymentOptionID,
 	}
 }
 
 // Execute executes the request
-//  @return PaymentMethod
-func (a *BillingApiService) GetBillingPaymentMethodExecute(r ApiGetBillingPaymentMethodRequest) (*PaymentMethod, *http.Response, error) {
+//  @return PaymentOption
+func (a *BillingApiService) GetBillingPaymentOptionExecute(r ApiGetBillingPaymentOptionRequest) (*PaymentOption, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *PaymentMethod
+		localVarReturnValue  *PaymentOption
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BillingApiService.GetBillingPaymentMethod")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BillingApiService.GetBillingPaymentOption")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/billing/payment-methods/{paymentMethodID}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"paymentMethodID"+"}", url.PathEscape(parameterToString(r.paymentMethodID, "")), -1)
+	localVarPath := localBasePath + "/billing/payment-options/{paymentOptionID}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"paymentOptionID"+"}", url.PathEscape(parameterToString(r.paymentOptionID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -314,7 +1015,8 @@ func (a *BillingApiService) GetBillingPaymentMethodExecute(r ApiGetBillingPaymen
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -422,7 +1124,335 @@ func (a *BillingApiService) GetBillingProductExecute(r ApiGetBillingProductReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetPaymentMethodRequest struct {
+	ctx context.Context
+	ApiService BillingApi
+	paymentMethodID string
+}
+
+func (r ApiGetPaymentMethodRequest) Execute() (*PaymentMethod, *http.Response, error) {
+	return r.ApiService.GetPaymentMethodExecute(r)
+}
+
+/*
+GetPaymentMethod Payment method info
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param paymentMethodID
+ @return ApiGetPaymentMethodRequest
+*/
+func (a *BillingApiService) GetPaymentMethod(ctx context.Context, paymentMethodID string) ApiGetPaymentMethodRequest {
+	return ApiGetPaymentMethodRequest{
+		ApiService: a,
+		ctx: ctx,
+		paymentMethodID: paymentMethodID,
+	}
+}
+
+// Execute executes the request
+//  @return PaymentMethod
+func (a *BillingApiService) GetPaymentMethodExecute(r ApiGetPaymentMethodRequest) (*PaymentMethod, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *PaymentMethod
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BillingApiService.GetPaymentMethod")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/billing/payment-methods/{paymentMethodID}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"paymentMethodID"+"}", url.PathEscape(parameterToString(r.paymentMethodID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetSubscriptionRequest struct {
+	ctx context.Context
+	ApiService BillingApi
+	subscriptionID string
+}
+
+func (r ApiGetSubscriptionRequest) Execute() (*Subscription, *http.Response, error) {
+	return r.ApiService.GetSubscriptionExecute(r)
+}
+
+/*
+GetSubscription Subscription info
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param subscriptionID
+ @return ApiGetSubscriptionRequest
+*/
+func (a *BillingApiService) GetSubscription(ctx context.Context, subscriptionID string) ApiGetSubscriptionRequest {
+	return ApiGetSubscriptionRequest{
+		ApiService: a,
+		ctx: ctx,
+		subscriptionID: subscriptionID,
+	}
+}
+
+// Execute executes the request
+//  @return Subscription
+func (a *BillingApiService) GetSubscriptionExecute(r ApiGetSubscriptionRequest) (*Subscription, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Subscription
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BillingApiService.GetSubscription")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/billing/subscriptions/{subscriptionID}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"subscriptionID"+"}", url.PathEscape(parameterToString(r.subscriptionID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetSubscriptionItemRequest struct {
+	ctx context.Context
+	ApiService BillingApi
+	subscriptionItemID string
+}
+
+func (r ApiGetSubscriptionItemRequest) Execute() (*SubscriptionItem, *http.Response, error) {
+	return r.ApiService.GetSubscriptionItemExecute(r)
+}
+
+/*
+GetSubscriptionItem Subscription item info
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param subscriptionItemID
+ @return ApiGetSubscriptionItemRequest
+*/
+func (a *BillingApiService) GetSubscriptionItem(ctx context.Context, subscriptionItemID string) ApiGetSubscriptionItemRequest {
+	return ApiGetSubscriptionItemRequest{
+		ApiService: a,
+		ctx: ctx,
+		subscriptionItemID: subscriptionItemID,
+	}
+}
+
+// Execute executes the request
+//  @return SubscriptionItem
+func (a *BillingApiService) GetSubscriptionItemExecute(r ApiGetSubscriptionItemRequest) (*SubscriptionItem, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *SubscriptionItem
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BillingApiService.GetSubscriptionItem")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/billing/subscription-items/{subscriptionItemID}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"subscriptionItemID"+"}", url.PathEscape(parameterToString(r.subscriptionItemID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -526,7 +1556,8 @@ func (a *BillingApiService) ListBillingBundlesExecute(r ApiListBillingBundlesReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -644,7 +1675,8 @@ func (a *BillingApiService) ListBillingFeaturesExecute(r ApiListBillingFeaturesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -660,44 +1692,44 @@ func (a *BillingApiService) ListBillingFeaturesExecute(r ApiListBillingFeaturesR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListBillingPaymentMethodsRequest struct {
+type ApiListBillingPaymentOptionsRequest struct {
 	ctx context.Context
 	ApiService BillingApi
 }
 
-func (r ApiListBillingPaymentMethodsRequest) Execute() ([]PaymentMethod, *http.Response, error) {
-	return r.ApiService.ListBillingPaymentMethodsExecute(r)
+func (r ApiListBillingPaymentOptionsRequest) Execute() ([]PaymentOption, *http.Response, error) {
+	return r.ApiService.ListBillingPaymentOptionsExecute(r)
 }
 
 /*
-ListBillingPaymentMethods Billing payment methods list
+ListBillingPaymentOptions Billing payment option list
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListBillingPaymentMethodsRequest
+ @return ApiListBillingPaymentOptionsRequest
 */
-func (a *BillingApiService) ListBillingPaymentMethods(ctx context.Context) ApiListBillingPaymentMethodsRequest {
-	return ApiListBillingPaymentMethodsRequest{
+func (a *BillingApiService) ListBillingPaymentOptions(ctx context.Context) ApiListBillingPaymentOptionsRequest {
+	return ApiListBillingPaymentOptionsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []PaymentMethod
-func (a *BillingApiService) ListBillingPaymentMethodsExecute(r ApiListBillingPaymentMethodsRequest) ([]PaymentMethod, *http.Response, error) {
+//  @return []PaymentOption
+func (a *BillingApiService) ListBillingPaymentOptionsExecute(r ApiListBillingPaymentOptionsRequest) ([]PaymentOption, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []PaymentMethod
+		localVarReturnValue  []PaymentOption
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BillingApiService.ListBillingPaymentMethods")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BillingApiService.ListBillingPaymentOptions")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/billing/payment-methods/"
+	localVarPath := localBasePath + "/billing/payment-options/"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -748,7 +1780,8 @@ func (a *BillingApiService) ListBillingPaymentMethodsExecute(r ApiListBillingPay
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -852,7 +1885,722 @@ func (a *BillingApiService) ListBillingProductsExecute(r ApiListBillingProductsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListPaymentMethodsRequest struct {
+	ctx context.Context
+	ApiService BillingApi
+}
+
+func (r ApiListPaymentMethodsRequest) Execute() ([]PaymentMethod, *http.Response, error) {
+	return r.ApiService.ListPaymentMethodsExecute(r)
+}
+
+/*
+ListPaymentMethods Payment method list
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListPaymentMethodsRequest
+*/
+func (a *BillingApiService) ListPaymentMethods(ctx context.Context) ApiListPaymentMethodsRequest {
+	return ApiListPaymentMethodsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return []PaymentMethod
+func (a *BillingApiService) ListPaymentMethodsExecute(r ApiListPaymentMethodsRequest) ([]PaymentMethod, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []PaymentMethod
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BillingApiService.ListPaymentMethods")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/billing/payment-methods/"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListSubscriptionItemsRequest struct {
+	ctx context.Context
+	ApiService BillingApi
+	subscription *string
+	perPage *int32
+	page *int32
+}
+
+func (r ApiListSubscriptionItemsRequest) Subscription(subscription string) ApiListSubscriptionItemsRequest {
+	r.subscription = &subscription
+	return r
+}
+
+func (r ApiListSubscriptionItemsRequest) PerPage(perPage int32) ApiListSubscriptionItemsRequest {
+	r.perPage = &perPage
+	return r
+}
+
+func (r ApiListSubscriptionItemsRequest) Page(page int32) ApiListSubscriptionItemsRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiListSubscriptionItemsRequest) Execute() ([]SubscriptionItem, *http.Response, error) {
+	return r.ApiService.ListSubscriptionItemsExecute(r)
+}
+
+/*
+ListSubscriptionItems Subscription items list
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListSubscriptionItemsRequest
+*/
+func (a *BillingApiService) ListSubscriptionItems(ctx context.Context) ApiListSubscriptionItemsRequest {
+	return ApiListSubscriptionItemsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return []SubscriptionItem
+func (a *BillingApiService) ListSubscriptionItemsExecute(r ApiListSubscriptionItemsRequest) ([]SubscriptionItem, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []SubscriptionItem
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BillingApiService.ListSubscriptionItems")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/billing/subscription-items/"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.subscription != nil {
+		localVarQueryParams.Add("subscription", parameterToString(*r.subscription, ""))
+	}
+	if r.perPage != nil {
+		localVarQueryParams.Add("per_page", parameterToString(*r.perPage, ""))
+	}
+	if r.page != nil {
+		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListSubscriptionsRequest struct {
+	ctx context.Context
+	ApiService BillingApi
+	product *string
+	perPage *int32
+	page *int32
+}
+
+func (r ApiListSubscriptionsRequest) Product(product string) ApiListSubscriptionsRequest {
+	r.product = &product
+	return r
+}
+
+func (r ApiListSubscriptionsRequest) PerPage(perPage int32) ApiListSubscriptionsRequest {
+	r.perPage = &perPage
+	return r
+}
+
+func (r ApiListSubscriptionsRequest) Page(page int32) ApiListSubscriptionsRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiListSubscriptionsRequest) Execute() ([]Subscription, *http.Response, error) {
+	return r.ApiService.ListSubscriptionsExecute(r)
+}
+
+/*
+ListSubscriptions Billing subscriptions list
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListSubscriptionsRequest
+*/
+func (a *BillingApiService) ListSubscriptions(ctx context.Context) ApiListSubscriptionsRequest {
+	return ApiListSubscriptionsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return []Subscription
+func (a *BillingApiService) ListSubscriptionsExecute(r ApiListSubscriptionsRequest) ([]Subscription, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []Subscription
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BillingApiService.ListSubscriptions")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/billing/subscriptions/"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.product != nil {
+		localVarQueryParams.Add("product", parameterToString(*r.product, ""))
+	}
+	if r.perPage != nil {
+		localVarQueryParams.Add("per_page", parameterToString(*r.perPage, ""))
+	}
+	if r.page != nil {
+		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiReactivateSubscriptionRequest struct {
+	ctx context.Context
+	ApiService BillingApi
+	subscriptionID string
+}
+
+func (r ApiReactivateSubscriptionRequest) Execute() (*Subscription, *http.Response, error) {
+	return r.ApiService.ReactivateSubscriptionExecute(r)
+}
+
+/*
+ReactivateSubscription Reactivate subscription
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param subscriptionID
+ @return ApiReactivateSubscriptionRequest
+*/
+func (a *BillingApiService) ReactivateSubscription(ctx context.Context, subscriptionID string) ApiReactivateSubscriptionRequest {
+	return ApiReactivateSubscriptionRequest{
+		ApiService: a,
+		ctx: ctx,
+		subscriptionID: subscriptionID,
+	}
+}
+
+// Execute executes the request
+//  @return Subscription
+func (a *BillingApiService) ReactivateSubscriptionExecute(r ApiReactivateSubscriptionRequest) (*Subscription, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Subscription
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BillingApiService.ReactivateSubscription")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/billing/subscriptions/{subscriptionID}/reactivate/"
+	localVarPath = strings.Replace(localVarPath, "{"+"subscriptionID"+"}", url.PathEscape(parameterToString(r.subscriptionID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateBillingAccountRequest struct {
+	ctx context.Context
+	ApiService BillingApi
+	billingAccount *BillingAccount
+}
+
+func (r ApiUpdateBillingAccountRequest) BillingAccount(billingAccount BillingAccount) ApiUpdateBillingAccountRequest {
+	r.billingAccount = &billingAccount
+	return r
+}
+
+func (r ApiUpdateBillingAccountRequest) Execute() (*BillingAccount, *http.Response, error) {
+	return r.ApiService.UpdateBillingAccountExecute(r)
+}
+
+/*
+UpdateBillingAccount Update billing account
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiUpdateBillingAccountRequest
+*/
+func (a *BillingApiService) UpdateBillingAccount(ctx context.Context) ApiUpdateBillingAccountRequest {
+	return ApiUpdateBillingAccountRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return BillingAccount
+func (a *BillingApiService) UpdateBillingAccountExecute(r ApiUpdateBillingAccountRequest) (*BillingAccount, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *BillingAccount
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BillingApiService.UpdateBillingAccount")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/billing/account/"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.billingAccount == nil {
+		return localVarReturnValue, nil, reportError("billingAccount is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.billingAccount
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateSubscriptionItemRequest struct {
+	ctx context.Context
+	ApiService BillingApi
+	subscriptionItemID string
+	subscriptionItem *SubscriptionItem
+}
+
+func (r ApiUpdateSubscriptionItemRequest) SubscriptionItem(subscriptionItem SubscriptionItem) ApiUpdateSubscriptionItemRequest {
+	r.subscriptionItem = &subscriptionItem
+	return r
+}
+
+func (r ApiUpdateSubscriptionItemRequest) Execute() (*SubscriptionItem, *http.Response, error) {
+	return r.ApiService.UpdateSubscriptionItemExecute(r)
+}
+
+/*
+UpdateSubscriptionItem Update subscription item
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param subscriptionItemID
+ @return ApiUpdateSubscriptionItemRequest
+*/
+func (a *BillingApiService) UpdateSubscriptionItem(ctx context.Context, subscriptionItemID string) ApiUpdateSubscriptionItemRequest {
+	return ApiUpdateSubscriptionItemRequest{
+		ApiService: a,
+		ctx: ctx,
+		subscriptionItemID: subscriptionItemID,
+	}
+}
+
+// Execute executes the request
+//  @return SubscriptionItem
+func (a *BillingApiService) UpdateSubscriptionItemExecute(r ApiUpdateSubscriptionItemRequest) (*SubscriptionItem, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *SubscriptionItem
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BillingApiService.UpdateSubscriptionItem")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/billing/subscription-items/{subscriptionItemID}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"subscriptionItemID"+"}", url.PathEscape(parameterToString(r.subscriptionItemID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.subscriptionItem == nil {
+		return localVarReturnValue, nil, reportError("subscriptionItem is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.subscriptionItem
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

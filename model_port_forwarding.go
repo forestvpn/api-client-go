@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -54,7 +54,7 @@ func (o *PortForwarding) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *PortForwarding) GetIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Id, true
 }
@@ -66,7 +66,7 @@ func (o *PortForwarding) SetId(v string) {
 
 // GetSrcPort returns the SrcPort field value if set, zero value otherwise.
 func (o *PortForwarding) GetSrcPort() int32 {
-	if o == nil || o.SrcPort == nil {
+	if o == nil || isNil(o.SrcPort) {
 		var ret int32
 		return ret
 	}
@@ -76,15 +76,15 @@ func (o *PortForwarding) GetSrcPort() int32 {
 // GetSrcPortOk returns a tuple with the SrcPort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PortForwarding) GetSrcPortOk() (*int32, bool) {
-	if o == nil || o.SrcPort == nil {
-		return nil, false
+	if o == nil || isNil(o.SrcPort) {
+    return nil, false
 	}
 	return o.SrcPort, true
 }
 
 // HasSrcPort returns a boolean if a field has been set.
 func (o *PortForwarding) HasSrcPort() bool {
-	if o != nil && o.SrcPort != nil {
+	if o != nil && !isNil(o.SrcPort) {
 		return true
 	}
 
@@ -98,7 +98,7 @@ func (o *PortForwarding) SetSrcPort(v int32) {
 
 // GetDstPort returns the DstPort field value if set, zero value otherwise.
 func (o *PortForwarding) GetDstPort() int32 {
-	if o == nil || o.DstPort == nil {
+	if o == nil || isNil(o.DstPort) {
 		var ret int32
 		return ret
 	}
@@ -108,15 +108,15 @@ func (o *PortForwarding) GetDstPort() int32 {
 // GetDstPortOk returns a tuple with the DstPort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PortForwarding) GetDstPortOk() (*int32, bool) {
-	if o == nil || o.DstPort == nil {
-		return nil, false
+	if o == nil || isNil(o.DstPort) {
+    return nil, false
 	}
 	return o.DstPort, true
 }
 
 // HasDstPort returns a boolean if a field has been set.
 func (o *PortForwarding) HasDstPort() bool {
-	if o != nil && o.DstPort != nil {
+	if o != nil && !isNil(o.DstPort) {
 		return true
 	}
 
@@ -133,10 +133,10 @@ func (o PortForwarding) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["id"] = o.Id
 	}
-	if o.SrcPort != nil {
+	if !isNil(o.SrcPort) {
 		toSerialize["src_port"] = o.SrcPort
 	}
-	if o.DstPort != nil {
+	if !isNil(o.DstPort) {
 		toSerialize["dst_port"] = o.DstPort
 	}
 	return json.Marshal(toSerialize)

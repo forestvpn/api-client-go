@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -57,7 +57,7 @@ func (o *BillingFeature) GetBundleId() string {
 // and a boolean to check if the value has been set.
 func (o *BillingFeature) GetBundleIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.BundleId, true
 }
@@ -69,7 +69,7 @@ func (o *BillingFeature) SetBundleId(v string) {
 
 // GetExpiryDate returns the ExpiryDate field value if set, zero value otherwise.
 func (o *BillingFeature) GetExpiryDate() time.Time {
-	if o == nil || o.ExpiryDate == nil {
+	if o == nil || isNil(o.ExpiryDate) {
 		var ret time.Time
 		return ret
 	}
@@ -79,15 +79,15 @@ func (o *BillingFeature) GetExpiryDate() time.Time {
 // GetExpiryDateOk returns a tuple with the ExpiryDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BillingFeature) GetExpiryDateOk() (*time.Time, bool) {
-	if o == nil || o.ExpiryDate == nil {
-		return nil, false
+	if o == nil || isNil(o.ExpiryDate) {
+    return nil, false
 	}
 	return o.ExpiryDate, true
 }
 
 // HasExpiryDate returns a boolean if a field has been set.
 func (o *BillingFeature) HasExpiryDate() bool {
-	if o != nil && o.ExpiryDate != nil {
+	if o != nil && !isNil(o.ExpiryDate) {
 		return true
 	}
 
@@ -101,7 +101,7 @@ func (o *BillingFeature) SetExpiryDate(v time.Time) {
 
 // GetConstraints returns the Constraints field value if set, zero value otherwise.
 func (o *BillingFeature) GetConstraints() []Constraint {
-	if o == nil || o.Constraints == nil {
+	if o == nil || isNil(o.Constraints) {
 		var ret []Constraint
 		return ret
 	}
@@ -111,15 +111,15 @@ func (o *BillingFeature) GetConstraints() []Constraint {
 // GetConstraintsOk returns a tuple with the Constraints field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BillingFeature) GetConstraintsOk() ([]Constraint, bool) {
-	if o == nil || o.Constraints == nil {
-		return nil, false
+	if o == nil || isNil(o.Constraints) {
+    return nil, false
 	}
 	return o.Constraints, true
 }
 
 // HasConstraints returns a boolean if a field has been set.
 func (o *BillingFeature) HasConstraints() bool {
-	if o != nil && o.Constraints != nil {
+	if o != nil && !isNil(o.Constraints) {
 		return true
 	}
 
@@ -136,10 +136,10 @@ func (o BillingFeature) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["bundle_id"] = o.BundleId
 	}
-	if o.ExpiryDate != nil {
+	if !isNil(o.ExpiryDate) {
 		toSerialize["expiry_date"] = o.ExpiryDate
 	}
-	if o.Constraints != nil {
+	if !isNil(o.Constraints) {
 		toSerialize["constraints"] = o.Constraints
 	}
 	return json.Marshal(toSerialize)

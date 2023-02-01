@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -47,6 +47,17 @@ type CheckoutApi interface {
 	// CreateCheckoutSessionExecute executes the request
 	//  @return CheckoutSession
 	CreateCheckoutSessionExecute(r ApiCreateCheckoutSessionRequest) (*CheckoutSession, *http.Response, error)
+
+	/*
+	CreateWaitListRequest Create request to add country in wait list
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWaitListRequestRequest
+	*/
+	CreateWaitListRequest(ctx context.Context) ApiCreateWaitListRequestRequest
+
+	// CreateWaitListRequestExecute executes the request
+	CreateWaitListRequestExecute(r ApiCreateWaitListRequestRequest) (*http.Response, error)
 
 	/*
 	ExpireCheckoutSession Expire checkout session
@@ -233,7 +244,8 @@ func (a *CheckoutApiService) ApplyCouponCheckoutSessionExecute(r ApiApplyCouponC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 			var v Error
@@ -242,7 +254,8 @@ func (a *CheckoutApiService) ApplyCouponCheckoutSessionExecute(r ApiApplyCouponC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -354,7 +367,8 @@ func (a *CheckoutApiService) CreateCheckoutSessionExecute(r ApiCreateCheckoutSes
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -368,6 +382,109 @@ func (a *CheckoutApiService) CreateCheckoutSessionExecute(r ApiCreateCheckoutSes
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateWaitListRequestRequest struct {
+	ctx context.Context
+	ApiService CheckoutApi
+	xCountry *string
+}
+
+func (r ApiCreateWaitListRequestRequest) XCountry(xCountry string) ApiCreateWaitListRequestRequest {
+	r.xCountry = &xCountry
+	return r
+}
+
+func (r ApiCreateWaitListRequestRequest) Execute() (*http.Response, error) {
+	return r.ApiService.CreateWaitListRequestExecute(r)
+}
+
+/*
+CreateWaitListRequest Create request to add country in wait list
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateWaitListRequestRequest
+*/
+func (a *CheckoutApiService) CreateWaitListRequest(ctx context.Context) ApiCreateWaitListRequestRequest {
+	return ApiCreateWaitListRequestRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+func (a *CheckoutApiService) CreateWaitListRequestExecute(r ApiCreateWaitListRequestRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CheckoutApiService.CreateWaitListRequest")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/checkout/wait-list/"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xCountry != nil {
+		localVarHeaderParams["X-Country"] = parameterToString(*r.xCountry, "")
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
 }
 
 type ApiExpireCheckoutSessionRequest struct {
@@ -460,7 +577,8 @@ func (a *CheckoutApiService) ExpireCheckoutSessionExecute(r ApiExpireCheckoutSes
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarHTTPResponse, newErr
 	}
 
@@ -559,7 +677,8 @@ func (a *CheckoutApiService) GetCheckoutSessionExecute(r ApiGetCheckoutSessionRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -667,7 +786,8 @@ func (a *CheckoutApiService) GetStripeCheckoutSessionExecute(r ApiGetStripeCheck
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -793,7 +913,8 @@ func (a *CheckoutApiService) GetStripePaymentIntentExecute(r ApiGetStripePayment
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -912,7 +1033,8 @@ func (a *CheckoutApiService) ProcessCloudPaymentsAuthExecute(r ApiProcessCloudPa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1031,7 +1153,8 @@ func (a *CheckoutApiService) ProcessCloudPaymentsPost3dsExecute(r ApiProcessClou
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Count** | **int32** |  | 
+**UnreadCount** | **int32** |  | 
 
 ## Methods
 
 ### NewNotificationUnreadCount
 
-`func NewNotificationUnreadCount(count int32, ) *NotificationUnreadCount`
+`func NewNotificationUnreadCount(unreadCount int32, ) *NotificationUnreadCount`
 
 NewNotificationUnreadCount instantiates a new NotificationUnreadCount object
 This constructor will assign default values to properties that have it defined,
@@ -25,24 +25,24 @@ NewNotificationUnreadCountWithDefaults instantiates a new NotificationUnreadCoun
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetCount
+### GetUnreadCount
 
-`func (o *NotificationUnreadCount) GetCount() int32`
+`func (o *NotificationUnreadCount) GetUnreadCount() int32`
 
-GetCount returns the Count field if non-nil, zero value otherwise.
+GetUnreadCount returns the UnreadCount field if non-nil, zero value otherwise.
 
-### GetCountOk
+### GetUnreadCountOk
 
-`func (o *NotificationUnreadCount) GetCountOk() (*int32, bool)`
+`func (o *NotificationUnreadCount) GetUnreadCountOk() (*int32, bool)`
 
-GetCountOk returns a tuple with the Count field if it's non-nil, zero value otherwise
+GetUnreadCountOk returns a tuple with the UnreadCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCount
+### SetUnreadCount
 
-`func (o *NotificationUnreadCount) SetCount(v int32)`
+`func (o *NotificationUnreadCount) SetUnreadCount(v int32)`
 
-SetCount sets Count field to given value.
+SetUnreadCount sets UnreadCount field to given value.
 
 
 

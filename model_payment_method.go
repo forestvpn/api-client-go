@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -13,25 +13,26 @@ package forestvpn_api
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // PaymentMethod struct for PaymentMethod
 type PaymentMethod struct {
 	Id string `json:"id"`
-	Slug string `json:"slug"`
-	Name string `json:"name"`
-	Description *string `json:"description,omitempty"`
+	Type PaymentMethodType `json:"type"`
+	Card *PaymentMethodCard `json:"card,omitempty"`
+	CreatedAt time.Time `json:"created_at"`
 }
 
 // NewPaymentMethod instantiates a new PaymentMethod object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaymentMethod(id string, slug string, name string) *PaymentMethod {
+func NewPaymentMethod(id string, type_ PaymentMethodType, createdAt time.Time) *PaymentMethod {
 	this := PaymentMethod{}
 	this.Id = id
-	this.Slug = slug
-	this.Name = name
+	this.Type = type_
+	this.CreatedAt = createdAt
 	return &this
 }
 
@@ -57,7 +58,7 @@ func (o *PaymentMethod) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *PaymentMethod) GetIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Id, true
 }
@@ -67,84 +68,84 @@ func (o *PaymentMethod) SetId(v string) {
 	o.Id = v
 }
 
-// GetSlug returns the Slug field value
-func (o *PaymentMethod) GetSlug() string {
+// GetType returns the Type field value
+func (o *PaymentMethod) GetType() PaymentMethodType {
 	if o == nil {
-		var ret string
+		var ret PaymentMethodType
 		return ret
 	}
 
-	return o.Slug
+	return o.Type
 }
 
-// GetSlugOk returns a tuple with the Slug field value
+// GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *PaymentMethod) GetSlugOk() (*string, bool) {
+func (o *PaymentMethod) GetTypeOk() (*PaymentMethodType, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
-	return &o.Slug, true
+	return &o.Type, true
 }
 
-// SetSlug sets field value
-func (o *PaymentMethod) SetSlug(v string) {
-	o.Slug = v
+// SetType sets field value
+func (o *PaymentMethod) SetType(v PaymentMethodType) {
+	o.Type = v
 }
 
-// GetName returns the Name field value
-func (o *PaymentMethod) GetName() string {
-	if o == nil {
-		var ret string
+// GetCard returns the Card field value if set, zero value otherwise.
+func (o *PaymentMethod) GetCard() PaymentMethodCard {
+	if o == nil || isNil(o.Card) {
+		var ret PaymentMethodCard
 		return ret
 	}
-
-	return o.Name
+	return *o.Card
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetCardOk returns a tuple with the Card field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentMethod) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
+func (o *PaymentMethod) GetCardOk() (*PaymentMethodCard, bool) {
+	if o == nil || isNil(o.Card) {
+    return nil, false
 	}
-	return &o.Name, true
+	return o.Card, true
 }
 
-// SetName sets field value
-func (o *PaymentMethod) SetName(v string) {
-	o.Name = v
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise.
-func (o *PaymentMethod) GetDescription() string {
-	if o == nil || o.Description == nil {
-		var ret string
-		return ret
-	}
-	return *o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentMethod) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
-	}
-	return o.Description, true
-}
-
-// HasDescription returns a boolean if a field has been set.
-func (o *PaymentMethod) HasDescription() bool {
-	if o != nil && o.Description != nil {
+// HasCard returns a boolean if a field has been set.
+func (o *PaymentMethod) HasCard() bool {
+	if o != nil && !isNil(o.Card) {
 		return true
 	}
 
 	return false
 }
 
-// SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *PaymentMethod) SetDescription(v string) {
-	o.Description = &v
+// SetCard gets a reference to the given PaymentMethodCard and assigns it to the Card field.
+func (o *PaymentMethod) SetCard(v PaymentMethodCard) {
+	o.Card = &v
+}
+
+// GetCreatedAt returns the CreatedAt field value
+func (o *PaymentMethod) GetCreatedAt() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetCreatedAtOk() (*time.Time, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return &o.CreatedAt, true
+}
+
+// SetCreatedAt sets field value
+func (o *PaymentMethod) SetCreatedAt(v time.Time) {
+	o.CreatedAt = v
 }
 
 func (o PaymentMethod) MarshalJSON() ([]byte, error) {
@@ -153,13 +154,13 @@ func (o PaymentMethod) MarshalJSON() ([]byte, error) {
 		toSerialize["id"] = o.Id
 	}
 	if true {
-		toSerialize["slug"] = o.Slug
+		toSerialize["type"] = o.Type
+	}
+	if !isNil(o.Card) {
+		toSerialize["card"] = o.Card
 	}
 	if true {
-		toSerialize["name"] = o.Name
-	}
-	if o.Description != nil {
-		toSerialize["description"] = o.Description
+		toSerialize["created_at"] = o.CreatedAt
 	}
 	return json.Marshal(toSerialize)
 }

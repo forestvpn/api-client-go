@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -56,7 +56,7 @@ func (o *TokenObtain) GetAccess() string {
 // and a boolean to check if the value has been set.
 func (o *TokenObtain) GetAccessOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Access, true
 }
@@ -80,7 +80,7 @@ func (o *TokenObtain) GetRefresh() string {
 // and a boolean to check if the value has been set.
 func (o *TokenObtain) GetRefreshOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Refresh, true
 }
@@ -104,7 +104,7 @@ func (o *TokenObtain) GetLoginUrl() string {
 // and a boolean to check if the value has been set.
 func (o *TokenObtain) GetLoginUrlOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.LoginUrl, true
 }

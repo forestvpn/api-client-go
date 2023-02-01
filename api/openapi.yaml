@@ -1,11 +1,12 @@
-openapi: 3.0.3
+openapi: 3.0.4
 info:
   contact:
     email: support@forestvpn.com
-    name: Digital Services LLC
+    name: ForestVPN
     url: https://forestvpn.com/
-  description: "ForestVPN defeats content restrictions and censorship to deliver unlimited\
-    \ access to video, music, social media,\nand more, from anywhere in the world.\n"
+  description: |
+    ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN,
+    30+ locations, and a free version with unlimited data.
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
@@ -73,6 +74,14 @@ paths:
   /locations/:
     get:
       operationId: ListLocations
+      parameters:
+      - explode: false
+        in: header
+        name: X-Device-Coordinates
+        required: false
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
@@ -100,11 +109,61 @@ paths:
         Retrieve devices list
       operationId: ListDevices
       parameters:
-      - explode: true
+      - description: Filter by search query
+        explode: true
+        in: query
+        name: q
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter by external_key
+        explode: true
         in: query
         name: external_key
         required: false
         schema:
+          type: string
+        style: form
+      - description: Filter by recently active
+        explode: true
+        in: query
+        name: recently_active
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Filter by last active at date-time after provided value
+        explode: true
+        in: query
+        name: last_active_at_after
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: Filter by last active at date-time before provided value
+        explode: true
+        in: query
+        name: last_active_at_before
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: Sort by provided field
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          enum:
+          - last_active_at
+          - -last_active_at
+          - created_at
+          - -created_at
+          - updated_at
+          - -updated_at
           type: string
         style: form
       - explode: true
@@ -816,6 +875,91 @@ paths:
       summary: Update device's port forwarding
       tags:
       - device
+  /analytics/data-usage/:
+    get:
+      description: |
+        Users data usage dtatistics for each device
+      operationId: GetDataUsageStats
+      parameters:
+      - description: No more than 3 days for hour aggregation type
+        example: hour / day / week / month
+        explode: true
+        in: query
+        name: aggr_interval
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: No more than 3 months between date_after and date_before
+        explode: true
+        in: query
+        name: date_after
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: No more than 3 months between date_after and date_before
+        explode: true
+        in: query
+        name: date_before
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: Filter by device type
+        explode: true
+        in: query
+        name: device_type__in
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Filter by device
+        explode: true
+        in: query
+        name: device__in
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+        style: form
+      - description: Sort output by
+        explode: true
+        in: query
+        name: sort_by
+        required: false
+        schema:
+          enum:
+          - total_bytes
+          - received_bytes
+          - transmitted_bytes
+          - usage_time
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AggregatedDataUsageStats'
+                type: array
+          description: ok
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+      summary: Data Usage Stats
+      tags:
+      - analytics
   /notification/fcm/:
     post:
       operationId: CreateFCMDevice
@@ -1048,6 +1192,120 @@ paths:
       summary: Login with JWT token
       tags:
       - auth
+  /auth/access-token-requests/{requestID}/:
+    get:
+      operationId: GetAccessTokenRequest
+      parameters:
+      - explode: false
+        in: path
+        name: requestID
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTokenRequest'
+          description: ok
+        "404":
+          description: not found
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+      security:
+      - {}
+      - bearerAuth: []
+      summary: Get access token request details
+      tags:
+      - auth
+  /auth/access-token-requests/{requestID}/revoke/:
+    post:
+      operationId: RevokeAccessTokenRequest
+      parameters:
+      - explode: false
+        in: path
+        name: requestID
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTokenRequest'
+          description: ok
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+      security:
+      - {}
+      - bearerAuth: []
+      summary: Revoke access token request
+      tags:
+      - auth
+  /auth/access-token-requests/{requestID}/authorize/:
+    post:
+      operationId: AuthorizeAccessTokenRequest
+      parameters:
+      - explode: false
+        in: path
+        name: requestID
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTokenRequest'
+          description: ok
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+      security:
+      - {}
+      - bearerAuth: []
+      summary: Authorize access token request
+      tags:
+      - auth
+  /auth/access-token-requests/:
+    post:
+      operationId: CreateAccessTokenRequest
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTokenRequest'
+          description: created
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+      security:
+      - {}
+      - bearerAuth: []
+      summary: Create access token request
+      tags:
+      - auth
   /billing/features/:
     get:
       operationId: ListBillingFeatures
@@ -1184,9 +1442,65 @@ paths:
       summary: Bundle info
       tags:
       - billing
+  /billing/payment-options/:
+    get:
+      operationId: ListBillingPaymentOptions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PaymentOption'
+                type: array
+          description: ok
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+      security:
+      - {}
+      - bearerAuth: []
+      summary: Billing payment option list
+      tags:
+      - billing
+  /billing/payment-options/{paymentOptionID}/:
+    get:
+      operationId: GetBillingPaymentOption
+      parameters:
+      - explode: false
+        in: path
+        name: paymentOptionID
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentOption'
+          description: ok
+        "404":
+          description: not found
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+      security:
+      - {}
+      - bearerAuth: []
+      summary: Payment option info
+      tags:
+      - billing
   /billing/payment-methods/:
     get:
-      operationId: ListBillingPaymentMethods
+      operationId: ListPaymentMethods
       responses:
         "200":
           content:
@@ -1205,18 +1519,44 @@ paths:
       security:
       - {}
       - bearerAuth: []
-      summary: Billing payment methods list
+      summary: Payment method list
       tags:
       - billing
   /billing/payment-methods/{paymentMethodID}/:
-    get:
-      operationId: GetBillingPaymentMethod
+    delete:
+      operationId: DeletePaymentMethod
       parameters:
       - explode: false
         in: path
         name: paymentMethodID
         required: true
         schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: no content
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+      security:
+      - bearerAuth: []
+      summary: Delete payment method
+      tags:
+      - billing
+    get:
+      operationId: GetPaymentMethod
+      parameters:
+      - explode: false
+        in: path
+        name: paymentMethodID
+        required: true
+        schema:
+          format: uuid
           type: string
         style: simple
       responses:
@@ -1235,9 +1575,372 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: unexpected error
       security:
-      - {}
       - bearerAuth: []
       summary: Payment method info
+      tags:
+      - billing
+  /billing/payment-methods/stripe/setup-intents/:
+    post:
+      operationId: CreatePaymentMethodStripeSetupIntent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStripeSetupIntentRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateStripeSetupIntentRequest'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StripeSetupIntent'
+          description: ok
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+      security:
+      - bearerAuth: []
+      summary: Create stripe's setup intent for add new payment method.
+      tags:
+      - billing
+  /billing/account/:
+    get:
+      operationId: GetBillingAccount
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingAccount'
+          description: ok
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+      security:
+      - bearerAuth: []
+      summary: Billing account info
+      tags:
+      - billing
+    patch:
+      operationId: UpdateBillingAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillingAccount'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingAccount'
+          description: ok
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+      security:
+      - bearerAuth: []
+      summary: Update billing account
+      tags:
+      - billing
+  /billing/subscription-items/:
+    get:
+      operationId: ListSubscriptionItems
+      parameters:
+      - explode: true
+        in: query
+        name: subscription
+        required: false
+        schema:
+          description: Filter by subscriptions
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SubscriptionItem'
+                type: array
+          description: ok
+          headers:
+            Link:
+              explode: false
+              schema:
+                description: https://docs.github.com/en/rest/guides/traversing-with-pagination
+                type: string
+              style: simple
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+      security:
+      - bearerAuth: []
+      summary: Subscription items list
+      tags:
+      - billing
+  /billing/subscription-items/{subscriptionItemID}/:
+    get:
+      operationId: GetSubscriptionItem
+      parameters:
+      - explode: false
+        in: path
+        name: subscriptionItemID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionItem'
+          description: ok
+        "404":
+          description: not found
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+      security:
+      - bearerAuth: []
+      summary: Subscription item info
+      tags:
+      - billing
+    patch:
+      operationId: UpdateSubscriptionItem
+      parameters:
+      - explode: false
+        in: path
+        name: subscriptionItemID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionItem'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionItem'
+          description: ok
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+      security:
+      - bearerAuth: []
+      summary: Update subscription item
+      tags:
+      - billing
+  /billing/subscriptions/:
+    get:
+      operationId: ListSubscriptions
+      parameters:
+      - explode: true
+        in: query
+        name: product
+        required: false
+        schema:
+          description: Filter by product
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Subscription'
+                type: array
+          description: ok
+          headers:
+            Link:
+              explode: false
+              schema:
+                description: https://docs.github.com/en/rest/guides/traversing-with-pagination
+                type: string
+              style: simple
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+      security:
+      - bearerAuth: []
+      summary: Billing subscriptions list
+      tags:
+      - billing
+    post:
+      operationId: CreateSubscription
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+          description: ok
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+      security:
+      - bearerAuth: []
+      summary: Create subscription
+      tags:
+      - billing
+  /billing/subscriptions/{subscriptionID}/:
+    delete:
+      operationId: CancelSubscription
+      parameters:
+      - explode: false
+        in: path
+        name: subscriptionID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: no content
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+      security:
+      - bearerAuth: []
+      summary: Cancel subscription
+      tags:
+      - billing
+    get:
+      operationId: GetSubscription
+      parameters:
+      - explode: false
+        in: path
+        name: subscriptionID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+          description: ok
+        "404":
+          description: not found
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+      security:
+      - bearerAuth: []
+      summary: Subscription info
+      tags:
+      - billing
+  /billing/subscriptions/{subscriptionID}/reactivate/:
+    post:
+      operationId: ReactivateSubscription
+      parameters:
+      - explode: false
+        in: path
+        name: subscriptionID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+          description: ok
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+      security:
+      - bearerAuth: []
+      summary: Reactivate subscription
       tags:
       - billing
   /friendship/friends/:
@@ -1858,6 +2561,31 @@ paths:
       summary: Cloud payments post3ds
       tags:
       - checkout
+  /checkout/wait-list/:
+    post:
+      operationId: CreateWaitListRequest
+      parameters:
+      - explode: false
+        in: header
+        name: X-Country
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "201":
+          description: created
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+      security:
+      - bearerAuth: []
+      summary: Create request to add country in wait list
+      tags:
+      - checkout
   /ads/placements/:
     get:
       operationId: ListAdPlacements
@@ -1909,13 +2637,13 @@ paths:
       summary: Create ad unit request log
       tags:
       - ads
-  /news/notifications/{notificationID}/mark_read/:
-    patch:
+  /notifications/mark_as_read/{slug}/:
+    get:
       operationId: UpdateNotificationMarkRead
       parameters:
       - explode: false
         in: path
-        name: notificationID
+        name: slug
         required: true
         schema:
           type: integer
@@ -1934,9 +2662,9 @@ paths:
       - bearerAuth: []
       summary: Mark notification as read by user
       tags:
-      - news
-  /news/notifications/mark_read_all/:
-    patch:
+      - notifications
+  /notifications/mark_all_as_read/:
+    get:
       operationId: UpdateNotificationMarkReadAll
       responses:
         "200":
@@ -1952,8 +2680,8 @@ paths:
       - bearerAuth: []
       summary: Mark all notifications as read by user
       tags:
-      - news
-  /news/unread_count/:
+      - notifications
+  /notifications/unread_count/:
     get:
       operationId: GetNotificationsUnreadCount
       responses:
@@ -1974,17 +2702,35 @@ paths:
       - bearerAuth: []
       summary: Get unread notifications count
       tags:
-      - news
-  /news/notifications/:
+      - notifications
+  /notifications/all_list/:
     get:
       operationId: ListNotifications
       parameters:
       - explode: true
         in: query
-        name: is_published
+        name: limit
         required: false
         schema:
-          type: boolean
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          enum:
+          - system_update
+          - product_update
+          - non_paper
+          type: string
         style: form
       responses:
         "200":
@@ -1992,7 +2738,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Notification'
+                  $ref: '#/components/schemas/NotificationAllList'
                 type: array
           description: ok
         default:
@@ -2006,24 +2752,16 @@ paths:
       - bearerAuth: []
       summary: Get notifications list
       tags:
-      - news
-  /news/notifications/{notificationID}/:
+      - notifications
+  /app/devices/current/:
     get:
-      operationId: GetNotification
-      parameters:
-      - explode: false
-        in: path
-        name: notificationID
-        required: true
-        schema:
-          type: integer
-        style: simple
+      operationId: GetCurrentUserDevice
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotificationDetail'
+                $ref: '#/components/schemas/UserDevice'
           description: ok
         default:
           content:
@@ -2031,21 +2769,82 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: unexpected error
-      security:
-      - {}
-      - bearerAuth: []
-      summary: Get notification content
+      summary: Get user device info
       tags:
-      - news
+      - app
+    patch:
+      operationId: UpdateCurrentUserDevice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserDeviceRequest'
+        required: true
+      responses:
+        "200":
+          description: ok
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+      summary: Update user device
+      tags:
+      - app
+  /support/tickets/:
+    post:
+      operationId: CreateSupportTicket
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CreateSupportTicket'
+        required: true
+      responses:
+        "201":
+          description: ok
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+      summary: Create support ticket
+      tags:
+      - support
+  /support/ticket-categories/:
+    get:
+      operationId: GetSupportTicketCategory
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TicketCategory'
+                type: array
+          description: ok
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+      summary: Get ticket categories
+      tags:
+      - support
 components:
   schemas:
     Error:
       properties:
         code:
-          format: int32
-          type: integer
+          type: string
         message:
           type: string
+        detail:
+          additionalProperties: {}
+          type: object
       required:
       - code
       - message
@@ -2096,6 +2895,8 @@ components:
           - alternative_names
           - alternative_names
           currency_code: currency_code
+        distance: 1.4658129805029452
+        latency_rate: 5.962133916683182
         latitude: 0.8008281904610115
         name: name
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -2117,6 +2918,16 @@ components:
           type: number
         country:
           $ref: '#/components/schemas/Country'
+        distance:
+          description: it's distance in kilometers between an user (longitude and
+            latitude from request object) and a location object
+          format: double
+          type: number
+        latency_rate:
+          description: it's a rate from 0 to 1 which shows a connection quality. where
+            1 is good and 0 is bad
+          format: double
+          type: number
         alternative_names:
           items:
             type: string
@@ -2144,6 +2955,39 @@ components:
       - access
       - login_url
       - refresh
+      type: object
+    AccessTokenRequest:
+      example:
+        id: id
+        user_agent: user_agent
+        token: token
+        username: username
+        status: Pending
+      properties:
+        id:
+          readOnly: true
+          type: string
+        user_agent:
+          readOnly: true
+          type: string
+        token:
+          readOnly: true
+          type: string
+        username:
+          readOnly: true
+          type: string
+        status:
+          enum:
+          - Pending
+          - Authorized
+          - Revoked
+          - Expired
+          type: string
+      required:
+      - id
+      - status
+      - user_agent
+      - username
       type: object
     TokenLogin:
       example:
@@ -2252,6 +3096,16 @@ components:
           format: date-time
           type: string
       type: object
+    DeviceType:
+      enum:
+      - ios
+      - ipados
+      - watchos
+      - macos
+      - android
+      - wp
+      - other
+      type: string
     CreateOrUpdateDeviceRequest:
       example:
         external_key: external_key
@@ -2261,7 +3115,7 @@ components:
         location: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         tor_over: false
         info:
-          type: ios
+          type: null
           info:
             key: info
       properties:
@@ -2322,6 +3176,8 @@ components:
             - alternative_names
             - alternative_names
             currency_code: currency_code
+          distance: 1.4658129805029452
+          latency_rate: 5.962133916683182
           latitude: 0.8008281904610115
           name: name
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -2347,6 +3203,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           priv_key: priv_key
           pub_key: pub_key
+        type: type
         ips:
         - ips
         - ips
@@ -2383,6 +3240,8 @@ components:
           type: array
         last_active_at:
           format: date-time
+          type: string
+        type:
           type: string
       required:
       - id
@@ -2845,16 +3704,24 @@ components:
       type: object
     Price:
       example:
+        product: null
         price: 0.8008281904610115
         currency: currency
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
+        id:
+          format: uuid
+          type: string
         currency:
           type: string
         price:
           format: double
           type: number
+        product:
+          $ref: '#/components/schemas/Product'
       required:
       - currency
+      - id
       - price
       type: object
     Recurring:
@@ -2868,15 +3735,37 @@ components:
       required:
       - period
       type: object
+    Discount:
+      example:
+        price: 6.027456183070403
+        recurring: recurring
+        discount: 1.4658129805029452
+      properties:
+        price:
+          format: double
+          type: number
+        recurring:
+          type: string
+        discount:
+          format: double
+          type: number
+      type: object
     Product:
       example:
+        is_most_popular: true
         price:
+          product: null
           price: 0.8008281904610115
           currency: currency
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         recurring:
           period: P1M
         name: name
         description: description
+        discount:
+          price: 6.027456183070403
+          recurring: recurring
+          discount: 1.4658129805029452
         id: id
         bundle:
           name: name
@@ -2898,12 +3787,35 @@ components:
           $ref: '#/components/schemas/Price'
         recurring:
           $ref: '#/components/schemas/Recurring'
+        discount:
+          $ref: '#/components/schemas/Discount'
+        is_most_popular:
+          type: boolean
       required:
       - id
       - name
-      - price
       type: object
-    PaymentMethod:
+    ProductWithoutPrice:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        bundle:
+          $ref: '#/components/schemas/Bundle'
+        recurring:
+          $ref: '#/components/schemas/Recurring'
+        discount:
+          $ref: '#/components/schemas/Discount'
+        is_most_popular:
+          type: boolean
+      required:
+      - id
+      - name
+      type: object
+    PaymentOption:
       example:
         name: name
         description: description
@@ -2922,6 +3834,261 @@ components:
       - id
       - name
       - slug
+      type: object
+    PaymentMethodType:
+      enum:
+      - card
+      type: string
+    PaymentMethodCard:
+      example:
+        last4: "4432"
+        country:
+          emoji: emoji
+          name: name
+          id: id
+          alternative_names:
+          - alternative_names
+          - alternative_names
+          currency_code: currency_code
+        expires_at: 2022-10-31T00:00:00.000+00:00
+        brand: visa
+      properties:
+        brand:
+          description: Card brand
+          example: visa
+          type: string
+        last4:
+          description: Last 4 digits of the card
+          example: "4432"
+          type: string
+        country:
+          $ref: '#/components/schemas/Country'
+        expires_at:
+          description: Last day of the expiration year and month
+          example: 2022-10-31
+          format: date
+          type: string
+      required:
+      - brand
+      - expires_at
+      - last4
+      type: object
+    PaymentMethod:
+      example:
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: id
+        type: null
+        card:
+          last4: "4432"
+          country:
+            emoji: emoji
+            name: name
+            id: id
+            alternative_names:
+            - alternative_names
+            - alternative_names
+            currency_code: currency_code
+          expires_at: 2022-10-31T00:00:00.000+00:00
+          brand: visa
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/PaymentMethodType'
+        card:
+          $ref: '#/components/schemas/PaymentMethodCard'
+        created_at:
+          format: date-time
+          type: string
+      required:
+      - created_at
+      - id
+      - type
+      type: object
+    BillingAccount:
+      description: Represents billing account
+      example:
+        default_payment_method_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        default_payment_method: ""
+        id: id
+      properties:
+        id:
+          readOnly: true
+          type: string
+        default_payment_method:
+          allOf:
+          - $ref: '#/components/schemas/PaymentMethod'
+          readOnly: true
+        default_payment_method_id:
+          format: uuid
+          type: string
+          writeOnly: true
+      required:
+      - default_payment_method
+      - default_payment_method_id
+      - id
+      type: object
+    CreateSubscriptionRequest:
+      properties:
+        product:
+          description: Product id
+          example: 1f62010c-076c-40b5-a702-1af107f69ea4
+          format: uuid
+          type: string
+        promotion_code:
+          description: |
+            Promotion Codes is a Billing and Checkout feature which enables you to generate customer
+            facing codes which can be redeemed to apply a coupon to an order. Promotion Codes have advanced
+            validation features which allow you to specify when and on what orders the codes can be redeemed.
+          example: xUyshhDqpTrmnsY
+          type: string
+      required:
+      - product
+      type: object
+    SubscriptionSource:
+      enum:
+      - default
+      - stripe
+      - google
+      - apple
+      - cloud_payments
+      type: string
+    SubscriptionStatus:
+      enum:
+      - unknown
+      - incomplete
+      - incomplete_expired
+      - trialing
+      - active
+      - past_due
+      - canceled
+      - unpaid
+      type: string
+    SubscriptionItem:
+      example:
+        quantity: 0
+        price: ""
+        price_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          format: uuid
+          readOnly: true
+          type: string
+        price:
+          allOf:
+          - $ref: '#/components/schemas/Price'
+          readOnly: true
+        price_id:
+          format: uuid
+          type: string
+          writeOnly: true
+        quantity:
+          type: integer
+      required:
+      - id
+      - price
+      - price_id
+      - quantity
+      - start_date
+      type: object
+    Subscription:
+      example:
+        canceled_at: 2000-01-23T04:56:07.000+00:00
+        trial_end: 2000-01-23T04:56:07.000+00:00
+        description: description
+        source: ""
+        current_period_end: 2000-01-23T04:56:07.000+00:00
+        trial_start: 2000-01-23T04:56:07.000+00:00
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        items:
+        - quantity: 0
+          price: ""
+          price_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - quantity: 0
+          price: ""
+          price_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        promotional_code: promotional_code
+        ended_at: 2000-01-23T04:56:07.000+00:00
+        current_period_start: 2000-01-23T04:56:07.000+00:00
+        start_date: 2000-01-23T04:56:07.000+00:00
+        cancel_at: 2000-01-23T04:56:07.000+00:00
+        status: ""
+      properties:
+        id:
+          format: uuid
+          readOnly: true
+          type: string
+        promotional_code:
+          type: string
+          writeOnly: true
+        source:
+          allOf:
+          - $ref: '#/components/schemas/SubscriptionSource'
+          readOnly: true
+        start_date:
+          format: date-time
+          readOnly: true
+          type: string
+        ended_at:
+          description: "If the subscription has ended, the date the subscription ended."
+          format: date-time
+          readOnly: true
+          type: string
+        current_period_start:
+          description: Start of the current period that the subscription has been
+            invoiced for.
+          format: date-time
+          readOnly: true
+          type: string
+        current_period_end:
+          description: "End of the current period that the subscription has been invoiced\
+            \ for. At the end of this period, a new invoice will be created."
+          format: date-time
+          readOnly: true
+          type: string
+        trial_start:
+          description: "If the subscription has a trial, the beginning of that trial."
+          format: date-time
+          readOnly: true
+          type: string
+        trial_end:
+          description: "If the subscription has a trial, the end of that trial."
+          format: date-time
+          readOnly: true
+          type: string
+        cancel_at:
+          description: A date in the future at which the subscription will automatically
+            get canceled.
+          format: date-time
+          readOnly: true
+          type: string
+        canceled_at:
+          description: "If the subscription has been canceled, the date of that cancellation."
+          format: date-time
+          readOnly: true
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/SubscriptionStatus'
+          readOnly: true
+        description:
+          description: "The subscription’s description, meant to be displayable to\
+            \ the customer."
+          readOnly: true
+          type: string
+        items:
+          items:
+            $ref: '#/components/schemas/SubscriptionItem'
+          type: array
+      required:
+      - current_period_end
+      - current_period_start
+      - id
+      - start_date
+      - status
       type: object
     CreateCheckoutSessionProduct:
       example:
@@ -2972,13 +4139,20 @@ components:
     CheckoutSessionProduct:
       example:
         product:
+          is_most_popular: true
           price:
+            product: null
             price: 0.8008281904610115
             currency: currency
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           recurring:
             period: P1M
           name: name
           description: description
+          discount:
+            price: 6.027456183070403
+            recurring: recurring
+            discount: 1.4658129805029452
           id: id
           bundle:
             name: name
@@ -3005,13 +4179,20 @@ components:
         locale: locale
         products:
         - product:
+            is_most_popular: true
             price:
+              product: null
               price: 0.8008281904610115
               currency: currency
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             recurring:
               period: P1M
             name: name
             description: description
+            discount:
+              price: 6.027456183070403
+              recurring: recurring
+              discount: 1.4658129805029452
             id: id
             bundle:
               name: name
@@ -3022,13 +4203,20 @@ components:
               - null
           quantity: 1
         - product:
+            is_most_popular: true
             price:
+              product: null
               price: 0.8008281904610115
               currency: currency
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             recurring:
               period: P1M
             name: name
             description: description
+            discount:
+              price: 6.027456183070403
+              recurring: recurring
+              discount: 1.4658129805029452
             id: id
             bundle:
               name: name
@@ -3137,6 +4325,22 @@ components:
       - key
       type: object
     StripePaymentIntent:
+      example:
+        client_secret: client_secret
+      properties:
+        client_secret:
+          type: string
+      required:
+      - client_secret
+      type: object
+    CreateStripeSetupIntentRequest:
+      example:
+        return_url: return_url
+      properties:
+        return_url:
+          type: string
+      type: object
+    StripeSetupIntent:
       example:
         client_secret: client_secret
       properties:
@@ -3367,137 +4571,280 @@ components:
       type: object
     NotificationUnreadCount:
       example:
-        count: 0
+        unread_count: 0
       properties:
-        count:
+        unread_count:
           type: integer
       required:
-      - count
+      - unread_count
+      type: object
+    NotificationAllList:
+      example:
+        unread_count: 0
+        all_list:
+        - actor_content_type: 5
+          data: data
+          unread: true
+          level: success
+          verb: verb
+          description: description
+          created_at: 2000-01-23T04:56:07.000+00:00
+          title: title
+          type: system_update
+          actor_object_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          deleted: true
+          public: true
+          recipient: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 6
+          slug: 1
+        - actor_content_type: 5
+          data: data
+          unread: true
+          level: success
+          verb: verb
+          description: description
+          created_at: 2000-01-23T04:56:07.000+00:00
+          title: title
+          type: system_update
+          actor_object_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          deleted: true
+          public: true
+          recipient: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 6
+          slug: 1
+      properties:
+        unread_count:
+          type: integer
+        all_list:
+          items:
+            $ref: '#/components/schemas/Notification'
+          type: array
+      required:
+      - all_count
+      - all_list
       type: object
     Notification:
       example:
-        summary: summary
-        is_unread: true
+        actor_content_type: 5
+        data: data
+        unread: true
+        level: success
+        verb: verb
+        description: description
         created_at: 2000-01-23T04:56:07.000+00:00
-        id: 0
         title: title
-        featured_image:
-          small: small
-          x-large: x-large
-          large: large
-          medium: medium
-          x-large@2: x-large@2
-        is_featured: true
+        type: system_update
+        actor_object_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        deleted: true
+        public: true
+        recipient: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        id: 6
+        slug: 1
       properties:
         id:
           type: integer
+        slug:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        unread:
+          type: boolean
+        type:
+          enum:
+          - system_update
+          - product_update
+          - non_paper
+          type: string
+        level:
+          enum:
+          - success
+          - info
+          - warning
+          - error
+          type: string
+        recipient:
+          format: uuid
+          type: string
+        actor_content_type:
+          type: integer
+        actor_object_id:
+          format: uuid
+          type: string
+        verb:
+          type: string
         created_at:
           format: date-time
           type: string
-        title:
-          type: string
-        summary:
-          type: string
-        featured_image:
-          $ref: '#/components/schemas/FeaturedImage'
-        is_unread:
+        public:
           type: boolean
-        is_featured:
+        deleted:
           type: boolean
+        data:
+          type: string
       required:
-      - created_at
-      - featured_image
+      - description
       - id
-      - is_featured
-      - is_unread
-      - summary
+      - slug
       - title
+      - type
+      - unread
       type: object
-    NotificationDetail:
+    NotificationType:
+      enum:
+      - ios
+      - ipados
+      - watchos
+      - macos
+      - android
+      - wp
+      - other
+      type: string
+    UpdateUserDeviceRequest:
       example:
-        summary: summary
-        is_unread: true
-        created_at: 2000-01-23T04:56:07.000+00:00
-        id: 0
-        title: title
-        featured_image:
-          small: small
-          x-large: x-large
-          large: large
-          medium: medium
-          x-large@2: x-large@2
-        content: content
-        is_featured: true
+        ref: ref
+        gaid: gaid
+        idfa: idfa
+        amazon_aid: amazon_aid
+        appsflyer_id: appsflyer_id
+        imei: imei
+        idfv: idfv
+        oaid: oaid
+      properties:
+        appsflyer_id:
+          type: string
+        gaid:
+          type: string
+        idfa:
+          type: string
+        idfv:
+          type: string
+        oaid:
+          type: string
+        amazon_aid:
+          type: string
+        imei:
+          type: string
+        ref:
+          type: string
+      type: object
+    UserDevice:
+      example:
+        ref: ref
+        gaid: gaid
+        idfa: idfa
+        amazon_aid: amazon_aid
+        appsflyer_id: appsflyer_id
+        imei: imei
+        idfv: idfv
+        oaid: oaid
+      properties:
+        appsflyer_id:
+          type: string
+        gaid:
+          type: string
+        idfa:
+          type: string
+        idfv:
+          type: string
+        oaid:
+          type: string
+        amazon_aid:
+          type: string
+        imei:
+          type: string
+        ref:
+          type: string
+      type: object
+    DeviceRecord:
       properties:
         id:
-          type: integer
-        created_at:
-          format: date-time
+          format: uuid
           type: string
-        title:
+        date:
+          format: datetime
           type: string
-        summary:
-          type: string
-        featured_image:
-          $ref: '#/components/schemas/FeaturedImage'
-        content:
-          type: string
-        is_unread:
-          type: boolean
-        is_featured:
-          type: boolean
-      required:
-      - content
-      - created_at
-      - featured_image
-      - id
-      - is_featured
-      - is_unread
-      - summary
-      - title
+        received_bytes:
+          type: number
+        transmitted_bytes:
+          type: number
+        usage_time:
+          type: number
       type: object
-    FeaturedImage:
+    AggregatedDataUsageStats:
       example:
-        small: small
-        x-large: x-large
-        large: large
-        medium: medium
-        x-large@2: x-large@2
+        received_bytes: 0
+        device_name: device_name
+        device_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        usage_time: 5
+        total_bytes: 1
+        transmitted_bytes: 6
+        aggr_interval: aggr_interval
       properties:
-        small:
+        aggr_interval:
+          description: "Aggregation value. It might de a hour, day, week, or month"
           type: string
-        medium:
+        device_id:
+          description: "User device name, useful for retrieve extra data through device\
+            \ API"
+          format: uuid
           type: string
-        large:
+        device_name:
+          description: "User device name, useful for showing in the chart"
           type: string
-        x-large:
+        received_bytes:
+          description: Sum of the received bytes aggregated around the device and
+            aggr_interval
+          type: integer
+        transmitted_bytes:
+          description: Sum of the transmitted bytes aggregated around the device and
+            aggr_interval
+          type: integer
+        total_bytes:
+          description: Sum of the received + transmitted bytes aggregated around the
+            device and aggr_interval
+          type: integer
+        usage_time:
+          description: Minutes of usage time aggregated around the device and aggr_interval
+          type: integer
+      type: object
+    CreateSupportTicket:
+      properties:
+        text:
           type: string
-        x-large@2:
+        category:
+          description: Ticket category's slug
           type: string
+        files:
+          items:
+            format: binary
+            type: string
+          nullable: true
+          type: array
       required:
-      - large
-      - medium
-      - small
-      - x-large
-      - x-large@2
+      - category
+      - text
+      type: object
+    TicketCategory:
+      example:
+        name: name
+        id: id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
       type: object
     CreateOrUpdateDeviceRequest_info:
       example:
-        type: ios
+        type: null
         info:
           key: info
       nullable: true
       properties:
         type:
-          enum:
-          - ios
-          - ipados
-          - watchos
-          - macos
-          - android
-          - wp
-          - other
-          type: string
+          $ref: '#/components/schemas/DeviceType'
         info:
           additionalProperties:
             type: string
@@ -3512,7 +4859,8 @@ components:
       scheme: bearer
       type: http
     wireguardAuth:
-      description: "Authorization: WireGuard <private key>\n"
+      description: |
+        Authorization: WireGuard <private key>
       in: header
       name: Authorization
       type: apiKey

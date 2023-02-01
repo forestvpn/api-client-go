@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -53,7 +53,7 @@ func NewCreateOrUpdateDeviceRequestWithDefaults() *CreateOrUpdateDeviceRequest {
 
 // GetExternalKey returns the ExternalKey field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateOrUpdateDeviceRequest) GetExternalKey() string {
-	if o == nil || o.ExternalKey.Get() == nil {
+	if o == nil || isNil(o.ExternalKey.Get()) {
 		var ret string
 		return ret
 	}
@@ -65,7 +65,7 @@ func (o *CreateOrUpdateDeviceRequest) GetExternalKey() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateOrUpdateDeviceRequest) GetExternalKeyOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.ExternalKey.Get(), o.ExternalKey.IsSet()
 }
@@ -95,7 +95,7 @@ func (o *CreateOrUpdateDeviceRequest) UnsetExternalKey() {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *CreateOrUpdateDeviceRequest) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || isNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -105,15 +105,15 @@ func (o *CreateOrUpdateDeviceRequest) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateOrUpdateDeviceRequest) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
-		return nil, false
+	if o == nil || isNil(o.Name) {
+    return nil, false
 	}
 	return o.Name, true
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *CreateOrUpdateDeviceRequest) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !isNil(o.Name) {
 		return true
 	}
 
@@ -127,7 +127,7 @@ func (o *CreateOrUpdateDeviceRequest) SetName(v string) {
 
 // GetLocation returns the Location field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateOrUpdateDeviceRequest) GetLocation() string {
-	if o == nil || o.Location.Get() == nil {
+	if o == nil || isNil(o.Location.Get()) {
 		var ret string
 		return ret
 	}
@@ -139,7 +139,7 @@ func (o *CreateOrUpdateDeviceRequest) GetLocation() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateOrUpdateDeviceRequest) GetLocationOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Location.Get(), o.Location.IsSet()
 }
@@ -169,7 +169,7 @@ func (o *CreateOrUpdateDeviceRequest) UnsetLocation() {
 
 // GetTorOver returns the TorOver field value if set, zero value otherwise.
 func (o *CreateOrUpdateDeviceRequest) GetTorOver() bool {
-	if o == nil || o.TorOver == nil {
+	if o == nil || isNil(o.TorOver) {
 		var ret bool
 		return ret
 	}
@@ -179,15 +179,15 @@ func (o *CreateOrUpdateDeviceRequest) GetTorOver() bool {
 // GetTorOverOk returns a tuple with the TorOver field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateOrUpdateDeviceRequest) GetTorOverOk() (*bool, bool) {
-	if o == nil || o.TorOver == nil {
-		return nil, false
+	if o == nil || isNil(o.TorOver) {
+    return nil, false
 	}
 	return o.TorOver, true
 }
 
 // HasTorOver returns a boolean if a field has been set.
 func (o *CreateOrUpdateDeviceRequest) HasTorOver() bool {
-	if o != nil && o.TorOver != nil {
+	if o != nil && !isNil(o.TorOver) {
 		return true
 	}
 
@@ -201,7 +201,7 @@ func (o *CreateOrUpdateDeviceRequest) SetTorOver(v bool) {
 
 // GetConnectionMode returns the ConnectionMode field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateOrUpdateDeviceRequest) GetConnectionMode() string {
-	if o == nil || o.ConnectionMode.Get() == nil {
+	if o == nil || isNil(o.ConnectionMode.Get()) {
 		var ret string
 		return ret
 	}
@@ -213,7 +213,7 @@ func (o *CreateOrUpdateDeviceRequest) GetConnectionMode() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateOrUpdateDeviceRequest) GetConnectionModeOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.ConnectionMode.Get(), o.ConnectionMode.IsSet()
 }
@@ -243,7 +243,7 @@ func (o *CreateOrUpdateDeviceRequest) UnsetConnectionMode() {
 
 // GetRandomServer returns the RandomServer field value if set, zero value otherwise.
 func (o *CreateOrUpdateDeviceRequest) GetRandomServer() bool {
-	if o == nil || o.RandomServer == nil {
+	if o == nil || isNil(o.RandomServer) {
 		var ret bool
 		return ret
 	}
@@ -253,15 +253,15 @@ func (o *CreateOrUpdateDeviceRequest) GetRandomServer() bool {
 // GetRandomServerOk returns a tuple with the RandomServer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateOrUpdateDeviceRequest) GetRandomServerOk() (*bool, bool) {
-	if o == nil || o.RandomServer == nil {
-		return nil, false
+	if o == nil || isNil(o.RandomServer) {
+    return nil, false
 	}
 	return o.RandomServer, true
 }
 
 // HasRandomServer returns a boolean if a field has been set.
 func (o *CreateOrUpdateDeviceRequest) HasRandomServer() bool {
-	if o != nil && o.RandomServer != nil {
+	if o != nil && !isNil(o.RandomServer) {
 		return true
 	}
 
@@ -275,7 +275,7 @@ func (o *CreateOrUpdateDeviceRequest) SetRandomServer(v bool) {
 
 // GetInfo returns the Info field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateOrUpdateDeviceRequest) GetInfo() CreateOrUpdateDeviceRequestInfo {
-	if o == nil || o.Info.Get() == nil {
+	if o == nil || isNil(o.Info.Get()) {
 		var ret CreateOrUpdateDeviceRequestInfo
 		return ret
 	}
@@ -287,7 +287,7 @@ func (o *CreateOrUpdateDeviceRequest) GetInfo() CreateOrUpdateDeviceRequestInfo 
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateOrUpdateDeviceRequest) GetInfoOk() (*CreateOrUpdateDeviceRequestInfo, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Info.Get(), o.Info.IsSet()
 }
@@ -320,19 +320,19 @@ func (o CreateOrUpdateDeviceRequest) MarshalJSON() ([]byte, error) {
 	if o.ExternalKey.IsSet() {
 		toSerialize["external_key"] = o.ExternalKey.Get()
 	}
-	if o.Name != nil {
+	if !isNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
 	if o.Location.IsSet() {
 		toSerialize["location"] = o.Location.Get()
 	}
-	if o.TorOver != nil {
+	if !isNil(o.TorOver) {
 		toSerialize["tor_over"] = o.TorOver
 	}
 	if o.ConnectionMode.IsSet() {
 		toSerialize["connection_mode"] = o.ConnectionMode.Get()
 	}
-	if o.RandomServer != nil {
+	if !isNil(o.RandomServer) {
 		toSerialize["random_server"] = o.RandomServer
 	}
 	if o.Info.IsSet() {

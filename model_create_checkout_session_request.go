@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -59,7 +59,7 @@ func (o *CreateCheckoutSessionRequest) GetCancelUrl() string {
 // and a boolean to check if the value has been set.
 func (o *CreateCheckoutSessionRequest) GetCancelUrlOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.CancelUrl, true
 }
@@ -83,7 +83,7 @@ func (o *CreateCheckoutSessionRequest) GetSuccessUrl() string {
 // and a boolean to check if the value has been set.
 func (o *CreateCheckoutSessionRequest) GetSuccessUrlOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.SuccessUrl, true
 }
@@ -95,7 +95,7 @@ func (o *CreateCheckoutSessionRequest) SetSuccessUrl(v string) {
 
 // GetCurrency returns the Currency field value if set, zero value otherwise.
 func (o *CreateCheckoutSessionRequest) GetCurrency() string {
-	if o == nil || o.Currency == nil {
+	if o == nil || isNil(o.Currency) {
 		var ret string
 		return ret
 	}
@@ -105,15 +105,15 @@ func (o *CreateCheckoutSessionRequest) GetCurrency() string {
 // GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateCheckoutSessionRequest) GetCurrencyOk() (*string, bool) {
-	if o == nil || o.Currency == nil {
-		return nil, false
+	if o == nil || isNil(o.Currency) {
+    return nil, false
 	}
 	return o.Currency, true
 }
 
 // HasCurrency returns a boolean if a field has been set.
 func (o *CreateCheckoutSessionRequest) HasCurrency() bool {
-	if o != nil && o.Currency != nil {
+	if o != nil && !isNil(o.Currency) {
 		return true
 	}
 
@@ -127,7 +127,7 @@ func (o *CreateCheckoutSessionRequest) SetCurrency(v string) {
 
 // GetLocale returns the Locale field value if set, zero value otherwise.
 func (o *CreateCheckoutSessionRequest) GetLocale() string {
-	if o == nil || o.Locale == nil {
+	if o == nil || isNil(o.Locale) {
 		var ret string
 		return ret
 	}
@@ -137,15 +137,15 @@ func (o *CreateCheckoutSessionRequest) GetLocale() string {
 // GetLocaleOk returns a tuple with the Locale field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateCheckoutSessionRequest) GetLocaleOk() (*string, bool) {
-	if o == nil || o.Locale == nil {
-		return nil, false
+	if o == nil || isNil(o.Locale) {
+    return nil, false
 	}
 	return o.Locale, true
 }
 
 // HasLocale returns a boolean if a field has been set.
 func (o *CreateCheckoutSessionRequest) HasLocale() bool {
-	if o != nil && o.Locale != nil {
+	if o != nil && !isNil(o.Locale) {
 		return true
 	}
 
@@ -159,7 +159,7 @@ func (o *CreateCheckoutSessionRequest) SetLocale(v string) {
 
 // GetEmail returns the Email field value if set, zero value otherwise.
 func (o *CreateCheckoutSessionRequest) GetEmail() string {
-	if o == nil || o.Email == nil {
+	if o == nil || isNil(o.Email) {
 		var ret string
 		return ret
 	}
@@ -169,15 +169,15 @@ func (o *CreateCheckoutSessionRequest) GetEmail() string {
 // GetEmailOk returns a tuple with the Email field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateCheckoutSessionRequest) GetEmailOk() (*string, bool) {
-	if o == nil || o.Email == nil {
-		return nil, false
+	if o == nil || isNil(o.Email) {
+    return nil, false
 	}
 	return o.Email, true
 }
 
 // HasEmail returns a boolean if a field has been set.
 func (o *CreateCheckoutSessionRequest) HasEmail() bool {
-	if o != nil && o.Email != nil {
+	if o != nil && !isNil(o.Email) {
 		return true
 	}
 
@@ -203,7 +203,7 @@ func (o *CreateCheckoutSessionRequest) GetProducts() []CreateCheckoutSessionProd
 // and a boolean to check if the value has been set.
 func (o *CreateCheckoutSessionRequest) GetProductsOk() ([]CreateCheckoutSessionProduct, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Products, true
 }
@@ -221,13 +221,13 @@ func (o CreateCheckoutSessionRequest) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["success_url"] = o.SuccessUrl
 	}
-	if o.Currency != nil {
+	if !isNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
-	if o.Locale != nil {
+	if !isNil(o.Locale) {
 		toSerialize["locale"] = o.Locale
 	}
-	if o.Email != nil {
+	if !isNil(o.Email) {
 		toSerialize["email"] = o.Email
 	}
 	if true {

@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -44,7 +44,7 @@ func NewWireGuardPeerUserWithDefaults() *WireGuardPeerUser {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *WireGuardPeerUser) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || isNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -54,15 +54,15 @@ func (o *WireGuardPeerUser) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeerUser) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
-		return nil, false
+	if o == nil || isNil(o.Id) {
+    return nil, false
 	}
 	return o.Id, true
 }
 
 // HasId returns a boolean if a field has been set.
 func (o *WireGuardPeerUser) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !isNil(o.Id) {
 		return true
 	}
 
@@ -76,7 +76,7 @@ func (o *WireGuardPeerUser) SetId(v string) {
 
 // GetUsername returns the Username field value if set, zero value otherwise.
 func (o *WireGuardPeerUser) GetUsername() string {
-	if o == nil || o.Username == nil {
+	if o == nil || isNil(o.Username) {
 		var ret string
 		return ret
 	}
@@ -86,15 +86,15 @@ func (o *WireGuardPeerUser) GetUsername() string {
 // GetUsernameOk returns a tuple with the Username field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeerUser) GetUsernameOk() (*string, bool) {
-	if o == nil || o.Username == nil {
-		return nil, false
+	if o == nil || isNil(o.Username) {
+    return nil, false
 	}
 	return o.Username, true
 }
 
 // HasUsername returns a boolean if a field has been set.
 func (o *WireGuardPeerUser) HasUsername() bool {
-	if o != nil && o.Username != nil {
+	if o != nil && !isNil(o.Username) {
 		return true
 	}
 
@@ -108,7 +108,7 @@ func (o *WireGuardPeerUser) SetUsername(v string) {
 
 // GetFirstName returns the FirstName field value if set, zero value otherwise.
 func (o *WireGuardPeerUser) GetFirstName() string {
-	if o == nil || o.FirstName == nil {
+	if o == nil || isNil(o.FirstName) {
 		var ret string
 		return ret
 	}
@@ -118,15 +118,15 @@ func (o *WireGuardPeerUser) GetFirstName() string {
 // GetFirstNameOk returns a tuple with the FirstName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeerUser) GetFirstNameOk() (*string, bool) {
-	if o == nil || o.FirstName == nil {
-		return nil, false
+	if o == nil || isNil(o.FirstName) {
+    return nil, false
 	}
 	return o.FirstName, true
 }
 
 // HasFirstName returns a boolean if a field has been set.
 func (o *WireGuardPeerUser) HasFirstName() bool {
-	if o != nil && o.FirstName != nil {
+	if o != nil && !isNil(o.FirstName) {
 		return true
 	}
 
@@ -140,7 +140,7 @@ func (o *WireGuardPeerUser) SetFirstName(v string) {
 
 // GetLastName returns the LastName field value if set, zero value otherwise.
 func (o *WireGuardPeerUser) GetLastName() string {
-	if o == nil || o.LastName == nil {
+	if o == nil || isNil(o.LastName) {
 		var ret string
 		return ret
 	}
@@ -150,15 +150,15 @@ func (o *WireGuardPeerUser) GetLastName() string {
 // GetLastNameOk returns a tuple with the LastName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeerUser) GetLastNameOk() (*string, bool) {
-	if o == nil || o.LastName == nil {
-		return nil, false
+	if o == nil || isNil(o.LastName) {
+    return nil, false
 	}
 	return o.LastName, true
 }
 
 // HasLastName returns a boolean if a field has been set.
 func (o *WireGuardPeerUser) HasLastName() bool {
-	if o != nil && o.LastName != nil {
+	if o != nil && !isNil(o.LastName) {
 		return true
 	}
 
@@ -172,7 +172,7 @@ func (o *WireGuardPeerUser) SetLastName(v string) {
 
 // GetEmail returns the Email field value if set, zero value otherwise.
 func (o *WireGuardPeerUser) GetEmail() string {
-	if o == nil || o.Email == nil {
+	if o == nil || isNil(o.Email) {
 		var ret string
 		return ret
 	}
@@ -182,15 +182,15 @@ func (o *WireGuardPeerUser) GetEmail() string {
 // GetEmailOk returns a tuple with the Email field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeerUser) GetEmailOk() (*string, bool) {
-	if o == nil || o.Email == nil {
-		return nil, false
+	if o == nil || isNil(o.Email) {
+    return nil, false
 	}
 	return o.Email, true
 }
 
 // HasEmail returns a boolean if a field has been set.
 func (o *WireGuardPeerUser) HasEmail() bool {
-	if o != nil && o.Email != nil {
+	if o != nil && !isNil(o.Email) {
 		return true
 	}
 
@@ -204,7 +204,7 @@ func (o *WireGuardPeerUser) SetEmail(v string) {
 
 // GetPhotoUrl returns the PhotoUrl field value if set, zero value otherwise.
 func (o *WireGuardPeerUser) GetPhotoUrl() string {
-	if o == nil || o.PhotoUrl == nil {
+	if o == nil || isNil(o.PhotoUrl) {
 		var ret string
 		return ret
 	}
@@ -214,15 +214,15 @@ func (o *WireGuardPeerUser) GetPhotoUrl() string {
 // GetPhotoUrlOk returns a tuple with the PhotoUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeerUser) GetPhotoUrlOk() (*string, bool) {
-	if o == nil || o.PhotoUrl == nil {
-		return nil, false
+	if o == nil || isNil(o.PhotoUrl) {
+    return nil, false
 	}
 	return o.PhotoUrl, true
 }
 
 // HasPhotoUrl returns a boolean if a field has been set.
 func (o *WireGuardPeerUser) HasPhotoUrl() bool {
-	if o != nil && o.PhotoUrl != nil {
+	if o != nil && !isNil(o.PhotoUrl) {
 		return true
 	}
 
@@ -236,22 +236,22 @@ func (o *WireGuardPeerUser) SetPhotoUrl(v string) {
 
 func (o WireGuardPeerUser) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
+	if !isNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.Username != nil {
+	if !isNil(o.Username) {
 		toSerialize["username"] = o.Username
 	}
-	if o.FirstName != nil {
+	if !isNil(o.FirstName) {
 		toSerialize["first_name"] = o.FirstName
 	}
-	if o.LastName != nil {
+	if !isNil(o.LastName) {
 		toSerialize["last_name"] = o.LastName
 	}
-	if o.Email != nil {
+	if !isNil(o.Email) {
 		toSerialize["email"] = o.Email
 	}
-	if o.PhotoUrl != nil {
+	if !isNil(o.PhotoUrl) {
 		toSerialize["photo_url"] = o.PhotoUrl
 	}
 	return json.Marshal(toSerialize)

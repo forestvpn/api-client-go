@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ApplyCouponCheckoutSession**](CheckoutApi.md#ApplyCouponCheckoutSession) | **Post** /checkout/sessions/{sessionID}/apply_coupon/ | Apply coupon to session
 [**CreateCheckoutSession**](CheckoutApi.md#CreateCheckoutSession) | **Post** /checkout/sessions/ | Create checkout session
+[**CreateWaitListRequest**](CheckoutApi.md#CreateWaitListRequest) | **Post** /checkout/wait-list/ | Create request to add country in wait list
 [**ExpireCheckoutSession**](CheckoutApi.md#ExpireCheckoutSession) | **Post** /checkout/sessions/{sessionID}/expire/ | Expire checkout session
 [**GetCheckoutSession**](CheckoutApi.md#GetCheckoutSession) | **Get** /checkout/sessions/{sessionID}/ | Checkout session details
 [**GetStripeCheckoutSession**](CheckoutApi.md#GetStripeCheckoutSession) | **Get** /checkout/sessions/{sessionID}/stripe/checkout/session/ | Stripe checkout session details
@@ -142,6 +143,68 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateWaitListRequest
+
+> CreateWaitListRequest(ctx).XCountry(xCountry).Execute()
+
+Create request to add country in wait list
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    xCountry := "xCountry_example" // string |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CheckoutApi.CreateWaitListRequest(context.Background()).XCountry(xCountry).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CheckoutApi.CreateWaitListRequest``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateWaitListRequestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **xCountry** | **string** |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

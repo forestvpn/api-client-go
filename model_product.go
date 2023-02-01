@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -21,19 +21,20 @@ type Product struct {
 	Name string `json:"name"`
 	Description *string `json:"description,omitempty"`
 	Bundle *Bundle `json:"bundle,omitempty"`
-	Price Price `json:"price"`
+	Price *Price `json:"price,omitempty"`
 	Recurring *Recurring `json:"recurring,omitempty"`
+	Discount *Discount `json:"discount,omitempty"`
+	IsMostPopular *bool `json:"is_most_popular,omitempty"`
 }
 
 // NewProduct instantiates a new Product object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProduct(id string, name string, price Price) *Product {
+func NewProduct(id string, name string) *Product {
 	this := Product{}
 	this.Id = id
 	this.Name = name
-	this.Price = price
 	return &this
 }
 
@@ -59,7 +60,7 @@ func (o *Product) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *Product) GetIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Id, true
 }
@@ -83,7 +84,7 @@ func (o *Product) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *Product) GetNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Name, true
 }
@@ -95,7 +96,7 @@ func (o *Product) SetName(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *Product) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || isNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -105,15 +106,15 @@ func (o *Product) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Product) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
+	if o == nil || isNil(o.Description) {
+    return nil, false
 	}
 	return o.Description, true
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *Product) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !isNil(o.Description) {
 		return true
 	}
 
@@ -127,7 +128,7 @@ func (o *Product) SetDescription(v string) {
 
 // GetBundle returns the Bundle field value if set, zero value otherwise.
 func (o *Product) GetBundle() Bundle {
-	if o == nil || o.Bundle == nil {
+	if o == nil || isNil(o.Bundle) {
 		var ret Bundle
 		return ret
 	}
@@ -137,15 +138,15 @@ func (o *Product) GetBundle() Bundle {
 // GetBundleOk returns a tuple with the Bundle field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Product) GetBundleOk() (*Bundle, bool) {
-	if o == nil || o.Bundle == nil {
-		return nil, false
+	if o == nil || isNil(o.Bundle) {
+    return nil, false
 	}
 	return o.Bundle, true
 }
 
 // HasBundle returns a boolean if a field has been set.
 func (o *Product) HasBundle() bool {
-	if o != nil && o.Bundle != nil {
+	if o != nil && !isNil(o.Bundle) {
 		return true
 	}
 
@@ -157,33 +158,41 @@ func (o *Product) SetBundle(v Bundle) {
 	o.Bundle = &v
 }
 
-// GetPrice returns the Price field value
+// GetPrice returns the Price field value if set, zero value otherwise.
 func (o *Product) GetPrice() Price {
-	if o == nil {
+	if o == nil || isNil(o.Price) {
 		var ret Price
 		return ret
 	}
-
-	return o.Price
+	return *o.Price
 }
 
-// GetPriceOk returns a tuple with the Price field value
+// GetPriceOk returns a tuple with the Price field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Product) GetPriceOk() (*Price, bool) {
-	if o == nil {
-		return nil, false
+	if o == nil || isNil(o.Price) {
+    return nil, false
 	}
-	return &o.Price, true
+	return o.Price, true
 }
 
-// SetPrice sets field value
+// HasPrice returns a boolean if a field has been set.
+func (o *Product) HasPrice() bool {
+	if o != nil && !isNil(o.Price) {
+		return true
+	}
+
+	return false
+}
+
+// SetPrice gets a reference to the given Price and assigns it to the Price field.
 func (o *Product) SetPrice(v Price) {
-	o.Price = v
+	o.Price = &v
 }
 
 // GetRecurring returns the Recurring field value if set, zero value otherwise.
 func (o *Product) GetRecurring() Recurring {
-	if o == nil || o.Recurring == nil {
+	if o == nil || isNil(o.Recurring) {
 		var ret Recurring
 		return ret
 	}
@@ -193,15 +202,15 @@ func (o *Product) GetRecurring() Recurring {
 // GetRecurringOk returns a tuple with the Recurring field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Product) GetRecurringOk() (*Recurring, bool) {
-	if o == nil || o.Recurring == nil {
-		return nil, false
+	if o == nil || isNil(o.Recurring) {
+    return nil, false
 	}
 	return o.Recurring, true
 }
 
 // HasRecurring returns a boolean if a field has been set.
 func (o *Product) HasRecurring() bool {
-	if o != nil && o.Recurring != nil {
+	if o != nil && !isNil(o.Recurring) {
 		return true
 	}
 
@@ -213,6 +222,70 @@ func (o *Product) SetRecurring(v Recurring) {
 	o.Recurring = &v
 }
 
+// GetDiscount returns the Discount field value if set, zero value otherwise.
+func (o *Product) GetDiscount() Discount {
+	if o == nil || isNil(o.Discount) {
+		var ret Discount
+		return ret
+	}
+	return *o.Discount
+}
+
+// GetDiscountOk returns a tuple with the Discount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Product) GetDiscountOk() (*Discount, bool) {
+	if o == nil || isNil(o.Discount) {
+    return nil, false
+	}
+	return o.Discount, true
+}
+
+// HasDiscount returns a boolean if a field has been set.
+func (o *Product) HasDiscount() bool {
+	if o != nil && !isNil(o.Discount) {
+		return true
+	}
+
+	return false
+}
+
+// SetDiscount gets a reference to the given Discount and assigns it to the Discount field.
+func (o *Product) SetDiscount(v Discount) {
+	o.Discount = &v
+}
+
+// GetIsMostPopular returns the IsMostPopular field value if set, zero value otherwise.
+func (o *Product) GetIsMostPopular() bool {
+	if o == nil || isNil(o.IsMostPopular) {
+		var ret bool
+		return ret
+	}
+	return *o.IsMostPopular
+}
+
+// GetIsMostPopularOk returns a tuple with the IsMostPopular field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Product) GetIsMostPopularOk() (*bool, bool) {
+	if o == nil || isNil(o.IsMostPopular) {
+    return nil, false
+	}
+	return o.IsMostPopular, true
+}
+
+// HasIsMostPopular returns a boolean if a field has been set.
+func (o *Product) HasIsMostPopular() bool {
+	if o != nil && !isNil(o.IsMostPopular) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsMostPopular gets a reference to the given bool and assigns it to the IsMostPopular field.
+func (o *Product) SetIsMostPopular(v bool) {
+	o.IsMostPopular = &v
+}
+
 func (o Product) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -221,17 +294,23 @@ func (o Product) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["name"] = o.Name
 	}
-	if o.Description != nil {
+	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if o.Bundle != nil {
+	if !isNil(o.Bundle) {
 		toSerialize["bundle"] = o.Bundle
 	}
-	if true {
+	if !isNil(o.Price) {
 		toSerialize["price"] = o.Price
 	}
-	if o.Recurring != nil {
+	if !isNil(o.Recurring) {
 		toSerialize["recurring"] = o.Recurring
+	}
+	if !isNil(o.Discount) {
+		toSerialize["discount"] = o.Discount
+	}
+	if !isNil(o.IsMostPopular) {
+		toSerialize["is_most_popular"] = o.IsMostPopular
 	}
 	return json.Marshal(toSerialize)
 }

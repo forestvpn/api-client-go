@@ -4,13 +4,212 @@ All URIs are relative to *https://api.forestvpn.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**AuthorizeAccessTokenRequest**](AuthApi.md#AuthorizeAccessTokenRequest) | **Post** /auth/access-token-requests/{requestID}/authorize/ | Authorize access token request
+[**CreateAccessTokenRequest**](AuthApi.md#CreateAccessTokenRequest) | **Post** /auth/access-token-requests/ | Create access token request
+[**GetAccessTokenRequest**](AuthApi.md#GetAccessTokenRequest) | **Get** /auth/access-token-requests/{requestID}/ | Get access token request details
 [**LoginToken**](AuthApi.md#LoginToken) | **Post** /auth/token/login/ | Login with JWT token
 [**MigrateLegacyAuth**](AuthApi.md#MigrateLegacyAuth) | **Get** /legacy/auth/ | Legacy auth migration
 [**ObtainToken**](AuthApi.md#ObtainToken) | **Get** /auth/token/obtain/ | Obtain JWT token
+[**RevokeAccessTokenRequest**](AuthApi.md#RevokeAccessTokenRequest) | **Post** /auth/access-token-requests/{requestID}/revoke/ | Revoke access token request
 [**UpdateUserProfile**](AuthApi.md#UpdateUserProfile) | **Patch** /auth/profile/ | Update profile
 [**UserProfile**](AuthApi.md#UserProfile) | **Get** /auth/profile/ | Profile
 [**WhoAmI**](AuthApi.md#WhoAmI) | **Get** /auth/whoami/ | Who am I
 
+
+
+## AuthorizeAccessTokenRequest
+
+> AccessTokenRequest AuthorizeAccessTokenRequest(ctx, requestID).Execute()
+
+Authorize access token request
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    requestID := "requestID_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AuthApi.AuthorizeAccessTokenRequest(context.Background(), requestID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AuthApi.AuthorizeAccessTokenRequest``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `AuthorizeAccessTokenRequest`: AccessTokenRequest
+    fmt.Fprintf(os.Stdout, "Response from `AuthApi.AuthorizeAccessTokenRequest`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**requestID** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAuthorizeAccessTokenRequestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**AccessTokenRequest**](AccessTokenRequest.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateAccessTokenRequest
+
+> AccessTokenRequest CreateAccessTokenRequest(ctx).Execute()
+
+Create access token request
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AuthApi.CreateAccessTokenRequest(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AuthApi.CreateAccessTokenRequest``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateAccessTokenRequest`: AccessTokenRequest
+    fmt.Fprintf(os.Stdout, "Response from `AuthApi.CreateAccessTokenRequest`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateAccessTokenRequestRequest struct via the builder pattern
+
+
+### Return type
+
+[**AccessTokenRequest**](AccessTokenRequest.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAccessTokenRequest
+
+> AccessTokenRequest GetAccessTokenRequest(ctx, requestID).Execute()
+
+Get access token request details
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    requestID := "requestID_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AuthApi.GetAccessTokenRequest(context.Background(), requestID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AuthApi.GetAccessTokenRequest``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetAccessTokenRequest`: AccessTokenRequest
+    fmt.Fprintf(os.Stdout, "Response from `AuthApi.GetAccessTokenRequest`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**requestID** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAccessTokenRequestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**AccessTokenRequest**](AccessTokenRequest.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## LoginToken
@@ -180,6 +379,74 @@ Other parameters are passed through a pointer to a apiObtainTokenRequest struct 
 ### Return type
 
 [**TokenObtain**](TokenObtain.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RevokeAccessTokenRequest
+
+> AccessTokenRequest RevokeAccessTokenRequest(ctx, requestID).Execute()
+
+Revoke access token request
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    requestID := "requestID_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AuthApi.RevokeAccessTokenRequest(context.Background(), requestID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AuthApi.RevokeAccessTokenRequest``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `RevokeAccessTokenRequest`: AccessTokenRequest
+    fmt.Fprintf(os.Stdout, "Response from `AuthApi.RevokeAccessTokenRequest`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**requestID** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRevokeAccessTokenRequestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**AccessTokenRequest**](AccessTokenRequest.md)
 
 ### Authorization
 

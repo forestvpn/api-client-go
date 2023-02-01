@@ -5,15 +5,15 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** |  | 
-**Slug** | **string** |  | 
-**Name** | **string** |  | 
-**Description** | Pointer to **string** |  | [optional] 
+**Type** | [**PaymentMethodType**](PaymentMethodType.md) |  | 
+**Card** | Pointer to [**PaymentMethodCard**](PaymentMethodCard.md) |  | [optional] 
+**CreatedAt** | **time.Time** |  | 
 
 ## Methods
 
 ### NewPaymentMethod
 
-`func NewPaymentMethod(id string, slug string, name string, ) *PaymentMethod`
+`func NewPaymentMethod(id string, type_ PaymentMethodType, createdAt time.Time, ) *PaymentMethod`
 
 NewPaymentMethod instantiates a new PaymentMethod object
 This constructor will assign default values to properties that have it defined,
@@ -48,70 +48,70 @@ and a boolean to check if the value has been set.
 SetId sets Id field to given value.
 
 
-### GetSlug
+### GetType
 
-`func (o *PaymentMethod) GetSlug() string`
+`func (o *PaymentMethod) GetType() PaymentMethodType`
 
-GetSlug returns the Slug field if non-nil, zero value otherwise.
+GetType returns the Type field if non-nil, zero value otherwise.
 
-### GetSlugOk
+### GetTypeOk
 
-`func (o *PaymentMethod) GetSlugOk() (*string, bool)`
+`func (o *PaymentMethod) GetTypeOk() (*PaymentMethodType, bool)`
 
-GetSlugOk returns a tuple with the Slug field if it's non-nil, zero value otherwise
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSlug
+### SetType
 
-`func (o *PaymentMethod) SetSlug(v string)`
+`func (o *PaymentMethod) SetType(v PaymentMethodType)`
 
-SetSlug sets Slug field to given value.
+SetType sets Type field to given value.
 
 
-### GetName
+### GetCard
 
-`func (o *PaymentMethod) GetName() string`
+`func (o *PaymentMethod) GetCard() PaymentMethodCard`
 
-GetName returns the Name field if non-nil, zero value otherwise.
+GetCard returns the Card field if non-nil, zero value otherwise.
 
-### GetNameOk
+### GetCardOk
 
-`func (o *PaymentMethod) GetNameOk() (*string, bool)`
+`func (o *PaymentMethod) GetCardOk() (*PaymentMethodCard, bool)`
 
-GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+GetCardOk returns a tuple with the Card field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetName
+### SetCard
 
-`func (o *PaymentMethod) SetName(v string)`
+`func (o *PaymentMethod) SetCard(v PaymentMethodCard)`
 
-SetName sets Name field to given value.
+SetCard sets Card field to given value.
 
+### HasCard
 
-### GetDescription
+`func (o *PaymentMethod) HasCard() bool`
 
-`func (o *PaymentMethod) GetDescription() string`
+HasCard returns a boolean if a field has been set.
 
-GetDescription returns the Description field if non-nil, zero value otherwise.
+### GetCreatedAt
 
-### GetDescriptionOk
+`func (o *PaymentMethod) GetCreatedAt() time.Time`
 
-`func (o *PaymentMethod) GetDescriptionOk() (*string, bool)`
+GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
 
-GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+### GetCreatedAtOk
+
+`func (o *PaymentMethod) GetCreatedAtOk() (*time.Time, bool)`
+
+GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDescription
+### SetCreatedAt
 
-`func (o *PaymentMethod) SetDescription(v string)`
+`func (o *PaymentMethod) SetCreatedAt(v time.Time)`
 
-SetDescription sets Description field to given value.
+SetCreatedAt sets CreatedAt field to given value.
 
-### HasDescription
-
-`func (o *PaymentMethod) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

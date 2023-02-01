@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -59,7 +59,7 @@ func (o *FriendshipInvitation) GetCode() string {
 // and a boolean to check if the value has been set.
 func (o *FriendshipInvitation) GetCodeOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Code, true
 }
@@ -83,7 +83,7 @@ func (o *FriendshipInvitation) GetUser() User {
 // and a boolean to check if the value has been set.
 func (o *FriendshipInvitation) GetUserOk() (*User, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.User, true
 }
@@ -107,7 +107,7 @@ func (o *FriendshipInvitation) GetShareText() string {
 // and a boolean to check if the value has been set.
 func (o *FriendshipInvitation) GetShareTextOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ShareText, true
 }
@@ -131,7 +131,7 @@ func (o *FriendshipInvitation) GetCreatedAt() time.Time {
 // and a boolean to check if the value has been set.
 func (o *FriendshipInvitation) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.CreatedAt, true
 }

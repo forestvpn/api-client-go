@@ -130,7 +130,7 @@ Other parameters are passed through a pointer to a apiListCurrenciesRequest stru
 
 ## ListLocations
 
-> []Location ListLocations(ctx).Execute()
+> []Location ListLocations(ctx).XDeviceCoordinates(xDeviceCoordinates).Execute()
 
 Location list
 
@@ -147,10 +147,11 @@ import (
 )
 
 func main() {
+    xDeviceCoordinates := "xDeviceCoordinates_example" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GeoApi.ListLocations(context.Background()).Execute()
+    resp, r, err := apiClient.GeoApi.ListLocations(context.Background()).XDeviceCoordinates(xDeviceCoordinates).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `GeoApi.ListLocations``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -162,12 +163,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListLocationsRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **xDeviceCoordinates** | **string** |  | 
 
 ### Return type
 

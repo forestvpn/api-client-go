@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -17,16 +17,16 @@ import (
 
 // NotificationUnreadCount struct for NotificationUnreadCount
 type NotificationUnreadCount struct {
-	Count int32 `json:"count"`
+	UnreadCount int32 `json:"unread_count"`
 }
 
 // NewNotificationUnreadCount instantiates a new NotificationUnreadCount object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNotificationUnreadCount(count int32) *NotificationUnreadCount {
+func NewNotificationUnreadCount(unreadCount int32) *NotificationUnreadCount {
 	this := NotificationUnreadCount{}
-	this.Count = count
+	this.UnreadCount = unreadCount
 	return &this
 }
 
@@ -38,34 +38,34 @@ func NewNotificationUnreadCountWithDefaults() *NotificationUnreadCount {
 	return &this
 }
 
-// GetCount returns the Count field value
-func (o *NotificationUnreadCount) GetCount() int32 {
+// GetUnreadCount returns the UnreadCount field value
+func (o *NotificationUnreadCount) GetUnreadCount() int32 {
 	if o == nil {
 		var ret int32
 		return ret
 	}
 
-	return o.Count
+	return o.UnreadCount
 }
 
-// GetCountOk returns a tuple with the Count field value
+// GetUnreadCountOk returns a tuple with the UnreadCount field value
 // and a boolean to check if the value has been set.
-func (o *NotificationUnreadCount) GetCountOk() (*int32, bool) {
+func (o *NotificationUnreadCount) GetUnreadCountOk() (*int32, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
-	return &o.Count, true
+	return &o.UnreadCount, true
 }
 
-// SetCount sets field value
-func (o *NotificationUnreadCount) SetCount(v int32) {
-	o.Count = v
+// SetUnreadCount sets field value
+func (o *NotificationUnreadCount) SetUnreadCount(v int32) {
+	o.UnreadCount = v
 }
 
 func (o NotificationUnreadCount) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
-		toSerialize["count"] = o.Count
+		toSerialize["unread_count"] = o.UnreadCount
 	}
 	return json.Marshal(toSerialize)
 }

@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -13,6 +13,7 @@ package forestvpn_api
 
 import (
 	"encoding/json"
+    "reflect"
 	"time"
 )
 
@@ -326,4 +327,18 @@ func (v NullableTime) MarshalJSON() ([]byte, error) {
 func (v *NullableTime) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
+}
+
+// isNil checks if an input is nil
+func isNil(i interface{}) bool {
+    if i == nil {
+        return true
+    }
+    switch reflect.TypeOf(i).Kind() {
+    case reflect.Chan, reflect.Func, reflect.Map, reflect.Ptr, reflect.UnsafePointer, reflect.Interface, reflect.Slice:
+        return reflect.ValueOf(i).IsNil()
+    case reflect.Array:
+        return reflect.ValueOf(i).IsZero()
+    }
+    return false
 }

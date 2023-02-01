@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -39,7 +39,7 @@ func NewCreateOrUpdatePortForwardingRequestWithDefaults() *CreateOrUpdatePortFor
 
 // GetDstPort returns the DstPort field value if set, zero value otherwise.
 func (o *CreateOrUpdatePortForwardingRequest) GetDstPort() int32 {
-	if o == nil || o.DstPort == nil {
+	if o == nil || isNil(o.DstPort) {
 		var ret int32
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *CreateOrUpdatePortForwardingRequest) GetDstPort() int32 {
 // GetDstPortOk returns a tuple with the DstPort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateOrUpdatePortForwardingRequest) GetDstPortOk() (*int32, bool) {
-	if o == nil || o.DstPort == nil {
-		return nil, false
+	if o == nil || isNil(o.DstPort) {
+    return nil, false
 	}
 	return o.DstPort, true
 }
 
 // HasDstPort returns a boolean if a field has been set.
 func (o *CreateOrUpdatePortForwardingRequest) HasDstPort() bool {
-	if o != nil && o.DstPort != nil {
+	if o != nil && !isNil(o.DstPort) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *CreateOrUpdatePortForwardingRequest) SetDstPort(v int32) {
 
 func (o CreateOrUpdatePortForwardingRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.DstPort != nil {
+	if !isNil(o.DstPort) {
 		toSerialize["dst_port"] = o.DstPort
 	}
 	return json.Marshal(toSerialize)

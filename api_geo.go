@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN defeats content restrictions and censorship to deliver unlimited access to video, music, social media, and more, from anywhere in the world. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -150,7 +150,8 @@ func (a *GeoApiService) ListCountriesExecute(r ApiListCountriesRequest) ([]Count
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -254,7 +255,8 @@ func (a *GeoApiService) ListCurrenciesExecute(r ApiListCurrenciesRequest) ([]Cur
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -273,6 +275,12 @@ func (a *GeoApiService) ListCurrenciesExecute(r ApiListCurrenciesRequest) ([]Cur
 type ApiListLocationsRequest struct {
 	ctx context.Context
 	ApiService GeoApi
+	xDeviceCoordinates *string
+}
+
+func (r ApiListLocationsRequest) XDeviceCoordinates(xDeviceCoordinates string) ApiListLocationsRequest {
+	r.xDeviceCoordinates = &xDeviceCoordinates
+	return r
 }
 
 func (r ApiListLocationsRequest) Execute() ([]Location, *http.Response, error) {
@@ -330,6 +338,9 @@ func (a *GeoApiService) ListLocationsExecute(r ApiListLocationsRequest) ([]Locat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xDeviceCoordinates != nil {
+		localVarHeaderParams["X-Device-Coordinates"] = parameterToString(*r.xDeviceCoordinates, "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -358,7 +369,8 @@ func (a *GeoApiService) ListLocationsExecute(r ApiListLocationsRequest) ([]Locat
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
