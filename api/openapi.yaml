@@ -2980,12 +2980,15 @@ components:
           - authorized
           - revoked
           - expired
+          readOnly: true
           type: string
         created_at:
           format: date-time
+          readOnly: true
           type: string
         expires_at:
           format: date-time
+          readOnly: true
           type: string
       required:
       - created_at

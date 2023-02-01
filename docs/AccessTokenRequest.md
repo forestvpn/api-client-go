@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 **Id** | **string** |  | [readonly] 
 **UserAgent** | Pointer to **string** |  | [optional] [readonly] 
 **AccessToken** | Pointer to **string** |  | [optional] [readonly] 
-**Status** | **string** |  | 
-**CreatedAt** | **time.Time** |  | 
-**ExpiresAt** | **time.Time** |  | 
+**Status** | **string** |  | [readonly] 
+**CreatedAt** | **time.Time** |  | [readonly] 
+**ExpiresAt** | **time.Time** |  | [readonly] 
 
 ## Methods
 
