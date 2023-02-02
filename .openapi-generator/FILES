@@ -104,6 +104,10 @@ docs/TokenObtain.md
 docs/UpdateFCMDeviceRequest.md
 docs/UpdateUserDeviceRequest.md
 docs/User.md
+docs/UserAgent.md
+docs/UserAgentBrowser.md
+docs/UserAgentDevice.md
+docs/UserAgentOs.md
 docs/UserDevice.md
 docs/WireGuard.md
 docs/WireGuardPeer.md
@@ -187,6 +191,10 @@ model_token_obtain.go
 model_update_fcm_device_request.go
 model_update_user_device_request.go
 model_user.go
+model_user_agent.go
+model_user_agent_browser.go
+model_user_agent_device.go
+model_user_agent_os.go
 model_user_device.go
 model_wire_guard.go
 model_wire_guard_peer.go

@@ -1287,6 +1287,15 @@ paths:
   /auth/access-token-requests/:
     post:
       operationId: CreateAccessTokenRequest
+      parameters:
+      - explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          maxLength: 255
+          type: string
+        style: form
       responses:
         "201":
           content:
@@ -2956,21 +2965,36 @@ components:
       - login_url
       - refresh
       type: object
+    UserAgent:
+      properties:
+        os:
+          $ref: '#/components/schemas/UserAgent_os'
+        device:
+          $ref: '#/components/schemas/UserAgent_device'
+        browser:
+          $ref: '#/components/schemas/UserAgent_browser'
+      type: object
     AccessTokenRequest:
       example:
         access_token: access_token
         expires_at: 2000-01-23T04:56:07.000+00:00
+        name: name
         created_at: 2000-01-23T04:56:07.000+00:00
         id: id
-        user_agent: user_agent
+        user_agent: ""
         status: pending
       properties:
         id:
           readOnly: true
           type: string
-        user_agent:
-          readOnly: true
+        name:
+          description: It might be empty string
+          nullable: true
           type: string
+        user_agent:
+          allOf:
+          - $ref: '#/components/schemas/UserAgent'
+          readOnly: true
         access_token:
           readOnly: true
           type: string
@@ -2995,6 +3019,7 @@ components:
       - expires_at
       - id
       - status
+      - user_agent
       type: object
     TokenLogin:
       example:
@@ -4831,6 +4856,37 @@ components:
         id:
           type: string
         name:
+          type: string
+      type: object
+    UserAgent_os:
+      properties:
+        family:
+          type: string
+        version:
+          description: It might be empty string
+          type: string
+      required:
+      - family
+      type: object
+    UserAgent_device:
+      properties:
+        family:
+          description: It might be "Other" in case if it can't be recognized
+          type: string
+        brand:
+          nullable: true
+          type: string
+        model:
+          nullable: true
+          type: string
+      type: object
+    UserAgent_browser:
+      properties:
+        family:
+          description: It might be "Other" in case if it can't be recognized
+          type: string
+        version:
+          description: It might be empty string
           type: string
       type: object
     CreateOrUpdateDeviceRequest_info:

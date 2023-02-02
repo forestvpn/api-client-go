@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## CreateAccessTokenRequest
 
-> AccessTokenRequest CreateAccessTokenRequest(ctx).Execute()
+> AccessTokenRequest CreateAccessTokenRequest(ctx).Name(name).Execute()
 
 Create access token request
 
@@ -104,10 +104,11 @@ import (
 )
 
 func main() {
+    name := "name_example" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AuthApi.CreateAccessTokenRequest(context.Background()).Execute()
+    resp, r, err := apiClient.AuthApi.CreateAccessTokenRequest(context.Background()).Name(name).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AuthApi.CreateAccessTokenRequest``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -119,12 +120,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateAccessTokenRequestRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string** |  | 
 
 ### Return type
 

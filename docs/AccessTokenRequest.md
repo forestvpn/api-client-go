@@ -5,7 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** |  | [readonly] 
-**UserAgent** | Pointer to **string** |  | [optional] [readonly] 
+**Name** | Pointer to **NullableString** | It might be empty string | [optional] 
+**UserAgent** | [**UserAgent**](UserAgent.md) |  | [readonly] 
 **AccessToken** | Pointer to **string** |  | [optional] [readonly] 
 **Status** | **string** |  | [readonly] 
 **CreatedAt** | **time.Time** |  | [readonly] 
@@ -15,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewAccessTokenRequest
 
-`func NewAccessTokenRequest(id string, status string, createdAt time.Time, expiresAt time.Time, ) *AccessTokenRequest`
+`func NewAccessTokenRequest(id string, userAgent UserAgent, status string, createdAt time.Time, expiresAt time.Time, ) *AccessTokenRequest`
 
 NewAccessTokenRequest instantiates a new AccessTokenRequest object
 This constructor will assign default values to properties that have it defined,
@@ -50,30 +51,60 @@ and a boolean to check if the value has been set.
 SetId sets Id field to given value.
 
 
+### GetName
+
+`func (o *AccessTokenRequest) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *AccessTokenRequest) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *AccessTokenRequest) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *AccessTokenRequest) HasName() bool`
+
+HasName returns a boolean if a field has been set.
+
+### SetNameNil
+
+`func (o *AccessTokenRequest) SetNameNil(b bool)`
+
+ SetNameNil sets the value for Name to be an explicit nil
+
+### UnsetName
+`func (o *AccessTokenRequest) UnsetName()`
+
+UnsetName ensures that no value is present for Name, not even an explicit nil
 ### GetUserAgent
 
-`func (o *AccessTokenRequest) GetUserAgent() string`
+`func (o *AccessTokenRequest) GetUserAgent() UserAgent`
 
 GetUserAgent returns the UserAgent field if non-nil, zero value otherwise.
 
 ### GetUserAgentOk
 
-`func (o *AccessTokenRequest) GetUserAgentOk() (*string, bool)`
+`func (o *AccessTokenRequest) GetUserAgentOk() (*UserAgent, bool)`
 
 GetUserAgentOk returns a tuple with the UserAgent field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUserAgent
 
-`func (o *AccessTokenRequest) SetUserAgent(v string)`
+`func (o *AccessTokenRequest) SetUserAgent(v UserAgent)`
 
 SetUserAgent sets UserAgent field to given value.
 
-### HasUserAgent
-
-`func (o *AccessTokenRequest) HasUserAgent() bool`
-
-HasUserAgent returns a boolean if a field has been set.
 
 ### GetAccessToken
 

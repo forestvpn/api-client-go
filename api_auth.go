@@ -262,6 +262,12 @@ func (a *AuthApiService) AuthorizeAccessTokenRequestExecute(r ApiAuthorizeAccess
 type ApiCreateAccessTokenRequestRequest struct {
 	ctx context.Context
 	ApiService AuthApi
+	name *string
+}
+
+func (r ApiCreateAccessTokenRequestRequest) Name(name string) ApiCreateAccessTokenRequestRequest {
+	r.name = &name
+	return r
 }
 
 func (r ApiCreateAccessTokenRequestRequest) Execute() (*AccessTokenRequest, *http.Response, error) {
@@ -302,6 +308,9 @@ func (a *AuthApiService) CreateAccessTokenRequestExecute(r ApiCreateAccessTokenR
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.name != nil {
+		localVarQueryParams.Add("name", parameterToString(*r.name, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

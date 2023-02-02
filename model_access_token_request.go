@@ -19,7 +19,9 @@ import (
 // AccessTokenRequest struct for AccessTokenRequest
 type AccessTokenRequest struct {
 	Id string `json:"id"`
-	UserAgent *string `json:"user_agent,omitempty"`
+	// It might be empty string
+	Name NullableString `json:"name,omitempty"`
+	UserAgent UserAgent `json:"user_agent"`
 	AccessToken *string `json:"access_token,omitempty"`
 	Status string `json:"status"`
 	CreatedAt time.Time `json:"created_at"`
@@ -30,9 +32,10 @@ type AccessTokenRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccessTokenRequest(id string, status string, createdAt time.Time, expiresAt time.Time) *AccessTokenRequest {
+func NewAccessTokenRequest(id string, userAgent UserAgent, status string, createdAt time.Time, expiresAt time.Time) *AccessTokenRequest {
 	this := AccessTokenRequest{}
 	this.Id = id
+	this.UserAgent = userAgent
 	this.Status = status
 	this.CreatedAt = createdAt
 	this.ExpiresAt = expiresAt
@@ -71,36 +74,70 @@ func (o *AccessTokenRequest) SetId(v string) {
 	o.Id = v
 }
 
-// GetUserAgent returns the UserAgent field value if set, zero value otherwise.
-func (o *AccessTokenRequest) GetUserAgent() string {
-	if o == nil || isNil(o.UserAgent) {
+// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AccessTokenRequest) GetName() string {
+	if o == nil || isNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.UserAgent
+	return *o.Name.Get()
 }
 
-// GetUserAgentOk returns a tuple with the UserAgent field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccessTokenRequest) GetUserAgentOk() (*string, bool) {
-	if o == nil || isNil(o.UserAgent) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AccessTokenRequest) GetNameOk() (*string, bool) {
+	if o == nil {
     return nil, false
 	}
-	return o.UserAgent, true
+	return o.Name.Get(), o.Name.IsSet()
 }
 
-// HasUserAgent returns a boolean if a field has been set.
-func (o *AccessTokenRequest) HasUserAgent() bool {
-	if o != nil && !isNil(o.UserAgent) {
+// HasName returns a boolean if a field has been set.
+func (o *AccessTokenRequest) HasName() bool {
+	if o != nil && o.Name.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUserAgent gets a reference to the given string and assigns it to the UserAgent field.
-func (o *AccessTokenRequest) SetUserAgent(v string) {
-	o.UserAgent = &v
+// SetName gets a reference to the given NullableString and assigns it to the Name field.
+func (o *AccessTokenRequest) SetName(v string) {
+	o.Name.Set(&v)
+}
+// SetNameNil sets the value for Name to be an explicit nil
+func (o *AccessTokenRequest) SetNameNil() {
+	o.Name.Set(nil)
+}
+
+// UnsetName ensures that no value is present for Name, not even an explicit nil
+func (o *AccessTokenRequest) UnsetName() {
+	o.Name.Unset()
+}
+
+// GetUserAgent returns the UserAgent field value
+func (o *AccessTokenRequest) GetUserAgent() UserAgent {
+	if o == nil {
+		var ret UserAgent
+		return ret
+	}
+
+	return o.UserAgent
+}
+
+// GetUserAgentOk returns a tuple with the UserAgent field value
+// and a boolean to check if the value has been set.
+func (o *AccessTokenRequest) GetUserAgentOk() (*UserAgent, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return &o.UserAgent, true
+}
+
+// SetUserAgent sets field value
+func (o *AccessTokenRequest) SetUserAgent(v UserAgent) {
+	o.UserAgent = v
 }
 
 // GetAccessToken returns the AccessToken field value if set, zero value otherwise.
@@ -212,7 +249,10 @@ func (o AccessTokenRequest) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["id"] = o.Id
 	}
-	if !isNil(o.UserAgent) {
+	if o.Name.IsSet() {
+		toSerialize["name"] = o.Name.Get()
+	}
+	if true {
 		toSerialize["user_agent"] = o.UserAgent
 	}
 	if !isNil(o.AccessToken) {
