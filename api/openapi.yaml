@@ -4698,16 +4698,6 @@ components:
       - type
       - unread
       type: object
-    NotificationType:
-      enum:
-      - ios
-      - ipados
-      - watchos
-      - macos
-      - android
-      - wp
-      - other
-      type: string
     UpdateUserDeviceRequest:
       example:
         ref: ref

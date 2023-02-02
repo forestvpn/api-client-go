@@ -1,7 +1,7 @@
 /*
 ForestVPN API
 
-ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data. 
+ForestVPN - Fast, secure, and modern VPN. It offers Distributed Computing, Crypto Mining, P2P, Ad Blocking, TOR over VPN, 30+ locations, and a free version with unlimited data.
 
 API version: 2.0
 Contact: support@forestvpn.com
@@ -76,8 +76,6 @@ type APIClient struct {
 
 	NotificationsApi NotificationsApi
 
-	SupportApi SupportApi
-
 	WireguardApi WireguardApi
 }
 
@@ -110,7 +108,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.GeoApi = (*GeoApiService)(&c.common)
 	c.GoogleApi = (*GoogleApiService)(&c.common)
 	c.NotificationsApi = (*NotificationsApiService)(&c.common)
-	c.SupportApi = (*SupportApiService)(&c.common)
 	c.WireguardApi = (*WireguardApiService)(&c.common)
 
 	return c

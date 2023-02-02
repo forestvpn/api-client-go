@@ -77,7 +77,6 @@ docs/Location.md
 docs/NetworkService.md
 docs/Notification.md
 docs/NotificationAllList.md
-docs/NotificationType.md
 docs/NotificationUnreadCount.md
 docs/NotificationsApi.md
 docs/PaymentMethod.md
@@ -163,7 +162,6 @@ model_location.go
 model_network_service.go
 model_notification.go
 model_notification_all_list.go
-model_notification_type.go
 model_notification_unread_count.go
 model_payment_method.go
 model_payment_method_card.go
