@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the Bundle type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Bundle{}
+
 // Bundle struct for Bundle
 type Bundle struct {
 	Id string `json:"id"`
@@ -57,7 +60,7 @@ func (o *Bundle) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *Bundle) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -81,7 +84,7 @@ func (o *Bundle) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *Bundle) GetNameOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Name, true
 }
@@ -104,7 +107,7 @@ func (o *Bundle) GetTrialPeriod() string {
 // and a boolean to check if the value has been set.
 func (o *Bundle) GetTrialPeriodOk() (*string, bool) {
 	if o == nil || isNil(o.TrialPeriod) {
-    return nil, false
+		return nil, false
 	}
 	return o.TrialPeriod, true
 }
@@ -136,7 +139,7 @@ func (o *Bundle) GetProducts() []Product {
 // and a boolean to check if the value has been set.
 func (o *Bundle) GetProductsOk() ([]Product, bool) {
 	if o == nil || isNil(o.Products) {
-    return nil, false
+		return nil, false
 	}
 	return o.Products, true
 }
@@ -156,20 +159,24 @@ func (o *Bundle) SetProducts(v []Product) {
 }
 
 func (o Bundle) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Bundle) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if true {
-		toSerialize["name"] = o.Name
-	}
+	toSerialize["id"] = o.Id
+	toSerialize["name"] = o.Name
 	if !isNil(o.TrialPeriod) {
 		toSerialize["trial_period"] = o.TrialPeriod
 	}
 	if !isNil(o.Products) {
 		toSerialize["products"] = o.Products
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableBundle struct {

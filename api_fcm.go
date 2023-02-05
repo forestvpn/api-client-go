@@ -176,8 +176,8 @@ func (a *FcmApiService) CreateFCMDeviceExecute(r ApiCreateFCMDeviceRequest) (*FC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -232,7 +232,7 @@ func (a *FcmApiService) DeleteFCMDeviceExecute(r ApiDeleteFCMDeviceRequest) (*ht
 	}
 
 	localVarPath := localBasePath + "/notification/fcm/{registrationID}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"registrationID"+"}", url.PathEscape(parameterToString(r.registrationID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"registrationID"+"}", url.PathEscape(parameterValueToString(r.registrationID, "registrationID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -283,8 +283,8 @@ func (a *FcmApiService) DeleteFCMDeviceExecute(r ApiDeleteFCMDeviceRequest) (*ht
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarHTTPResponse, newErr
 	}
 
@@ -332,7 +332,7 @@ func (a *FcmApiService) GetFCMDeviceExecute(r ApiGetFCMDeviceRequest) (*FCMDevic
 	}
 
 	localVarPath := localBasePath + "/notification/fcm/{registrationID}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"registrationID"+"}", url.PathEscape(parameterToString(r.registrationID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"registrationID"+"}", url.PathEscape(parameterValueToString(r.registrationID, "registrationID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -383,8 +383,8 @@ func (a *FcmApiService) GetFCMDeviceExecute(r ApiGetFCMDeviceRequest) (*FCMDevic
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -447,7 +447,7 @@ func (a *FcmApiService) UpdateFCMDeviceExecute(r ApiUpdateFCMDeviceRequest) (*FC
 	}
 
 	localVarPath := localBasePath + "/notification/fcm/{registrationID}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"registrationID"+"}", url.PathEscape(parameterToString(r.registrationID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"registrationID"+"}", url.PathEscape(parameterValueToString(r.registrationID, "registrationID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -503,8 +503,8 @@ func (a *FcmApiService) UpdateFCMDeviceExecute(r ApiUpdateFCMDeviceRequest) (*FC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

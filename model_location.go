@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the Location type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Location{}
+
 // Location struct for Location
 type Location struct {
 	Id string `json:"id"`
@@ -65,7 +68,7 @@ func (o *Location) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *Location) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -89,7 +92,7 @@ func (o *Location) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *Location) GetNameOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Name, true
 }
@@ -113,7 +116,7 @@ func (o *Location) GetLatitude() float64 {
 // and a boolean to check if the value has been set.
 func (o *Location) GetLatitudeOk() (*float64, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Latitude, true
 }
@@ -137,7 +140,7 @@ func (o *Location) GetLongitude() float64 {
 // and a boolean to check if the value has been set.
 func (o *Location) GetLongitudeOk() (*float64, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Longitude, true
 }
@@ -161,7 +164,7 @@ func (o *Location) GetCountry() Country {
 // and a boolean to check if the value has been set.
 func (o *Location) GetCountryOk() (*Country, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Country, true
 }
@@ -184,7 +187,7 @@ func (o *Location) GetDistance() float64 {
 // and a boolean to check if the value has been set.
 func (o *Location) GetDistanceOk() (*float64, bool) {
 	if o == nil || isNil(o.Distance) {
-    return nil, false
+		return nil, false
 	}
 	return o.Distance, true
 }
@@ -216,7 +219,7 @@ func (o *Location) GetLatencyRate() float64 {
 // and a boolean to check if the value has been set.
 func (o *Location) GetLatencyRateOk() (*float64, bool) {
 	if o == nil || isNil(o.LatencyRate) {
-    return nil, false
+		return nil, false
 	}
 	return o.LatencyRate, true
 }
@@ -248,7 +251,7 @@ func (o *Location) GetAlternativeNames() []string {
 // and a boolean to check if the value has been set.
 func (o *Location) GetAlternativeNamesOk() ([]string, bool) {
 	if o == nil || isNil(o.AlternativeNames) {
-    return nil, false
+		return nil, false
 	}
 	return o.AlternativeNames, true
 }
@@ -268,22 +271,20 @@ func (o *Location) SetAlternativeNames(v []string) {
 }
 
 func (o Location) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Location) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if true {
-		toSerialize["name"] = o.Name
-	}
-	if true {
-		toSerialize["latitude"] = o.Latitude
-	}
-	if true {
-		toSerialize["longitude"] = o.Longitude
-	}
-	if true {
-		toSerialize["country"] = o.Country
-	}
+	toSerialize["id"] = o.Id
+	toSerialize["name"] = o.Name
+	toSerialize["latitude"] = o.Latitude
+	toSerialize["longitude"] = o.Longitude
+	toSerialize["country"] = o.Country
 	if !isNil(o.Distance) {
 		toSerialize["distance"] = o.Distance
 	}
@@ -293,7 +294,7 @@ func (o Location) MarshalJSON() ([]byte, error) {
 	if !isNil(o.AlternativeNames) {
 		toSerialize["alternative_names"] = o.AlternativeNames
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableLocation struct {

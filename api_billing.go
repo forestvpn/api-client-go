@@ -326,7 +326,7 @@ func (a *BillingApiService) CancelSubscriptionExecute(r ApiCancelSubscriptionReq
 	}
 
 	localVarPath := localBasePath + "/billing/subscriptions/{subscriptionID}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"subscriptionID"+"}", url.PathEscape(parameterToString(r.subscriptionID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"subscriptionID"+"}", url.PathEscape(parameterValueToString(r.subscriptionID, "subscriptionID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -377,8 +377,8 @@ func (a *BillingApiService) CancelSubscriptionExecute(r ApiCancelSubscriptionReq
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarHTTPResponse, newErr
 	}
 
@@ -481,8 +481,8 @@ func (a *BillingApiService) CreatePaymentMethodStripeSetupIntentExecute(r ApiCre
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -594,8 +594,8 @@ func (a *BillingApiService) CreateSubscriptionExecute(r ApiCreateSubscriptionReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -650,7 +650,7 @@ func (a *BillingApiService) DeletePaymentMethodExecute(r ApiDeletePaymentMethodR
 	}
 
 	localVarPath := localBasePath + "/billing/payment-methods/{paymentMethodID}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"paymentMethodID"+"}", url.PathEscape(parameterToString(r.paymentMethodID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"paymentMethodID"+"}", url.PathEscape(parameterValueToString(r.paymentMethodID, "paymentMethodID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -701,8 +701,8 @@ func (a *BillingApiService) DeletePaymentMethodExecute(r ApiDeletePaymentMethodR
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarHTTPResponse, newErr
 	}
 
@@ -797,8 +797,8 @@ func (a *BillingApiService) GetBillingAccountExecute(r ApiGetBillingAccountReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -855,7 +855,7 @@ func (a *BillingApiService) GetBillingBundleExecute(r ApiGetBillingBundleRequest
 	}
 
 	localVarPath := localBasePath + "/billing/bundles/{bundleID}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"bundleID"+"}", url.PathEscape(parameterToString(r.bundleID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"bundleID"+"}", url.PathEscape(parameterValueToString(r.bundleID, "bundleID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -906,8 +906,8 @@ func (a *BillingApiService) GetBillingBundleExecute(r ApiGetBillingBundleRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -964,7 +964,7 @@ func (a *BillingApiService) GetBillingPaymentOptionExecute(r ApiGetBillingPaymen
 	}
 
 	localVarPath := localBasePath + "/billing/payment-options/{paymentOptionID}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"paymentOptionID"+"}", url.PathEscape(parameterToString(r.paymentOptionID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"paymentOptionID"+"}", url.PathEscape(parameterValueToString(r.paymentOptionID, "paymentOptionID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1015,8 +1015,8 @@ func (a *BillingApiService) GetBillingPaymentOptionExecute(r ApiGetBillingPaymen
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1073,7 +1073,7 @@ func (a *BillingApiService) GetBillingProductExecute(r ApiGetBillingProductReque
 	}
 
 	localVarPath := localBasePath + "/billing/products/{productID}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"productID"+"}", url.PathEscape(parameterToString(r.productID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"productID"+"}", url.PathEscape(parameterValueToString(r.productID, "productID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1124,8 +1124,8 @@ func (a *BillingApiService) GetBillingProductExecute(r ApiGetBillingProductReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1182,7 +1182,7 @@ func (a *BillingApiService) GetPaymentMethodExecute(r ApiGetPaymentMethodRequest
 	}
 
 	localVarPath := localBasePath + "/billing/payment-methods/{paymentMethodID}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"paymentMethodID"+"}", url.PathEscape(parameterToString(r.paymentMethodID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"paymentMethodID"+"}", url.PathEscape(parameterValueToString(r.paymentMethodID, "paymentMethodID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1233,8 +1233,8 @@ func (a *BillingApiService) GetPaymentMethodExecute(r ApiGetPaymentMethodRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1291,7 +1291,7 @@ func (a *BillingApiService) GetSubscriptionExecute(r ApiGetSubscriptionRequest) 
 	}
 
 	localVarPath := localBasePath + "/billing/subscriptions/{subscriptionID}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"subscriptionID"+"}", url.PathEscape(parameterToString(r.subscriptionID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"subscriptionID"+"}", url.PathEscape(parameterValueToString(r.subscriptionID, "subscriptionID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1342,8 +1342,8 @@ func (a *BillingApiService) GetSubscriptionExecute(r ApiGetSubscriptionRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1400,7 +1400,7 @@ func (a *BillingApiService) GetSubscriptionItemExecute(r ApiGetSubscriptionItemR
 	}
 
 	localVarPath := localBasePath + "/billing/subscription-items/{subscriptionItemID}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"subscriptionItemID"+"}", url.PathEscape(parameterToString(r.subscriptionItemID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"subscriptionItemID"+"}", url.PathEscape(parameterValueToString(r.subscriptionItemID, "subscriptionItemID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1451,8 +1451,8 @@ func (a *BillingApiService) GetSubscriptionItemExecute(r ApiGetSubscriptionItemR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1556,8 +1556,8 @@ func (a *BillingApiService) ListBillingBundlesExecute(r ApiListBillingBundlesReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1675,8 +1675,8 @@ func (a *BillingApiService) ListBillingFeaturesExecute(r ApiListBillingFeaturesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1780,8 +1780,8 @@ func (a *BillingApiService) ListBillingPaymentOptionsExecute(r ApiListBillingPay
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1885,8 +1885,8 @@ func (a *BillingApiService) ListBillingProductsExecute(r ApiListBillingProductsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1990,8 +1990,8 @@ func (a *BillingApiService) ListPaymentMethodsExecute(r ApiListPaymentMethodsReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2069,13 +2069,13 @@ func (a *BillingApiService) ListSubscriptionItemsExecute(r ApiListSubscriptionIt
 	localVarFormParams := url.Values{}
 
 	if r.subscription != nil {
-		localVarQueryParams.Add("subscription", parameterToString(*r.subscription, ""))
+		parameterAddToQuery(localVarQueryParams, "subscription", r.subscription, "")
 	}
 	if r.perPage != nil {
-		localVarQueryParams.Add("per_page", parameterToString(*r.perPage, ""))
+		parameterAddToQuery(localVarQueryParams, "per_page", r.perPage, "")
 	}
 	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+		parameterAddToQuery(localVarQueryParams, "page", r.page, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2122,8 +2122,8 @@ func (a *BillingApiService) ListSubscriptionItemsExecute(r ApiListSubscriptionIt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2201,13 +2201,13 @@ func (a *BillingApiService) ListSubscriptionsExecute(r ApiListSubscriptionsReque
 	localVarFormParams := url.Values{}
 
 	if r.product != nil {
-		localVarQueryParams.Add("product", parameterToString(*r.product, ""))
+		parameterAddToQuery(localVarQueryParams, "product", r.product, "")
 	}
 	if r.perPage != nil {
-		localVarQueryParams.Add("per_page", parameterToString(*r.perPage, ""))
+		parameterAddToQuery(localVarQueryParams, "per_page", r.perPage, "")
 	}
 	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+		parameterAddToQuery(localVarQueryParams, "page", r.page, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2254,8 +2254,8 @@ func (a *BillingApiService) ListSubscriptionsExecute(r ApiListSubscriptionsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2312,7 +2312,7 @@ func (a *BillingApiService) ReactivateSubscriptionExecute(r ApiReactivateSubscri
 	}
 
 	localVarPath := localBasePath + "/billing/subscriptions/{subscriptionID}/reactivate/"
-	localVarPath = strings.Replace(localVarPath, "{"+"subscriptionID"+"}", url.PathEscape(parameterToString(r.subscriptionID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"subscriptionID"+"}", url.PathEscape(parameterValueToString(r.subscriptionID, "subscriptionID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -2363,8 +2363,8 @@ func (a *BillingApiService) ReactivateSubscriptionExecute(r ApiReactivateSubscri
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2479,8 +2479,8 @@ func (a *BillingApiService) UpdateBillingAccountExecute(r ApiUpdateBillingAccoun
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2543,7 +2543,7 @@ func (a *BillingApiService) UpdateSubscriptionItemExecute(r ApiUpdateSubscriptio
 	}
 
 	localVarPath := localBasePath + "/billing/subscription-items/{subscriptionItemID}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"subscriptionItemID"+"}", url.PathEscape(parameterToString(r.subscriptionItemID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"subscriptionItemID"+"}", url.PathEscape(parameterValueToString(r.subscriptionItemID, "subscriptionItemID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -2599,8 +2599,8 @@ func (a *BillingApiService) UpdateSubscriptionItemExecute(r ApiUpdateSubscriptio
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

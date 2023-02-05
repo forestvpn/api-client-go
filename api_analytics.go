@@ -133,22 +133,22 @@ func (a *AnalyticsApiService) GetDataUsageStatsExecute(r ApiGetDataUsageStatsReq
 		return localVarReturnValue, nil, reportError("aggrInterval is required and must be specified")
 	}
 
-	localVarQueryParams.Add("aggr_interval", parameterToString(*r.aggrInterval, ""))
+	parameterAddToQuery(localVarQueryParams, "aggr_interval", r.aggrInterval, "")
 	if r.dateAfter != nil {
-		localVarQueryParams.Add("date_after", parameterToString(*r.dateAfter, ""))
+		parameterAddToQuery(localVarQueryParams, "date_after", r.dateAfter, "")
 	}
 	if r.dateBefore != nil {
-		localVarQueryParams.Add("date_before", parameterToString(*r.dateBefore, ""))
+		parameterAddToQuery(localVarQueryParams, "date_before", r.dateBefore, "")
 	}
 	if r.deviceTypeIn != nil {
 		t := *r.deviceTypeIn
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("device_type__in", parameterToString(s.Index(i), "multi"))
+				parameterAddToQuery(localVarQueryParams, "device_type__in", s.Index(i), "multi")
 			}
 		} else {
-			localVarQueryParams.Add("device_type__in", parameterToString(t, "multi"))
+			parameterAddToQuery(localVarQueryParams, "device_type__in", t, "multi")
 		}
 	}
 	if r.deviceIn != nil {
@@ -156,14 +156,14 @@ func (a *AnalyticsApiService) GetDataUsageStatsExecute(r ApiGetDataUsageStatsReq
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("device__in", parameterToString(s.Index(i), "multi"))
+				parameterAddToQuery(localVarQueryParams, "device__in", s.Index(i), "multi")
 			}
 		} else {
-			localVarQueryParams.Add("device__in", parameterToString(t, "multi"))
+			parameterAddToQuery(localVarQueryParams, "device__in", t, "multi")
 		}
 	}
 	if r.sortBy != nil {
-		localVarQueryParams.Add("sort_by", parameterToString(*r.sortBy, ""))
+		parameterAddToQuery(localVarQueryParams, "sort_by", r.sortBy, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -210,8 +210,8 @@ func (a *AnalyticsApiService) GetDataUsageStatsExecute(r ApiGetDataUsageStatsReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

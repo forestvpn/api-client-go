@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the NotificationUnreadCount type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NotificationUnreadCount{}
+
 // NotificationUnreadCount struct for NotificationUnreadCount
 type NotificationUnreadCount struct {
 	UnreadCount int32 `json:"unread_count"`
@@ -52,7 +55,7 @@ func (o *NotificationUnreadCount) GetUnreadCount() int32 {
 // and a boolean to check if the value has been set.
 func (o *NotificationUnreadCount) GetUnreadCountOk() (*int32, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.UnreadCount, true
 }
@@ -63,11 +66,17 @@ func (o *NotificationUnreadCount) SetUnreadCount(v int32) {
 }
 
 func (o NotificationUnreadCount) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["unread_count"] = o.UnreadCount
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o NotificationUnreadCount) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["unread_count"] = o.UnreadCount
+	return toSerialize, nil
 }
 
 type NullableNotificationUnreadCount struct {

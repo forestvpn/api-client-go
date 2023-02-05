@@ -150,8 +150,8 @@ func (a *GeoApiService) ListCountriesExecute(r ApiListCountriesRequest) ([]Count
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -255,8 +255,8 @@ func (a *GeoApiService) ListCurrenciesExecute(r ApiListCurrenciesRequest) ([]Cur
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -339,7 +339,7 @@ func (a *GeoApiService) ListLocationsExecute(r ApiListLocationsRequest) ([]Locat
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.xDeviceCoordinates != nil {
-		localVarHeaderParams["X-Device-Coordinates"] = parameterToString(*r.xDeviceCoordinates, "")
+		parameterAddToQuery(localVarQueryParams, "X-Device-Coordinates", r.xDeviceCoordinates, "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -369,8 +369,8 @@ func (a *GeoApiService) ListLocationsExecute(r ApiListLocationsRequest) ([]Locat
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

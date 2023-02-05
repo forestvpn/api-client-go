@@ -187,7 +187,7 @@ func (a *CheckoutApiService) ApplyCouponCheckoutSessionExecute(r ApiApplyCouponC
 	}
 
 	localVarPath := localBasePath + "/checkout/sessions/{sessionID}/apply_coupon/"
-	localVarPath = strings.Replace(localVarPath, "{"+"sessionID"+"}", url.PathEscape(parameterToString(r.sessionID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"sessionID"+"}", url.PathEscape(parameterValueToString(r.sessionID, "sessionID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -244,8 +244,8 @@ func (a *CheckoutApiService) ApplyCouponCheckoutSessionExecute(r ApiApplyCouponC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 			var v Error
@@ -254,8 +254,8 @@ func (a *CheckoutApiService) ApplyCouponCheckoutSessionExecute(r ApiApplyCouponC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -367,8 +367,8 @@ func (a *CheckoutApiService) CreateCheckoutSessionExecute(r ApiCreateCheckoutSes
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -449,7 +449,7 @@ func (a *CheckoutApiService) CreateWaitListRequestExecute(r ApiCreateWaitListReq
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.xCountry != nil {
-		localVarHeaderParams["X-Country"] = parameterToString(*r.xCountry, "")
+		parameterAddToQuery(localVarQueryParams, "X-Country", r.xCountry, "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -479,8 +479,8 @@ func (a *CheckoutApiService) CreateWaitListRequestExecute(r ApiCreateWaitListReq
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarHTTPResponse, newErr
 	}
 
@@ -526,7 +526,7 @@ func (a *CheckoutApiService) ExpireCheckoutSessionExecute(r ApiExpireCheckoutSes
 	}
 
 	localVarPath := localBasePath + "/checkout/sessions/{sessionID}/expire/"
-	localVarPath = strings.Replace(localVarPath, "{"+"sessionID"+"}", url.PathEscape(parameterToString(r.sessionID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"sessionID"+"}", url.PathEscape(parameterValueToString(r.sessionID, "sessionID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -577,8 +577,8 @@ func (a *CheckoutApiService) ExpireCheckoutSessionExecute(r ApiExpireCheckoutSes
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarHTTPResponse, newErr
 	}
 
@@ -626,7 +626,7 @@ func (a *CheckoutApiService) GetCheckoutSessionExecute(r ApiGetCheckoutSessionRe
 	}
 
 	localVarPath := localBasePath + "/checkout/sessions/{sessionID}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"sessionID"+"}", url.PathEscape(parameterToString(r.sessionID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"sessionID"+"}", url.PathEscape(parameterValueToString(r.sessionID, "sessionID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -677,8 +677,8 @@ func (a *CheckoutApiService) GetCheckoutSessionExecute(r ApiGetCheckoutSessionRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -735,7 +735,7 @@ func (a *CheckoutApiService) GetStripeCheckoutSessionExecute(r ApiGetStripeCheck
 	}
 
 	localVarPath := localBasePath + "/checkout/sessions/{sessionID}/stripe/checkout/session/"
-	localVarPath = strings.Replace(localVarPath, "{"+"sessionID"+"}", url.PathEscape(parameterToString(r.sessionID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"sessionID"+"}", url.PathEscape(parameterValueToString(r.sessionID, "sessionID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -786,8 +786,8 @@ func (a *CheckoutApiService) GetStripeCheckoutSessionExecute(r ApiGetStripeCheck
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -856,17 +856,17 @@ func (a *CheckoutApiService) GetStripePaymentIntentExecute(r ApiGetStripePayment
 	}
 
 	localVarPath := localBasePath + "/checkout/sessions/{sessionID}/stripe/payment/intent/"
-	localVarPath = strings.Replace(localVarPath, "{"+"sessionID"+"}", url.PathEscape(parameterToString(r.sessionID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"sessionID"+"}", url.PathEscape(parameterValueToString(r.sessionID, "sessionID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
 	if r.useStripeSdk != nil {
-		localVarQueryParams.Add("use_stripe_sdk", parameterToString(*r.useStripeSdk, ""))
+		parameterAddToQuery(localVarQueryParams, "use_stripe_sdk", r.useStripeSdk, "")
 	}
 	if r.returnUrl != nil {
-		localVarQueryParams.Add("return_url", parameterToString(*r.returnUrl, ""))
+		parameterAddToQuery(localVarQueryParams, "return_url", r.returnUrl, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -913,8 +913,8 @@ func (a *CheckoutApiService) GetStripePaymentIntentExecute(r ApiGetStripePayment
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -977,7 +977,7 @@ func (a *CheckoutApiService) ProcessCloudPaymentsAuthExecute(r ApiProcessCloudPa
 	}
 
 	localVarPath := localBasePath + "/checkout/sessions/{sessionID}/cloud-payments/auth/"
-	localVarPath = strings.Replace(localVarPath, "{"+"sessionID"+"}", url.PathEscape(parameterToString(r.sessionID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"sessionID"+"}", url.PathEscape(parameterValueToString(r.sessionID, "sessionID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1033,8 +1033,8 @@ func (a *CheckoutApiService) ProcessCloudPaymentsAuthExecute(r ApiProcessCloudPa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1097,7 +1097,7 @@ func (a *CheckoutApiService) ProcessCloudPaymentsPost3dsExecute(r ApiProcessClou
 	}
 
 	localVarPath := localBasePath + "/checkout/sessions/{sessionID}/cloud-payments/post3ds/"
-	localVarPath = strings.Replace(localVarPath, "{"+"sessionID"+"}", url.PathEscape(parameterToString(r.sessionID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"sessionID"+"}", url.PathEscape(parameterValueToString(r.sessionID, "sessionID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1153,8 +1153,8 @@ func (a *CheckoutApiService) ProcessCloudPaymentsPost3dsExecute(r ApiProcessClou
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

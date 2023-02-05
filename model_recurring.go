@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the Recurring type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Recurring{}
+
 // Recurring struct for Recurring
 type Recurring struct {
 	// Recurring period in ISO 8601 format.
@@ -53,7 +56,7 @@ func (o *Recurring) GetPeriod() string {
 // and a boolean to check if the value has been set.
 func (o *Recurring) GetPeriodOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Period, true
 }
@@ -64,11 +67,17 @@ func (o *Recurring) SetPeriod(v string) {
 }
 
 func (o Recurring) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["period"] = o.Period
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o Recurring) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["period"] = o.Period
+	return toSerialize, nil
 }
 
 type NullableRecurring struct {

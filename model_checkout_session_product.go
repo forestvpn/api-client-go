@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the CheckoutSessionProduct type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CheckoutSessionProduct{}
+
 // CheckoutSessionProduct struct for CheckoutSessionProduct
 type CheckoutSessionProduct struct {
 	Product Product `json:"product"`
@@ -54,7 +57,7 @@ func (o *CheckoutSessionProduct) GetProduct() Product {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSessionProduct) GetProductOk() (*Product, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Product, true
 }
@@ -78,7 +81,7 @@ func (o *CheckoutSessionProduct) GetQuantity() int32 {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSessionProduct) GetQuantityOk() (*int32, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Quantity, true
 }
@@ -89,14 +92,18 @@ func (o *CheckoutSessionProduct) SetQuantity(v int32) {
 }
 
 func (o CheckoutSessionProduct) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["product"] = o.Product
-	}
-	if true {
-		toSerialize["quantity"] = o.Quantity
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o CheckoutSessionProduct) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["product"] = o.Product
+	toSerialize["quantity"] = o.Quantity
+	return toSerialize, nil
 }
 
 type NullableCheckoutSessionProduct struct {

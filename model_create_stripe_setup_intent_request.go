@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the CreateStripeSetupIntentRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateStripeSetupIntentRequest{}
+
 // CreateStripeSetupIntentRequest struct for CreateStripeSetupIntentRequest
 type CreateStripeSetupIntentRequest struct {
 	ReturnUrl *string `json:"return_url,omitempty"`
@@ -50,7 +53,7 @@ func (o *CreateStripeSetupIntentRequest) GetReturnUrl() string {
 // and a boolean to check if the value has been set.
 func (o *CreateStripeSetupIntentRequest) GetReturnUrlOk() (*string, bool) {
 	if o == nil || isNil(o.ReturnUrl) {
-    return nil, false
+		return nil, false
 	}
 	return o.ReturnUrl, true
 }
@@ -70,11 +73,19 @@ func (o *CreateStripeSetupIntentRequest) SetReturnUrl(v string) {
 }
 
 func (o CreateStripeSetupIntentRequest) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CreateStripeSetupIntentRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.ReturnUrl) {
 		toSerialize["return_url"] = o.ReturnUrl
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableCreateStripeSetupIntentRequest struct {

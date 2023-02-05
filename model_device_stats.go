@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the DeviceStats type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DeviceStats{}
+
 // DeviceStats struct for DeviceStats
 type DeviceStats struct {
 	Id *string `json:"id,omitempty"`
@@ -57,7 +60,7 @@ func (o *DeviceStats) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *DeviceStats) GetIdOk() (*string, bool) {
 	if o == nil || isNil(o.Id) {
-    return nil, false
+		return nil, false
 	}
 	return o.Id, true
 }
@@ -89,7 +92,7 @@ func (o *DeviceStats) GetConnections() int32 {
 // and a boolean to check if the value has been set.
 func (o *DeviceStats) GetConnectionsOk() (*int32, bool) {
 	if o == nil || isNil(o.Connections) {
-    return nil, false
+		return nil, false
 	}
 	return o.Connections, true
 }
@@ -121,7 +124,7 @@ func (o *DeviceStats) GetReceivedBytes() int32 {
 // and a boolean to check if the value has been set.
 func (o *DeviceStats) GetReceivedBytesOk() (*int32, bool) {
 	if o == nil || isNil(o.ReceivedBytes) {
-    return nil, false
+		return nil, false
 	}
 	return o.ReceivedBytes, true
 }
@@ -153,7 +156,7 @@ func (o *DeviceStats) GetTransmittedBytes() int32 {
 // and a boolean to check if the value has been set.
 func (o *DeviceStats) GetTransmittedBytesOk() (*int32, bool) {
 	if o == nil || isNil(o.TransmittedBytes) {
-    return nil, false
+		return nil, false
 	}
 	return o.TransmittedBytes, true
 }
@@ -185,7 +188,7 @@ func (o *DeviceStats) GetBlockedAds() int32 {
 // and a boolean to check if the value has been set.
 func (o *DeviceStats) GetBlockedAdsOk() (*int32, bool) {
 	if o == nil || isNil(o.BlockedAds) {
-    return nil, false
+		return nil, false
 	}
 	return o.BlockedAds, true
 }
@@ -217,7 +220,7 @@ func (o *DeviceStats) GetBlockedMalwares() int32 {
 // and a boolean to check if the value has been set.
 func (o *DeviceStats) GetBlockedMalwaresOk() (*int32, bool) {
 	if o == nil || isNil(o.BlockedMalwares) {
-    return nil, false
+		return nil, false
 	}
 	return o.BlockedMalwares, true
 }
@@ -249,7 +252,7 @@ func (o *DeviceStats) GetDate() time.Time {
 // and a boolean to check if the value has been set.
 func (o *DeviceStats) GetDateOk() (*time.Time, bool) {
 	if o == nil || isNil(o.Date) {
-    return nil, false
+		return nil, false
 	}
 	return o.Date, true
 }
@@ -269,6 +272,14 @@ func (o *DeviceStats) SetDate(v time.Time) {
 }
 
 func (o DeviceStats) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o DeviceStats) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Id) {
 		toSerialize["id"] = o.Id
@@ -291,7 +302,7 @@ func (o DeviceStats) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Date) {
 		toSerialize["date"] = o.Date
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableDeviceStats struct {

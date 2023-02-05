@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the AdProvider type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AdProvider{}
+
 // AdProvider struct for AdProvider
 type AdProvider struct {
 	Id string `json:"id"`
@@ -56,7 +59,7 @@ func (o *AdProvider) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *AdProvider) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -80,7 +83,7 @@ func (o *AdProvider) GetSlug() string {
 // and a boolean to check if the value has been set.
 func (o *AdProvider) GetSlugOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Slug, true
 }
@@ -104,7 +107,7 @@ func (o *AdProvider) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *AdProvider) GetNameOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Name, true
 }
@@ -115,17 +118,19 @@ func (o *AdProvider) SetName(v string) {
 }
 
 func (o AdProvider) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if true {
-		toSerialize["slug"] = o.Slug
-	}
-	if true {
-		toSerialize["name"] = o.Name
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o AdProvider) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["id"] = o.Id
+	toSerialize["slug"] = o.Slug
+	toSerialize["name"] = o.Name
+	return toSerialize, nil
 }
 
 type NullableAdProvider struct {

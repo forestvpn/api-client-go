@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the Notification type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Notification{}
+
 // Notification struct for Notification
 type Notification struct {
 	Id int32 `json:"id"`
@@ -72,7 +75,7 @@ func (o *Notification) GetId() int32 {
 // and a boolean to check if the value has been set.
 func (o *Notification) GetIdOk() (*int32, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -96,7 +99,7 @@ func (o *Notification) GetSlug() int32 {
 // and a boolean to check if the value has been set.
 func (o *Notification) GetSlugOk() (*int32, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Slug, true
 }
@@ -120,7 +123,7 @@ func (o *Notification) GetTitle() string {
 // and a boolean to check if the value has been set.
 func (o *Notification) GetTitleOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Title, true
 }
@@ -144,7 +147,7 @@ func (o *Notification) GetDescription() string {
 // and a boolean to check if the value has been set.
 func (o *Notification) GetDescriptionOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Description, true
 }
@@ -168,7 +171,7 @@ func (o *Notification) GetUnread() bool {
 // and a boolean to check if the value has been set.
 func (o *Notification) GetUnreadOk() (*bool, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Unread, true
 }
@@ -192,7 +195,7 @@ func (o *Notification) GetType() string {
 // and a boolean to check if the value has been set.
 func (o *Notification) GetTypeOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Type, true
 }
@@ -215,7 +218,7 @@ func (o *Notification) GetLevel() string {
 // and a boolean to check if the value has been set.
 func (o *Notification) GetLevelOk() (*string, bool) {
 	if o == nil || isNil(o.Level) {
-    return nil, false
+		return nil, false
 	}
 	return o.Level, true
 }
@@ -247,7 +250,7 @@ func (o *Notification) GetRecipient() string {
 // and a boolean to check if the value has been set.
 func (o *Notification) GetRecipientOk() (*string, bool) {
 	if o == nil || isNil(o.Recipient) {
-    return nil, false
+		return nil, false
 	}
 	return o.Recipient, true
 }
@@ -279,7 +282,7 @@ func (o *Notification) GetActorContentType() int32 {
 // and a boolean to check if the value has been set.
 func (o *Notification) GetActorContentTypeOk() (*int32, bool) {
 	if o == nil || isNil(o.ActorContentType) {
-    return nil, false
+		return nil, false
 	}
 	return o.ActorContentType, true
 }
@@ -311,7 +314,7 @@ func (o *Notification) GetActorObjectId() string {
 // and a boolean to check if the value has been set.
 func (o *Notification) GetActorObjectIdOk() (*string, bool) {
 	if o == nil || isNil(o.ActorObjectId) {
-    return nil, false
+		return nil, false
 	}
 	return o.ActorObjectId, true
 }
@@ -343,7 +346,7 @@ func (o *Notification) GetVerb() string {
 // and a boolean to check if the value has been set.
 func (o *Notification) GetVerbOk() (*string, bool) {
 	if o == nil || isNil(o.Verb) {
-    return nil, false
+		return nil, false
 	}
 	return o.Verb, true
 }
@@ -375,7 +378,7 @@ func (o *Notification) GetCreatedAt() time.Time {
 // and a boolean to check if the value has been set.
 func (o *Notification) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil || isNil(o.CreatedAt) {
-    return nil, false
+		return nil, false
 	}
 	return o.CreatedAt, true
 }
@@ -407,7 +410,7 @@ func (o *Notification) GetPublic() bool {
 // and a boolean to check if the value has been set.
 func (o *Notification) GetPublicOk() (*bool, bool) {
 	if o == nil || isNil(o.Public) {
-    return nil, false
+		return nil, false
 	}
 	return o.Public, true
 }
@@ -439,7 +442,7 @@ func (o *Notification) GetDeleted() bool {
 // and a boolean to check if the value has been set.
 func (o *Notification) GetDeletedOk() (*bool, bool) {
 	if o == nil || isNil(o.Deleted) {
-    return nil, false
+		return nil, false
 	}
 	return o.Deleted, true
 }
@@ -471,7 +474,7 @@ func (o *Notification) GetData() string {
 // and a boolean to check if the value has been set.
 func (o *Notification) GetDataOk() (*string, bool) {
 	if o == nil || isNil(o.Data) {
-    return nil, false
+		return nil, false
 	}
 	return o.Data, true
 }
@@ -491,25 +494,21 @@ func (o *Notification) SetData(v string) {
 }
 
 func (o Notification) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Notification) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if true {
-		toSerialize["slug"] = o.Slug
-	}
-	if true {
-		toSerialize["title"] = o.Title
-	}
-	if true {
-		toSerialize["description"] = o.Description
-	}
-	if true {
-		toSerialize["unread"] = o.Unread
-	}
-	if true {
-		toSerialize["type"] = o.Type
-	}
+	toSerialize["id"] = o.Id
+	toSerialize["slug"] = o.Slug
+	toSerialize["title"] = o.Title
+	toSerialize["description"] = o.Description
+	toSerialize["unread"] = o.Unread
+	toSerialize["type"] = o.Type
 	if !isNil(o.Level) {
 		toSerialize["level"] = o.Level
 	}
@@ -537,7 +536,7 @@ func (o Notification) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableNotification struct {

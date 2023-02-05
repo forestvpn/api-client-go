@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the CreateSubscriptionRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateSubscriptionRequest{}
+
 // CreateSubscriptionRequest struct for CreateSubscriptionRequest
 type CreateSubscriptionRequest struct {
 	// Product id
@@ -55,7 +58,7 @@ func (o *CreateSubscriptionRequest) GetProduct() string {
 // and a boolean to check if the value has been set.
 func (o *CreateSubscriptionRequest) GetProductOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Product, true
 }
@@ -78,7 +81,7 @@ func (o *CreateSubscriptionRequest) GetPromotionCode() string {
 // and a boolean to check if the value has been set.
 func (o *CreateSubscriptionRequest) GetPromotionCodeOk() (*string, bool) {
 	if o == nil || isNil(o.PromotionCode) {
-    return nil, false
+		return nil, false
 	}
 	return o.PromotionCode, true
 }
@@ -98,14 +101,20 @@ func (o *CreateSubscriptionRequest) SetPromotionCode(v string) {
 }
 
 func (o CreateSubscriptionRequest) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["product"] = o.Product
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CreateSubscriptionRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["product"] = o.Product
 	if !isNil(o.PromotionCode) {
 		toSerialize["promotion_code"] = o.PromotionCode
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableCreateSubscriptionRequest struct {

@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the UserAgentBrowser type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UserAgentBrowser{}
+
 // UserAgentBrowser struct for UserAgentBrowser
 type UserAgentBrowser struct {
 	// It might be \"Other\" in case if it can't be recognized
@@ -53,7 +56,7 @@ func (o *UserAgentBrowser) GetFamily() string {
 // and a boolean to check if the value has been set.
 func (o *UserAgentBrowser) GetFamilyOk() (*string, bool) {
 	if o == nil || isNil(o.Family) {
-    return nil, false
+		return nil, false
 	}
 	return o.Family, true
 }
@@ -85,7 +88,7 @@ func (o *UserAgentBrowser) GetVersion() string {
 // and a boolean to check if the value has been set.
 func (o *UserAgentBrowser) GetVersionOk() (*string, bool) {
 	if o == nil || isNil(o.Version) {
-    return nil, false
+		return nil, false
 	}
 	return o.Version, true
 }
@@ -105,6 +108,14 @@ func (o *UserAgentBrowser) SetVersion(v string) {
 }
 
 func (o UserAgentBrowser) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o UserAgentBrowser) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Family) {
 		toSerialize["family"] = o.Family
@@ -112,7 +123,7 @@ func (o UserAgentBrowser) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableUserAgentBrowser struct {

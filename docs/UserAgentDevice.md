@@ -4,15 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Family** | Pointer to **string** | It might be \&quot;Other\&quot; in case if it can&#39;t be recognized | [optional] 
+**Family** | **string** | It might be \&quot;Other\&quot; in case if it can&#39;t be recognized | 
 **Brand** | Pointer to **NullableString** |  | [optional] 
 **Model** | Pointer to **NullableString** |  | [optional] 
+**Type** | **string** |  | 
 
 ## Methods
 
 ### NewUserAgentDevice
 
-`func NewUserAgentDevice() *UserAgentDevice`
+`func NewUserAgentDevice(family string, type_ string, ) *UserAgentDevice`
 
 NewUserAgentDevice instantiates a new UserAgentDevice object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +47,6 @@ and a boolean to check if the value has been set.
 
 SetFamily sets Family field to given value.
 
-### HasFamily
-
-`func (o *UserAgentDevice) HasFamily() bool`
-
-HasFamily returns a boolean if a field has been set.
 
 ### GetBrand
 
@@ -122,6 +118,26 @@ HasModel returns a boolean if a field has been set.
 `func (o *UserAgentDevice) UnsetModel()`
 
 UnsetModel ensures that no value is present for Model, not even an explicit nil
+### GetType
+
+`func (o *UserAgentDevice) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *UserAgentDevice) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *UserAgentDevice) SetType(v string)`
+
+SetType sets Type field to given value.
+
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

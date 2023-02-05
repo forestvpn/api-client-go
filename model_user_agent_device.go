@@ -15,20 +15,26 @@ import (
 	"encoding/json"
 )
 
+// checks if the UserAgentDevice type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UserAgentDevice{}
+
 // UserAgentDevice struct for UserAgentDevice
 type UserAgentDevice struct {
 	// It might be \"Other\" in case if it can't be recognized
-	Family *string `json:"family,omitempty"`
+	Family string `json:"family"`
 	Brand NullableString `json:"brand,omitempty"`
 	Model NullableString `json:"model,omitempty"`
+	Type string `json:"type"`
 }
 
 // NewUserAgentDevice instantiates a new UserAgentDevice object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserAgentDevice() *UserAgentDevice {
+func NewUserAgentDevice(family string, type_ string) *UserAgentDevice {
 	this := UserAgentDevice{}
+	this.Family = family
+	this.Type = type_
 	return &this
 }
 
@@ -40,36 +46,28 @@ func NewUserAgentDeviceWithDefaults() *UserAgentDevice {
 	return &this
 }
 
-// GetFamily returns the Family field value if set, zero value otherwise.
+// GetFamily returns the Family field value
 func (o *UserAgentDevice) GetFamily() string {
-	if o == nil || isNil(o.Family) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Family
+
+	return o.Family
 }
 
-// GetFamilyOk returns a tuple with the Family field value if set, nil otherwise
+// GetFamilyOk returns a tuple with the Family field value
 // and a boolean to check if the value has been set.
 func (o *UserAgentDevice) GetFamilyOk() (*string, bool) {
-	if o == nil || isNil(o.Family) {
-    return nil, false
+	if o == nil {
+		return nil, false
 	}
-	return o.Family, true
+	return &o.Family, true
 }
 
-// HasFamily returns a boolean if a field has been set.
-func (o *UserAgentDevice) HasFamily() bool {
-	if o != nil && !isNil(o.Family) {
-		return true
-	}
-
-	return false
-}
-
-// SetFamily gets a reference to the given string and assigns it to the Family field.
+// SetFamily sets field value
 func (o *UserAgentDevice) SetFamily(v string) {
-	o.Family = &v
+	o.Family = v
 }
 
 // GetBrand returns the Brand field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -86,7 +84,7 @@ func (o *UserAgentDevice) GetBrand() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UserAgentDevice) GetBrandOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Brand.Get(), o.Brand.IsSet()
 }
@@ -128,7 +126,7 @@ func (o *UserAgentDevice) GetModel() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UserAgentDevice) GetModelOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Model.Get(), o.Model.IsSet()
 }
@@ -156,18 +154,49 @@ func (o *UserAgentDevice) UnsetModel() {
 	o.Model.Unset()
 }
 
-func (o UserAgentDevice) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.Family) {
-		toSerialize["family"] = o.Family
+// GetType returns the Type field value
+func (o *UserAgentDevice) GetType() string {
+	if o == nil {
+		var ret string
+		return ret
 	}
+
+	return o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *UserAgentDevice) GetTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Type, true
+}
+
+// SetType sets field value
+func (o *UserAgentDevice) SetType(v string) {
+	o.Type = v
+}
+
+func (o UserAgentDevice) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o UserAgentDevice) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["family"] = o.Family
 	if o.Brand.IsSet() {
 		toSerialize["brand"] = o.Brand.Get()
 	}
 	if o.Model.IsSet() {
 		toSerialize["model"] = o.Model.Get()
 	}
-	return json.Marshal(toSerialize)
+	toSerialize["type"] = o.Type
+	return toSerialize, nil
 }
 
 type NullableUserAgentDevice struct {

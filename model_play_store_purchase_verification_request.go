@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the PlayStorePurchaseVerificationRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PlayStorePurchaseVerificationRequest{}
+
 // PlayStorePurchaseVerificationRequest struct for PlayStorePurchaseVerificationRequest
 type PlayStorePurchaseVerificationRequest struct {
 	// The inapp product SKU (for example, 'com.some.thing.inapp1').
@@ -56,7 +59,7 @@ func (o *PlayStorePurchaseVerificationRequest) GetProductSku() string {
 // and a boolean to check if the value has been set.
 func (o *PlayStorePurchaseVerificationRequest) GetProductSkuOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.ProductSku, true
 }
@@ -80,7 +83,7 @@ func (o *PlayStorePurchaseVerificationRequest) GetPurchaseToken() string {
 // and a boolean to check if the value has been set.
 func (o *PlayStorePurchaseVerificationRequest) GetPurchaseTokenOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.PurchaseToken, true
 }
@@ -91,14 +94,18 @@ func (o *PlayStorePurchaseVerificationRequest) SetPurchaseToken(v string) {
 }
 
 func (o PlayStorePurchaseVerificationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["product_sku"] = o.ProductSku
-	}
-	if true {
-		toSerialize["purchase_token"] = o.PurchaseToken
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o PlayStorePurchaseVerificationRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["product_sku"] = o.ProductSku
+	toSerialize["purchase_token"] = o.PurchaseToken
+	return toSerialize, nil
 }
 
 type NullablePlayStorePurchaseVerificationRequest struct {

@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the PortForwarding type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PortForwarding{}
+
 // PortForwarding struct for PortForwarding
 type PortForwarding struct {
 	Id string `json:"id"`
@@ -54,7 +57,7 @@ func (o *PortForwarding) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *PortForwarding) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -77,7 +80,7 @@ func (o *PortForwarding) GetSrcPort() int32 {
 // and a boolean to check if the value has been set.
 func (o *PortForwarding) GetSrcPortOk() (*int32, bool) {
 	if o == nil || isNil(o.SrcPort) {
-    return nil, false
+		return nil, false
 	}
 	return o.SrcPort, true
 }
@@ -109,7 +112,7 @@ func (o *PortForwarding) GetDstPort() int32 {
 // and a boolean to check if the value has been set.
 func (o *PortForwarding) GetDstPortOk() (*int32, bool) {
 	if o == nil || isNil(o.DstPort) {
-    return nil, false
+		return nil, false
 	}
 	return o.DstPort, true
 }
@@ -129,17 +132,23 @@ func (o *PortForwarding) SetDstPort(v int32) {
 }
 
 func (o PortForwarding) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PortForwarding) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["id"] = o.Id
 	if !isNil(o.SrcPort) {
 		toSerialize["src_port"] = o.SrcPort
 	}
 	if !isNil(o.DstPort) {
 		toSerialize["dst_port"] = o.DstPort
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullablePortForwarding struct {

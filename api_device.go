@@ -383,8 +383,8 @@ func (a *DeviceApiService) CreateDeviceExecute(r ApiCreateDeviceRequest) (*Devic
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -450,7 +450,7 @@ func (a *DeviceApiService) CreateDevicePortForwardingExecute(r ApiCreateDevicePo
 	}
 
 	localVarPath := localBasePath + "/devices/{deviceID}/port-forwarding/"
-	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterToString(r.deviceID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterValueToString(r.deviceID, "deviceID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -503,8 +503,8 @@ func (a *DeviceApiService) CreateDevicePortForwardingExecute(r ApiCreateDevicePo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -562,7 +562,7 @@ func (a *DeviceApiService) DeleteDeviceExecute(r ApiDeleteDeviceRequest) (*http.
 	}
 
 	localVarPath := localBasePath + "/devices/{deviceID}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterToString(r.deviceID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterValueToString(r.deviceID, "deviceID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -613,8 +613,8 @@ func (a *DeviceApiService) DeleteDeviceExecute(r ApiDeleteDeviceRequest) (*http.
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarHTTPResponse, newErr
 	}
 
@@ -666,8 +666,8 @@ func (a *DeviceApiService) DeleteDevicePortForwardingExecute(r ApiDeleteDevicePo
 	}
 
 	localVarPath := localBasePath + "/devices/{deviceID}/port-forwarding/{portForwardingID}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterToString(r.deviceID, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"portForwardingID"+"}", url.PathEscape(parameterToString(r.portForwardingID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterValueToString(r.deviceID, "deviceID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"portForwardingID"+"}", url.PathEscape(parameterValueToString(r.portForwardingID, "portForwardingID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -718,8 +718,8 @@ func (a *DeviceApiService) DeleteDevicePortForwardingExecute(r ApiDeleteDevicePo
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarHTTPResponse, newErr
 	}
 
@@ -770,7 +770,7 @@ func (a *DeviceApiService) GetDeviceExecute(r ApiGetDeviceRequest) (*Device, *ht
 	}
 
 	localVarPath := localBasePath + "/devices/{deviceID}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterToString(r.deviceID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterValueToString(r.deviceID, "deviceID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -821,8 +821,8 @@ func (a *DeviceApiService) GetDeviceExecute(r ApiGetDeviceRequest) (*Device, *ht
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -882,8 +882,8 @@ func (a *DeviceApiService) GetDeviceStatsExecute(r ApiGetDeviceStatsRequest) (*D
 	}
 
 	localVarPath := localBasePath + "/devices/{deviceID}/stats/{statsID}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterToString(r.deviceID, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"statsID"+"}", url.PathEscape(parameterToString(r.statsID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterValueToString(r.deviceID, "deviceID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"statsID"+"}", url.PathEscape(parameterValueToString(r.statsID, "statsID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -934,8 +934,8 @@ func (a *DeviceApiService) GetDeviceStatsExecute(r ApiGetDeviceStatsRequest) (*D
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -995,8 +995,8 @@ func (a *DeviceApiService) GetDeviceWireGuardExecute(r ApiGetDeviceWireGuardRequ
 	}
 
 	localVarPath := localBasePath + "/devices/{deviceID}/wireguards/{wireGuardID}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterToString(r.deviceID, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"wireGuardID"+"}", url.PathEscape(parameterToString(r.wireGuardID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterValueToString(r.deviceID, "deviceID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"wireGuardID"+"}", url.PathEscape(parameterValueToString(r.wireGuardID, "wireGuardID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1047,8 +1047,8 @@ func (a *DeviceApiService) GetDeviceWireGuardExecute(r ApiGetDeviceWireGuardRequ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1109,7 +1109,7 @@ func (a *DeviceApiService) ListDeviceBindingsExecute(r ApiListDeviceBindingsRequ
 	}
 
 	localVarPath := localBasePath + "/devices/{deviceID}/bindings/"
-	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterToString(r.deviceID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterValueToString(r.deviceID, "deviceID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1160,8 +1160,8 @@ func (a *DeviceApiService) ListDeviceBindingsExecute(r ApiListDeviceBindingsRequ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1233,7 +1233,7 @@ func (a *DeviceApiService) ListDeviceConnectionModesExecute(r ApiListDeviceConne
 	}
 
 	localVarPath := localBasePath + "/devices/{deviceID}/connection-modes/"
-	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterToString(r.deviceID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterValueToString(r.deviceID, "deviceID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1257,10 +1257,10 @@ func (a *DeviceApiService) ListDeviceConnectionModesExecute(r ApiListDeviceConne
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.xAndroidPackage != nil {
-		localVarHeaderParams["X-Android-Package"] = parameterToString(*r.xAndroidPackage, "")
+		parameterAddToQuery(localVarQueryParams, "X-Android-Package", r.xAndroidPackage, "")
 	}
 	if r.xAndroidSHA1 != nil {
-		localVarHeaderParams["X-Android-SHA1"] = parameterToString(*r.xAndroidSHA1, "")
+		parameterAddToQuery(localVarQueryParams, "X-Android-SHA1", r.xAndroidSHA1, "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -1290,8 +1290,8 @@ func (a *DeviceApiService) ListDeviceConnectionModesExecute(r ApiListDeviceConne
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1372,23 +1372,23 @@ func (a *DeviceApiService) ListDeviceDetailStatsExecute(r ApiListDeviceDetailSta
 	}
 
 	localVarPath := localBasePath + "/devices/{deviceID}/detail-stats/"
-	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterToString(r.deviceID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterValueToString(r.deviceID, "deviceID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
 	if r.dateTimeAfter != nil {
-		localVarQueryParams.Add("date_time_after", parameterToString(*r.dateTimeAfter, ""))
+		parameterAddToQuery(localVarQueryParams, "date_time_after", r.dateTimeAfter, "")
 	}
 	if r.dateTimeBefore != nil {
-		localVarQueryParams.Add("date_time_before", parameterToString(*r.dateTimeBefore, ""))
+		parameterAddToQuery(localVarQueryParams, "date_time_before", r.dateTimeBefore, "")
 	}
 	if r.perPage != nil {
-		localVarQueryParams.Add("per_page", parameterToString(*r.perPage, ""))
+		parameterAddToQuery(localVarQueryParams, "per_page", r.perPage, "")
 	}
 	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+		parameterAddToQuery(localVarQueryParams, "page", r.page, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1435,8 +1435,8 @@ func (a *DeviceApiService) ListDeviceDetailStatsExecute(r ApiListDeviceDetailSta
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1508,17 +1508,17 @@ func (a *DeviceApiService) ListDevicePortForwardingsExecute(r ApiListDevicePortF
 	}
 
 	localVarPath := localBasePath + "/devices/{deviceID}/port-forwarding/"
-	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterToString(r.deviceID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterValueToString(r.deviceID, "deviceID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
 	if r.perPage != nil {
-		localVarQueryParams.Add("per_page", parameterToString(*r.perPage, ""))
+		parameterAddToQuery(localVarQueryParams, "per_page", r.perPage, "")
 	}
 	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+		parameterAddToQuery(localVarQueryParams, "page", r.page, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1565,8 +1565,8 @@ func (a *DeviceApiService) ListDevicePortForwardingsExecute(r ApiListDevicePortF
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1647,23 +1647,23 @@ func (a *DeviceApiService) ListDeviceStatsExecute(r ApiListDeviceStatsRequest) (
 	}
 
 	localVarPath := localBasePath + "/devices/{deviceID}/stats/"
-	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterToString(r.deviceID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterValueToString(r.deviceID, "deviceID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
 	if r.dateAfter != nil {
-		localVarQueryParams.Add("date_after", parameterToString(*r.dateAfter, ""))
+		parameterAddToQuery(localVarQueryParams, "date_after", r.dateAfter, "")
 	}
 	if r.dateBefore != nil {
-		localVarQueryParams.Add("date_before", parameterToString(*r.dateBefore, ""))
+		parameterAddToQuery(localVarQueryParams, "date_before", r.dateBefore, "")
 	}
 	if r.perPage != nil {
-		localVarQueryParams.Add("per_page", parameterToString(*r.perPage, ""))
+		parameterAddToQuery(localVarQueryParams, "per_page", r.perPage, "")
 	}
 	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+		parameterAddToQuery(localVarQueryParams, "page", r.page, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1710,8 +1710,8 @@ func (a *DeviceApiService) ListDeviceStatsExecute(r ApiListDeviceStatsRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1771,8 +1771,8 @@ func (a *DeviceApiService) ListDeviceWireGuardPeersExecute(r ApiListDeviceWireGu
 	}
 
 	localVarPath := localBasePath + "/devices/{deviceID}/wireguards/{wireGuardID}/peers/"
-	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterToString(r.deviceID, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"wireGuardID"+"}", url.PathEscape(parameterToString(r.wireGuardID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterValueToString(r.deviceID, "deviceID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"wireGuardID"+"}", url.PathEscape(parameterValueToString(r.wireGuardID, "wireGuardID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1823,8 +1823,8 @@ func (a *DeviceApiService) ListDeviceWireGuardPeersExecute(r ApiListDeviceWireGu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1893,17 +1893,17 @@ func (a *DeviceApiService) ListDeviceWireGuardsExecute(r ApiListDeviceWireGuards
 	}
 
 	localVarPath := localBasePath + "/devices/{deviceID}/wireguards/"
-	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterToString(r.deviceID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterValueToString(r.deviceID, "deviceID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
 	if r.perPage != nil {
-		localVarQueryParams.Add("per_page", parameterToString(*r.perPage, ""))
+		parameterAddToQuery(localVarQueryParams, "per_page", r.perPage, "")
 	}
 	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+		parameterAddToQuery(localVarQueryParams, "page", r.page, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1950,8 +1950,8 @@ func (a *DeviceApiService) ListDeviceWireGuardsExecute(r ApiListDeviceWireGuards
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2068,28 +2068,28 @@ func (a *DeviceApiService) ListDevicesExecute(r ApiListDevicesRequest) ([]Device
 	localVarFormParams := url.Values{}
 
 	if r.q != nil {
-		localVarQueryParams.Add("q", parameterToString(*r.q, ""))
+		parameterAddToQuery(localVarQueryParams, "q", r.q, "")
 	}
 	if r.externalKey != nil {
-		localVarQueryParams.Add("external_key", parameterToString(*r.externalKey, ""))
+		parameterAddToQuery(localVarQueryParams, "external_key", r.externalKey, "")
 	}
 	if r.recentlyActive != nil {
-		localVarQueryParams.Add("recently_active", parameterToString(*r.recentlyActive, ""))
+		parameterAddToQuery(localVarQueryParams, "recently_active", r.recentlyActive, "")
 	}
 	if r.lastActiveAtAfter != nil {
-		localVarQueryParams.Add("last_active_at_after", parameterToString(*r.lastActiveAtAfter, ""))
+		parameterAddToQuery(localVarQueryParams, "last_active_at_after", r.lastActiveAtAfter, "")
 	}
 	if r.lastActiveAtBefore != nil {
-		localVarQueryParams.Add("last_active_at_before", parameterToString(*r.lastActiveAtBefore, ""))
+		parameterAddToQuery(localVarQueryParams, "last_active_at_before", r.lastActiveAtBefore, "")
 	}
 	if r.sort != nil {
-		localVarQueryParams.Add("sort", parameterToString(*r.sort, ""))
+		parameterAddToQuery(localVarQueryParams, "sort", r.sort, "")
 	}
 	if r.perPage != nil {
-		localVarQueryParams.Add("per_page", parameterToString(*r.perPage, ""))
+		parameterAddToQuery(localVarQueryParams, "per_page", r.perPage, "")
 	}
 	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+		parameterAddToQuery(localVarQueryParams, "page", r.page, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2136,8 +2136,8 @@ func (a *DeviceApiService) ListDevicesExecute(r ApiListDevicesRequest) ([]Device
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2203,7 +2203,7 @@ func (a *DeviceApiService) UpdateDeviceExecute(r ApiUpdateDeviceRequest) (*Devic
 	}
 
 	localVarPath := localBasePath + "/devices/{deviceID}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterToString(r.deviceID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterValueToString(r.deviceID, "deviceID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -2259,8 +2259,8 @@ func (a *DeviceApiService) UpdateDeviceExecute(r ApiUpdateDeviceRequest) (*Devic
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2329,8 +2329,8 @@ func (a *DeviceApiService) UpdateDevicePortForwardingExecute(r ApiUpdateDevicePo
 	}
 
 	localVarPath := localBasePath + "/devices/{deviceID}/port-forwarding/{portForwardingID}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterToString(r.deviceID, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"portForwardingID"+"}", url.PathEscape(parameterToString(r.portForwardingID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"deviceID"+"}", url.PathEscape(parameterValueToString(r.deviceID, "deviceID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"portForwardingID"+"}", url.PathEscape(parameterValueToString(r.portForwardingID, "portForwardingID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -2386,8 +2386,8 @@ func (a *DeviceApiService) UpdateDevicePortForwardingExecute(r ApiUpdateDevicePo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

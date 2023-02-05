@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the CreateCheckoutSessionRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateCheckoutSessionRequest{}
+
 // CreateCheckoutSessionRequest struct for CreateCheckoutSessionRequest
 type CreateCheckoutSessionRequest struct {
 	CancelUrl string `json:"cancel_url"`
@@ -59,7 +62,7 @@ func (o *CreateCheckoutSessionRequest) GetCancelUrl() string {
 // and a boolean to check if the value has been set.
 func (o *CreateCheckoutSessionRequest) GetCancelUrlOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.CancelUrl, true
 }
@@ -83,7 +86,7 @@ func (o *CreateCheckoutSessionRequest) GetSuccessUrl() string {
 // and a boolean to check if the value has been set.
 func (o *CreateCheckoutSessionRequest) GetSuccessUrlOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.SuccessUrl, true
 }
@@ -106,7 +109,7 @@ func (o *CreateCheckoutSessionRequest) GetCurrency() string {
 // and a boolean to check if the value has been set.
 func (o *CreateCheckoutSessionRequest) GetCurrencyOk() (*string, bool) {
 	if o == nil || isNil(o.Currency) {
-    return nil, false
+		return nil, false
 	}
 	return o.Currency, true
 }
@@ -138,7 +141,7 @@ func (o *CreateCheckoutSessionRequest) GetLocale() string {
 // and a boolean to check if the value has been set.
 func (o *CreateCheckoutSessionRequest) GetLocaleOk() (*string, bool) {
 	if o == nil || isNil(o.Locale) {
-    return nil, false
+		return nil, false
 	}
 	return o.Locale, true
 }
@@ -170,7 +173,7 @@ func (o *CreateCheckoutSessionRequest) GetEmail() string {
 // and a boolean to check if the value has been set.
 func (o *CreateCheckoutSessionRequest) GetEmailOk() (*string, bool) {
 	if o == nil || isNil(o.Email) {
-    return nil, false
+		return nil, false
 	}
 	return o.Email, true
 }
@@ -203,7 +206,7 @@ func (o *CreateCheckoutSessionRequest) GetProducts() []CreateCheckoutSessionProd
 // and a boolean to check if the value has been set.
 func (o *CreateCheckoutSessionRequest) GetProductsOk() ([]CreateCheckoutSessionProduct, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Products, true
 }
@@ -214,13 +217,17 @@ func (o *CreateCheckoutSessionRequest) SetProducts(v []CreateCheckoutSessionProd
 }
 
 func (o CreateCheckoutSessionRequest) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CreateCheckoutSessionRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["cancel_url"] = o.CancelUrl
-	}
-	if true {
-		toSerialize["success_url"] = o.SuccessUrl
-	}
+	toSerialize["cancel_url"] = o.CancelUrl
+	toSerialize["success_url"] = o.SuccessUrl
 	if !isNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
@@ -230,10 +237,8 @@ func (o CreateCheckoutSessionRequest) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Email) {
 		toSerialize["email"] = o.Email
 	}
-	if true {
-		toSerialize["products"] = o.Products
-	}
-	return json.Marshal(toSerialize)
+	toSerialize["products"] = o.Products
+	return toSerialize, nil
 }
 
 type NullableCreateCheckoutSessionRequest struct {

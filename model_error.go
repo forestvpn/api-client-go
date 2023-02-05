@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the Error type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Error{}
+
 // Error struct for Error
 type Error struct {
 	Code string `json:"code"`
@@ -55,7 +58,7 @@ func (o *Error) GetCode() string {
 // and a boolean to check if the value has been set.
 func (o *Error) GetCodeOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Code, true
 }
@@ -79,7 +82,7 @@ func (o *Error) GetMessage() string {
 // and a boolean to check if the value has been set.
 func (o *Error) GetMessageOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Message, true
 }
@@ -102,7 +105,7 @@ func (o *Error) GetDetail() map[string]interface{} {
 // and a boolean to check if the value has been set.
 func (o *Error) GetDetailOk() (map[string]interface{}, bool) {
 	if o == nil || isNil(o.Detail) {
-    return map[string]interface{}{}, false
+		return map[string]interface{}{}, false
 	}
 	return o.Detail, true
 }
@@ -122,17 +125,21 @@ func (o *Error) SetDetail(v map[string]interface{}) {
 }
 
 func (o Error) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Error) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["code"] = o.Code
-	}
-	if true {
-		toSerialize["message"] = o.Message
-	}
+	toSerialize["code"] = o.Code
+	toSerialize["message"] = o.Message
 	if !isNil(o.Detail) {
 		toSerialize["detail"] = o.Detail
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableError struct {

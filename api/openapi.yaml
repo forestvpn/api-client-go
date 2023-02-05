@@ -4842,7 +4842,6 @@ components:
           items:
             format: binary
             type: string
-          nullable: true
           type: array
       required:
       - category
@@ -4879,6 +4878,16 @@ components:
         model:
           nullable: true
           type: string
+        type:
+          enum:
+          - other
+          - pc
+          - tablet
+          - mobile
+          type: string
+      required:
+      - family
+      - type
       type: object
     UserAgent_browser:
       properties:

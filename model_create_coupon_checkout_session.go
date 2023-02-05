@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the CreateCouponCheckoutSession type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateCouponCheckoutSession{}
+
 // CreateCouponCheckoutSession struct for CreateCouponCheckoutSession
 type CreateCouponCheckoutSession struct {
 	Key string `json:"key"`
@@ -52,7 +55,7 @@ func (o *CreateCouponCheckoutSession) GetKey() string {
 // and a boolean to check if the value has been set.
 func (o *CreateCouponCheckoutSession) GetKeyOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Key, true
 }
@@ -63,11 +66,17 @@ func (o *CreateCouponCheckoutSession) SetKey(v string) {
 }
 
 func (o CreateCouponCheckoutSession) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["key"] = o.Key
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o CreateCouponCheckoutSession) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["key"] = o.Key
+	return toSerialize, nil
 }
 
 type NullableCreateCouponCheckoutSession struct {

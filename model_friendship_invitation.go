@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the FriendshipInvitation type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FriendshipInvitation{}
+
 // FriendshipInvitation struct for FriendshipInvitation
 type FriendshipInvitation struct {
 	Code string `json:"code"`
@@ -59,7 +62,7 @@ func (o *FriendshipInvitation) GetCode() string {
 // and a boolean to check if the value has been set.
 func (o *FriendshipInvitation) GetCodeOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Code, true
 }
@@ -83,7 +86,7 @@ func (o *FriendshipInvitation) GetUser() User {
 // and a boolean to check if the value has been set.
 func (o *FriendshipInvitation) GetUserOk() (*User, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.User, true
 }
@@ -107,7 +110,7 @@ func (o *FriendshipInvitation) GetShareText() string {
 // and a boolean to check if the value has been set.
 func (o *FriendshipInvitation) GetShareTextOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.ShareText, true
 }
@@ -131,7 +134,7 @@ func (o *FriendshipInvitation) GetCreatedAt() time.Time {
 // and a boolean to check if the value has been set.
 func (o *FriendshipInvitation) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.CreatedAt, true
 }
@@ -142,20 +145,20 @@ func (o *FriendshipInvitation) SetCreatedAt(v time.Time) {
 }
 
 func (o FriendshipInvitation) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["code"] = o.Code
-	}
-	if true {
-		toSerialize["user"] = o.User
-	}
-	if true {
-		toSerialize["share_text"] = o.ShareText
-	}
-	if true {
-		toSerialize["created_at"] = o.CreatedAt
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o FriendshipInvitation) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["code"] = o.Code
+	toSerialize["user"] = o.User
+	toSerialize["share_text"] = o.ShareText
+	toSerialize["created_at"] = o.CreatedAt
+	return toSerialize, nil
 }
 
 type NullableFriendshipInvitation struct {

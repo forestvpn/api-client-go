@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the UserAgentOs type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UserAgentOs{}
+
 // UserAgentOs struct for UserAgentOs
 type UserAgentOs struct {
 	Family string `json:"family"`
@@ -54,7 +57,7 @@ func (o *UserAgentOs) GetFamily() string {
 // and a boolean to check if the value has been set.
 func (o *UserAgentOs) GetFamilyOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Family, true
 }
@@ -77,7 +80,7 @@ func (o *UserAgentOs) GetVersion() string {
 // and a boolean to check if the value has been set.
 func (o *UserAgentOs) GetVersionOk() (*string, bool) {
 	if o == nil || isNil(o.Version) {
-    return nil, false
+		return nil, false
 	}
 	return o.Version, true
 }
@@ -97,14 +100,20 @@ func (o *UserAgentOs) SetVersion(v string) {
 }
 
 func (o UserAgentOs) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["family"] = o.Family
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
+	return json.Marshal(toSerialize)
+}
+
+func (o UserAgentOs) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["family"] = o.Family
 	if !isNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableUserAgentOs struct {

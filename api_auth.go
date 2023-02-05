@@ -191,7 +191,7 @@ func (a *AuthApiService) AuthorizeAccessTokenRequestExecute(r ApiAuthorizeAccess
 	}
 
 	localVarPath := localBasePath + "/auth/access-token-requests/{requestID}/authorize/"
-	localVarPath = strings.Replace(localVarPath, "{"+"requestID"+"}", url.PathEscape(parameterToString(r.requestID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"requestID"+"}", url.PathEscape(parameterValueToString(r.requestID, "requestID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -242,8 +242,8 @@ func (a *AuthApiService) AuthorizeAccessTokenRequestExecute(r ApiAuthorizeAccess
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -309,7 +309,7 @@ func (a *AuthApiService) CreateAccessTokenRequestExecute(r ApiCreateAccessTokenR
 	localVarFormParams := url.Values{}
 
 	if r.name != nil {
-		localVarQueryParams.Add("name", parameterToString(*r.name, ""))
+		parameterAddToQuery(localVarQueryParams, "name", r.name, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -356,8 +356,8 @@ func (a *AuthApiService) CreateAccessTokenRequestExecute(r ApiCreateAccessTokenR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -414,7 +414,7 @@ func (a *AuthApiService) GetAccessTokenRequestExecute(r ApiGetAccessTokenRequest
 	}
 
 	localVarPath := localBasePath + "/auth/access-token-requests/{requestID}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"requestID"+"}", url.PathEscape(parameterToString(r.requestID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"requestID"+"}", url.PathEscape(parameterValueToString(r.requestID, "requestID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -465,8 +465,8 @@ func (a *AuthApiService) GetAccessTokenRequestExecute(r ApiGetAccessTokenRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -578,8 +578,8 @@ func (a *AuthApiService) LoginTokenExecute(r ApiLoginTokenRequest) (*TokenLogin,
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -683,8 +683,8 @@ func (a *AuthApiService) MigrateLegacyAuthExecute(r ApiMigrateLegacyAuthRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -788,8 +788,8 @@ func (a *AuthApiService) ObtainTokenExecute(r ApiObtainTokenRequest) (*TokenObta
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -846,7 +846,7 @@ func (a *AuthApiService) RevokeAccessTokenRequestExecute(r ApiRevokeAccessTokenR
 	}
 
 	localVarPath := localBasePath + "/auth/access-token-requests/{requestID}/revoke/"
-	localVarPath = strings.Replace(localVarPath, "{"+"requestID"+"}", url.PathEscape(parameterToString(r.requestID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"requestID"+"}", url.PathEscape(parameterValueToString(r.requestID, "requestID")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -897,8 +897,8 @@ func (a *AuthApiService) RevokeAccessTokenRequestExecute(r ApiRevokeAccessTokenR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1010,8 +1010,8 @@ func (a *AuthApiService) UpdateUserProfileExecute(r ApiUpdateUserProfileRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1115,8 +1115,8 @@ func (a *AuthApiService) UserProfileExecute(r ApiUserProfileRequest) (*User, *ht
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1220,8 +1220,8 @@ func (a *AuthApiService) WhoAmIExecute(r ApiWhoAmIRequest) (*User, *http.Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

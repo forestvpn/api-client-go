@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the StripeCheckoutSession type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StripeCheckoutSession{}
+
 // StripeCheckoutSession struct for StripeCheckoutSession
 type StripeCheckoutSession struct {
 	SessionId string `json:"session_id"`
@@ -56,7 +59,7 @@ func (o *StripeCheckoutSession) GetSessionId() string {
 // and a boolean to check if the value has been set.
 func (o *StripeCheckoutSession) GetSessionIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.SessionId, true
 }
@@ -80,7 +83,7 @@ func (o *StripeCheckoutSession) GetSuccessUrl() string {
 // and a boolean to check if the value has been set.
 func (o *StripeCheckoutSession) GetSuccessUrlOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.SuccessUrl, true
 }
@@ -104,7 +107,7 @@ func (o *StripeCheckoutSession) GetCancelUrl() string {
 // and a boolean to check if the value has been set.
 func (o *StripeCheckoutSession) GetCancelUrlOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.CancelUrl, true
 }
@@ -115,17 +118,19 @@ func (o *StripeCheckoutSession) SetCancelUrl(v string) {
 }
 
 func (o StripeCheckoutSession) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["session_id"] = o.SessionId
-	}
-	if true {
-		toSerialize["success_url"] = o.SuccessUrl
-	}
-	if true {
-		toSerialize["cancel_url"] = o.CancelUrl
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o StripeCheckoutSession) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["session_id"] = o.SessionId
+	toSerialize["success_url"] = o.SuccessUrl
+	toSerialize["cancel_url"] = o.CancelUrl
+	return toSerialize, nil
 }
 
 type NullableStripeCheckoutSession struct {

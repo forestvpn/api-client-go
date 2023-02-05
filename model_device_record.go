@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the DeviceRecord type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DeviceRecord{}
+
 // DeviceRecord struct for DeviceRecord
 type DeviceRecord struct {
 	Id *string `json:"id,omitempty"`
@@ -54,7 +57,7 @@ func (o *DeviceRecord) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *DeviceRecord) GetIdOk() (*string, bool) {
 	if o == nil || isNil(o.Id) {
-    return nil, false
+		return nil, false
 	}
 	return o.Id, true
 }
@@ -86,7 +89,7 @@ func (o *DeviceRecord) GetDate() string {
 // and a boolean to check if the value has been set.
 func (o *DeviceRecord) GetDateOk() (*string, bool) {
 	if o == nil || isNil(o.Date) {
-    return nil, false
+		return nil, false
 	}
 	return o.Date, true
 }
@@ -118,7 +121,7 @@ func (o *DeviceRecord) GetReceivedBytes() float32 {
 // and a boolean to check if the value has been set.
 func (o *DeviceRecord) GetReceivedBytesOk() (*float32, bool) {
 	if o == nil || isNil(o.ReceivedBytes) {
-    return nil, false
+		return nil, false
 	}
 	return o.ReceivedBytes, true
 }
@@ -150,7 +153,7 @@ func (o *DeviceRecord) GetTransmittedBytes() float32 {
 // and a boolean to check if the value has been set.
 func (o *DeviceRecord) GetTransmittedBytesOk() (*float32, bool) {
 	if o == nil || isNil(o.TransmittedBytes) {
-    return nil, false
+		return nil, false
 	}
 	return o.TransmittedBytes, true
 }
@@ -182,7 +185,7 @@ func (o *DeviceRecord) GetUsageTime() float32 {
 // and a boolean to check if the value has been set.
 func (o *DeviceRecord) GetUsageTimeOk() (*float32, bool) {
 	if o == nil || isNil(o.UsageTime) {
-    return nil, false
+		return nil, false
 	}
 	return o.UsageTime, true
 }
@@ -202,6 +205,14 @@ func (o *DeviceRecord) SetUsageTime(v float32) {
 }
 
 func (o DeviceRecord) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o DeviceRecord) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Id) {
 		toSerialize["id"] = o.Id
@@ -218,7 +229,7 @@ func (o DeviceRecord) MarshalJSON() ([]byte, error) {
 	if !isNil(o.UsageTime) {
 		toSerialize["usage_time"] = o.UsageTime
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableDeviceRecord struct {

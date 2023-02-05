@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the AccessTokenRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AccessTokenRequest{}
+
 // AccessTokenRequest struct for AccessTokenRequest
 type AccessTokenRequest struct {
 	Id string `json:"id"`
@@ -64,7 +67,7 @@ func (o *AccessTokenRequest) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *AccessTokenRequest) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -88,7 +91,7 @@ func (o *AccessTokenRequest) GetName() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AccessTokenRequest) GetNameOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Name.Get(), o.Name.IsSet()
 }
@@ -130,7 +133,7 @@ func (o *AccessTokenRequest) GetUserAgent() UserAgent {
 // and a boolean to check if the value has been set.
 func (o *AccessTokenRequest) GetUserAgentOk() (*UserAgent, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.UserAgent, true
 }
@@ -153,7 +156,7 @@ func (o *AccessTokenRequest) GetAccessToken() string {
 // and a boolean to check if the value has been set.
 func (o *AccessTokenRequest) GetAccessTokenOk() (*string, bool) {
 	if o == nil || isNil(o.AccessToken) {
-    return nil, false
+		return nil, false
 	}
 	return o.AccessToken, true
 }
@@ -186,7 +189,7 @@ func (o *AccessTokenRequest) GetStatus() string {
 // and a boolean to check if the value has been set.
 func (o *AccessTokenRequest) GetStatusOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Status, true
 }
@@ -210,7 +213,7 @@ func (o *AccessTokenRequest) GetCreatedAt() time.Time {
 // and a boolean to check if the value has been set.
 func (o *AccessTokenRequest) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.CreatedAt, true
 }
@@ -234,7 +237,7 @@ func (o *AccessTokenRequest) GetExpiresAt() time.Time {
 // and a boolean to check if the value has been set.
 func (o *AccessTokenRequest) GetExpiresAtOk() (*time.Time, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.ExpiresAt, true
 }
@@ -245,29 +248,25 @@ func (o *AccessTokenRequest) SetExpiresAt(v time.Time) {
 }
 
 func (o AccessTokenRequest) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AccessTokenRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	// skip: id is readOnly
 	if o.Name.IsSet() {
 		toSerialize["name"] = o.Name.Get()
 	}
-	if true {
-		toSerialize["user_agent"] = o.UserAgent
-	}
-	if !isNil(o.AccessToken) {
-		toSerialize["access_token"] = o.AccessToken
-	}
-	if true {
-		toSerialize["status"] = o.Status
-	}
-	if true {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if true {
-		toSerialize["expires_at"] = o.ExpiresAt
-	}
-	return json.Marshal(toSerialize)
+	// skip: user_agent is readOnly
+	// skip: access_token is readOnly
+	// skip: status is readOnly
+	// skip: created_at is readOnly
+	// skip: expires_at is readOnly
+	return toSerialize, nil
 }
 
 type NullableAccessTokenRequest struct {

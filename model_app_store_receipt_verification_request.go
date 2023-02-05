@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the AppStoreReceiptVerificationRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AppStoreReceiptVerificationRequest{}
+
 // AppStoreReceiptVerificationRequest struct for AppStoreReceiptVerificationRequest
 type AppStoreReceiptVerificationRequest struct {
 	// The latest Base64-encoded transaction receipt.
@@ -55,7 +58,7 @@ func (o *AppStoreReceiptVerificationRequest) GetReceipt() string {
 // and a boolean to check if the value has been set.
 func (o *AppStoreReceiptVerificationRequest) GetReceiptOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Receipt, true
 }
@@ -78,7 +81,7 @@ func (o *AppStoreReceiptVerificationRequest) GetPrice() int64 {
 // and a boolean to check if the value has been set.
 func (o *AppStoreReceiptVerificationRequest) GetPriceOk() (*int64, bool) {
 	if o == nil || isNil(o.Price) {
-    return nil, false
+		return nil, false
 	}
 	return o.Price, true
 }
@@ -110,7 +113,7 @@ func (o *AppStoreReceiptVerificationRequest) GetCurrency() string {
 // and a boolean to check if the value has been set.
 func (o *AppStoreReceiptVerificationRequest) GetCurrencyOk() (*string, bool) {
 	if o == nil || isNil(o.Currency) {
-    return nil, false
+		return nil, false
 	}
 	return o.Currency, true
 }
@@ -130,17 +133,23 @@ func (o *AppStoreReceiptVerificationRequest) SetCurrency(v string) {
 }
 
 func (o AppStoreReceiptVerificationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["receipt"] = o.Receipt
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AppStoreReceiptVerificationRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["receipt"] = o.Receipt
 	if !isNil(o.Price) {
 		toSerialize["price"] = o.Price
 	}
 	if !isNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableAppStoreReceiptVerificationRequest struct {

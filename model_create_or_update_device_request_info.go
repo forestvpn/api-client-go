@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the CreateOrUpdateDeviceRequestInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateOrUpdateDeviceRequestInfo{}
+
 // CreateOrUpdateDeviceRequestInfo struct for CreateOrUpdateDeviceRequestInfo
 type CreateOrUpdateDeviceRequestInfo struct {
 	Type DeviceType `json:"type"`
@@ -54,7 +57,7 @@ func (o *CreateOrUpdateDeviceRequestInfo) GetType() DeviceType {
 // and a boolean to check if the value has been set.
 func (o *CreateOrUpdateDeviceRequestInfo) GetTypeOk() (*DeviceType, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Type, true
 }
@@ -78,7 +81,7 @@ func (o *CreateOrUpdateDeviceRequestInfo) GetInfo() map[string]string {
 // and a boolean to check if the value has been set.
 func (o *CreateOrUpdateDeviceRequestInfo) GetInfoOk() (*map[string]string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Info, true
 }
@@ -89,14 +92,18 @@ func (o *CreateOrUpdateDeviceRequestInfo) SetInfo(v map[string]string) {
 }
 
 func (o CreateOrUpdateDeviceRequestInfo) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["type"] = o.Type
-	}
-	if true {
-		toSerialize["info"] = o.Info
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o CreateOrUpdateDeviceRequestInfo) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["type"] = o.Type
+	toSerialize["info"] = o.Info
+	return toSerialize, nil
 }
 
 type NullableCreateOrUpdateDeviceRequestInfo struct {

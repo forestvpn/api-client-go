@@ -93,7 +93,7 @@ func (a *WireguardApiService) GetWireGuardPeerInfoExecute(r ApiGetWireGuardPeerI
 	}
 
 	localVarPath := localBasePath + "/wireguard/peers/{pubKey}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"pubKey"+"}", url.PathEscape(parameterToString(r.pubKey, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"pubKey"+"}", url.PathEscape(parameterValueToString(r.pubKey, "pubKey")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -144,8 +144,8 @@ func (a *WireguardApiService) GetWireGuardPeerInfoExecute(r ApiGetWireGuardPeerI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -249,8 +249,8 @@ func (a *WireguardApiService) ListWireGuardPeersExecute(r ApiListWireGuardPeersR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

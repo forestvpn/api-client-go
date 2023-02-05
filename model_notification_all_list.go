@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the NotificationAllList type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NotificationAllList{}
+
 // NotificationAllList struct for NotificationAllList
 type NotificationAllList struct {
 	UnreadCount *int32 `json:"unread_count,omitempty"`
@@ -52,7 +55,7 @@ func (o *NotificationAllList) GetUnreadCount() int32 {
 // and a boolean to check if the value has been set.
 func (o *NotificationAllList) GetUnreadCountOk() (*int32, bool) {
 	if o == nil || isNil(o.UnreadCount) {
-    return nil, false
+		return nil, false
 	}
 	return o.UnreadCount, true
 }
@@ -85,7 +88,7 @@ func (o *NotificationAllList) GetAllList() []Notification {
 // and a boolean to check if the value has been set.
 func (o *NotificationAllList) GetAllListOk() ([]Notification, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.AllList, true
 }
@@ -96,14 +99,20 @@ func (o *NotificationAllList) SetAllList(v []Notification) {
 }
 
 func (o NotificationAllList) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NotificationAllList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.UnreadCount) {
 		toSerialize["unread_count"] = o.UnreadCount
 	}
-	if true {
-		toSerialize["all_list"] = o.AllList
-	}
-	return json.Marshal(toSerialize)
+	toSerialize["all_list"] = o.AllList
+	return toSerialize, nil
 }
 
 type NullableNotificationAllList struct {

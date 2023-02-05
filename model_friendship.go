@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the Friendship type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Friendship{}
+
 // Friendship struct for Friendship
 type Friendship struct {
 	Id string `json:"id"`
@@ -56,7 +59,7 @@ func (o *Friendship) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *Friendship) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -79,7 +82,7 @@ func (o *Friendship) GetUser() User {
 // and a boolean to check if the value has been set.
 func (o *Friendship) GetUserOk() (*User, bool) {
 	if o == nil || isNil(o.User) {
-    return nil, false
+		return nil, false
 	}
 	return o.User, true
 }
@@ -112,7 +115,7 @@ func (o *Friendship) GetCreatedAt() time.Time {
 // and a boolean to check if the value has been set.
 func (o *Friendship) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.CreatedAt, true
 }
@@ -123,17 +126,21 @@ func (o *Friendship) SetCreatedAt(v time.Time) {
 }
 
 func (o Friendship) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Friendship) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["id"] = o.Id
 	if !isNil(o.User) {
 		toSerialize["user"] = o.User
 	}
-	if true {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	return json.Marshal(toSerialize)
+	toSerialize["created_at"] = o.CreatedAt
+	return toSerialize, nil
 }
 
 type NullableFriendship struct {

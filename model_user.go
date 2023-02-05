@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the User type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &User{}
+
 // User struct for User
 type User struct {
 	Id string `json:"id"`
@@ -65,7 +68,7 @@ func (o *User) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *User) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -88,7 +91,7 @@ func (o *User) GetPromoCode() string {
 // and a boolean to check if the value has been set.
 func (o *User) GetPromoCodeOk() (*string, bool) {
 	if o == nil || isNil(o.PromoCode) {
-    return nil, false
+		return nil, false
 	}
 	return o.PromoCode, true
 }
@@ -121,7 +124,7 @@ func (o *User) GetUsername() string {
 // and a boolean to check if the value has been set.
 func (o *User) GetUsernameOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Username, true
 }
@@ -144,7 +147,7 @@ func (o *User) GetFirstName() string {
 // and a boolean to check if the value has been set.
 func (o *User) GetFirstNameOk() (*string, bool) {
 	if o == nil || isNil(o.FirstName) {
-    return nil, false
+		return nil, false
 	}
 	return o.FirstName, true
 }
@@ -176,7 +179,7 @@ func (o *User) GetLastName() string {
 // and a boolean to check if the value has been set.
 func (o *User) GetLastNameOk() (*string, bool) {
 	if o == nil || isNil(o.LastName) {
-    return nil, false
+		return nil, false
 	}
 	return o.LastName, true
 }
@@ -208,7 +211,7 @@ func (o *User) GetEmail() string {
 // and a boolean to check if the value has been set.
 func (o *User) GetEmailOk() (*string, bool) {
 	if o == nil || isNil(o.Email) {
-    return nil, false
+		return nil, false
 	}
 	return o.Email, true
 }
@@ -240,7 +243,7 @@ func (o *User) GetEmailVerified() bool {
 // and a boolean to check if the value has been set.
 func (o *User) GetEmailVerifiedOk() (*bool, bool) {
 	if o == nil || isNil(o.EmailVerified) {
-    return nil, false
+		return nil, false
 	}
 	return o.EmailVerified, true
 }
@@ -272,7 +275,7 @@ func (o *User) GetPhotoUrl() string {
 // and a boolean to check if the value has been set.
 func (o *User) GetPhotoUrlOk() (*string, bool) {
 	if o == nil || isNil(o.PhotoUrl) {
-    return nil, false
+		return nil, false
 	}
 	return o.PhotoUrl, true
 }
@@ -304,7 +307,7 @@ func (o *User) GetDateJoined() time.Time {
 // and a boolean to check if the value has been set.
 func (o *User) GetDateJoinedOk() (*time.Time, bool) {
 	if o == nil || isNil(o.DateJoined) {
-    return nil, false
+		return nil, false
 	}
 	return o.DateJoined, true
 }
@@ -336,7 +339,7 @@ func (o *User) GetCountry() string {
 // and a boolean to check if the value has been set.
 func (o *User) GetCountryOk() (*string, bool) {
 	if o == nil || isNil(o.Country) {
-    return nil, false
+		return nil, false
 	}
 	return o.Country, true
 }
@@ -368,7 +371,7 @@ func (o *User) GetCurrencyCode() string {
 // and a boolean to check if the value has been set.
 func (o *User) GetCurrencyCodeOk() (*string, bool) {
 	if o == nil || isNil(o.CurrencyCode) {
-    return nil, false
+		return nil, false
 	}
 	return o.CurrencyCode, true
 }
@@ -401,7 +404,7 @@ func (o *User) GetEnvironments() []Environment {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *User) GetEnvironmentsOk() ([]Environment, bool) {
 	if o == nil || isNil(o.Environments) {
-    return nil, false
+		return nil, false
 	}
 	return o.Environments, true
 }
@@ -421,16 +424,20 @@ func (o *User) SetEnvironments(v []Environment) {
 }
 
 func (o User) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
+	return json.Marshal(toSerialize)
+}
+
+func (o User) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["id"] = o.Id
 	if !isNil(o.PromoCode) {
 		toSerialize["promo_code"] = o.PromoCode
 	}
-	if true {
-		toSerialize["username"] = o.Username
-	}
+	toSerialize["username"] = o.Username
 	if !isNil(o.FirstName) {
 		toSerialize["first_name"] = o.FirstName
 	}
@@ -458,7 +465,7 @@ func (o User) MarshalJSON() ([]byte, error) {
 	if o.Environments != nil {
 		toSerialize["environments"] = o.Environments
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableUser struct {

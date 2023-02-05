@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the Country type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Country{}
+
 // Country struct for Country
 type Country struct {
 	Id string `json:"id"`
@@ -58,7 +61,7 @@ func (o *Country) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *Country) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -82,7 +85,7 @@ func (o *Country) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *Country) GetNameOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Name, true
 }
@@ -106,7 +109,7 @@ func (o *Country) GetEmoji() string {
 // and a boolean to check if the value has been set.
 func (o *Country) GetEmojiOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Emoji, true
 }
@@ -129,7 +132,7 @@ func (o *Country) GetCurrencyCode() string {
 // and a boolean to check if the value has been set.
 func (o *Country) GetCurrencyCodeOk() (*string, bool) {
 	if o == nil || isNil(o.CurrencyCode) {
-    return nil, false
+		return nil, false
 	}
 	return o.CurrencyCode, true
 }
@@ -161,7 +164,7 @@ func (o *Country) GetAlternativeNames() []string {
 // and a boolean to check if the value has been set.
 func (o *Country) GetAlternativeNamesOk() ([]string, bool) {
 	if o == nil || isNil(o.AlternativeNames) {
-    return nil, false
+		return nil, false
 	}
 	return o.AlternativeNames, true
 }
@@ -181,23 +184,25 @@ func (o *Country) SetAlternativeNames(v []string) {
 }
 
 func (o Country) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Country) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if true {
-		toSerialize["name"] = o.Name
-	}
-	if true {
-		toSerialize["emoji"] = o.Emoji
-	}
+	toSerialize["id"] = o.Id
+	toSerialize["name"] = o.Name
+	toSerialize["emoji"] = o.Emoji
 	if !isNil(o.CurrencyCode) {
 		toSerialize["currency_code"] = o.CurrencyCode
 	}
 	if !isNil(o.AlternativeNames) {
 		toSerialize["alternative_names"] = o.AlternativeNames
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableCountry struct {

@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the LegacyAuthMigrationToken type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &LegacyAuthMigrationToken{}
+
 // LegacyAuthMigrationToken struct for LegacyAuthMigrationToken
 type LegacyAuthMigrationToken struct {
 	// Firebase authentication token
@@ -53,7 +56,7 @@ func (o *LegacyAuthMigrationToken) GetToken() string {
 // and a boolean to check if the value has been set.
 func (o *LegacyAuthMigrationToken) GetTokenOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Token, true
 }
@@ -64,11 +67,17 @@ func (o *LegacyAuthMigrationToken) SetToken(v string) {
 }
 
 func (o LegacyAuthMigrationToken) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["token"] = o.Token
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o LegacyAuthMigrationToken) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["token"] = o.Token
+	return toSerialize, nil
 }
 
 type NullableLegacyAuthMigrationToken struct {

@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the StripePaymentIntent type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StripePaymentIntent{}
+
 // StripePaymentIntent struct for StripePaymentIntent
 type StripePaymentIntent struct {
 	ClientSecret string `json:"client_secret"`
@@ -52,7 +55,7 @@ func (o *StripePaymentIntent) GetClientSecret() string {
 // and a boolean to check if the value has been set.
 func (o *StripePaymentIntent) GetClientSecretOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.ClientSecret, true
 }
@@ -63,11 +66,17 @@ func (o *StripePaymentIntent) SetClientSecret(v string) {
 }
 
 func (o StripePaymentIntent) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["client_secret"] = o.ClientSecret
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o StripePaymentIntent) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["client_secret"] = o.ClientSecret
+	return toSerialize, nil
 }
 
 type NullableStripePaymentIntent struct {

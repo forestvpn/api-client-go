@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ConnectionMode type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ConnectionMode{}
+
 // ConnectionMode struct for ConnectionMode
 type ConnectionMode struct {
 	Id string `json:"id"`
@@ -56,7 +59,7 @@ func (o *ConnectionMode) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *ConnectionMode) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -80,7 +83,7 @@ func (o *ConnectionMode) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *ConnectionMode) GetNameOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Name, true
 }
@@ -103,7 +106,7 @@ func (o *ConnectionMode) GetDescription() string {
 // and a boolean to check if the value has been set.
 func (o *ConnectionMode) GetDescriptionOk() (*string, bool) {
 	if o == nil || isNil(o.Description) {
-    return nil, false
+		return nil, false
 	}
 	return o.Description, true
 }
@@ -135,7 +138,7 @@ func (o *ConnectionMode) GetIcon() string {
 // and a boolean to check if the value has been set.
 func (o *ConnectionMode) GetIconOk() (*string, bool) {
 	if o == nil || isNil(o.Icon) {
-    return nil, false
+		return nil, false
 	}
 	return o.Icon, true
 }
@@ -155,20 +158,24 @@ func (o *ConnectionMode) SetIcon(v string) {
 }
 
 func (o ConnectionMode) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ConnectionMode) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if true {
-		toSerialize["name"] = o.Name
-	}
+	toSerialize["id"] = o.Id
+	toSerialize["name"] = o.Name
 	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
 	if !isNil(o.Icon) {
 		toSerialize["icon"] = o.Icon
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableConnectionMode struct {

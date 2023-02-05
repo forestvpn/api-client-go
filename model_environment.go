@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the Environment type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Environment{}
+
 // Environment struct for Environment
 type Environment struct {
 	Id string `json:"id"`
@@ -56,7 +59,7 @@ func (o *Environment) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *Environment) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -80,7 +83,7 @@ func (o *Environment) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *Environment) GetNameOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Name, true
 }
@@ -104,7 +107,7 @@ func (o *Environment) GetApiBaseUrl() string {
 // and a boolean to check if the value has been set.
 func (o *Environment) GetApiBaseUrlOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.ApiBaseUrl, true
 }
@@ -115,17 +118,19 @@ func (o *Environment) SetApiBaseUrl(v string) {
 }
 
 func (o Environment) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if true {
-		toSerialize["name"] = o.Name
-	}
-	if true {
-		toSerialize["api_base_url"] = o.ApiBaseUrl
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o Environment) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["id"] = o.Id
+	toSerialize["name"] = o.Name
+	toSerialize["api_base_url"] = o.ApiBaseUrl
+	return toSerialize, nil
 }
 
 type NullableEnvironment struct {

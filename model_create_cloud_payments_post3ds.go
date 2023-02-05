@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the CreateCloudPaymentsPost3ds type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateCloudPaymentsPost3ds{}
+
 // CreateCloudPaymentsPost3ds struct for CreateCloudPaymentsPost3ds
 type CreateCloudPaymentsPost3ds struct {
 	PaRes string `json:"paRes"`
@@ -52,7 +55,7 @@ func (o *CreateCloudPaymentsPost3ds) GetPaRes() string {
 // and a boolean to check if the value has been set.
 func (o *CreateCloudPaymentsPost3ds) GetPaResOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.PaRes, true
 }
@@ -63,11 +66,17 @@ func (o *CreateCloudPaymentsPost3ds) SetPaRes(v string) {
 }
 
 func (o CreateCloudPaymentsPost3ds) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["paRes"] = o.PaRes
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o CreateCloudPaymentsPost3ds) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["paRes"] = o.PaRes
+	return toSerialize, nil
 }
 
 type NullableCreateCloudPaymentsPost3ds struct {

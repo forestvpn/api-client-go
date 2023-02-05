@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the Server type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Server{}
+
 // Server struct for Server
 type Server struct {
 	Host string `json:"host"`
@@ -54,7 +57,7 @@ func (o *Server) GetHost() string {
 // and a boolean to check if the value has been set.
 func (o *Server) GetHostOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Host, true
 }
@@ -78,7 +81,7 @@ func (o *Server) GetNetworkServices() []NetworkService {
 // and a boolean to check if the value has been set.
 func (o *Server) GetNetworkServicesOk() ([]NetworkService, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.NetworkServices, true
 }
@@ -89,14 +92,18 @@ func (o *Server) SetNetworkServices(v []NetworkService) {
 }
 
 func (o Server) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["host"] = o.Host
-	}
-	if true {
-		toSerialize["network_services"] = o.NetworkServices
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o Server) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["host"] = o.Host
+	toSerialize["network_services"] = o.NetworkServices
+	return toSerialize, nil
 }
 
 type NullableServer struct {

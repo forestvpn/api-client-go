@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the Device type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Device{}
+
 // Device struct for Device
 type Device struct {
 	Id string `json:"id"`
@@ -68,7 +71,7 @@ func (o *Device) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *Device) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -91,7 +94,7 @@ func (o *Device) GetExternalKey() string {
 // and a boolean to check if the value has been set.
 func (o *Device) GetExternalKeyOk() (*string, bool) {
 	if o == nil || isNil(o.ExternalKey) {
-    return nil, false
+		return nil, false
 	}
 	return o.ExternalKey, true
 }
@@ -123,7 +126,7 @@ func (o *Device) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *Device) GetNameOk() (*string, bool) {
 	if o == nil || isNil(o.Name) {
-    return nil, false
+		return nil, false
 	}
 	return o.Name, true
 }
@@ -155,7 +158,7 @@ func (o *Device) GetIps() []string {
 // and a boolean to check if the value has been set.
 func (o *Device) GetIpsOk() ([]string, bool) {
 	if o == nil || isNil(o.Ips) {
-    return nil, false
+		return nil, false
 	}
 	return o.Ips, true
 }
@@ -187,7 +190,7 @@ func (o *Device) GetDns() []string {
 // and a boolean to check if the value has been set.
 func (o *Device) GetDnsOk() ([]string, bool) {
 	if o == nil || isNil(o.Dns) {
-    return nil, false
+		return nil, false
 	}
 	return o.Dns, true
 }
@@ -219,7 +222,7 @@ func (o *Device) GetTorOver() bool {
 // and a boolean to check if the value has been set.
 func (o *Device) GetTorOverOk() (*bool, bool) {
 	if o == nil || isNil(o.TorOver) {
-    return nil, false
+		return nil, false
 	}
 	return o.TorOver, true
 }
@@ -251,7 +254,7 @@ func (o *Device) GetConnectionMode() ConnectionMode {
 // and a boolean to check if the value has been set.
 func (o *Device) GetConnectionModeOk() (*ConnectionMode, bool) {
 	if o == nil || isNil(o.ConnectionMode) {
-    return nil, false
+		return nil, false
 	}
 	return o.ConnectionMode, true
 }
@@ -283,7 +286,7 @@ func (o *Device) GetWireguard() WireGuard {
 // and a boolean to check if the value has been set.
 func (o *Device) GetWireguardOk() (*WireGuard, bool) {
 	if o == nil || isNil(o.Wireguard) {
-    return nil, false
+		return nil, false
 	}
 	return o.Wireguard, true
 }
@@ -315,7 +318,7 @@ func (o *Device) GetLocation() Location {
 // and a boolean to check if the value has been set.
 func (o *Device) GetLocationOk() (*Location, bool) {
 	if o == nil || isNil(o.Location) {
-    return nil, false
+		return nil, false
 	}
 	return o.Location, true
 }
@@ -347,7 +350,7 @@ func (o *Device) GetServers() []Server {
 // and a boolean to check if the value has been set.
 func (o *Device) GetServersOk() ([]Server, bool) {
 	if o == nil || isNil(o.Servers) {
-    return nil, false
+		return nil, false
 	}
 	return o.Servers, true
 }
@@ -379,7 +382,7 @@ func (o *Device) GetLastActiveAt() time.Time {
 // and a boolean to check if the value has been set.
 func (o *Device) GetLastActiveAtOk() (*time.Time, bool) {
 	if o == nil || isNil(o.LastActiveAt) {
-    return nil, false
+		return nil, false
 	}
 	return o.LastActiveAt, true
 }
@@ -411,7 +414,7 @@ func (o *Device) GetType() string {
 // and a boolean to check if the value has been set.
 func (o *Device) GetTypeOk() (*string, bool) {
 	if o == nil || isNil(o.Type) {
-    return nil, false
+		return nil, false
 	}
 	return o.Type, true
 }
@@ -431,10 +434,16 @@ func (o *Device) SetType(v string) {
 }
 
 func (o Device) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Device) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["id"] = o.Id
 	if !isNil(o.ExternalKey) {
 		toSerialize["external_key"] = o.ExternalKey
 	}
@@ -468,7 +477,7 @@ func (o Device) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableDevice struct {

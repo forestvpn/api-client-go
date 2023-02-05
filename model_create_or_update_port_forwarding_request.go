@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the CreateOrUpdatePortForwardingRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateOrUpdatePortForwardingRequest{}
+
 // CreateOrUpdatePortForwardingRequest struct for CreateOrUpdatePortForwardingRequest
 type CreateOrUpdatePortForwardingRequest struct {
 	DstPort *int32 `json:"dst_port,omitempty"`
@@ -50,7 +53,7 @@ func (o *CreateOrUpdatePortForwardingRequest) GetDstPort() int32 {
 // and a boolean to check if the value has been set.
 func (o *CreateOrUpdatePortForwardingRequest) GetDstPortOk() (*int32, bool) {
 	if o == nil || isNil(o.DstPort) {
-    return nil, false
+		return nil, false
 	}
 	return o.DstPort, true
 }
@@ -70,11 +73,19 @@ func (o *CreateOrUpdatePortForwardingRequest) SetDstPort(v int32) {
 }
 
 func (o CreateOrUpdatePortForwardingRequest) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CreateOrUpdatePortForwardingRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.DstPort) {
 		toSerialize["dst_port"] = o.DstPort
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableCreateOrUpdatePortForwardingRequest struct {

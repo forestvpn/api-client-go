@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the TokenLogin type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TokenLogin{}
+
 // TokenLogin struct for TokenLogin
 type TokenLogin struct {
 	FirebaseToken string `json:"firebase_token"`
@@ -52,7 +55,7 @@ func (o *TokenLogin) GetFirebaseToken() string {
 // and a boolean to check if the value has been set.
 func (o *TokenLogin) GetFirebaseTokenOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.FirebaseToken, true
 }
@@ -63,11 +66,17 @@ func (o *TokenLogin) SetFirebaseToken(v string) {
 }
 
 func (o TokenLogin) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["firebase_token"] = o.FirebaseToken
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o TokenLogin) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["firebase_token"] = o.FirebaseToken
+	return toSerialize, nil
 }
 
 type NullableTokenLogin struct {

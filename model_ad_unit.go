@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the AdUnit type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AdUnit{}
+
 // AdUnit struct for AdUnit
 type AdUnit struct {
 	Id string `json:"id"`
@@ -60,7 +63,7 @@ func (o *AdUnit) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *AdUnit) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -84,7 +87,7 @@ func (o *AdUnit) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *AdUnit) GetNameOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Name, true
 }
@@ -107,7 +110,7 @@ func (o *AdUnit) GetExternalKey() string {
 // and a boolean to check if the value has been set.
 func (o *AdUnit) GetExternalKeyOk() (*string, bool) {
 	if o == nil || isNil(o.ExternalKey) {
-    return nil, false
+		return nil, false
 	}
 	return o.ExternalKey, true
 }
@@ -140,7 +143,7 @@ func (o *AdUnit) GetFormat() string {
 // and a boolean to check if the value has been set.
 func (o *AdUnit) GetFormatOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Format, true
 }
@@ -163,7 +166,7 @@ func (o *AdUnit) GetReward() AdReward {
 // and a boolean to check if the value has been set.
 func (o *AdUnit) GetRewardOk() (*AdReward, bool) {
 	if o == nil || isNil(o.Reward) {
-    return nil, false
+		return nil, false
 	}
 	return o.Reward, true
 }
@@ -196,7 +199,7 @@ func (o *AdUnit) GetProvider() AdProvider {
 // and a boolean to check if the value has been set.
 func (o *AdUnit) GetProviderOk() (*AdProvider, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Provider, true
 }
@@ -207,26 +210,26 @@ func (o *AdUnit) SetProvider(v AdProvider) {
 }
 
 func (o AdUnit) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AdUnit) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if true {
-		toSerialize["name"] = o.Name
-	}
+	toSerialize["id"] = o.Id
+	toSerialize["name"] = o.Name
 	if !isNil(o.ExternalKey) {
 		toSerialize["external_key"] = o.ExternalKey
 	}
-	if true {
-		toSerialize["format"] = o.Format
-	}
+	toSerialize["format"] = o.Format
 	if !isNil(o.Reward) {
 		toSerialize["reward"] = o.Reward
 	}
-	if true {
-		toSerialize["provider"] = o.Provider
-	}
-	return json.Marshal(toSerialize)
+	toSerialize["provider"] = o.Provider
+	return toSerialize, nil
 }
 
 type NullableAdUnit struct {

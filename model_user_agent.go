@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the UserAgent type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UserAgent{}
+
 // UserAgent struct for UserAgent
 type UserAgent struct {
 	Os *UserAgentOs `json:"os,omitempty"`
@@ -52,7 +55,7 @@ func (o *UserAgent) GetOs() UserAgentOs {
 // and a boolean to check if the value has been set.
 func (o *UserAgent) GetOsOk() (*UserAgentOs, bool) {
 	if o == nil || isNil(o.Os) {
-    return nil, false
+		return nil, false
 	}
 	return o.Os, true
 }
@@ -84,7 +87,7 @@ func (o *UserAgent) GetDevice() UserAgentDevice {
 // and a boolean to check if the value has been set.
 func (o *UserAgent) GetDeviceOk() (*UserAgentDevice, bool) {
 	if o == nil || isNil(o.Device) {
-    return nil, false
+		return nil, false
 	}
 	return o.Device, true
 }
@@ -116,7 +119,7 @@ func (o *UserAgent) GetBrowser() UserAgentBrowser {
 // and a boolean to check if the value has been set.
 func (o *UserAgent) GetBrowserOk() (*UserAgentBrowser, bool) {
 	if o == nil || isNil(o.Browser) {
-    return nil, false
+		return nil, false
 	}
 	return o.Browser, true
 }
@@ -136,6 +139,14 @@ func (o *UserAgent) SetBrowser(v UserAgentBrowser) {
 }
 
 func (o UserAgent) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o UserAgent) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Os) {
 		toSerialize["os"] = o.Os
@@ -146,7 +157,7 @@ func (o UserAgent) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Browser) {
 		toSerialize["browser"] = o.Browser
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableUserAgent struct {

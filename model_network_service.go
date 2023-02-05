@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the NetworkService type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NetworkService{}
+
 // NetworkService struct for NetworkService
 type NetworkService struct {
 	Proto string `json:"proto"`
@@ -54,7 +57,7 @@ func (o *NetworkService) GetProto() string {
 // and a boolean to check if the value has been set.
 func (o *NetworkService) GetProtoOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Proto, true
 }
@@ -78,7 +81,7 @@ func (o *NetworkService) GetConnectionUri() string {
 // and a boolean to check if the value has been set.
 func (o *NetworkService) GetConnectionUriOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.ConnectionUri, true
 }
@@ -89,14 +92,18 @@ func (o *NetworkService) SetConnectionUri(v string) {
 }
 
 func (o NetworkService) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["proto"] = o.Proto
-	}
-	if true {
-		toSerialize["connection_uri"] = o.ConnectionUri
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o NetworkService) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["proto"] = o.Proto
+	toSerialize["connection_uri"] = o.ConnectionUri
+	return toSerialize, nil
 }
 
 type NullableNetworkService struct {

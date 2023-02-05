@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the CreateOrUpdateDeviceRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateOrUpdateDeviceRequest{}
+
 // CreateOrUpdateDeviceRequest struct for CreateOrUpdateDeviceRequest
 type CreateOrUpdateDeviceRequest struct {
 	ExternalKey NullableString `json:"external_key,omitempty"`
@@ -65,7 +68,7 @@ func (o *CreateOrUpdateDeviceRequest) GetExternalKey() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateOrUpdateDeviceRequest) GetExternalKeyOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.ExternalKey.Get(), o.ExternalKey.IsSet()
 }
@@ -106,7 +109,7 @@ func (o *CreateOrUpdateDeviceRequest) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *CreateOrUpdateDeviceRequest) GetNameOk() (*string, bool) {
 	if o == nil || isNil(o.Name) {
-    return nil, false
+		return nil, false
 	}
 	return o.Name, true
 }
@@ -139,7 +142,7 @@ func (o *CreateOrUpdateDeviceRequest) GetLocation() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateOrUpdateDeviceRequest) GetLocationOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Location.Get(), o.Location.IsSet()
 }
@@ -180,7 +183,7 @@ func (o *CreateOrUpdateDeviceRequest) GetTorOver() bool {
 // and a boolean to check if the value has been set.
 func (o *CreateOrUpdateDeviceRequest) GetTorOverOk() (*bool, bool) {
 	if o == nil || isNil(o.TorOver) {
-    return nil, false
+		return nil, false
 	}
 	return o.TorOver, true
 }
@@ -213,7 +216,7 @@ func (o *CreateOrUpdateDeviceRequest) GetConnectionMode() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateOrUpdateDeviceRequest) GetConnectionModeOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.ConnectionMode.Get(), o.ConnectionMode.IsSet()
 }
@@ -254,7 +257,7 @@ func (o *CreateOrUpdateDeviceRequest) GetRandomServer() bool {
 // and a boolean to check if the value has been set.
 func (o *CreateOrUpdateDeviceRequest) GetRandomServerOk() (*bool, bool) {
 	if o == nil || isNil(o.RandomServer) {
-    return nil, false
+		return nil, false
 	}
 	return o.RandomServer, true
 }
@@ -287,7 +290,7 @@ func (o *CreateOrUpdateDeviceRequest) GetInfo() CreateOrUpdateDeviceRequestInfo 
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateOrUpdateDeviceRequest) GetInfoOk() (*CreateOrUpdateDeviceRequestInfo, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Info.Get(), o.Info.IsSet()
 }
@@ -316,6 +319,14 @@ func (o *CreateOrUpdateDeviceRequest) UnsetInfo() {
 }
 
 func (o CreateOrUpdateDeviceRequest) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CreateOrUpdateDeviceRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ExternalKey.IsSet() {
 		toSerialize["external_key"] = o.ExternalKey.Get()
@@ -338,7 +349,7 @@ func (o CreateOrUpdateDeviceRequest) MarshalJSON() ([]byte, error) {
 	if o.Info.IsSet() {
 		toSerialize["info"] = o.Info.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableCreateOrUpdateDeviceRequest struct {

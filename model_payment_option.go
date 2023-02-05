@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the PaymentOption type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PaymentOption{}
+
 // PaymentOption struct for PaymentOption
 type PaymentOption struct {
 	Id string `json:"id"`
@@ -57,7 +60,7 @@ func (o *PaymentOption) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *PaymentOption) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -81,7 +84,7 @@ func (o *PaymentOption) GetSlug() string {
 // and a boolean to check if the value has been set.
 func (o *PaymentOption) GetSlugOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Slug, true
 }
@@ -105,7 +108,7 @@ func (o *PaymentOption) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *PaymentOption) GetNameOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Name, true
 }
@@ -128,7 +131,7 @@ func (o *PaymentOption) GetDescription() string {
 // and a boolean to check if the value has been set.
 func (o *PaymentOption) GetDescriptionOk() (*string, bool) {
 	if o == nil || isNil(o.Description) {
-    return nil, false
+		return nil, false
 	}
 	return o.Description, true
 }
@@ -148,20 +151,22 @@ func (o *PaymentOption) SetDescription(v string) {
 }
 
 func (o PaymentOption) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PaymentOption) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if true {
-		toSerialize["slug"] = o.Slug
-	}
-	if true {
-		toSerialize["name"] = o.Name
-	}
+	toSerialize["id"] = o.Id
+	toSerialize["slug"] = o.Slug
+	toSerialize["name"] = o.Name
 	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullablePaymentOption struct {

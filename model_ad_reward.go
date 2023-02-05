@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the AdReward type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AdReward{}
+
 // AdReward struct for AdReward
 type AdReward struct {
 	Item string `json:"item"`
@@ -54,7 +57,7 @@ func (o *AdReward) GetItem() string {
 // and a boolean to check if the value has been set.
 func (o *AdReward) GetItemOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Item, true
 }
@@ -78,7 +81,7 @@ func (o *AdReward) GetAmount() int32 {
 // and a boolean to check if the value has been set.
 func (o *AdReward) GetAmountOk() (*int32, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Amount, true
 }
@@ -89,14 +92,18 @@ func (o *AdReward) SetAmount(v int32) {
 }
 
 func (o AdReward) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["item"] = o.Item
-	}
-	if true {
-		toSerialize["amount"] = o.Amount
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o AdReward) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["item"] = o.Item
+	toSerialize["amount"] = o.Amount
+	return toSerialize, nil
 }
 
 type NullableAdReward struct {

@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the CloudPaymentsAuth type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudPaymentsAuth{}
+
 // CloudPaymentsAuth struct for CloudPaymentsAuth
 type CloudPaymentsAuth struct {
 	TransactionId *int32 `json:"transaction_id,omitempty"`
@@ -51,7 +54,7 @@ func (o *CloudPaymentsAuth) GetTransactionId() int32 {
 // and a boolean to check if the value has been set.
 func (o *CloudPaymentsAuth) GetTransactionIdOk() (*int32, bool) {
 	if o == nil || isNil(o.TransactionId) {
-    return nil, false
+		return nil, false
 	}
 	return o.TransactionId, true
 }
@@ -83,7 +86,7 @@ func (o *CloudPaymentsAuth) GetSecure3d() CloudPaymentsSecure3d {
 // and a boolean to check if the value has been set.
 func (o *CloudPaymentsAuth) GetSecure3dOk() (*CloudPaymentsSecure3d, bool) {
 	if o == nil || isNil(o.Secure3d) {
-    return nil, false
+		return nil, false
 	}
 	return o.Secure3d, true
 }
@@ -103,6 +106,14 @@ func (o *CloudPaymentsAuth) SetSecure3d(v CloudPaymentsSecure3d) {
 }
 
 func (o CloudPaymentsAuth) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudPaymentsAuth) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.TransactionId) {
 		toSerialize["transaction_id"] = o.TransactionId
@@ -110,7 +121,7 @@ func (o CloudPaymentsAuth) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Secure3d) {
 		toSerialize["secure3d"] = o.Secure3d
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableCloudPaymentsAuth struct {

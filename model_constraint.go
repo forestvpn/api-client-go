@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the Constraint type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Constraint{}
+
 // Constraint struct for Constraint
 type Constraint struct {
 	Namespace *string `json:"namespace,omitempty"`
@@ -52,7 +55,7 @@ func (o *Constraint) GetNamespace() string {
 // and a boolean to check if the value has been set.
 func (o *Constraint) GetNamespaceOk() (*string, bool) {
 	if o == nil || isNil(o.Namespace) {
-    return nil, false
+		return nil, false
 	}
 	return o.Namespace, true
 }
@@ -84,7 +87,7 @@ func (o *Constraint) GetRelation() string {
 // and a boolean to check if the value has been set.
 func (o *Constraint) GetRelationOk() (*string, bool) {
 	if o == nil || isNil(o.Relation) {
-    return nil, false
+		return nil, false
 	}
 	return o.Relation, true
 }
@@ -116,7 +119,7 @@ func (o *Constraint) GetSubject() []string {
 // and a boolean to check if the value has been set.
 func (o *Constraint) GetSubjectOk() ([]string, bool) {
 	if o == nil || isNil(o.Subject) {
-    return nil, false
+		return nil, false
 	}
 	return o.Subject, true
 }
@@ -136,6 +139,14 @@ func (o *Constraint) SetSubject(v []string) {
 }
 
 func (o Constraint) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Constraint) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Namespace) {
 		toSerialize["namespace"] = o.Namespace
@@ -146,7 +157,7 @@ func (o Constraint) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Subject) {
 		toSerialize["subject"] = o.Subject
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableConstraint struct {

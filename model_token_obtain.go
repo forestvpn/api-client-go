@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the TokenObtain type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TokenObtain{}
+
 // TokenObtain struct for TokenObtain
 type TokenObtain struct {
 	Access string `json:"access"`
@@ -56,7 +59,7 @@ func (o *TokenObtain) GetAccess() string {
 // and a boolean to check if the value has been set.
 func (o *TokenObtain) GetAccessOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Access, true
 }
@@ -80,7 +83,7 @@ func (o *TokenObtain) GetRefresh() string {
 // and a boolean to check if the value has been set.
 func (o *TokenObtain) GetRefreshOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Refresh, true
 }
@@ -104,7 +107,7 @@ func (o *TokenObtain) GetLoginUrl() string {
 // and a boolean to check if the value has been set.
 func (o *TokenObtain) GetLoginUrlOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.LoginUrl, true
 }
@@ -115,17 +118,19 @@ func (o *TokenObtain) SetLoginUrl(v string) {
 }
 
 func (o TokenObtain) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["access"] = o.Access
-	}
-	if true {
-		toSerialize["refresh"] = o.Refresh
-	}
-	if true {
-		toSerialize["login_url"] = o.LoginUrl
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o TokenObtain) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["access"] = o.Access
+	toSerialize["refresh"] = o.Refresh
+	toSerialize["login_url"] = o.LoginUrl
+	return toSerialize, nil
 }
 
 type NullableTokenObtain struct {

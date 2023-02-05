@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the CreateTokenLogin type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateTokenLogin{}
+
 // CreateTokenLogin struct for CreateTokenLogin
 type CreateTokenLogin struct {
 	JwtToken string `json:"jwt_token"`
@@ -52,7 +55,7 @@ func (o *CreateTokenLogin) GetJwtToken() string {
 // and a boolean to check if the value has been set.
 func (o *CreateTokenLogin) GetJwtTokenOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.JwtToken, true
 }
@@ -63,11 +66,17 @@ func (o *CreateTokenLogin) SetJwtToken(v string) {
 }
 
 func (o CreateTokenLogin) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["jwt_token"] = o.JwtToken
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o CreateTokenLogin) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["jwt_token"] = o.JwtToken
+	return toSerialize, nil
 }
 
 type NullableCreateTokenLogin struct {

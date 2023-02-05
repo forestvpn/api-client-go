@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the AggregatedDataUsageStats type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AggregatedDataUsageStats{}
+
 // AggregatedDataUsageStats struct for AggregatedDataUsageStats
 type AggregatedDataUsageStats struct {
 	// Aggregation value. It might de a hour, day, week, or month
@@ -63,7 +66,7 @@ func (o *AggregatedDataUsageStats) GetAggrInterval() string {
 // and a boolean to check if the value has been set.
 func (o *AggregatedDataUsageStats) GetAggrIntervalOk() (*string, bool) {
 	if o == nil || isNil(o.AggrInterval) {
-    return nil, false
+		return nil, false
 	}
 	return o.AggrInterval, true
 }
@@ -95,7 +98,7 @@ func (o *AggregatedDataUsageStats) GetDeviceId() string {
 // and a boolean to check if the value has been set.
 func (o *AggregatedDataUsageStats) GetDeviceIdOk() (*string, bool) {
 	if o == nil || isNil(o.DeviceId) {
-    return nil, false
+		return nil, false
 	}
 	return o.DeviceId, true
 }
@@ -127,7 +130,7 @@ func (o *AggregatedDataUsageStats) GetDeviceName() string {
 // and a boolean to check if the value has been set.
 func (o *AggregatedDataUsageStats) GetDeviceNameOk() (*string, bool) {
 	if o == nil || isNil(o.DeviceName) {
-    return nil, false
+		return nil, false
 	}
 	return o.DeviceName, true
 }
@@ -159,7 +162,7 @@ func (o *AggregatedDataUsageStats) GetReceivedBytes() int32 {
 // and a boolean to check if the value has been set.
 func (o *AggregatedDataUsageStats) GetReceivedBytesOk() (*int32, bool) {
 	if o == nil || isNil(o.ReceivedBytes) {
-    return nil, false
+		return nil, false
 	}
 	return o.ReceivedBytes, true
 }
@@ -191,7 +194,7 @@ func (o *AggregatedDataUsageStats) GetTransmittedBytes() int32 {
 // and a boolean to check if the value has been set.
 func (o *AggregatedDataUsageStats) GetTransmittedBytesOk() (*int32, bool) {
 	if o == nil || isNil(o.TransmittedBytes) {
-    return nil, false
+		return nil, false
 	}
 	return o.TransmittedBytes, true
 }
@@ -223,7 +226,7 @@ func (o *AggregatedDataUsageStats) GetTotalBytes() int32 {
 // and a boolean to check if the value has been set.
 func (o *AggregatedDataUsageStats) GetTotalBytesOk() (*int32, bool) {
 	if o == nil || isNil(o.TotalBytes) {
-    return nil, false
+		return nil, false
 	}
 	return o.TotalBytes, true
 }
@@ -255,7 +258,7 @@ func (o *AggregatedDataUsageStats) GetUsageTime() int32 {
 // and a boolean to check if the value has been set.
 func (o *AggregatedDataUsageStats) GetUsageTimeOk() (*int32, bool) {
 	if o == nil || isNil(o.UsageTime) {
-    return nil, false
+		return nil, false
 	}
 	return o.UsageTime, true
 }
@@ -275,6 +278,14 @@ func (o *AggregatedDataUsageStats) SetUsageTime(v int32) {
 }
 
 func (o AggregatedDataUsageStats) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AggregatedDataUsageStats) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.AggrInterval) {
 		toSerialize["aggr_interval"] = o.AggrInterval
@@ -297,7 +308,7 @@ func (o AggregatedDataUsageStats) MarshalJSON() ([]byte, error) {
 	if !isNil(o.UsageTime) {
 		toSerialize["usage_time"] = o.UsageTime
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableAggregatedDataUsageStats struct {

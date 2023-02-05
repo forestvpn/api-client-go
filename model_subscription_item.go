@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the SubscriptionItem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SubscriptionItem{}
+
 // SubscriptionItem struct for SubscriptionItem
 type SubscriptionItem struct {
 	Id string `json:"id"`
@@ -58,7 +61,7 @@ func (o *SubscriptionItem) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *SubscriptionItem) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -82,7 +85,7 @@ func (o *SubscriptionItem) GetPrice() Price {
 // and a boolean to check if the value has been set.
 func (o *SubscriptionItem) GetPriceOk() (*Price, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Price, true
 }
@@ -106,7 +109,7 @@ func (o *SubscriptionItem) GetPriceId() string {
 // and a boolean to check if the value has been set.
 func (o *SubscriptionItem) GetPriceIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.PriceId, true
 }
@@ -130,7 +133,7 @@ func (o *SubscriptionItem) GetQuantity() int32 {
 // and a boolean to check if the value has been set.
 func (o *SubscriptionItem) GetQuantityOk() (*int32, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Quantity, true
 }
@@ -141,20 +144,20 @@ func (o *SubscriptionItem) SetQuantity(v int32) {
 }
 
 func (o SubscriptionItem) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if true {
-		toSerialize["price"] = o.Price
-	}
-	if true {
-		toSerialize["price_id"] = o.PriceId
-	}
-	if true {
-		toSerialize["quantity"] = o.Quantity
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o SubscriptionItem) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	// skip: id is readOnly
+	// skip: price is readOnly
+	toSerialize["price_id"] = o.PriceId
+	toSerialize["quantity"] = o.Quantity
+	return toSerialize, nil
 }
 
 type NullableSubscriptionItem struct {

@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the WireGuardPeerUser type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WireGuardPeerUser{}
+
 // WireGuardPeerUser struct for WireGuardPeerUser
 type WireGuardPeerUser struct {
 	Id *string `json:"id,omitempty"`
@@ -55,7 +58,7 @@ func (o *WireGuardPeerUser) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeerUser) GetIdOk() (*string, bool) {
 	if o == nil || isNil(o.Id) {
-    return nil, false
+		return nil, false
 	}
 	return o.Id, true
 }
@@ -87,7 +90,7 @@ func (o *WireGuardPeerUser) GetUsername() string {
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeerUser) GetUsernameOk() (*string, bool) {
 	if o == nil || isNil(o.Username) {
-    return nil, false
+		return nil, false
 	}
 	return o.Username, true
 }
@@ -119,7 +122,7 @@ func (o *WireGuardPeerUser) GetFirstName() string {
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeerUser) GetFirstNameOk() (*string, bool) {
 	if o == nil || isNil(o.FirstName) {
-    return nil, false
+		return nil, false
 	}
 	return o.FirstName, true
 }
@@ -151,7 +154,7 @@ func (o *WireGuardPeerUser) GetLastName() string {
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeerUser) GetLastNameOk() (*string, bool) {
 	if o == nil || isNil(o.LastName) {
-    return nil, false
+		return nil, false
 	}
 	return o.LastName, true
 }
@@ -183,7 +186,7 @@ func (o *WireGuardPeerUser) GetEmail() string {
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeerUser) GetEmailOk() (*string, bool) {
 	if o == nil || isNil(o.Email) {
-    return nil, false
+		return nil, false
 	}
 	return o.Email, true
 }
@@ -215,7 +218,7 @@ func (o *WireGuardPeerUser) GetPhotoUrl() string {
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeerUser) GetPhotoUrlOk() (*string, bool) {
 	if o == nil || isNil(o.PhotoUrl) {
-    return nil, false
+		return nil, false
 	}
 	return o.PhotoUrl, true
 }
@@ -235,6 +238,14 @@ func (o *WireGuardPeerUser) SetPhotoUrl(v string) {
 }
 
 func (o WireGuardPeerUser) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WireGuardPeerUser) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Id) {
 		toSerialize["id"] = o.Id
@@ -254,7 +265,7 @@ func (o WireGuardPeerUser) MarshalJSON() ([]byte, error) {
 	if !isNil(o.PhotoUrl) {
 		toSerialize["photo_url"] = o.PhotoUrl
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableWireGuardPeerUser struct {

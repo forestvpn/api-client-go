@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the CreateFCMDeviceRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateFCMDeviceRequest{}
+
 // CreateFCMDeviceRequest struct for CreateFCMDeviceRequest
 type CreateFCMDeviceRequest struct {
 	RegistrationId string `json:"registration_id"`
@@ -55,7 +58,7 @@ func (o *CreateFCMDeviceRequest) GetRegistrationId() string {
 // and a boolean to check if the value has been set.
 func (o *CreateFCMDeviceRequest) GetRegistrationIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.RegistrationId, true
 }
@@ -79,7 +82,7 @@ func (o *CreateFCMDeviceRequest) GetDeviceId() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateFCMDeviceRequest) GetDeviceIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.DeviceId.Get(), o.DeviceId.IsSet()
 }
@@ -121,7 +124,7 @@ func (o *CreateFCMDeviceRequest) GetActive() bool {
 // and a boolean to check if the value has been set.
 func (o *CreateFCMDeviceRequest) GetActiveOk() (*bool, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Active, true
 }
@@ -132,17 +135,21 @@ func (o *CreateFCMDeviceRequest) SetActive(v bool) {
 }
 
 func (o CreateFCMDeviceRequest) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["registration_id"] = o.RegistrationId
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CreateFCMDeviceRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["registration_id"] = o.RegistrationId
 	if o.DeviceId.IsSet() {
 		toSerialize["device_id"] = o.DeviceId.Get()
 	}
-	if true {
-		toSerialize["active"] = o.Active
-	}
-	return json.Marshal(toSerialize)
+	toSerialize["active"] = o.Active
+	return toSerialize, nil
 }
 
 type NullableCreateFCMDeviceRequest struct {

@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the UpdateUserDeviceRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateUserDeviceRequest{}
+
 // UpdateUserDeviceRequest struct for UpdateUserDeviceRequest
 type UpdateUserDeviceRequest struct {
 	AppsflyerId *string `json:"appsflyer_id,omitempty"`
@@ -57,7 +60,7 @@ func (o *UpdateUserDeviceRequest) GetAppsflyerId() string {
 // and a boolean to check if the value has been set.
 func (o *UpdateUserDeviceRequest) GetAppsflyerIdOk() (*string, bool) {
 	if o == nil || isNil(o.AppsflyerId) {
-    return nil, false
+		return nil, false
 	}
 	return o.AppsflyerId, true
 }
@@ -89,7 +92,7 @@ func (o *UpdateUserDeviceRequest) GetGaid() string {
 // and a boolean to check if the value has been set.
 func (o *UpdateUserDeviceRequest) GetGaidOk() (*string, bool) {
 	if o == nil || isNil(o.Gaid) {
-    return nil, false
+		return nil, false
 	}
 	return o.Gaid, true
 }
@@ -121,7 +124,7 @@ func (o *UpdateUserDeviceRequest) GetIdfa() string {
 // and a boolean to check if the value has been set.
 func (o *UpdateUserDeviceRequest) GetIdfaOk() (*string, bool) {
 	if o == nil || isNil(o.Idfa) {
-    return nil, false
+		return nil, false
 	}
 	return o.Idfa, true
 }
@@ -153,7 +156,7 @@ func (o *UpdateUserDeviceRequest) GetIdfv() string {
 // and a boolean to check if the value has been set.
 func (o *UpdateUserDeviceRequest) GetIdfvOk() (*string, bool) {
 	if o == nil || isNil(o.Idfv) {
-    return nil, false
+		return nil, false
 	}
 	return o.Idfv, true
 }
@@ -185,7 +188,7 @@ func (o *UpdateUserDeviceRequest) GetOaid() string {
 // and a boolean to check if the value has been set.
 func (o *UpdateUserDeviceRequest) GetOaidOk() (*string, bool) {
 	if o == nil || isNil(o.Oaid) {
-    return nil, false
+		return nil, false
 	}
 	return o.Oaid, true
 }
@@ -217,7 +220,7 @@ func (o *UpdateUserDeviceRequest) GetAmazonAid() string {
 // and a boolean to check if the value has been set.
 func (o *UpdateUserDeviceRequest) GetAmazonAidOk() (*string, bool) {
 	if o == nil || isNil(o.AmazonAid) {
-    return nil, false
+		return nil, false
 	}
 	return o.AmazonAid, true
 }
@@ -249,7 +252,7 @@ func (o *UpdateUserDeviceRequest) GetImei() string {
 // and a boolean to check if the value has been set.
 func (o *UpdateUserDeviceRequest) GetImeiOk() (*string, bool) {
 	if o == nil || isNil(o.Imei) {
-    return nil, false
+		return nil, false
 	}
 	return o.Imei, true
 }
@@ -281,7 +284,7 @@ func (o *UpdateUserDeviceRequest) GetRef() string {
 // and a boolean to check if the value has been set.
 func (o *UpdateUserDeviceRequest) GetRefOk() (*string, bool) {
 	if o == nil || isNil(o.Ref) {
-    return nil, false
+		return nil, false
 	}
 	return o.Ref, true
 }
@@ -301,6 +304,14 @@ func (o *UpdateUserDeviceRequest) SetRef(v string) {
 }
 
 func (o UpdateUserDeviceRequest) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o UpdateUserDeviceRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.AppsflyerId) {
 		toSerialize["appsflyer_id"] = o.AppsflyerId
@@ -326,7 +337,7 @@ func (o UpdateUserDeviceRequest) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Ref) {
 		toSerialize["ref"] = o.Ref
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableUpdateUserDeviceRequest struct {

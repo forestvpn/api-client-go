@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the BillingAccount type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BillingAccount{}
+
 // BillingAccount Represents billing account
 type BillingAccount struct {
 	Id string `json:"id"`
@@ -56,7 +59,7 @@ func (o *BillingAccount) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *BillingAccount) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -80,7 +83,7 @@ func (o *BillingAccount) GetDefaultPaymentMethod() PaymentMethod {
 // and a boolean to check if the value has been set.
 func (o *BillingAccount) GetDefaultPaymentMethodOk() (*PaymentMethod, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.DefaultPaymentMethod, true
 }
@@ -104,7 +107,7 @@ func (o *BillingAccount) GetDefaultPaymentMethodId() string {
 // and a boolean to check if the value has been set.
 func (o *BillingAccount) GetDefaultPaymentMethodIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.DefaultPaymentMethodId, true
 }
@@ -115,17 +118,19 @@ func (o *BillingAccount) SetDefaultPaymentMethodId(v string) {
 }
 
 func (o BillingAccount) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if true {
-		toSerialize["default_payment_method"] = o.DefaultPaymentMethod
-	}
-	if true {
-		toSerialize["default_payment_method_id"] = o.DefaultPaymentMethodId
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o BillingAccount) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	// skip: id is readOnly
+	// skip: default_payment_method is readOnly
+	toSerialize["default_payment_method_id"] = o.DefaultPaymentMethodId
+	return toSerialize, nil
 }
 
 type NullableBillingAccount struct {

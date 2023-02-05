@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the Discount type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Discount{}
+
 // Discount struct for Discount
 type Discount struct {
 	Price *float64 `json:"price,omitempty"`
@@ -52,7 +55,7 @@ func (o *Discount) GetPrice() float64 {
 // and a boolean to check if the value has been set.
 func (o *Discount) GetPriceOk() (*float64, bool) {
 	if o == nil || isNil(o.Price) {
-    return nil, false
+		return nil, false
 	}
 	return o.Price, true
 }
@@ -84,7 +87,7 @@ func (o *Discount) GetRecurring() string {
 // and a boolean to check if the value has been set.
 func (o *Discount) GetRecurringOk() (*string, bool) {
 	if o == nil || isNil(o.Recurring) {
-    return nil, false
+		return nil, false
 	}
 	return o.Recurring, true
 }
@@ -116,7 +119,7 @@ func (o *Discount) GetDiscount() float64 {
 // and a boolean to check if the value has been set.
 func (o *Discount) GetDiscountOk() (*float64, bool) {
 	if o == nil || isNil(o.Discount) {
-    return nil, false
+		return nil, false
 	}
 	return o.Discount, true
 }
@@ -136,6 +139,14 @@ func (o *Discount) SetDiscount(v float64) {
 }
 
 func (o Discount) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Discount) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Price) {
 		toSerialize["price"] = o.Price
@@ -146,7 +157,7 @@ func (o Discount) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Discount) {
 		toSerialize["discount"] = o.Discount
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableDiscount struct {

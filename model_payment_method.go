@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the PaymentMethod type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PaymentMethod{}
+
 // PaymentMethod struct for PaymentMethod
 type PaymentMethod struct {
 	Id string `json:"id"`
@@ -58,7 +61,7 @@ func (o *PaymentMethod) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *PaymentMethod) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -82,7 +85,7 @@ func (o *PaymentMethod) GetType() PaymentMethodType {
 // and a boolean to check if the value has been set.
 func (o *PaymentMethod) GetTypeOk() (*PaymentMethodType, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Type, true
 }
@@ -105,7 +108,7 @@ func (o *PaymentMethod) GetCard() PaymentMethodCard {
 // and a boolean to check if the value has been set.
 func (o *PaymentMethod) GetCardOk() (*PaymentMethodCard, bool) {
 	if o == nil || isNil(o.Card) {
-    return nil, false
+		return nil, false
 	}
 	return o.Card, true
 }
@@ -138,7 +141,7 @@ func (o *PaymentMethod) GetCreatedAt() time.Time {
 // and a boolean to check if the value has been set.
 func (o *PaymentMethod) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.CreatedAt, true
 }
@@ -149,20 +152,22 @@ func (o *PaymentMethod) SetCreatedAt(v time.Time) {
 }
 
 func (o PaymentMethod) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if true {
-		toSerialize["type"] = o.Type
-	}
+	toSerialize["id"] = o.Id
+	toSerialize["type"] = o.Type
 	if !isNil(o.Card) {
 		toSerialize["card"] = o.Card
 	}
-	if true {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	return json.Marshal(toSerialize)
+	toSerialize["created_at"] = o.CreatedAt
+	return toSerialize, nil
 }
 
 type NullablePaymentMethod struct {

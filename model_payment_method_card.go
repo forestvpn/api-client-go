@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the PaymentMethodCard type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PaymentMethodCard{}
+
 // PaymentMethodCard struct for PaymentMethodCard
 type PaymentMethodCard struct {
 	// Card brand
@@ -60,7 +63,7 @@ func (o *PaymentMethodCard) GetBrand() string {
 // and a boolean to check if the value has been set.
 func (o *PaymentMethodCard) GetBrandOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Brand, true
 }
@@ -84,7 +87,7 @@ func (o *PaymentMethodCard) GetLast4() string {
 // and a boolean to check if the value has been set.
 func (o *PaymentMethodCard) GetLast4Ok() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Last4, true
 }
@@ -107,7 +110,7 @@ func (o *PaymentMethodCard) GetCountry() Country {
 // and a boolean to check if the value has been set.
 func (o *PaymentMethodCard) GetCountryOk() (*Country, bool) {
 	if o == nil || isNil(o.Country) {
-    return nil, false
+		return nil, false
 	}
 	return o.Country, true
 }
@@ -140,7 +143,7 @@ func (o *PaymentMethodCard) GetExpiresAt() string {
 // and a boolean to check if the value has been set.
 func (o *PaymentMethodCard) GetExpiresAtOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.ExpiresAt, true
 }
@@ -151,20 +154,22 @@ func (o *PaymentMethodCard) SetExpiresAt(v string) {
 }
 
 func (o PaymentMethodCard) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PaymentMethodCard) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["brand"] = o.Brand
-	}
-	if true {
-		toSerialize["last4"] = o.Last4
-	}
+	toSerialize["brand"] = o.Brand
+	toSerialize["last4"] = o.Last4
 	if !isNil(o.Country) {
 		toSerialize["country"] = o.Country
 	}
-	if true {
-		toSerialize["expires_at"] = o.ExpiresAt
-	}
-	return json.Marshal(toSerialize)
+	toSerialize["expires_at"] = o.ExpiresAt
+	return toSerialize, nil
 }
 
 type NullablePaymentMethodCard struct {

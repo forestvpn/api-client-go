@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the AdPlacement type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AdPlacement{}
+
 // AdPlacement struct for AdPlacement
 type AdPlacement struct {
 	Id string `json:"id"`
@@ -56,7 +59,7 @@ func (o *AdPlacement) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *AdPlacement) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -80,7 +83,7 @@ func (o *AdPlacement) GetSlug() string {
 // and a boolean to check if the value has been set.
 func (o *AdPlacement) GetSlugOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Slug, true
 }
@@ -104,7 +107,7 @@ func (o *AdPlacement) GetUnits() []AdUnit {
 // and a boolean to check if the value has been set.
 func (o *AdPlacement) GetUnitsOk() ([]AdUnit, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Units, true
 }
@@ -115,17 +118,19 @@ func (o *AdPlacement) SetUnits(v []AdUnit) {
 }
 
 func (o AdPlacement) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if true {
-		toSerialize["slug"] = o.Slug
-	}
-	if true {
-		toSerialize["units"] = o.Units
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o AdPlacement) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["id"] = o.Id
+	toSerialize["slug"] = o.Slug
+	toSerialize["units"] = o.Units
+	return toSerialize, nil
 }
 
 type NullableAdPlacement struct {

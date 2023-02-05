@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the CreateAdUnitRequestLogRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateAdUnitRequestLogRequest{}
+
 // CreateAdUnitRequestLogRequest struct for CreateAdUnitRequestLogRequest
 type CreateAdUnitRequestLogRequest struct {
 	Unit string `json:"unit"`
@@ -60,7 +63,7 @@ func (o *CreateAdUnitRequestLogRequest) GetUnit() string {
 // and a boolean to check if the value has been set.
 func (o *CreateAdUnitRequestLogRequest) GetUnitOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Unit, true
 }
@@ -84,7 +87,7 @@ func (o *CreateAdUnitRequestLogRequest) GetRequestDate() time.Time {
 // and a boolean to check if the value has been set.
 func (o *CreateAdUnitRequestLogRequest) GetRequestDateOk() (*time.Time, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.RequestDate, true
 }
@@ -107,7 +110,7 @@ func (o *CreateAdUnitRequestLogRequest) GetErrorCode() int32 {
 // and a boolean to check if the value has been set.
 func (o *CreateAdUnitRequestLogRequest) GetErrorCodeOk() (*int32, bool) {
 	if o == nil || isNil(o.ErrorCode) {
-    return nil, false
+		return nil, false
 	}
 	return o.ErrorCode, true
 }
@@ -139,7 +142,7 @@ func (o *CreateAdUnitRequestLogRequest) GetErrorMessage() string {
 // and a boolean to check if the value has been set.
 func (o *CreateAdUnitRequestLogRequest) GetErrorMessageOk() (*string, bool) {
 	if o == nil || isNil(o.ErrorMessage) {
-    return nil, false
+		return nil, false
 	}
 	return o.ErrorMessage, true
 }
@@ -172,7 +175,7 @@ func (o *CreateAdUnitRequestLogRequest) GetDuration() string {
 // and a boolean to check if the value has been set.
 func (o *CreateAdUnitRequestLogRequest) GetDurationOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Duration, true
 }
@@ -183,23 +186,25 @@ func (o *CreateAdUnitRequestLogRequest) SetDuration(v string) {
 }
 
 func (o CreateAdUnitRequestLogRequest) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CreateAdUnitRequestLogRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["unit"] = o.Unit
-	}
-	if true {
-		toSerialize["request_date"] = o.RequestDate
-	}
+	toSerialize["unit"] = o.Unit
+	toSerialize["request_date"] = o.RequestDate
 	if !isNil(o.ErrorCode) {
 		toSerialize["error_code"] = o.ErrorCode
 	}
 	if !isNil(o.ErrorMessage) {
 		toSerialize["error_message"] = o.ErrorMessage
 	}
-	if true {
-		toSerialize["duration"] = o.Duration
-	}
-	return json.Marshal(toSerialize)
+	toSerialize["duration"] = o.Duration
+	return toSerialize, nil
 }
 
 type NullableCreateAdUnitRequestLogRequest struct {

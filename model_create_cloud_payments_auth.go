@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the CreateCloudPaymentsAuth type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateCloudPaymentsAuth{}
+
 // CreateCloudPaymentsAuth struct for CreateCloudPaymentsAuth
 type CreateCloudPaymentsAuth struct {
 	Cryptogram string `json:"cryptogram"`
@@ -54,7 +57,7 @@ func (o *CreateCloudPaymentsAuth) GetCryptogram() string {
 // and a boolean to check if the value has been set.
 func (o *CreateCloudPaymentsAuth) GetCryptogramOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Cryptogram, true
 }
@@ -78,7 +81,7 @@ func (o *CreateCloudPaymentsAuth) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *CreateCloudPaymentsAuth) GetNameOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Name, true
 }
@@ -89,14 +92,18 @@ func (o *CreateCloudPaymentsAuth) SetName(v string) {
 }
 
 func (o CreateCloudPaymentsAuth) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["cryptogram"] = o.Cryptogram
-	}
-	if true {
-		toSerialize["name"] = o.Name
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o CreateCloudPaymentsAuth) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["cryptogram"] = o.Cryptogram
+	toSerialize["name"] = o.Name
+	return toSerialize, nil
 }
 
 type NullableCreateCloudPaymentsAuth struct {

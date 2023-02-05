@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the WireGuard type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WireGuard{}
+
 // WireGuard struct for WireGuard
 type WireGuard struct {
 	Id string `json:"id"`
@@ -58,7 +61,7 @@ func (o *WireGuard) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *WireGuard) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -82,7 +85,7 @@ func (o *WireGuard) GetPrivKey() string {
 // and a boolean to check if the value has been set.
 func (o *WireGuard) GetPrivKeyOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.PrivKey, true
 }
@@ -106,7 +109,7 @@ func (o *WireGuard) GetPubKey() string {
 // and a boolean to check if the value has been set.
 func (o *WireGuard) GetPubKeyOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.PubKey, true
 }
@@ -130,7 +133,7 @@ func (o *WireGuard) GetPeers() []WireGuardPeer {
 // and a boolean to check if the value has been set.
 func (o *WireGuard) GetPeersOk() ([]WireGuardPeer, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Peers, true
 }
@@ -141,20 +144,20 @@ func (o *WireGuard) SetPeers(v []WireGuardPeer) {
 }
 
 func (o WireGuard) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if true {
-		toSerialize["priv_key"] = o.PrivKey
-	}
-	if true {
-		toSerialize["pub_key"] = o.PubKey
-	}
-	if true {
-		toSerialize["peers"] = o.Peers
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o WireGuard) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["id"] = o.Id
+	toSerialize["priv_key"] = o.PrivKey
+	toSerialize["pub_key"] = o.PubKey
+	toSerialize["peers"] = o.Peers
+	return toSerialize, nil
 }
 
 type NullableWireGuard struct {

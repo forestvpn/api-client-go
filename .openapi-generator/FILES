@@ -13,7 +13,6 @@ api_friendship.go
 api_geo.go
 api_google.go
 api_notifications.go
-api_support.go
 api_wireguard.go
 client.go
 configuration.go

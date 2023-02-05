@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the CloudPaymentsSecure3d type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudPaymentsSecure3d{}
+
 // CloudPaymentsSecure3d struct for CloudPaymentsSecure3d
 type CloudPaymentsSecure3d struct {
 	PaReq string `json:"pa_req"`
@@ -56,7 +59,7 @@ func (o *CloudPaymentsSecure3d) GetPaReq() string {
 // and a boolean to check if the value has been set.
 func (o *CloudPaymentsSecure3d) GetPaReqOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.PaReq, true
 }
@@ -80,7 +83,7 @@ func (o *CloudPaymentsSecure3d) GetAcsUrl() string {
 // and a boolean to check if the value has been set.
 func (o *CloudPaymentsSecure3d) GetAcsUrlOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.AcsUrl, true
 }
@@ -104,7 +107,7 @@ func (o *CloudPaymentsSecure3d) GetTermUrl() string {
 // and a boolean to check if the value has been set.
 func (o *CloudPaymentsSecure3d) GetTermUrlOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.TermUrl, true
 }
@@ -115,17 +118,19 @@ func (o *CloudPaymentsSecure3d) SetTermUrl(v string) {
 }
 
 func (o CloudPaymentsSecure3d) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["pa_req"] = o.PaReq
-	}
-	if true {
-		toSerialize["acs_url"] = o.AcsUrl
-	}
-	if true {
-		toSerialize["term_url"] = o.TermUrl
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o CloudPaymentsSecure3d) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["pa_req"] = o.PaReq
+	toSerialize["acs_url"] = o.AcsUrl
+	toSerialize["term_url"] = o.TermUrl
+	return toSerialize, nil
 }
 
 type NullableCloudPaymentsSecure3d struct {

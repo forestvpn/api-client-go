@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the Product type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Product{}
+
 // Product struct for Product
 type Product struct {
 	Id string `json:"id"`
@@ -60,7 +63,7 @@ func (o *Product) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *Product) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -84,7 +87,7 @@ func (o *Product) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *Product) GetNameOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Name, true
 }
@@ -107,7 +110,7 @@ func (o *Product) GetDescription() string {
 // and a boolean to check if the value has been set.
 func (o *Product) GetDescriptionOk() (*string, bool) {
 	if o == nil || isNil(o.Description) {
-    return nil, false
+		return nil, false
 	}
 	return o.Description, true
 }
@@ -139,7 +142,7 @@ func (o *Product) GetBundle() Bundle {
 // and a boolean to check if the value has been set.
 func (o *Product) GetBundleOk() (*Bundle, bool) {
 	if o == nil || isNil(o.Bundle) {
-    return nil, false
+		return nil, false
 	}
 	return o.Bundle, true
 }
@@ -171,7 +174,7 @@ func (o *Product) GetPrice() Price {
 // and a boolean to check if the value has been set.
 func (o *Product) GetPriceOk() (*Price, bool) {
 	if o == nil || isNil(o.Price) {
-    return nil, false
+		return nil, false
 	}
 	return o.Price, true
 }
@@ -203,7 +206,7 @@ func (o *Product) GetRecurring() Recurring {
 // and a boolean to check if the value has been set.
 func (o *Product) GetRecurringOk() (*Recurring, bool) {
 	if o == nil || isNil(o.Recurring) {
-    return nil, false
+		return nil, false
 	}
 	return o.Recurring, true
 }
@@ -235,7 +238,7 @@ func (o *Product) GetDiscount() Discount {
 // and a boolean to check if the value has been set.
 func (o *Product) GetDiscountOk() (*Discount, bool) {
 	if o == nil || isNil(o.Discount) {
-    return nil, false
+		return nil, false
 	}
 	return o.Discount, true
 }
@@ -267,7 +270,7 @@ func (o *Product) GetIsMostPopular() bool {
 // and a boolean to check if the value has been set.
 func (o *Product) GetIsMostPopularOk() (*bool, bool) {
 	if o == nil || isNil(o.IsMostPopular) {
-    return nil, false
+		return nil, false
 	}
 	return o.IsMostPopular, true
 }
@@ -287,13 +290,17 @@ func (o *Product) SetIsMostPopular(v bool) {
 }
 
 func (o Product) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Product) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if true {
-		toSerialize["name"] = o.Name
-	}
+	toSerialize["id"] = o.Id
+	toSerialize["name"] = o.Name
 	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -312,7 +319,7 @@ func (o Product) MarshalJSON() ([]byte, error) {
 	if !isNil(o.IsMostPopular) {
 		toSerialize["is_most_popular"] = o.IsMostPopular
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableProduct struct {

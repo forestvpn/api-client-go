@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the WireGuardPeerInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WireGuardPeerInfo{}
+
 // WireGuardPeerInfo struct for WireGuardPeerInfo
 type WireGuardPeerInfo struct {
 	PubKey *string `json:"pub_key,omitempty"`
@@ -52,7 +55,7 @@ func (o *WireGuardPeerInfo) GetPubKey() string {
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeerInfo) GetPubKeyOk() (*string, bool) {
 	if o == nil || isNil(o.PubKey) {
-    return nil, false
+		return nil, false
 	}
 	return o.PubKey, true
 }
@@ -84,7 +87,7 @@ func (o *WireGuardPeerInfo) GetUser() WireGuardPeerUser {
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeerInfo) GetUserOk() (*WireGuardPeerUser, bool) {
 	if o == nil || isNil(o.User) {
-    return nil, false
+		return nil, false
 	}
 	return o.User, true
 }
@@ -116,7 +119,7 @@ func (o *WireGuardPeerInfo) GetDevice() WireGuardPeerDevice {
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeerInfo) GetDeviceOk() (*WireGuardPeerDevice, bool) {
 	if o == nil || isNil(o.Device) {
-    return nil, false
+		return nil, false
 	}
 	return o.Device, true
 }
@@ -136,6 +139,14 @@ func (o *WireGuardPeerInfo) SetDevice(v WireGuardPeerDevice) {
 }
 
 func (o WireGuardPeerInfo) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WireGuardPeerInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.PubKey) {
 		toSerialize["pub_key"] = o.PubKey
@@ -146,7 +157,7 @@ func (o WireGuardPeerInfo) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Device) {
 		toSerialize["device"] = o.Device
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableWireGuardPeerInfo struct {

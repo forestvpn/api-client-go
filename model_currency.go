@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the Currency type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Currency{}
+
 // Currency struct for Currency
 type Currency struct {
 	CurrencyCode string `json:"currency_code"`
@@ -52,7 +55,7 @@ func (o *Currency) GetCurrencyCode() string {
 // and a boolean to check if the value has been set.
 func (o *Currency) GetCurrencyCodeOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.CurrencyCode, true
 }
@@ -63,11 +66,17 @@ func (o *Currency) SetCurrencyCode(v string) {
 }
 
 func (o Currency) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["currency_code"] = o.CurrencyCode
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o Currency) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["currency_code"] = o.CurrencyCode
+	return toSerialize, nil
 }
 
 type NullableCurrency struct {

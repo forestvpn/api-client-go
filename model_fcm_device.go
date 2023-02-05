@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the FCMDevice type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FCMDevice{}
+
 // FCMDevice struct for FCMDevice
 type FCMDevice struct {
 	RegistrationId string `json:"registration_id"`
@@ -58,7 +61,7 @@ func (o *FCMDevice) GetRegistrationId() string {
 // and a boolean to check if the value has been set.
 func (o *FCMDevice) GetRegistrationIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.RegistrationId, true
 }
@@ -81,7 +84,7 @@ func (o *FCMDevice) GetDeviceId() string {
 // and a boolean to check if the value has been set.
 func (o *FCMDevice) GetDeviceIdOk() (*string, bool) {
 	if o == nil || isNil(o.DeviceId) {
-    return nil, false
+		return nil, false
 	}
 	return o.DeviceId, true
 }
@@ -114,7 +117,7 @@ func (o *FCMDevice) GetActive() bool {
 // and a boolean to check if the value has been set.
 func (o *FCMDevice) GetActiveOk() (*bool, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Active, true
 }
@@ -138,7 +141,7 @@ func (o *FCMDevice) GetCreatedAt() time.Time {
 // and a boolean to check if the value has been set.
 func (o *FCMDevice) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.CreatedAt, true
 }
@@ -149,20 +152,22 @@ func (o *FCMDevice) SetCreatedAt(v time.Time) {
 }
 
 func (o FCMDevice) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["registration_id"] = o.RegistrationId
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FCMDevice) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["registration_id"] = o.RegistrationId
 	if !isNil(o.DeviceId) {
 		toSerialize["device_id"] = o.DeviceId
 	}
-	if true {
-		toSerialize["active"] = o.Active
-	}
-	if true {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	return json.Marshal(toSerialize)
+	toSerialize["active"] = o.Active
+	toSerialize["created_at"] = o.CreatedAt
+	return toSerialize, nil
 }
 
 type NullableFCMDevice struct {

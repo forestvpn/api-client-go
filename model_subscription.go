@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the Subscription type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Subscription{}
+
 // Subscription struct for Subscription
 type Subscription struct {
 	Id string `json:"id"`
@@ -78,7 +81,7 @@ func (o *Subscription) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *Subscription) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -101,7 +104,7 @@ func (o *Subscription) GetPromotionalCode() string {
 // and a boolean to check if the value has been set.
 func (o *Subscription) GetPromotionalCodeOk() (*string, bool) {
 	if o == nil || isNil(o.PromotionalCode) {
-    return nil, false
+		return nil, false
 	}
 	return o.PromotionalCode, true
 }
@@ -133,7 +136,7 @@ func (o *Subscription) GetSource() SubscriptionSource {
 // and a boolean to check if the value has been set.
 func (o *Subscription) GetSourceOk() (*SubscriptionSource, bool) {
 	if o == nil || isNil(o.Source) {
-    return nil, false
+		return nil, false
 	}
 	return o.Source, true
 }
@@ -166,7 +169,7 @@ func (o *Subscription) GetStartDate() time.Time {
 // and a boolean to check if the value has been set.
 func (o *Subscription) GetStartDateOk() (*time.Time, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.StartDate, true
 }
@@ -189,7 +192,7 @@ func (o *Subscription) GetEndedAt() time.Time {
 // and a boolean to check if the value has been set.
 func (o *Subscription) GetEndedAtOk() (*time.Time, bool) {
 	if o == nil || isNil(o.EndedAt) {
-    return nil, false
+		return nil, false
 	}
 	return o.EndedAt, true
 }
@@ -222,7 +225,7 @@ func (o *Subscription) GetCurrentPeriodStart() time.Time {
 // and a boolean to check if the value has been set.
 func (o *Subscription) GetCurrentPeriodStartOk() (*time.Time, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.CurrentPeriodStart, true
 }
@@ -246,7 +249,7 @@ func (o *Subscription) GetCurrentPeriodEnd() time.Time {
 // and a boolean to check if the value has been set.
 func (o *Subscription) GetCurrentPeriodEndOk() (*time.Time, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.CurrentPeriodEnd, true
 }
@@ -269,7 +272,7 @@ func (o *Subscription) GetTrialStart() time.Time {
 // and a boolean to check if the value has been set.
 func (o *Subscription) GetTrialStartOk() (*time.Time, bool) {
 	if o == nil || isNil(o.TrialStart) {
-    return nil, false
+		return nil, false
 	}
 	return o.TrialStart, true
 }
@@ -301,7 +304,7 @@ func (o *Subscription) GetTrialEnd() time.Time {
 // and a boolean to check if the value has been set.
 func (o *Subscription) GetTrialEndOk() (*time.Time, bool) {
 	if o == nil || isNil(o.TrialEnd) {
-    return nil, false
+		return nil, false
 	}
 	return o.TrialEnd, true
 }
@@ -333,7 +336,7 @@ func (o *Subscription) GetCancelAt() time.Time {
 // and a boolean to check if the value has been set.
 func (o *Subscription) GetCancelAtOk() (*time.Time, bool) {
 	if o == nil || isNil(o.CancelAt) {
-    return nil, false
+		return nil, false
 	}
 	return o.CancelAt, true
 }
@@ -365,7 +368,7 @@ func (o *Subscription) GetCanceledAt() time.Time {
 // and a boolean to check if the value has been set.
 func (o *Subscription) GetCanceledAtOk() (*time.Time, bool) {
 	if o == nil || isNil(o.CanceledAt) {
-    return nil, false
+		return nil, false
 	}
 	return o.CanceledAt, true
 }
@@ -398,7 +401,7 @@ func (o *Subscription) GetStatus() SubscriptionStatus {
 // and a boolean to check if the value has been set.
 func (o *Subscription) GetStatusOk() (*SubscriptionStatus, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Status, true
 }
@@ -421,7 +424,7 @@ func (o *Subscription) GetDescription() string {
 // and a boolean to check if the value has been set.
 func (o *Subscription) GetDescriptionOk() (*string, bool) {
 	if o == nil || isNil(o.Description) {
-    return nil, false
+		return nil, false
 	}
 	return o.Description, true
 }
@@ -453,7 +456,7 @@ func (o *Subscription) GetItems() []SubscriptionItem {
 // and a boolean to check if the value has been set.
 func (o *Subscription) GetItemsOk() ([]SubscriptionItem, bool) {
 	if o == nil || isNil(o.Items) {
-    return nil, false
+		return nil, false
 	}
 	return o.Items, true
 }
@@ -473,50 +476,34 @@ func (o *Subscription) SetItems(v []SubscriptionItem) {
 }
 
 func (o Subscription) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Subscription) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	// skip: id is readOnly
 	if !isNil(o.PromotionalCode) {
 		toSerialize["promotional_code"] = o.PromotionalCode
 	}
-	if !isNil(o.Source) {
-		toSerialize["source"] = o.Source
-	}
-	if true {
-		toSerialize["start_date"] = o.StartDate
-	}
-	if !isNil(o.EndedAt) {
-		toSerialize["ended_at"] = o.EndedAt
-	}
-	if true {
-		toSerialize["current_period_start"] = o.CurrentPeriodStart
-	}
-	if true {
-		toSerialize["current_period_end"] = o.CurrentPeriodEnd
-	}
-	if !isNil(o.TrialStart) {
-		toSerialize["trial_start"] = o.TrialStart
-	}
-	if !isNil(o.TrialEnd) {
-		toSerialize["trial_end"] = o.TrialEnd
-	}
-	if !isNil(o.CancelAt) {
-		toSerialize["cancel_at"] = o.CancelAt
-	}
-	if !isNil(o.CanceledAt) {
-		toSerialize["canceled_at"] = o.CanceledAt
-	}
-	if true {
-		toSerialize["status"] = o.Status
-	}
-	if !isNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
+	// skip: source is readOnly
+	// skip: start_date is readOnly
+	// skip: ended_at is readOnly
+	// skip: current_period_start is readOnly
+	// skip: current_period_end is readOnly
+	// skip: trial_start is readOnly
+	// skip: trial_end is readOnly
+	// skip: cancel_at is readOnly
+	// skip: canceled_at is readOnly
+	// skip: status is readOnly
+	// skip: description is readOnly
 	if !isNil(o.Items) {
 		toSerialize["items"] = o.Items
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableSubscription struct {

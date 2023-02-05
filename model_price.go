@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the Price type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Price{}
+
 // Price struct for Price
 type Price struct {
 	Id string `json:"id"`
@@ -57,7 +60,7 @@ func (o *Price) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *Price) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -81,7 +84,7 @@ func (o *Price) GetCurrency() string {
 // and a boolean to check if the value has been set.
 func (o *Price) GetCurrencyOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Currency, true
 }
@@ -105,7 +108,7 @@ func (o *Price) GetPrice() float64 {
 // and a boolean to check if the value has been set.
 func (o *Price) GetPriceOk() (*float64, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Price, true
 }
@@ -128,7 +131,7 @@ func (o *Price) GetProduct() Product {
 // and a boolean to check if the value has been set.
 func (o *Price) GetProductOk() (*Product, bool) {
 	if o == nil || isNil(o.Product) {
-    return nil, false
+		return nil, false
 	}
 	return o.Product, true
 }
@@ -148,20 +151,22 @@ func (o *Price) SetProduct(v Product) {
 }
 
 func (o Price) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Price) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if true {
-		toSerialize["currency"] = o.Currency
-	}
-	if true {
-		toSerialize["price"] = o.Price
-	}
+	toSerialize["id"] = o.Id
+	toSerialize["currency"] = o.Currency
+	toSerialize["price"] = o.Price
 	if !isNil(o.Product) {
 		toSerialize["product"] = o.Product
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullablePrice struct {

@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the TicketCategory type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TicketCategory{}
+
 // TicketCategory struct for TicketCategory
 type TicketCategory struct {
 	Id *string `json:"id,omitempty"`
@@ -51,7 +54,7 @@ func (o *TicketCategory) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *TicketCategory) GetIdOk() (*string, bool) {
 	if o == nil || isNil(o.Id) {
-    return nil, false
+		return nil, false
 	}
 	return o.Id, true
 }
@@ -83,7 +86,7 @@ func (o *TicketCategory) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *TicketCategory) GetNameOk() (*string, bool) {
 	if o == nil || isNil(o.Name) {
-    return nil, false
+		return nil, false
 	}
 	return o.Name, true
 }
@@ -103,6 +106,14 @@ func (o *TicketCategory) SetName(v string) {
 }
 
 func (o TicketCategory) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TicketCategory) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Id) {
 		toSerialize["id"] = o.Id
@@ -110,7 +121,7 @@ func (o TicketCategory) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableTicketCategory struct {

@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the WireGuardPeer type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WireGuardPeer{}
+
 // WireGuardPeer struct for WireGuardPeer
 type WireGuardPeer struct {
 	PubKey string `json:"pub_key"`
@@ -55,7 +58,7 @@ func (o *WireGuardPeer) GetPubKey() string {
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeer) GetPubKeyOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.PubKey, true
 }
@@ -78,7 +81,7 @@ func (o *WireGuardPeer) GetPsKey() string {
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeer) GetPsKeyOk() (*string, bool) {
 	if o == nil || isNil(o.PsKey) {
-    return nil, false
+		return nil, false
 	}
 	return o.PsKey, true
 }
@@ -110,7 +113,7 @@ func (o *WireGuardPeer) GetEndpoint() string {
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeer) GetEndpointOk() (*string, bool) {
 	if o == nil || isNil(o.Endpoint) {
-    return nil, false
+		return nil, false
 	}
 	return o.Endpoint, true
 }
@@ -142,7 +145,7 @@ func (o *WireGuardPeer) GetAllowedIps() []string {
 // and a boolean to check if the value has been set.
 func (o *WireGuardPeer) GetAllowedIpsOk() ([]string, bool) {
 	if o == nil || isNil(o.AllowedIps) {
-    return nil, false
+		return nil, false
 	}
 	return o.AllowedIps, true
 }
@@ -162,10 +165,16 @@ func (o *WireGuardPeer) SetAllowedIps(v []string) {
 }
 
 func (o WireGuardPeer) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["pub_key"] = o.PubKey
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WireGuardPeer) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["pub_key"] = o.PubKey
 	if !isNil(o.PsKey) {
 		toSerialize["ps_key"] = o.PsKey
 	}
@@ -175,7 +184,7 @@ func (o WireGuardPeer) MarshalJSON() ([]byte, error) {
 	if !isNil(o.AllowedIps) {
 		toSerialize["allowed_ips"] = o.AllowedIps
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableWireGuardPeer struct {

@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the CheckoutSession type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CheckoutSession{}
+
 // CheckoutSession struct for CheckoutSession
 type CheckoutSession struct {
 	Id string `json:"id"`
@@ -79,7 +82,7 @@ func (o *CheckoutSession) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -103,7 +106,7 @@ func (o *CheckoutSession) GetCancelUrl() string {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetCancelUrlOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.CancelUrl, true
 }
@@ -127,7 +130,7 @@ func (o *CheckoutSession) GetSuccessUrl() string {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetSuccessUrlOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.SuccessUrl, true
 }
@@ -150,7 +153,7 @@ func (o *CheckoutSession) GetRedirectUrl() string {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetRedirectUrlOk() (*string, bool) {
 	if o == nil || isNil(o.RedirectUrl) {
-    return nil, false
+		return nil, false
 	}
 	return o.RedirectUrl, true
 }
@@ -183,7 +186,7 @@ func (o *CheckoutSession) GetCurrency() string {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetCurrencyOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Currency, true
 }
@@ -207,7 +210,7 @@ func (o *CheckoutSession) GetAmountSubtotal() float64 {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetAmountSubtotalOk() (*float64, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.AmountSubtotal, true
 }
@@ -231,7 +234,7 @@ func (o *CheckoutSession) GetAmountTotal() float64 {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetAmountTotalOk() (*float64, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.AmountTotal, true
 }
@@ -254,7 +257,7 @@ func (o *CheckoutSession) GetLocale() string {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetLocaleOk() (*string, bool) {
 	if o == nil || isNil(o.Locale) {
-    return nil, false
+		return nil, false
 	}
 	return o.Locale, true
 }
@@ -286,7 +289,7 @@ func (o *CheckoutSession) GetEmail() string {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetEmailOk() (*string, bool) {
 	if o == nil || isNil(o.Email) {
-    return nil, false
+		return nil, false
 	}
 	return o.Email, true
 }
@@ -319,7 +322,7 @@ func (o *CheckoutSession) GetProducts() []CheckoutSessionProduct {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetProductsOk() ([]CheckoutSessionProduct, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Products, true
 }
@@ -343,7 +346,7 @@ func (o *CheckoutSession) GetPaymentStatus() string {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetPaymentStatusOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.PaymentStatus, true
 }
@@ -367,7 +370,7 @@ func (o *CheckoutSession) GetStatus() string {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetStatusOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Status, true
 }
@@ -390,7 +393,7 @@ func (o *CheckoutSession) GetTrialPeriod() string {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetTrialPeriodOk() (*string, bool) {
 	if o == nil || isNil(o.TrialPeriod) {
-    return nil, false
+		return nil, false
 	}
 	return o.TrialPeriod, true
 }
@@ -422,7 +425,7 @@ func (o *CheckoutSession) GetUser() string {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetUserOk() (*string, bool) {
 	if o == nil || isNil(o.User) {
-    return nil, false
+		return nil, false
 	}
 	return o.User, true
 }
@@ -455,7 +458,7 @@ func (o *CheckoutSession) GetCreatedAt() time.Time {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.CreatedAt, true
 }
@@ -479,7 +482,7 @@ func (o *CheckoutSession) GetExpiresAt() time.Time {
 // and a boolean to check if the value has been set.
 func (o *CheckoutSession) GetExpiresAtOk() (*time.Time, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.ExpiresAt, true
 }
@@ -490,56 +493,42 @@ func (o *CheckoutSession) SetExpiresAt(v time.Time) {
 }
 
 func (o CheckoutSession) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CheckoutSession) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if true {
-		toSerialize["cancel_url"] = o.CancelUrl
-	}
-	if true {
-		toSerialize["success_url"] = o.SuccessUrl
-	}
+	toSerialize["id"] = o.Id
+	toSerialize["cancel_url"] = o.CancelUrl
+	toSerialize["success_url"] = o.SuccessUrl
 	if !isNil(o.RedirectUrl) {
 		toSerialize["redirect_url"] = o.RedirectUrl
 	}
-	if true {
-		toSerialize["currency"] = o.Currency
-	}
-	if true {
-		toSerialize["amount_subtotal"] = o.AmountSubtotal
-	}
-	if true {
-		toSerialize["amount_total"] = o.AmountTotal
-	}
+	toSerialize["currency"] = o.Currency
+	toSerialize["amount_subtotal"] = o.AmountSubtotal
+	toSerialize["amount_total"] = o.AmountTotal
 	if !isNil(o.Locale) {
 		toSerialize["locale"] = o.Locale
 	}
 	if !isNil(o.Email) {
 		toSerialize["email"] = o.Email
 	}
-	if true {
-		toSerialize["products"] = o.Products
-	}
-	if true {
-		toSerialize["payment_status"] = o.PaymentStatus
-	}
-	if true {
-		toSerialize["status"] = o.Status
-	}
+	toSerialize["products"] = o.Products
+	toSerialize["payment_status"] = o.PaymentStatus
+	toSerialize["status"] = o.Status
 	if !isNil(o.TrialPeriod) {
 		toSerialize["trial_period"] = o.TrialPeriod
 	}
 	if !isNil(o.User) {
 		toSerialize["user"] = o.User
 	}
-	if true {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if true {
-		toSerialize["expires_at"] = o.ExpiresAt
-	}
-	return json.Marshal(toSerialize)
+	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["expires_at"] = o.ExpiresAt
+	return toSerialize, nil
 }
 
 type NullableCheckoutSession struct {

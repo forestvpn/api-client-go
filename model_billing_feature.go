@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the BillingFeature type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BillingFeature{}
+
 // BillingFeature struct for BillingFeature
 type BillingFeature struct {
 	// Billing feature's slug
@@ -57,7 +60,7 @@ func (o *BillingFeature) GetBundleId() string {
 // and a boolean to check if the value has been set.
 func (o *BillingFeature) GetBundleIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.BundleId, true
 }
@@ -80,7 +83,7 @@ func (o *BillingFeature) GetExpiryDate() time.Time {
 // and a boolean to check if the value has been set.
 func (o *BillingFeature) GetExpiryDateOk() (*time.Time, bool) {
 	if o == nil || isNil(o.ExpiryDate) {
-    return nil, false
+		return nil, false
 	}
 	return o.ExpiryDate, true
 }
@@ -112,7 +115,7 @@ func (o *BillingFeature) GetConstraints() []Constraint {
 // and a boolean to check if the value has been set.
 func (o *BillingFeature) GetConstraintsOk() ([]Constraint, bool) {
 	if o == nil || isNil(o.Constraints) {
-    return nil, false
+		return nil, false
 	}
 	return o.Constraints, true
 }
@@ -132,17 +135,23 @@ func (o *BillingFeature) SetConstraints(v []Constraint) {
 }
 
 func (o BillingFeature) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["bundle_id"] = o.BundleId
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
+	return json.Marshal(toSerialize)
+}
+
+func (o BillingFeature) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["bundle_id"] = o.BundleId
 	if !isNil(o.ExpiryDate) {
 		toSerialize["expiry_date"] = o.ExpiryDate
 	}
 	if !isNil(o.Constraints) {
 		toSerialize["constraints"] = o.Constraints
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableBillingFeature struct {

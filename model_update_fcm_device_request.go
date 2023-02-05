@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the UpdateFCMDeviceRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateFCMDeviceRequest{}
+
 // UpdateFCMDeviceRequest struct for UpdateFCMDeviceRequest
 type UpdateFCMDeviceRequest struct {
 	DeviceId NullableString `json:"device_id,omitempty"`
@@ -52,7 +55,7 @@ func (o *UpdateFCMDeviceRequest) GetDeviceId() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateFCMDeviceRequest) GetDeviceIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.DeviceId.Get(), o.DeviceId.IsSet()
 }
@@ -94,7 +97,7 @@ func (o *UpdateFCMDeviceRequest) GetActive() bool {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateFCMDeviceRequest) GetActiveOk() (*bool, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Active.Get(), o.Active.IsSet()
 }
@@ -123,6 +126,14 @@ func (o *UpdateFCMDeviceRequest) UnsetActive() {
 }
 
 func (o UpdateFCMDeviceRequest) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o UpdateFCMDeviceRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.DeviceId.IsSet() {
 		toSerialize["device_id"] = o.DeviceId.Get()
@@ -130,7 +141,7 @@ func (o UpdateFCMDeviceRequest) MarshalJSON() ([]byte, error) {
 	if o.Active.IsSet() {
 		toSerialize["active"] = o.Active.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableUpdateFCMDeviceRequest struct {
