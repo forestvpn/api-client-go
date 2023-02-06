@@ -93,7 +93,7 @@ type Configuration struct {
 func NewConfiguration() *Configuration {
 	cfg := &Configuration{
 		DefaultHeader:    make(map[string]string),
-		UserAgent:        "ForestVPN-Client/2.0.0",
+		UserAgent:        "ForestVPN-Client/3.7.1",
 		Debug:            false,
 		Servers:          ServerConfigurations{
 			{
